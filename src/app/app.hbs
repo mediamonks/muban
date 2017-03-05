@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="./style/main.scss">
+{{!
+	App shell for all pages, used for rendering header/footer and dynamic page content
+}}
+
+{{> header }}
+
+<div class="wrapper">
+	<h1>{{title}}</h1>
+
+	<div class="content">
+		{{#each blocks}}
+			{{> (lookup . 'name') data }}
+		{{/each}}
+	</div>
+</div>
+
+{{> footer }}

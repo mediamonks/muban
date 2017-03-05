@@ -1,0 +1,11 @@
+@import "~normalize.css";
+@import "./variables";
+
+.wrapper {
+	max-width: $wrapperWidth;
+	margin: 0 auto;
+}
+
+.hidden {
+	display: none;
+}
