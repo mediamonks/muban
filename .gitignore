@@ -49,6 +49,9 @@ node_modules/
 # dotenv environment variables file
 .env
 
+# idea project files
+.idea
+
 
 ### Project
 
