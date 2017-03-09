@@ -33,7 +33,10 @@ module.exports = {
     extensions: [".hbs", ".ts", ".js", ".json"],
     plugins: [
 	    getDirectoryNamedWebpackPlugin()
-    ]
+    ],
+	  alias: {
+		  modernizr$: path.resolve(__dirname, "../../../.modernizrrc")
+	  }
   //   fallback: path.join(__dirname, "helpers")
   },
   module: {
@@ -60,9 +63,7 @@ module.exports = {
 					    sourceMap: true
 				    }
 			    },
-			    {
-				    loader: 'postcss-loader',
-			    },
+			    { loader: 'postcss-loader' },
 			    {
 				    loader: 'sass-loader',
 				    options: {

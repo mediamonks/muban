@@ -18,7 +18,10 @@ module.exports = {
 		publicPath: '/',
 	},
 	resolve: {
-		extensions: [".ts", ".js", ".json"]
+		extensions: [".ts", ".js", ".json"],
+		alias: {
+			modernizr$: path.resolve(__dirname, "../../../.modernizrrc")
+		}
 	},
 	module: {
 		rules: [

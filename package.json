@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/mediamonks/muban#readme",
   "dependencies": {
+    "modernizr": "^3.3.1",
+    "modernizr-loader": "^1.0.1",
     "normalize.css": "^5.0.0"
   },
   "devDependencies": {

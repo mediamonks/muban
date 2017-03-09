@@ -62,3 +62,5 @@ _TODO: run local http-server using `npm run serve` to view the dist build._
   Using a `.` in the filename will allow to group alternative variations for a single page.
   E.g. `home.json` is the main page, and `home.alt.json` is an alternative version that can be
   visited via the overview page.
+* `.modernizrrc` config file for Modernizrrc used by `modernizr-loader`, config rules can
+  be found [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
