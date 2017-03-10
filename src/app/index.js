@@ -5,6 +5,7 @@
 import indexTemplate from "./index.hbs";
 import appTemplate from "./app.hbs";
 import Handlebars from 'handlebars/runtime';
+import 'modernizr';
 
 import { initComponents } from './component/components';
 import { getModuleContext, getChanged } from './util/webpack';

@@ -47,7 +47,14 @@ function getCodeRules() {
 					loader: 'awesome-typescript-loader'
 				}
 			]
-		}
+		},
+		{
+			test: /\.modernizrrc$/,
+			use: [
+				{ loader: "modernizr-loader" },
+				{ loader: "json-loader" }
+			]
+		},
 	]
 }
 
