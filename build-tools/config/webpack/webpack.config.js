@@ -20,7 +20,7 @@ module.exports = {
 			// bundle the client for hot reloading
 			// only- means to only hot reload for successful updates
 			'webpack/hot/only-dev-server',
-			'babel-polyfill',
+			'./src/app/polyfills.js',
 			'./src/app/index.js',
 		],
 	},
@@ -37,7 +37,7 @@ module.exports = {
 		alias: {
 			modernizr$: path.resolve(__dirname, '../../../.modernizrrc')
 		}
-		//   fallback: path.join(__dirname, "helpers")
+	//	 fallback: path.join(__dirname, "helpers")
 	},
 	module: {
 		rules: [
@@ -63,15 +63,12 @@ module.exports = {
 							sourceMap: true
 						}
 					},
-					{
-						loader: 'postcss-loader'
+					{ loader: 'postcss-loader'
 					},
-					{
-						loader: 'sass-loader',
+						{loader: 'sass-loader',
 						options: {
 							sourceMap: true,
-							data: '@import "~seng-scss"; @import "src/app/style/global";'
-						}
+						data: '@import "~seng-scss"; @import "src/app/style/global";'}
 					}
 				]
 			}
@@ -86,18 +83,13 @@ module.exports = {
 		overlay: true,
 		setup(app) {
 			app.use((req, res, next) =>
-			{
-				if (req.path.includes('.html'))
-				{
-					res.send(fs.readFileSync(path.resolve(__dirname, '../../../index.html'), 'utf-8'));
-				}
-				else
-				{
-					next();
+		{		if (req.path.includes('.html'))
+					{res.send(fs.readFileSync(path.resolve(__dirname, '../../../index.html'), 'utf-8'));
+				} else
+		{			next();
 				}
 			});
-			app.get('/', function(req, res)
-			{
+			app.get('/', function(req, res) {
 				res.send(fs.readFileSync(path.resolve(__dirname, '../../../index.html'), 'utf-8'));
 			});
 		}
