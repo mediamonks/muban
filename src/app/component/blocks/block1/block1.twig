@@ -2,5 +2,5 @@
 
 <div data-component="block1">
 	<h2>{{title}}</h2>
-	{{> button text="Foo" }}
+	{% include '../../../component/button' with {'text': 'Foo'} only %}
 </div>

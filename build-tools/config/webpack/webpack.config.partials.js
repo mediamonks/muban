@@ -5,7 +5,7 @@ const path = require("path");
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const {
-	getHandlebarsRules,
+	getTwigRules,
 	getDirectoryNamedWebpackPlugin,
 } = require('./webpack-helpers');
 
@@ -22,7 +22,7 @@ module.exports = {
   },
   target: 'node',
   resolve: {
-    extensions: [".hbs", ".js", ".json"],
+    extensions: [".twig", ".js", ".json"],
 	  plugins: [
 		  getDirectoryNamedWebpackPlugin()
 	  ]
@@ -30,7 +30,7 @@ module.exports = {
   },
   module: {
     rules: [
-	    ...getHandlebarsRules(),
+	    ...getTwigRules(),
 	    {
 		    test: /\.scss$/,
 		    loader: ExtractTextPlugin.extract([

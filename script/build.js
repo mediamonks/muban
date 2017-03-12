@@ -3,13 +3,16 @@
  */
 const fs = require('fs');
 const path = require('path');
-const Handlebars = require('handlebars');
+const Twig = require('twig');
 const glob = require('glob-fs')({ gitignore: true });
 var beautify_html = require('js-beautify').html;
 
 const { indexTemplate, appTemplate } = require('../build/partials');
 
-const htmlTemplate = Handlebars.compile(fs.readFileSync(path.resolve(__dirname, './template.hbs'), 'utf-8'));
+
+const htmlTemplate = Twig.twig({
+	data: fs.readFileSync(path.resolve(__dirname, './template.twig'), 'utf-8')
+});
 
 // store json info to render overview page later
 const dirIndex = [];
@@ -25,7 +28,7 @@ const files = glob
 		let page = file;
 		let content = appTemplate(require('../src/data/' + file + '.json'));
 
-		const result = htmlTemplate({
+		const result = htmlTemplate.render({
 			content,
 			page,
 		});
@@ -47,7 +50,7 @@ const files = glob
 const content = indexTemplate({
 	pages: dirIndex,
 });
-const indexResult = htmlTemplate({
+const indexResult = htmlTemplate.render({
 	content,
 	page: 'Index',
 });

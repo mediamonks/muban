@@ -24,7 +24,8 @@
   "dependencies": {
     "modernizr": "^3.3.1",
     "modernizr-loader": "^1.0.1",
-    "normalize.css": "^5.0.0"
+    "normalize.css": "^5.0.0",
+    "twig": "0.8.9"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.0.8",
@@ -58,6 +59,7 @@
     "sass-loader": "^6.0.2",
     "source-map-loader": "^0.1.6",
     "style-loader": "^0.13.2",
+    "twig-loader": "ThaNarie/twig-loader#feature/resolve",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"

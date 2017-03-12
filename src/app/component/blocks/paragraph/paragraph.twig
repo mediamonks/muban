@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="./paragraph.scss">
+
+<div class="component-paragraph" data-component="paragraph">
+	<h2>{{title}}</h2>
+
+	<p>{{content}}</p>
+
+	<p class="js-content-more hidden">{{ contentMore }}</p>
+
+	{% include '../../../component/button' with {'text': 'read more...'} only %}
+</div>

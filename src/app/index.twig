@@ -1,0 +1,8 @@
+{#
+	Index with all rendered pages for easy access
+#}
+<ul>
+	{% for page in pages %}
+		<li><a href="{{page.link}}">{{page.page}}</a></li>
+	{% endfor %}
+</ul>

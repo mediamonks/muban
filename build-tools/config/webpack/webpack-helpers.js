@@ -61,7 +61,7 @@ function getCodeRules() {
 function getHandlebarsRules() {
 	return [
 		{
-			test: /\.hbs/,
+			test: /\.hbs$/,
 			use: [
 				{
 					loader: path.resolve(__dirname, '../../hbs-style-loader'),
@@ -75,6 +75,25 @@ function getHandlebarsRules() {
 						],
 						debug: false
 					}
+				},
+				{
+					loader: path.resolve(__dirname, '../../partial-comment-loader'),
+				}
+			]
+		}
+	];
+}
+
+function getTwigRules() {
+	return [
+		{
+			test: /\.twig$/,
+			use: [
+				{
+					loader: path.resolve(__dirname, '../../hbs-style-loader'),
+				},
+				{
+					loader: 'twig-loader',
 				},
 				{
 					loader: path.resolve(__dirname, '../../partial-comment-loader'),
@@ -101,5 +120,6 @@ function getDirectoryNamedWebpackPlugin() {
 module.exports = {
 	getCodeRules,
 	getHandlebarsRules,
+	getTwigRules,
 	getDirectoryNamedWebpackPlugin,
 };

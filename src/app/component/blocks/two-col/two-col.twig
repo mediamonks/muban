@@ -1,17 +1,13 @@
 <link rel="stylesheet" href="./two-col.scss">
 
 <div class="component-two-col">
-	{{#with left}}
 	<div class="col col-left">
-		<h3>{{title}}</h3>
-		<p>{{{content}}}</p>
+		<h3>{{left.title}}</h3>
+		<p>{{left.content}}</p>
 	</div>
-	{{/with}}
 
-	{{#with right}}
 	<div class="col col-right">
-		<h3>{{title}}</h3>
-		<p>{{{content}}}</p>
+		<h3>{{right.title}}</h3>
+		<p>{{right.content}}</p>
 	</div>
-	{{/with}}
 </div>

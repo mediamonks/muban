@@ -7,7 +7,7 @@ const webpack = require('webpack');
 
 const {
 	getCodeRules,
-	getHandlebarsRules,
+	getTwigRules,
 	getDirectoryNamedWebpackPlugin,
 } = require('./webpack-helpers');
 
@@ -30,7 +30,7 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: [".hbs", ".ts", ".js", ".json"],
+    extensions: [".twig", ".ts", ".js", ".json"],
     plugins: [
 	    getDirectoryNamedWebpackPlugin()
     ],
@@ -41,7 +41,7 @@ module.exports = {
   },
   module: {
     rules: [
-	    ...getHandlebarsRules(),
+	    ...getTwigRules(),
 	    ...getCodeRules(),
       {
         test: /\.js$/,
@@ -101,5 +101,8 @@ module.exports = {
     // prints more readable module names in the browser console on HMR updates
     new webpack.NamedModulesPlugin(),
   ],
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+	node: {
+		fs: "empty" // avoids error messages
+	}
 };

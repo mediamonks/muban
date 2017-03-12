@@ -1,18 +1,18 @@
 <link rel="stylesheet" href="./style/main.scss">
-{{!
+{#
 	App shell for all pages, used for rendering header/footer and dynamic page content
-}}
+#}
 
-{{> header }}
+{% include './component/header' %}
 
 <div class="wrapper">
-	<h1>{{title}}</h1>
+	<h1>{{ title }}</h1>
 
 	<div class="content">
-		{{#each blocks}}
-			{{> (lookup . 'name') data }}
-		{{/each}}
+		{% for block in blocks %}
+			{% include block.name with block.data %}
+		{% endfor %}
 	</div>
 </div>
 
-{{> footer }}
+{% include './component/footer' %}

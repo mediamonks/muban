@@ -1,0 +1,23 @@
+{#
+	Page that lists all production pages
+#}
+<html lang="en">
+<head>
+	<meta charSet="utf-8" />
+	<title>Muban - Index</title>
+
+	<meta httpEquiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, user-scalable=no" />
+	<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="/screen.css">
+</head>
+<body>
+	<ul>
+		{% for page in pages %}
+			<li><a href="{{page.link}}">{{page.page}}</a></li>
+		{% endfor %}
+	</ul>
+
+	<script src="/bundle.js"></script>
+</body>
+</html>
