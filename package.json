@@ -24,7 +24,8 @@
   "dependencies": {
     "modernizr": "^3.3.1",
     "modernizr-loader": "^1.0.1",
-    "normalize.css": "^5.0.0"
+    "normalize.css": "^5.0.0",
+    "seng-scss": "^1.0.0"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.0.8",

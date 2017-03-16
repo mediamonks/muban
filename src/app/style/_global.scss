@@ -1,0 +1,9 @@
+/*
+ * This is a globally available SCSS project file.
+ * It contains project specific utilities (variables, mixins, functions) that don't! output CSS by default.
+ * We use it to be imported in a webpack loader to avoid having to import these in each separate file.
+ *
+ * This file is used next to "seng-scss" which is imported globally as well and contain the default mixins/vars/functions
+ */
+
+@import "util/variables";

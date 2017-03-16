@@ -1,6 +1,5 @@
-@import "../../style/variables";
-
 .component-header {
+	@include aspect-ratio(1,0.15);
 	border-bottom: 1px solid #ddd;
 	background-color: #eee;
 

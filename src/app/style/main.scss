@@ -1,5 +1,10 @@
 @import "~normalize.css";
-@import "./variables";
+@import "~seng-scss";
+
+/* Globally available project specific mixins, functions and variables */
+@import "global";
+
+@import "./type/font";
 
 .wrapper {
 	max-width: $wrapperWidth;
