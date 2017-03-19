@@ -46,7 +46,8 @@ module.exports = {
 			    {
 				    loader: 'sass-loader',
 				    options: {
-					    sourceMap: true
+					    sourceMap: true,
+					    data: '@import "~seng-scss"; @import "src/app/style/global";'
 				    }
 			    }
 		    ])
