@@ -10,54 +10,54 @@ const {
 } = require('./webpack-helpers');
 
 module.exports = {
-  entry: {
-	  partials: [
-		  './src/app/partials.js',
-	  ]
-  },
-  output: {
-    path: path.resolve(__dirname, '../../../build'),
-    filename: "[name].js",
-	  libraryTarget: 'commonjs2'
-  },
-  target: 'node',
-  resolve: {
-    extensions: [".hbs", ".js", ".json"],
-	  plugins: [
-		  getDirectoryNamedWebpackPlugin()
-	  ]
-  //   fallback: path.join(__dirname, "helpers")
-  },
-  module: {
-    rules: [
-	    ...getHandlebarsRules(),
-	    {
-		    test: /\.scss$/,
-		    loader: ExtractTextPlugin.extract([
-		    	{
-				    loader: 'css-loader',
-				    options: {
-					    sourceMap: true
-				    }
-			    },
-			    {
-				    loader: 'postcss-loader',
-			    },
-			    {
-				    loader: 'sass-loader',
-				    options: {
-					    sourceMap: true,
-					    data: '@import "~seng-scss"; @import "src/app/style/global";'
-				    }
-			    }
-		    ])
-	    }
-    ]
-  },
-  plugins: [
-	  new ExtractTextPlugin({
-		  filename: 'screen.css',
-		  allChunks : true,
-	  })
-  ]
+	entry: {
+		partials: [
+			'./src/app/partials.js',
+		]
+	},
+	output: {
+		path: path.resolve(__dirname, '../../../build'),
+		filename: "[name].js",
+		libraryTarget: 'commonjs2'
+	},
+	target: 'node',
+	resolve: {
+		extensions: [".hbs", ".js", ".json"],
+		plugins: [
+			getDirectoryNamedWebpackPlugin()
+		]
+	// fallback: path.join(__dirname, "helpers")
+	},
+	module: {
+		rules: [
+			...getHandlebarsRules(),
+			{
+				test: /\.scss$/,
+				loader: ExtractTextPlugin.extract([
+					{
+						loader: 'css-loader',
+						options: {
+							sourceMap: true
+						}
+					},
+					{
+						loader: 'postcss-loader',
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: true,
+							data: '@import "~seng-scss"; @import "src/app/style/global";'
+						}
+					}
+				])
+			}
+		]
+	},
+	plugins: [
+		new ExtractTextPlugin({
+			filename: 'screen.css',
+			allChunks : true,
+		})
+	]
 };

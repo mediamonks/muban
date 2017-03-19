@@ -8,7 +8,7 @@ const { getCodeRules } = require('./webpack-helpers');
 module.exports = {
 	entry: {
 		bundle: [
-			'babel-polyfill',
+			'./src/app/polyfills.js',
 			'./src/app/code.js',
 		]
 	},
