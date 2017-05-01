@@ -81,6 +81,7 @@ module.exports = {
 		contentBase: path.join(projectRoot, 'src/static'),
 		publicPath: '/',
 		compress: true,
+		host: '0.0.0.0',
 		port: 9000,
 		overlay: true,
 		setup(app) {
