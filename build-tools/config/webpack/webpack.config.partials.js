@@ -9,6 +9,8 @@ const {
 	getDirectoryNamedWebpackPlugin,
 } = require('./webpack-helpers');
 
+const projectRoot = path.resolve(__dirname, '../../../');
+
 module.exports = {
 	entry: {
 		partials: [
@@ -16,7 +18,7 @@ module.exports = {
 		]
 	},
 	output: {
-		path: path.resolve(__dirname, '../../../build'),
+		path: path.resolve(projectRoot, 'build'),
 		filename: "[name].js",
 		libraryTarget: 'commonjs2'
 	},

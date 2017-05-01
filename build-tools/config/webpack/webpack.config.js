@@ -11,6 +11,8 @@ const {
 	getDirectoryNamedWebpackPlugin,
 } = require('./webpack-helpers');
 
+const projectRoot = path.resolve(__dirname, '../../../');
+
 module.exports = {
 	entry: {
 		main: [
@@ -25,7 +27,7 @@ module.exports = {
 		],
 	},
 	output: {
-		path: path.resolve(__dirname, '../../../build'),
+		path: path.resolve(projectRoot, 'build'),
 		filename: '[name].js',
 		publicPath: '/',
 	},
@@ -35,7 +37,7 @@ module.exports = {
 			getDirectoryNamedWebpackPlugin()
 		],
 		alias: {
-			modernizr$: path.resolve(__dirname, '../../../.modernizrrc')
+			modernizr$: path.resolve(projectRoot, '.modernizrrc')
 		}
 	//	 fallback: path.join(__dirname, "helpers")
 	},
@@ -76,21 +78,21 @@ module.exports = {
 	},
 	devServer: {
 		hot: true,
-		contentBase: path.join(__dirname, '../../../build'),
+		contentBase: path.join(projectRoot, 'build'),
 		publicPath: '/',
 		compress: true,
 		port: 9000,
 		overlay: true,
 		setup(app) {
-			app.use((req, res, next) =>
-		{		if (req.path.includes('.html'))
-					{res.send(fs.readFileSync(path.resolve(__dirname, '../../../index.html'), 'utf-8'));
-				} else
-		{			next();
+			app.use((req, res, next) => {
+				if (req.path.includes('.html')) {
+					res.send(fs.readFileSync(path.resolve(projectRoot, 'index.html'), 'utf-8'));
+				} else {
+					next();
 				}
 			});
 			app.get('/', function(req, res) {
-				res.send(fs.readFileSync(path.resolve(__dirname, '../../../index.html'), 'utf-8'));
+				res.send(fs.readFileSync(path.resolve(projectRoot, 'index.html'), 'utf-8'));
 			});
 		}
 	},

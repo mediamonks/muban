@@ -5,6 +5,8 @@ const path = require("path");
 const webpack = require('webpack');
 const { getCodeRules } = require('./webpack-helpers');
 
+const projectRoot = path.resolve(__dirname, '../../../');
+
 module.exports = {
 	entry: {
 		bundle: [
@@ -13,14 +15,14 @@ module.exports = {
 		]
 	},
 	output: {
-		path: path.resolve(__dirname, '../../../build'),
+		path: path.resolve(projectRoot, 'build'),
 		filename: "[name].js",
 		publicPath: '/',
 	},
 	resolve: {
 		extensions: [".ts", ".js", ".json"],
 		alias: {
-			modernizr$: path.resolve(__dirname, "../../../.modernizrrc")
+			modernizr$: path.resolve(projectRoot, '.modernizrrc')
 		}
 	},
 	module: {

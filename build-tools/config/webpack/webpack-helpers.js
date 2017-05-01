@@ -2,6 +2,8 @@ const path = require("path");
 const webpack = require('webpack');
 const DirectoryNamedWebpackPlugin = require("directory-named-webpack-plugin");
 
+const projectRoot = path.resolve(__dirname, '../../../');
+
 function getBabelLoaderConfig() {
 	return {
 		loader :'babel-loader',
@@ -97,7 +99,7 @@ function getCodeRules() {
 		{
 			test: /\.js$/,
 			include: [
-				/src\/app/,
+				/src[\/\\]app/,
 			],
 			use: [
 				getBabelLoaderConfig()
@@ -106,7 +108,7 @@ function getCodeRules() {
 		{
 			test: /\.ts$/,
 			include: [
-				/src\/app/,
+				/src[\/\\]app/,
 			],
 			use: [
 				getBabelLoaderConfig(),
@@ -141,7 +143,7 @@ function getHandlebarsRules() {
 					options: {
 						extensions: ['.hbs', ''],
 						partialDirs: [
-							path.resolve(__dirname, '../../../src/app/component'),
+							path.resolve(projectRoot, 'src/app/component'),
 						],
 						debug: false
 					}
@@ -159,7 +161,7 @@ function getDirectoryNamedWebpackPlugin() {
 		honorIndex: false, // defaults to false
 
 		ignoreFn: function(webpackResolveRequest) {
-			return !webpackResolveRequest.path.includes('app/component');
+			return !webpackResolveRequest.path.includes(path.join('app', 'component'));
 
 			// custom logic to decide whether request should be ignored
 			// return true if request should be ignored, false otherwise
