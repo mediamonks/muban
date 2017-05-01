@@ -7,7 +7,7 @@ const Handlebars = require('handlebars');
 const glob = require('glob-fs')({ gitignore: true });
 var beautify_html = require('js-beautify').html;
 
-const { indexTemplate, appTemplate } = require('../build/partials');
+const { indexTemplate, appTemplate } = require('../build/asset/partials');
 
 const htmlTemplate = Handlebars.compile(fs.readFileSync(path.resolve(__dirname, './template.hbs'), 'utf-8'));
 
@@ -55,5 +55,5 @@ fs.writeFileSync(path.resolve(__dirname, '../build/index.html'), indexResult, 'u
 
 
 // cleanup, doesn't belong in the build folder
-fs.unlink(path.resolve(__dirname, '../build/partials.js'));
+fs.unlink(path.resolve(__dirname, '../build/asset/partials.js'));
 

@@ -17,7 +17,7 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(projectRoot, 'build'),
-		filename: "[name].js",
+		filename: "asset/[name].js",
 		publicPath: '/',
 	},
 	resolve: {

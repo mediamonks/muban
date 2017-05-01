@@ -2,9 +2,9 @@
  * Webpack config used to compile partials (for node build script) and css (required from partials)
  */
 const path = require("path");
-const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const {
+	getStyleRules,
 	getHandlebarsRules,
 	getDirectoryNamedWebpackPlugin,
 } = require('./webpack-helpers');
@@ -19,7 +19,7 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(projectRoot, 'build'),
-		filename: "[name].js",
+		filename: "asset/[name].js",
 		libraryTarget: 'commonjs2'
 	},
 	target: 'node',
@@ -33,32 +33,12 @@ module.exports = {
 	module: {
 		rules: [
 			...getHandlebarsRules(),
-			{
-				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract([
-					{
-						loader: 'css-loader',
-						options: {
-							sourceMap: true
-						}
-					},
-					{
-						loader: 'postcss-loader',
-					},
-					{
-						loader: 'sass-loader',
-						options: {
-							sourceMap: true,
-							data: '@import "~seng-scss"; @import "src/app/style/global";'
-						}
-					}
-				])
-			}
+			...getStyleRules(false),
 		]
 	},
 	plugins: [
 		new ExtractTextPlugin({
-			filename: 'screen.css',
+			filename: 'asset/screen.css',
 			allChunks : true,
 		})
 	]

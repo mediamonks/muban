@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require('webpack');
 const DirectoryNamedWebpackPlugin = require("directory-named-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
@@ -130,6 +131,67 @@ function getCodeRules() {
 	]
 }
 
+function getStyleRules(development) {
+	// used in both dev and dist
+	var cssRules = [
+		{
+			loader: 'css-loader',
+			options: {
+				sourceMap: true
+			}
+		},
+		{
+			loader: 'postcss-loader'
+		},
+		{
+			loader: 'sass-loader',
+			options: {
+				sourceMap: true,
+				data: '@import "~seng-scss"; @import "src/app/style/global";'
+			}
+		}
+	];
+
+	// only in dev
+	if (development) {
+		cssRules.unshift({
+			loader: 'style-loader',
+			options: {
+				sourceMap: true
+			}
+		});
+	}
+
+	// used in both dev and dist
+	const styleRules = [
+		{
+			test: /.(eot|svg|ttf|woff2?)$/,
+			loader: 'file-loader?name=asset/font/[name].[hash].[ext]',
+			include: path.resolve(projectRoot, 'src/app/font')
+		},
+		{
+			test: /\.(png|svg|jpg|gif)$/,
+			loader: 'url-loader?limit=10000&name=asset/image/[name].[hash].[ext]'
+		},
+	];
+
+	if (development) {
+		// dev uses 'use'
+		styleRules.unshift({
+			test: /\.scss$/,
+			use: cssRules,
+		});
+	} else {
+		// dust uses single ExtractTextPlugin loader
+		styleRules.unshift({
+			test: /\.scss$/,
+			loader: ExtractTextPlugin.extract(cssRules),
+		});
+	}
+
+	return styleRules;
+}
+
 function getHandlebarsRules() {
 	return [
 		{
@@ -172,6 +234,7 @@ function getDirectoryNamedWebpackPlugin() {
 
 module.exports = {
 	getCodeRules,
+	getStyleRules,
 	getHandlebarsRules,
 	getDirectoryNamedWebpackPlugin,
 };

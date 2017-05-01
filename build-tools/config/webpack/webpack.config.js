@@ -4,9 +4,11 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const {
 	getCodeRules,
+	getStyleRules,
 	getHandlebarsRules,
 	getDirectoryNamedWebpackPlugin,
 } = require('./webpack-helpers');
@@ -54,30 +56,7 @@ module.exports = {
 				enforce: 'pre',
 				loader: 'source-map-loader'
 			},
-			{
-				test: /\.scss$/,
-				use: [
-					{
-						loader: 'style-loader',
-						options: {
-							sourceMap: true
-						}
-					},
-					{
-						loader: 'css-loader',
-						options: {
-							sourceMap: true
-						}
-					},
-					{ loader: 'postcss-loader'
-					},
-						{loader: 'sass-loader',
-						options: {
-							sourceMap: true,
-						data: '@import "~seng-scss"; @import "src/app/style/global";'}
-					}
-				]
-			}
+			...getStyleRules(true),
 		]
 	},
 	devServer: {
