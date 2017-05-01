@@ -33,6 +33,10 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.hbs', '.ts', '.js', '.json'],
+		modules: [
+			path.resolve(projectRoot, 'src'),
+			'node_modules',
+		],
 		plugins: [
 			getDirectoryNamedWebpackPlugin()
 		],
