@@ -78,12 +78,13 @@ module.exports = {
 	},
 	devServer: {
 		hot: true,
-		contentBase: path.join(projectRoot, 'build'),
+		contentBase: path.join(projectRoot, 'src/static'),
 		publicPath: '/',
 		compress: true,
 		port: 9000,
 		overlay: true,
 		setup(app) {
+			// render basic default index.html for all html files (path will be picked by JS)
 			app.use((req, res, next) => {
 				if (req.path.includes('.html')) {
 					res.send(fs.readFileSync(path.resolve(projectRoot, 'index.html'), 'utf-8'));
@@ -91,6 +92,8 @@ module.exports = {
 					next();
 				}
 			});
+
+			// also render index.html on /
 			app.get('/', function(req, res) {
 				res.send(fs.readFileSync(path.resolve(projectRoot, 'index.html'), 'utf-8'));
 			});

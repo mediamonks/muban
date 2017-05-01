@@ -47,6 +47,7 @@
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.2.1",
     "babel-preset-es2015": "^6.22.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.2",
     "directory-named-webpack-plugin": "^2.1.0",
     "extract-text-webpack-plugin": "^2.1.0",

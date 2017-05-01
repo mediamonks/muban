@@ -3,6 +3,7 @@
  */
 const path = require("path");
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { getCodeRules } = require('./webpack-helpers');
 
 const projectRoot = path.resolve(__dirname, '../../../');
@@ -31,5 +32,13 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new CopyWebpackPlugin([
+			{
+				// copy files to public root (not versioned)
+				context: path.join(projectRoot, 'src/static/'),
+				from: '**/*',
+				to: path.resolve(projectRoot, `build/`),
+			},
+		]),
 	]
 };
