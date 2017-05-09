@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 const Handlebars = require('handlebars');
 const recursive = require('recursive-readdir');
-const glob = require('glob-fs')({ gitignore: true });
 var beautify_html = require('js-beautify').html;
 
 const { indexTemplate, appTemplate } = require('../build/asset/partials');
