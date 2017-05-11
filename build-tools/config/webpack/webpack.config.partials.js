@@ -20,7 +20,8 @@ module.exports = {
 	output: {
 		path: path.resolve(projectRoot, 'build'),
 		filename: "asset/[name].js",
-		libraryTarget: 'commonjs2'
+		libraryTarget: 'commonjs2',
+		publicPath: '/'
 	},
 	target: 'node',
 	resolve: {
