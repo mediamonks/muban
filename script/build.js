@@ -44,20 +44,19 @@ recursive(
 					link: page + '.html',
 				});
 			});
+		
+		// render list overview page
+		const content = indexTemplate({
+			pages: dirIndex,
+		});
+		const indexResult = htmlTemplate({
+			content,
+			page: 'Index',
+		});
+		fs.writeFileSync(path.resolve(__dirname, '../build/index.html'), indexResult, 'utf-8');
+
+
+		// cleanup, doesn't belong in the build folder
+		fs.unlink(path.resolve(__dirname, '../build/asset/partials.js'));
 	}
 );
-
-// render list overview page
-const content = indexTemplate({
-	pages: dirIndex,
-});
-const indexResult = htmlTemplate({
-	content,
-	page: 'Index',
-});
-fs.writeFileSync(path.resolve(__dirname, '../build/index.html'), indexResult, 'utf-8');
-
-
-// cleanup, doesn't belong in the build folder
-fs.unlink(path.resolve(__dirname, '../build/asset/partials.js'));
-
