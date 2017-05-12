@@ -9,7 +9,7 @@ module.exports = function(content) {
 	this.cacheable();
 
 	const requires = [];
-	content = content.replace(/<link rel=\\["']stylesheet\\["'] href=\\["']([^"']+)\\["']>[\\n]*/i, (res, match) => {
+	content = content.replace(/<link rel=\\["']stylesheet\\["'] href=\\["']([^"']+)\\["']>[\n]*/i, (res, match) => {
 		requires.push(match);
 		return '';
 	});
