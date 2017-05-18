@@ -9,7 +9,7 @@ module.exports = function(content) {
 	this.cacheable();
 
 	const partialName = loaderContext.resolve(loaderContext.context, loaderContext.resourcePath, (err, partialName) => {
-		partialName = partialName.split('src/app/')[1];
+		partialName = partialName.split(/src[\\/]app[\\/]/)[1];
 
 		content = `
 <!-- partial: ${partialName} -->
