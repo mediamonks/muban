@@ -7,8 +7,8 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const {
-	getCodeRules,
 	getStyleRules,
+	getCodeRules,
 	getHandlebarsRules,
 	getDirectoryNamedWebpackPlugin,
 } = require('./webpack-helpers');
@@ -25,12 +25,12 @@ module.exports = {
 			// only- means to only hot reload for successful updates
 			'webpack/hot/only-dev-server',
 			'./src/app/polyfills.js',
-			'./src/app/index.js',
+			'./src/app/dev.js',
 		],
 	},
 	output: {
 		path: path.resolve(projectRoot, 'build'),
-		filename: '[name].js',
+		filename: 'asset/[name].js',
 		publicPath: '/',
 	},
 	resolve: {
@@ -44,19 +44,19 @@ module.exports = {
 		],
 		alias: {
 			modernizr$: path.resolve(projectRoot, '.modernizrrc')
-		}
+		},
 	//	 fallback: path.join(__dirname, "helpers")
 	},
 	module: {
 		rules: [
-			...getHandlebarsRules(),
+			...getHandlebarsRules(true),
 			...getCodeRules(),
+			...getStyleRules(true),
 			{
 				test: /\.js$/,
 				enforce: 'pre',
 				loader: 'source-map-loader'
 			},
-			...getStyleRules(true),
 		]
 	},
 	devServer: {

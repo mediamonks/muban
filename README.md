@@ -29,15 +29,15 @@ npm run dev
 Open your browser at [http://localhost:9000](http://localhost:9000).
 
 ## Creating views, blocks and components
+
 With seng-generator you're able to create views, blocks and components with the CLI.
 The seng-generator needs to be installed globally
 
 ```
-npm install -g seng-generator
+npm i -g seng-generator
 ```
 
 The easiest way to use it is by using the wizard
-
 
 ```
 sg wizard
@@ -63,20 +63,24 @@ _TODO: run local http-server using `npm run serve` to view the dist build._
 
 ## Files and folders
 
-* `src/app/index.js` Main dev file, you should never have to change anything here
+* `src/app/dev.js` Main dev file, you should never have to change anything here
 
-* `src/app/code.js` Webpack entry file for production code build.
-* `src/app/partials.js` Webpack entry file for production partials build.
-* `src/app/index.hbs` Template file to list all the pages, used for dev and dist.
-* `src/app/app.hbs` Template file that is used for all pages.
+* `src/app/dist.js` Webpack entry file for production build, contains code that runs immediately.
+* `src/app/partials.js` Webpack entry file for generating output html files.
+* `src/app/bundle.js` Webpack entry that will include all js and css files referenced from all
+  template files.
+* `src/app/polyfills.js` List of polyfills to include in the bundles.
+* `src/app/index.hbs` Template file to list all the pages, used during development.
+* `src/app/app.hbs` Template file that is used for all pages, contains basic page layout.
 * `src/app/component/` Contains all components, each folder is made up of:
-  * `component-name.hbs` The template file, can import a stylesheet using the html link tag.
+  * `component-name.hbs` The template file, can import a stylesheet using the html `link` tag, and a
+    script using the html `script` tag.
   * `component-name.scss` The stylesheet, best to use a `component` prefix for your outer selector.
   * `ComponentName.ts/js` An optional TS/JS file for the component, receives the DOM element,
     and should have a static `block` property that corresponds with the `data-component`
     DOM attribute.
-* `src/app/component/components.ts` The index file that loads all components and initiates them
-  based on the found DOM elements.
+* `src/app/component/components.ts` Helper function for registering, updating and initializing
+  components.
 * `src/app/component/blocks/` Contains all _block_ components. They are dynamically rendered based
   on the blocks entry in the json data file.
 * `src/app/style` Folder containing global styles. All components will include their own stylesheet.
@@ -87,3 +91,4 @@ _TODO: run local http-server using `npm run serve` to view the dist build._
   visited via the overview page.
 * `.modernizrrc` config file for Modernizrrc used by `modernizr-loader`, config rules can
   be found [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
+* `template/*` Template files for seng-generator, for creating pages, blocks and components.

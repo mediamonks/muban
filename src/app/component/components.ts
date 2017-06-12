@@ -1,20 +1,46 @@
 declare const module:any;
 declare const require:any;
 
-import { getModuleContext, getChanged } from '../util/webpack';
-
-// Get all component scripts
-const [blockModules, blockContext] = getModuleContext(
-	require.context('./', true, /([^\/]+)\/\1\.(ts|js)$/i)
-);
-
 // store for instances
 const blocks = {
 };
 
+const blockModules = [];
+
+/**
+ * Registers a component class to be initialized later for each DOM element matching the block name.
+ * @param component
+ */
+export function registerComponent(component) {
+	if (component.block) {
+		blockModules.push(component);
+	} else {
+		console.error('missing "block" definition on component', component);
+	}
+}
+
+/**
+ * Used for hot reloading, is called when a new version of a component class is called.
+ * @param component
+ */
+export function updateComponent(component) {
+	const BlockConstructor = component;
+	const blockName = BlockConstructor.block;
+
+	// cleanup and recreate all block instances
+	blocks[blockName].forEach(b => {
+		b.instance.dispose && b.instance.dispose();
+		b.instance = new BlockConstructor(b.element);
+	});
+}
+
+/**
+ * Called to init components for the elements in the DOM.
+ * @param rootElement
+ */
 export function initComponents(rootElement) {
-	Object.keys(blockModules).forEach(key => {
-		const BlockConstructor = blockModules[key].default;
+	blockModules.forEach(component => {
+		const BlockConstructor = component;
 		const blockName = BlockConstructor.block;
 		blocks[BlockConstructor.block] = [];
 
@@ -24,26 +50,4 @@ export function initComponents(rootElement) {
 			blocks[blockName].push({instance, element})
 		});
 	})
-}
-
-
-// Hot Module Replacement API
-if (module.hot) {
-	module.hot.accept(blockContext.id, () => {
-		const changedModules = getChanged(
-			require.context('./', true, /([^\/]+)\/\1\.(ts|js)$/i),
-			blockModules,
-		);
-
-		changedModules.forEach(({key, content}) => {
-			const BlockConstructor = content.default;
-			const blockName = BlockConstructor.block;
-
-			// cleanup and recreate all block instances
-			blocks[blockName].forEach(b => {
-				b.instance.dispose && b.instance.dispose();
-				b.instance = new BlockConstructor(b.element);
-			})
-		});
-	});
 }
