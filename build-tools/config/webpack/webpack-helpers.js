@@ -137,7 +137,8 @@ function getStyleRules(development) {
 		{
 			loader: 'css-loader',
 			options: {
-				sourceMap: true
+				sourceMap: true,
+				minimize: !development
 			}
 		},
 		{
@@ -192,13 +193,19 @@ function getStyleRules(development) {
 	return styleRules;
 }
 
-function getHandlebarsRules() {
+function getHandlebarsRules(development, buildType) {
 	return [
 		{
 			test: /\.hbs/,
 			use: [
 				{
-					loader: path.resolve(__dirname, '../../hbs-style-loader'),
+					loader: path.resolve(__dirname, '../../hbs-build-loader'),
+					options: {
+						removeScript: development ? false : buildType !== 'code',
+						removeStyle: development ? false :  buildType !== 'code',
+						removeTemplate: development ? false : buildType === 'code',
+						hot: development,
+					}
 				},
 				{
 					loader: 'handlebars-loader',

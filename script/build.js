@@ -10,9 +10,14 @@ var beautify_html = require('js-beautify').html;
 const { indexTemplate, appTemplate } = require('../build/asset/partials');
 
 const htmlTemplate = Handlebars.compile(fs.readFileSync(path.resolve(__dirname, './template.hbs'), 'utf-8'));
+const htmlTemplateStandalone = Handlebars.compile(fs.readFileSync(path.resolve(__dirname, './template-standalone.hbs'), 'utf-8'));
 
 // store json info to render overview page later
 const dirIndex = [];
+
+if (!fs.existsSync(path.resolve(__dirname, '../build/standalone'))) {
+	fs.mkdirSync(path.resolve(__dirname, '../build/standalone'));
+}
 
 // read json files and generate a page for each json
 recursive(
@@ -27,13 +32,13 @@ recursive(
 				let page = file;
 				let content = appTemplate(require('../src/data/' + file + '.json'));
 
-				const result = htmlTemplate({
+				const templateResult = htmlTemplate({
 					content,
 					page,
 				});
 
 				// make nice indenting
-				const html = beautify_html(result, { indent_size: 2 });
+				let html = beautify_html(templateResult, { indent_size: 2 });
 
 				fs.writeFileSync(path.resolve(__dirname, '../build/' + page + '.html'), html, 'utf-8');
 
@@ -43,8 +48,19 @@ recursive(
 					page,
 					link: page + '.html',
 				});
+
+
+				const templateStandaloneResult = htmlTemplateStandalone({
+					content,
+					page,
+				});
+
+				// make nice indenting
+				html = beautify_html(templateStandaloneResult, { indent_size: 2 });
+
+				fs.writeFileSync(path.resolve(__dirname, '../build/standalone/' + page + '.html'), html, 'utf-8');
 			});
-		
+
 		// render list overview page
 		const content = indexTemplate({
 			pages: dirIndex,

@@ -1,10 +1,8 @@
 /**
- * Webpack config used to compile partials (for node build script) and css (required from partials)
+ * Webpack config to compile partials (for node build script)
  */
 const path = require("path");
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const {
-	getStyleRules,
 	getHandlebarsRules,
 	getDirectoryNamedWebpackPlugin,
 } = require('./webpack-helpers');
@@ -19,28 +17,27 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(projectRoot, 'build'),
-		filename: "asset/[name].js",
+		filename: 'asset/[name].js',
 		libraryTarget: 'commonjs2',
-		publicPath: '/'
+		publicPath: '/',
 	},
 	target: 'node',
 	resolve: {
-		extensions: [".hbs", ".js", ".json"],
+		extensions: ['.hbs', '.js', '.json'],
 		plugins: [
 			getDirectoryNamedWebpackPlugin()
-		]
+		],
 	// fallback: path.join(__dirname, "helpers")
 	},
 	module: {
 		rules: [
-			...getHandlebarsRules(),
-			...getStyleRules(false),
+			...getHandlebarsRules(false, 'partials'),
+			{
+				test: /\.scss$/,
+				use: [{
+					loader: 'null-loader',
+				}],
+			}
 		]
 	},
-	plugins: [
-		new ExtractTextPlugin({
-			filename: 'asset/screen.css',
-			allChunks : true,
-		})
-	]
 };
