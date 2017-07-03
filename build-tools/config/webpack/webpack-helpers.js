@@ -172,7 +172,7 @@ function getStyleRules(development) {
 		},
 		{
 			test: /\.(png|svg|jpg|gif)$/,
-			loader: 'url-loader?limit=10000&name=asset/image/[name].[hash].[ext]'
+			loader: 'url-loader?limit=10000&name=image/[name].[hash].[ext]'
 		},
 	];
 
