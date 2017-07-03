@@ -1,0 +1,8 @@
+{
+	"title": "{{name_pc}}"{{#if blocks}},
+	"blocks": [{{#each blocks}}
+		{
+			"name" : "{{this}}"
+		}{{#unless @last}},  {{/unless}}{{/each}}
+	]{{/if}}
+}
