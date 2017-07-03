@@ -32,7 +32,7 @@ const config = {
 	output: {
 		path: path.resolve(projectRoot, 'build'),
 		filename: 'asset/[name].js',
-		publicPath: '/',
+		publicPath: '../',
 	},
 	resolve: {
 		extensions: ['.hbs', '.ts', '.js', '.json'],

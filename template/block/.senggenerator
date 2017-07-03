@@ -1,3 +1,8 @@
 {
-  "destination": "./src/app/component/blocks"
+  "destination": "./src/app/component/blocks",
+  "variables": [{
+    "name": "element",
+    "message": "What HTML element should be used?",
+    "default": "div"
+  }]
 }
