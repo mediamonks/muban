@@ -94,7 +94,7 @@ const configPromise = new Promise(function(resolve, reject) {
 
 					config.entry[page.replace(/\./, '-')] = blockNames
 						.map(name => './src/app/component/blocks/' + name + '/' + name + '.hbs')
-						.concat(['./src/app/dist.js']);
+						.filter((value, index, list) => list.indexOf(value) === index);
 				});
 
 			resolve(config);
