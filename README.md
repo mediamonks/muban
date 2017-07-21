@@ -28,9 +28,9 @@ npm run dev
 ```
 Open your browser at [http://localhost:9000](http://localhost:9000).
 
-## Creating views, blocks and components
+## Creating pages, blocks and components
 
-With seng-generator you're able to create views, blocks and components with the CLI.
+With seng-generator you're able to create pages, blocks and components with the CLI.
 The seng-generator needs to be installed globally
 
 ```
@@ -43,13 +43,19 @@ The easiest way to use it is by using the wizard
 sg wizard
 ```
 
-Starts a wizard to create a component, view or block.
+Starts a wizard to create a component, page or block.
 
 ```
 sg block foo
 ```
 
-Generates a block with the name of foo. This can be done for views and components too.
+Generates a block with the name of foo. This can be done for pages and components too.
+
+```
+sg page foo -v blocks=header,footer
+```
+
+Generates a page with the name of foo and adds the blocks header and footer.
 
 ### Build
 
