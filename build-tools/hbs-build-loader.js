@@ -27,12 +27,12 @@ module.exports = function(content) {
 	const scripts = [];
 	const styles = [];
 
-	content = content.replace(/<script src=\\["']([^"']+)\\["']><\/script>[\\r\\n]*/i, (res, match) => {
+	content = content.replace(/<script src=\\["']([^"']+)\\["']><\/script>[\\r\\n]*/ig, (res, match) => {
 		scripts.push(match);
 		return '';
 	});
 
-	content = content.replace(/<link rel=\\["']stylesheet\\["'] href=\\["']([^"']+)\\["']>[\\r\\n]*/i, (res, match) => {
+	content = content.replace(/<link rel=\\["']stylesheet\\["'] href=\\["']([^"']+)\\["']>[\\r\\n]*/ig, (res, match) => {
 		styles.push(match);
 		return '';
 	});
