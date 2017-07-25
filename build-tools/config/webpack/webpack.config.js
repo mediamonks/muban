@@ -90,5 +90,5 @@ module.exports = {
 		// prints more readable module names in the browser console on HMR updates
 		new webpack.NamedModulesPlugin(),
 	],
-	devtool: 'inline-source-map'
+	devtool: 'eval-source-map'
 };
