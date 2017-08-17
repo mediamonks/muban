@@ -66,6 +66,7 @@ module.exports = {
 		compress: true,
 		host: '0.0.0.0',
 		port: 9000,
+		disableHostCheck: true,
 		overlay: true,
 		setup(app) {
 			// render basic default index.html for all html files (path will be picked by JS)
