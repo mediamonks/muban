@@ -42,13 +42,15 @@ function render() {
 		// render the index overview page
 		div.innerHTML = indexTemplate({
 			pages: Object.keys(jsonModules)
-				.map(key =>
-					key.split('/').pop().split('.').slice(0, -1).join('.')
-				)
+				.map(key => ({
+					page: key.split('/').pop().split('.').slice(0, -1).join('.'),
+					data: jsonModules[key],
+				}))
 				.sort()
-				.map(page => ({
+				.map(({ page, data }) => ({
 					page,
 					link: page + '.html',
+					data,
 				}))
 		});
 	} else {

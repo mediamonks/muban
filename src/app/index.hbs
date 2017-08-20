@@ -3,6 +3,9 @@
 }}
 <ul>
 	{{#each pages}}
-		<li><a href="{{link}}">{{page}}</a></li>
+		<li>
+			<a href="{{link}}">{{page}}</a>
+			- {{data.title}} ({{data.blocks.length}})
+		</li>
 	{{/each}}
 </ul>

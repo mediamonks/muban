@@ -30,7 +30,8 @@ recursive(
 			.sort()
 			.forEach(file => {
 				let page = file;
-				let content = appTemplate(require('../src/data/' + file + '.json'));
+				let data = require('../src/data/' + file + '.json');
+				let content = appTemplate(data);
 
 				const templateResult = htmlTemplate({
 					content,
@@ -47,6 +48,7 @@ recursive(
 				dirIndex.push({
 					page,
 					link: page + '.html',
+					data,
 				});
 
 
