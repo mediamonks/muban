@@ -1,7 +1,7 @@
 import AbstractBlock from "../AbstractBlock";
 
 export default class Block1 extends AbstractBlock {
-	static block:string = 'block1';
+	static displayName:string = 'block1';
 
 	private btn:HTMLButtonElement;
 

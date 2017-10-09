@@ -43,9 +43,9 @@ module.exports = function(content) {
 		newContent = `
 ${scripts.map(script => `
 var component = require(${loaderUtils.stringifyRequest(loaderContext, script)}).default;
-var registerComponent = require(${loaderUtils.stringifyRequest(loaderContext, 'app/component/components.ts')}).registerComponent;
+var registerComponent = require(${loaderUtils.stringifyRequest(loaderContext, 'app/util/components.ts')}).registerComponent;
 registerComponent(component);
-${hot ? `var updateComponent = require(${loaderUtils.stringifyRequest(loaderContext, 'app/component/components.ts')}).updateComponent;
+${hot ? `var updateComponent = require(${loaderUtils.stringifyRequest(loaderContext, 'app/util/components.ts')}).updateComponent;
 
 // Hot Module Replacement API
 if (module.hot) {

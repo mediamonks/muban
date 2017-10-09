@@ -22,7 +22,7 @@ const config = {
 		common: [
 			'./src/app/polyfills.js',
 			'modernizr',
-			'./src/app/app.hbs',
+			'./src/app/component/layout/app/app.hbs',
 		],
 		bundle: [
 			'./src/app/bundle.js',

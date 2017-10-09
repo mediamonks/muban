@@ -1,9 +1,7 @@
-export default class AbstractBlock {
+import AbstractComponent from "../AbstractComponent";
+
+export default class AbstractBlock extends AbstractComponent {
 	constructor(public element:HTMLElement) {
-
-	}
-
-	dispose() {
-		this.element = null;
+		super(element);
 	}
 }
