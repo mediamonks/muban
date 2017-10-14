@@ -3,8 +3,8 @@
  * It's used by the nodejs build script for rendering all pages based on these partials
  */
 const Handlebars = require('handlebars/runtime');
-const indexTemplate = require("./index.hbs");
-const appTemplate = require("./app.hbs");
+const indexTemplate = require("./component/layout/index/index.hbs");
+const appTemplate = require("./component/layout/app/app.hbs");
 
 const context = require.context('./component/', true, /\.hbs$/);
 context.keys().forEach(function(key) {

@@ -1,7 +1,7 @@
 import AbstractBlock from "../AbstractBlock";
 
 export default class Paragraph extends AbstractBlock {
-	static block:string = 'paragraph';
+	static displayName:string = 'paragraph';
 
 	private btn:HTMLButtonElement;
 	private contentMore:HTMLParagraphElement;

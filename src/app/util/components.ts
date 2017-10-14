@@ -1,19 +1,19 @@
 declare const module:any;
 declare const require:any;
 
-// store for instances
-const blocks = {
-};
+// store instances
+const components = {};
 
-const blockModules = [];
+// store constructors
+const componentModules = [];
 
 /**
- * Registers a component class to be initialized later for each DOM element matching the block name.
+ * Registers a component class to be initialized later for each DOM element matching the displayName.
  * @param component
  */
 export function registerComponent(component) {
-	if (component.block) {
-		blockModules.push(component);
+	if (component.displayName) {
+		componentModules.push(component);
 	} else {
 		console.error('missing "block" definition on component', component);
 	}
@@ -25,10 +25,10 @@ export function registerComponent(component) {
  */
 export function updateComponent(component) {
 	const BlockConstructor = component;
-	const blockName = BlockConstructor.block;
+	const displayName = BlockConstructor.displayName;
 
 	// cleanup and recreate all block instances
-	blocks[blockName].forEach(b => {
+	components[displayName].forEach(b => {
 		b.instance.dispose && b.instance.dispose();
 		b.instance = new BlockConstructor(b.element);
 	});
@@ -39,15 +39,15 @@ export function updateComponent(component) {
  * @param rootElement
  */
 export function initComponents(rootElement) {
-	blockModules.forEach(component => {
+	componentModules.forEach(component => {
 		const BlockConstructor = component;
-		const blockName = BlockConstructor.block;
-		blocks[BlockConstructor.block] = [];
+		const displayName = BlockConstructor.displayName;
+		components[BlockConstructor.displayName] = [];
 
 		// find all DOM elements that belong the this block
-		[].forEach.call(rootElement.querySelectorAll(`[data-component="${blockName}"]`), element => {
+		[].forEach.call(rootElement.querySelectorAll(`[data-component="${displayName}"]`), element => {
 			const instance = new BlockConstructor(element);
-			blocks[blockName].push({instance, element})
+			components[displayName].push({instance, element})
 		});
 	})
 }

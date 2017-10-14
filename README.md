@@ -76,8 +76,10 @@ _TODO: run local http-server using `npm run serve` to view the dist build._
 * `src/app/bundle.js` Webpack entry that will include all js and css files referenced from all
   template files.
 * `src/app/polyfills.js` List of polyfills to include in the bundles.
-* `src/app/index.hbs` Template file to list all the pages, used during development.
-* `src/app/app.hbs` Template file that is used for all pages, contains basic page layout.
+* `src/app/component/layout/index/index.hbs` Template file to list all the pages, used during
+  development.
+* `src/app/component/layout/app/app.hbs` Template file that is used for all pages, contains basic
+  page layout.
 * `src/app/component/` Contains all components, each folder is made up of:
   * `component-name.hbs` The template file, can import a stylesheet using the html `link` tag, and a
     script using the html `script` tag.
@@ -85,10 +87,10 @@ _TODO: run local http-server using `npm run serve` to view the dist build._
   * `ComponentName.ts/js` An optional TS/JS file for the component, receives the DOM element,
     and should have a static `block` property that corresponds with the `data-component`
     DOM attribute.
-* `src/app/component/components.ts` Helper function for registering, updating and initializing
-  components.
 * `src/app/component/blocks/` Contains all _block_ components. They are dynamically rendered based
   on the blocks entry in the json data file.
+* `src/app/util/components.ts` Helper function for registering, updating and initializing
+  components.
 * `src/app/style` Folder containing global styles. All components will include their own stylesheet.
 * `src/app/style/main.scss` Main stylesheet file, only for setting up global styles.
 * `src/data` The json files for all preview pages. Each json file corresponds with a page.

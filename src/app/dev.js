@@ -2,12 +2,12 @@
  * This file is only used during development.
  * It's set up to render the hbs templates in the DOM using javascript, and supports hot reloading.
  */
-import indexTemplate from "./index.hbs";
-import appTemplate from "./app.hbs";
+import indexTemplate from "./component/layout/index/index.hbs";
+import appTemplate from "./component/layout/app/app.hbs";
 import Handlebars from 'handlebars/runtime';
 import 'modernizr';
 
-import { initComponents } from './component/components';
+import { initComponents } from './util/components';
 import { getModuleContext, getChanged } from './util/webpack';
 
 /**
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Hot Module Replacement API
 if (module.hot) {
-	module.hot.accept(['./index.hbs', './app.hbs'], () => {
+	module.hot.accept(['./component/layout/index/index.hbs', './component/layout/app/app.hbs'], () => {
 		render();
 	});
 
