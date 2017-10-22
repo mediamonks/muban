@@ -74,13 +74,11 @@ yarn lint:ts
 ### stylelint
 
 We use [stylelint](https://github.com/stylelint/stylelint) lint our SCSS code. It's configured
-for use with Prettier.
-
-TODO: the current config is copied over from an internal project, but it might be better to pick
+for use with Prettier and uses
 [stylelint-config-recommended-scss](https://github.com/kristerkari/stylelint-config-recommended-scss)
-as a starting point.
+without any modifications. 
 
-Settings can be changed in `.stylelintrc`.
+Settings can be changed in `.stylelintrc` and files can be ignored in `.stylelintignore`.
 
 ```
 yarn lint:css
