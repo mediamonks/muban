@@ -47,7 +47,9 @@ export function initComponents(rootElement) {
     components[BlockConstructor.displayName] = [];
 
     // find all DOM elements that belong the this block
-    [].forEach.call(rootElement.querySelectorAll(`[data-component="${displayName}"]`), element => {
+    Array.from(
+      rootElement.querySelectorAll(`[data-component="${displayName}"]`),
+    ).forEach(element => {
       const instance = new BlockConstructor(element);
       components[displayName].push({ instance, element });
     });

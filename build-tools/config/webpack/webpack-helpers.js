@@ -12,7 +12,7 @@ function getBabelLoaderConfig() {
       presets: [
         ["env", {
           "targets": {
-            "browsers": ['last 3 iOS versions', 'last 3 versions', 'ie >= 9'],
+            "browsers": ['last 3 iOS versions', 'last 3 versions', 'ie >= 10'],
             "uglify": true,
           },
           "modules": false,
@@ -153,7 +153,6 @@ function getStyleRules(development) {
     }
   ];
 
-  // only in dev
   if (development) {
     cssRules.unshift({
       loader: 'style-loader',

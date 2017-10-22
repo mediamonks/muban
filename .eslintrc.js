@@ -19,13 +19,11 @@ module.exports = {
     },
   },
   rules: {
-    // don't require .vue extension when importing
     'import/extensions': [
       'error',
       'always',
       {
         js: 'never',
-        vue: 'never',
         ts: 'never',
       },
     ],

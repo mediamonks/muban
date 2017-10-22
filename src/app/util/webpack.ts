@@ -36,12 +36,8 @@ export function getChanged(
   // equality. Equal means it is unchanged.
   const changedModules = reloadedContext
     .keys()
-    .map(key => {
-      return { key, content: reloadedContext(key) };
-    })
-    .filter(({ key, content }) => {
-      return modules[key] !== content;
-    });
+    .map(key => ({ key, content: reloadedContext(key) }))
+    .filter(({ key, content }) => modules[key] !== content);
 
   changedModules.forEach(({ key, content }) => {
     modules[key] = content;

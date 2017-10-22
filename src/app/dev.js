@@ -3,6 +3,7 @@
  * It's set up to render the hbs templates in the DOM using javascript, and supports hot reloading.
  */
 import 'modernizr';
+import path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Handlebars from 'handlebars/runtime';
 import indexTemplate from './component/layout/index/index.hbs';
@@ -39,12 +40,7 @@ function render() {
     div.innerHTML = indexTemplate({
       pages: Object.keys(jsonModules)
         .map(key => ({
-          page: key
-            .split('/')
-            .pop()
-            .split('.')
-            .slice(0, -1)
-            .join('.'),
+          page: path.basename(key, '.json'),
           data: jsonModules[key],
         }))
         .sort()
