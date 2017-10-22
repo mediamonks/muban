@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-	"sourceMap": true,
-	"noImplicitAny": false,
-	"target": "es6",
-	"allowJs": true,
-	"allowSyntheticDefaultImports": true,
-	"moduleResolution": "Node"
+  "sourceMap": true,
+  "noImplicitAny": false,
+  "target": "es6",
+  "allowJs": true,
+  "allowSyntheticDefaultImports": true,
+  "moduleResolution": "Node"
   },
   "include": [
-	"./src/**/*"
+  "./src/**/*"
   ]
 }
