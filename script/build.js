@@ -16,65 +16,65 @@ const htmlTemplateStandalone = Handlebars.compile(fs.readFileSync(path.resolve(_
 const dirIndex = [];
 
 if (!fs.existsSync(path.resolve(__dirname, '../build/standalone'))) {
-	fs.mkdirSync(path.resolve(__dirname, '../build/standalone'));
+  fs.mkdirSync(path.resolve(__dirname, '../build/standalone'));
 }
 
 // read json files and generate a page for each json
 recursive(
-	path.resolve(__dirname, '../src/data'),
-	[(file, stats) => path.extname(file) !== '.json'],
-	function (err, files) {
-		// files is an array of filename
-		files
-			.map(f => path.basename(f, '.json'))
-			.sort()
-			.forEach(file => {
-				let page = file;
-				let data = require('../src/data/' + file + '.json');
-				let content = appTemplate(data);
+  path.resolve(__dirname, '../src/data'),
+  [(file, stats) => path.extname(file) !== '.json'],
+  function (err, files) {
+    // files is an array of filename
+    files
+      .map(f => path.basename(f, '.json'))
+      .sort()
+      .forEach(file => {
+        let page = file;
+        let data = require('../src/data/' + file + '.json');
+        let content = appTemplate(data);
 
-				const templateResult = htmlTemplate({
-					content,
-					page,
-				});
+        const templateResult = htmlTemplate({
+          content,
+          page,
+        });
 
-				// make nice indenting
-				let html = beautify_html(templateResult, { indent_size: 2 });
+        // make nice indenting
+        let html = beautify_html(templateResult, { indent_size: 2 });
 
-				fs.writeFileSync(path.resolve(__dirname, '../build/' + page + '.html'), html, 'utf-8');
+        fs.writeFileSync(path.resolve(__dirname, '../build/' + page + '.html'), html, 'utf-8');
 
-				console.log('Generating... ' + page + '.html');
+        console.log('Generating... ' + page + '.html');
 
-				dirIndex.push({
-					page,
-					link: page + '.html',
-					data,
-				});
-
-
-				const templateStandaloneResult = htmlTemplateStandalone({
-					content,
-					page,
-				});
-
-				// make nice indenting
-				html = beautify_html(templateStandaloneResult, { indent_size: 2 });
-
-				fs.writeFileSync(path.resolve(__dirname, '../build/standalone/' + page + '.html'), html, 'utf-8');
-			});
-
-		// render list overview page
-		const content = indexTemplate({
-			pages: dirIndex,
-		});
-		const indexResult = htmlTemplate({
-			content,
-			page: 'Index',
-		});
-		fs.writeFileSync(path.resolve(__dirname, '../build/index.html'), indexResult, 'utf-8');
+        dirIndex.push({
+          page,
+          link: page + '.html',
+          data,
+        });
 
 
-		// cleanup, doesn't belong in the build folder
-		fs.unlink(path.resolve(__dirname, '../build/asset/partials.js'));
-	}
+        const templateStandaloneResult = htmlTemplateStandalone({
+          content,
+          page,
+        });
+
+        // make nice indenting
+        html = beautify_html(templateStandaloneResult, { indent_size: 2 });
+
+        fs.writeFileSync(path.resolve(__dirname, '../build/standalone/' + page + '.html'), html, 'utf-8');
+      });
+
+    // render list overview page
+    const content = indexTemplate({
+      pages: dirIndex,
+    });
+    const indexResult = htmlTemplate({
+      content,
+      page: 'Index',
+    });
+    fs.writeFileSync(path.resolve(__dirname, '../build/index.html'), indexResult, 'utf-8');
+
+
+    // cleanup, doesn't belong in the build folder
+    fs.unlink(path.resolve(__dirname, '../build/asset/partials.js'));
+  }
 );

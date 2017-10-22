@@ -1,29 +1,29 @@
 .component-header {
-	border-bottom: 1px solid #ddd;
-	background-color: #eee;
+  border-bottom: 1px solid #ddd;
+  background-color: #eee;
 
-	ul {
-		max-width: $wrapperWidth;
-		margin: 0 auto;
-		padding: 10px 0;
+  ul {
+    max-width: $wrapperWidth;
+    margin: 0 auto;
+    padding: 10px 0;
 
-		li {
-			display: inline-block;
+    li {
+      display: inline-block;
 
-			a {
-				color: #444;
-				text-decoration: none;
-				font-size: 1.2em;
-				padding: 1px 10px;
+      a {
+        color: #444;
+        text-decoration: none;
+        font-size: 1.2em;
+        padding: 1px 10px;
 
-				&:hover {
-					color: #111;
-				}
+        &:hover {
+          color: #111;
+        }
 
-				&:first-child {
-					padding-left: 0;
-				}
-			}
-		}
-	}
+        &:first-child {
+          padding-left: 0;
+        }
+      }
+    }
+  }
 }

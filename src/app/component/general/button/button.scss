@@ -1,13 +1,13 @@
 .component-button {
-	border-radius: 2px;
-	border: 1px solid #ddd;
-	background-color: #eee;
-	padding: 4px 8px;
-	color: #333;
-	cursor: pointer;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  background-color: #eee;
+  padding: 4px 8px;
+  color: #333;
+  cursor: pointer;
 
-	&:hover {
-		color: #000;
-		border-color: #bbb;
-	}
+  &:hover {
+    color: #000;
+    border-color: #bbb;
+  }
 }
