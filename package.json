@@ -104,6 +104,7 @@
     "source-map-loader": "^0.1.6",
     "style-loader": "^0.17.0",
     "stylelint": "^8.2.0",
+    "stylelint-config-recommended-scss": "^2.0.0",
     "stylelint-declaration-use-variable": "^1.6.0",
     "stylelint-scss": "^2.1.0",
     "tslint": "^5.8.0",
