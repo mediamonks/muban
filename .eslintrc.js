@@ -39,6 +39,9 @@ module.exports = {
       { singleQuote: true, trailingComma: 'all', printWidth: 100, tabWidth: 2 },
     ],
     // only for use with getter-setters
-    'no-underscore-dangle': 0
+    'no-underscore-dangle': 0,
+    // to correctly work on windows with some tools that create windows line-endings
+    // this will be correct by git when committed
+    'linebreak-style': 0
   },
 };
