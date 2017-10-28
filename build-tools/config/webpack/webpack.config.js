@@ -41,10 +41,12 @@ module.exports = {
       'node_modules',
     ],
     plugins: [
-      getDirectoryNamedWebpackPlugin()
+      getDirectoryNamedWebpackPlugin(),
+      new webpack.NamedChunksPlugin(),
     ],
     alias: {
-      modernizr$: path.resolve(projectRoot, '.modernizrrc')
+      modernizr$: path.resolve(projectRoot, '.modernizrrc'),
+      TweenLite: path.resolve(projectRoot, 'node_modules/gsap/src/uncompressed/TweenLite'),
     },
   //   fallback: path.join(__dirname, "helpers")
   },
@@ -69,7 +71,7 @@ module.exports = {
     port: 9000,
     disableHostCheck: true,
     overlay: true,
-    setup(app) {
+    before(app) {
       // render basic default index.html for all html files (path will be picked by JS)
       app.use((req, res, next) => {
         if (req.path.includes('.html')) {

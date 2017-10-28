@@ -142,7 +142,10 @@ function getStyleRules(development) {
       }
     },
     {
-      loader: 'postcss-loader'
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: true,
+      }
     },
     {
       loader: 'sass-loader',
@@ -166,12 +169,67 @@ function getStyleRules(development) {
   const styleRules = [
     {
       test: /.(eot|svg|ttf|woff2?)$/,
-      loader: 'file-loader?name=asset/font/[name].[hash].[ext]',
-      include: path.resolve(projectRoot, 'src/app/font')
+      include: path.resolve(projectRoot, 'src/app/font'),
+      loader: 'file-loader',
+      options: {
+        name: 'asset/font/[name].' + (development ? '' : '[hash].') + '[ext]',
+      },
     },
     {
-      test: /\.(png|svg|jpg|gif)$/,
-      loader: 'url-loader?limit=10000&name=asset/image/[name].[hash].[ext]'
+      test: /\.(png|jpe?g|gif)$/,
+      loaders: [
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 2000,
+            name: 'asset/image/[name].' + (development ? '' : '[hash].') + '[ext]',
+          },
+        },
+        // {
+        // 	loader: 'image-webpack-loader',
+        // 	options: {
+        // 		bypassOnDebug: true,
+        // 		progressive: true,
+        // 		optipng: {
+        // 			optimizationLevel: 7,
+        // 		},
+        // 		mozjpeg: {
+        // 			quality: 65,
+        // 		},
+        // 		pngquant: {
+        // 			quality: '65-90',
+        // 			speed: 4,
+        // 		},
+        // 		gifsicle: {
+        // 			interlaced: false,
+        // 		},
+        // 	},
+        // },
+      ],
+    },
+    {
+      test: /\.svg$/,
+      use: [
+        {
+          loader: 'svg-inline-loader',
+        },
+        {
+          loader: 'svgo-loader',
+          options: {
+            plugins: [
+              { removeStyleElement: true },
+              { removeComments: true },
+              { removeDesc: true },
+              { removeUselessDefs: true },
+              { removeTitle: true, },
+              { removeMetadata: true, },
+              { removeComments: true, },
+              { cleanupIDs: { remove: true, prefix: '' } },
+              { convertColors: { shorthex: false } },
+            ],
+          },
+        },
+      ],
     },
   ];
 

@@ -31,6 +31,7 @@ const config = {
   output: {
     path: path.resolve(projectRoot, 'build'),
     filename: 'asset/[name].js',
+    chunkFilename: 'asset/[id].js',
     publicPath: '/',
   },
   resolve: {
@@ -43,7 +44,8 @@ const config = {
       getDirectoryNamedWebpackPlugin()
     ],
     alias: {
-      modernizr$: path.resolve(projectRoot, '.modernizrrc')
+      modernizr$: path.resolve(projectRoot, '.modernizrrc'),
+      TweenLite: path.resolve(projectRoot, 'node_modules/gsap/src/uncompressed/TweenLite'),
     },
   },
   module: {
