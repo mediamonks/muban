@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src --ext .js --cache",
-    "lint:ts": "tslint src/**/*.ts -c .tslintrc.js -p tsconfig.json",
+    "lint:ts": "tslint src/**/*.ts -c .tslintrc.js -p tsconfig.json -t verbose",
     "lint:css": "stylelint src/**/*.scss --cache",
     "bundle-size": "webpack-bundle-analyzer bundlesize-profile.json build/",
     "prebundle-size": "webpack --profile --json --config build-tools/config/webpack/webpack.config.dist.js > bundlesize-profile.json",
