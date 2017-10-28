@@ -1,17 +1,17 @@
-import AbstractComponent from "../../AbstractComponent";
+import AbstractComponent from '../../AbstractComponent';
 
 export default class App extends AbstractComponent {
-	static displayName:string = 'app-root';
+  static displayName: string = 'app-root';
 
-	constructor(element:HTMLElement) {
-		super(element);
+  constructor(element: HTMLElement) {
+    super(element);
 
-		// for generic app logic
-		console.log('Welcome to this app!');
-	}
+    // for generic app logic
+    // tslint:disable-next-line no-console
+    console.log('Welcome to this app!');
+  }
 
-
-	public dispose() {
-		// clean up stuff when hot reloading
-	}
+  public dispose() {
+    // clean up stuff when hot reloading
+  }
 }

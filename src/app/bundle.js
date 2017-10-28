@@ -5,5 +5,5 @@
 // require all hbs templates to get reference to all used code
 const context = require.context('./component/blocks/', true, /\.hbs$/);
 context.keys().forEach(key => {
-	context(key);
+  context(key);
 });

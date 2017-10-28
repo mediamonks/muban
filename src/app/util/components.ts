@@ -1,5 +1,5 @@
-declare const module:any;
-declare const require:any;
+declare const module: any;
+declare const require: any;
 
 // store instances
 const components = {};
@@ -8,15 +8,17 @@ const components = {};
 const componentModules = [];
 
 /**
- * Registers a component class to be initialized later for each DOM element matching the displayName.
+ * Registers a component class to be initialized later for each DOM element matching the
+ * displayName.
  * @param component
  */
 export function registerComponent(component) {
-	if (component.displayName) {
-		componentModules.push(component);
-	} else {
-		console.error('missing "block" definition on component', component);
-	}
+  if (component.displayName) {
+    componentModules.push(component);
+  } else {
+    // tslint:disable-next-line no-console
+    console.error('missing "block" definition on component', component);
+  }
 }
 
 /**
@@ -24,14 +26,14 @@ export function registerComponent(component) {
  * @param component
  */
 export function updateComponent(component) {
-	const BlockConstructor = component;
-	const displayName = BlockConstructor.displayName;
+  const BlockConstructor = component;
+  const displayName = BlockConstructor.displayName;
 
-	// cleanup and recreate all block instances
-	components[displayName].forEach(b => {
-		b.instance.dispose && b.instance.dispose();
-		b.instance = new BlockConstructor(b.element);
-	});
+  // cleanup and recreate all block instances
+  components[displayName].forEach(b => {
+    b.instance.dispose && b.instance.dispose();
+    b.instance = new BlockConstructor(b.element);
+  });
 }
 
 /**
@@ -39,15 +41,17 @@ export function updateComponent(component) {
  * @param rootElement
  */
 export function initComponents(rootElement) {
-	componentModules.forEach(component => {
-		const BlockConstructor = component;
-		const displayName = BlockConstructor.displayName;
-		components[BlockConstructor.displayName] = [];
+  componentModules.forEach(component => {
+    const BlockConstructor = component;
+    const displayName = BlockConstructor.displayName;
+    components[BlockConstructor.displayName] = [];
 
-		// find all DOM elements that belong the this block
-		[].forEach.call(rootElement.querySelectorAll(`[data-component="${displayName}"]`), element => {
-			const instance = new BlockConstructor(element);
-			components[displayName].push({instance, element})
-		});
-	})
+    // find all DOM elements that belong the this block
+    Array.from(
+      rootElement.querySelectorAll(`[data-component="${displayName}"]`),
+    ).forEach(element => {
+      const instance = new BlockConstructor(element);
+      components[displayName].push({ instance, element });
+    });
+  });
 }

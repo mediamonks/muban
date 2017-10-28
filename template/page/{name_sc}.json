@@ -1,14 +1,14 @@
 {
-	"title": "{{name_pc}}",
-	"blocks": [
-		{{#if blocks}}
-		{{#each blocks}}
-		{
-			"name" : "{{this}}",
-			"data" : {}
-		}{{#unless @last}},{{/unless}}
-		{{/each}}
-		{{/if}}
-	]
+  "title": "{{name_pc}}",
+  "blocks": [
+    {{#if blocks}}
+    {{#each blocks}}
+    {
+      "name" : "{{this}}",
+      "data" : {}
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+    {{/if}}
+  ]
 }
 

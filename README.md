@@ -57,7 +57,12 @@ sg page foo -v blocks=header,footer
 
 Generates a page with the name of foo and adds the blocks header and footer.
 
-### Build
+## Code Quality tools
+
+Muban uses multiple code quality tools like linters and formatters. Please read the
+[extended documentation](docs/code-quality.md) for more information.
+
+## Build
 
 ```
 npm run build

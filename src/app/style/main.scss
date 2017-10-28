@@ -1,13 +1,13 @@
-@import "~normalize.css";
-@import "~seng-scss";
+@import '~normalize.css';
+@import '~seng-scss';
 
 /* Globally available project specific mixins, functions and variables */
-@import "global";
+@import 'global';
 
-@import "./type/font";
+@import './type/font';
 
 // Generic stuff
 
 .hidden {
-	display: none;
+  display: none;
 }
