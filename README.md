@@ -48,7 +48,12 @@ Starts a wizard to create a component, page or block.
 
 For more information about the generating components, check the [docs](./docs/components.md).
 
-### Build
+## Code Quality tools
+
+Muban uses multiple code quality tools like linters and formatters. Please read the
+[extended documentation](docs/code-quality.md) for more information.
+
+## Build
 
 ```
 yarn build

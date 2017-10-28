@@ -1,21 +1,21 @@
 {{!
-	Production page template, requires standalone js/css files instead of the complete bundle
+  Production page template, requires standalone js/css files instead of the complete bundle
 }}
 <html lang="en">
 <head>
-	<meta charSet="utf-8" />
-	<title>Muban - {{page}}</title>
+  <meta charSet="utf-8">
+  <title>Muban - {{page}}</title>
 
-	<meta httpEquiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, user-scalable=no" />
-	<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="../asset/common.css">
-	<link rel="stylesheet" href="../asset/{{page}}.css">
+  <meta httpEquiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../asset/common.css">
+  <link rel="stylesheet" href="../asset/{{page}}.css">
 </head>
 <body>
-	{{{content}}}
+  {{{content}}}
 
-	<script src="../asset/common.js"></script>
-	<script src="../asset/{{page}}.js"></script>
+  <script src="../asset/common.js"></script>
+  <script src="../asset/{{page}}.js"></script>
 </body>
 </html>
