@@ -5,10 +5,15 @@ declare const module: any;
 declare const require: any;
 
 // store instances
-const components = {};
+let components: {
+  [key: string]: Array<{
+    instance: any;
+    element: HTMLElement;
+  }>;
+} = {};
 
 // store constructors
-const componentModules = [];
+let componentModules = [];
 
 /**
  * Registers a component class to be initialized later for each DOM element matching the
@@ -18,6 +23,8 @@ const componentModules = [];
  */
 export function registerComponent(component) {
   if (component.displayName) {
+    // remove old instance before adding the new one
+    componentModules = componentModules.filter(c => c.displayName !== component.displayName);
     componentModules.push(component);
   } else {
     // tslint:disable-next-line no-console
@@ -35,9 +42,9 @@ export function updateComponent(component): void {
   const displayName = BlockConstructor.displayName;
 
   // cleanup and recreate all block instances
-  components[displayName].forEach(b => {
-    b.instance.dispose && b.instance.dispose();
-    b.instance = new BlockConstructor(b.element);
+  components[displayName].forEach(c => {
+    c.instance.dispose && c.instance.dispose();
+    c.instance = new BlockConstructor(c.element);
   });
 }
 
@@ -47,6 +54,14 @@ export function updateComponent(component): void {
  * @param {HTMLElement} rootElement
  */
 export function initComponents(rootElement: HTMLElement): void {
+  // first dispose all old instances
+  Object.values(components).forEach(group => {
+    group.forEach(b => {
+      b.instance.dispose && b.instance.dispose();
+    });
+  });
+  components = {};
+
   const list = [];
 
   componentModules.forEach(component => {
@@ -96,9 +111,9 @@ export function initComponents(rootElement: HTMLElement): void {
  */
 export function getComponentForElement(element: HTMLElement): AbstractComponent {
   const displayName = element.getAttribute('data-component');
-  return ((components[displayName] && components[displayName].find(b => b.element === element)) ||
-    {}
-  ).instance;
+  return (<any>((components[displayName] &&
+    components[displayName].find(b => b.element === element)) ||
+    {})).instance;
 }
 
 /**
