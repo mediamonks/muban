@@ -4,57 +4,51 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const merge = require('webpack-merge');
+const config = require('../index');
 
 const {
   getStyleRules,
   getCodeRules,
   getHandlebarsRules,
-  getDirectoryNamedWebpackPlugin,
+  getESLintLoader,
+  getTSLintLoader,
+  getStyleLintPlugin,
 } = require('./webpack-helpers');
 
 const projectRoot = path.resolve(__dirname, '../../../');
+const port = process.env.PORT || config.dev.port;
 
-module.exports = {
+module.exports = merge(require('./webpack.config.base'), {
   entry: {
     main: [
-      // bundle the client for webpack-dev-server
-      // and connect to the provided endpoint
-      'webpack-dev-server/client?http://localhost:9000',
-      // bundle the client for hot reloading
-      // only- means to only hot reload for successful updates
-      'webpack/hot/only-dev-server',
       './src/app/polyfills.js',
       './src/app/dev.js',
     ],
   },
   output: {
-    path: path.resolve(projectRoot, 'build'),
-    filename: 'asset/[name].js',
-    publicPath: '/',
+    publicPath: config.dev.publicPath,
   },
   resolve: {
     extensions: ['.hbs', '.ts', '.js', '.json'],
-    modules: [
-      path.resolve(projectRoot, 'src'),
-      'node_modules',
-    ],
-    plugins: [
-      getDirectoryNamedWebpackPlugin(),
-      new webpack.NamedChunksPlugin(),
-    ],
-    alias: {
-      modernizr$: path.resolve(projectRoot, '.modernizrrc'),
-      TweenLite: path.resolve(projectRoot, 'node_modules/gsap/src/uncompressed/TweenLite'),
-    },
-  //   fallback: path.join(__dirname, "helpers")
   },
+  plugins: [
+    // enable HMR globally
+    new webpack.HotModuleReplacementPlugin(),
+
+    new webpack.DefinePlugin({
+      'process.env': config.dev.env,
+    }),
+
+    getStyleLintPlugin(config.dev.enableStyleLintPlugin),
+  ].filter(_ => _),
   module: {
     rules: [
       ...getHandlebarsRules(true),
       ...getCodeRules(),
       ...getStyleRules(true),
+      getESLintLoader(config.dev.enableESLintLoader),
+      getTSLintLoader(config.dev.enableTSLintLoader),
       {
         test: /\.js$/,
         enforce: 'pre',
@@ -63,19 +57,20 @@ module.exports = {
     ]
   },
   devServer: {
-    hot: true,
-    contentBase: path.join(projectRoot, 'src/static'),
-    publicPath: '/',
+    hotOnly: true,
+    publicPath: config.dev.publicPath,
+    contentBase: config.dev.staticPath,
     compress: true,
     host: '0.0.0.0',
-    port: 9000,
+    port,
     disableHostCheck: true,
     overlay: true,
+    noInfo: true,
     before(app) {
       // render basic default index.html for all html files (path will be picked by JS)
       app.use((req, res, next) => {
         if (req.path.includes('.html')) {
-          res.send(fs.readFileSync(path.resolve(projectRoot, 'index.html'), 'utf-8'));
+          res.send(fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8'));
         } else {
           next();
         }
@@ -83,19 +78,14 @@ module.exports = {
 
       // also render index.html on /
       app.get('/', function(req, res) {
-        res.send(fs.readFileSync(path.resolve(projectRoot, 'index.html'), 'utf-8'));
+        res.send(fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8'));
       });
-    }
+    },
+    https: (config.useHttps ? {
+      key: fs.readFileSync(path.resolve(projectRoot, 'build-tools/ssl/key.pem')),
+      cert: fs.readFileSync(path.resolve(projectRoot, 'build-tools/ssl/cert.pem')),
+      // ca: fs.readFileSync(path.resolve(projectRoot, 'build-tools/ssl/cert.crt')),
+    } : false),
   },
-  plugins: [
-    // enable HMR globally
-    new webpack.HotModuleReplacementPlugin(),
-
-    // prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
-
-    // Friendly webpack errors
-    new FriendlyErrorsWebpackPlugin(),
-  ],
   devtool: 'eval-source-map'
-};
+});

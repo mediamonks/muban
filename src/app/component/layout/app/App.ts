@@ -7,8 +7,6 @@ export default class App extends AbstractComponent {
     super(element);
 
     // for generic app logic
-    // tslint:disable-next-line no-console
-    console.log('Welcome to this app!');
   }
 
   public dispose() {

@@ -16,10 +16,10 @@ After cloning this repos and removing the `.git` folder, run:
 ```
 yarn
 ```
-or
-```
-npm i
-```
+
+### Config
+
+The most basic settings can be found and changed in `build-tools/config/index.js`.
 
 ### Development
 
@@ -27,6 +27,16 @@ npm i
 yarn dev
 ```
 Open your browser at [http://localhost:9000](http://localhost:9000).
+
+**Using own server for html**
+
+When using server-generated html instead of the handlebars templates, you can use the following
+command to just compile the `js` and `css` bundles (incl other assets).
+```
+yarn dev:code
+```
+The files will be outputted/updated in the same folder as the normal build is done, but uses
+the `development` environment, enables sourcemaps, and disables minification and other stuff.
 
 ## Creating pages, blocks and components
 
@@ -59,12 +69,23 @@ Muban uses multiple code quality tools like linters and formatters. Please read 
 yarn build
 ```
 
-View your output at `/build`.
+The code is outputted in  `/dist`.
 
-To preview your build in the browser at [http://localhost:3001](http://localhost:3001):
-
+To preview the build in the browser, run:
 ```
-yarn serve
+yarn preview
+```
+
+To analyze the created bundle, run:
+```
+yarn analyze
+```
+
+Using the build script, you can also run some parts of the process separately:
+```
+yarn build code      # or yarn compile:code
+yarn build partials  # or yarn compile:partials
+yarn build html      # or yarn compile:html
 ```
 
 ## Files and folders

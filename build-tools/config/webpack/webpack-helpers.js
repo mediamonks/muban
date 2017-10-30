@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require('webpack');
 const DirectoryNamedWebpackPlugin = require("directory-named-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
@@ -16,7 +17,7 @@ function getBabelLoaderConfig() {
             "uglify": true,
           },
           "modules": false,
-          "useBuiltIns": true,
+          "useBuiltIns": 'entry',
           "exclude": [
             // we don't use generators or async/await by default
             "transform-regenerator",
@@ -80,7 +81,23 @@ function getBabelLoaderConfig() {
         }]
       ],
       plugins: [
-        'transform-runtime',
+        // NOTE: adding helpers will reduce the filesize if you have a lot off classes,
+        // but it will increase the main bundle size due to core-js/library/module imports
+        // where babel-preset-env includes core-js/modules
+        // The ../library/.. versions don't pollute the global scope, this is why babel-runtime
+        // uses those for their helpers. But since we already have the global ones loaded,
+        // we don't need both.
+        // Until there is a fix for this (related: https://github.com/babel/babel/issues/5699)
+        // you need to analyze your bundle to see if enabling this gives you an advantage
+        // 25kb parsed / 5.9kb (gzip)
+
+        // ['transform-runtime', {
+        //   "helpers": true,
+        //   "polyfill": false,
+        //   "regenerator": false,
+        //   "moduleName": "babel-runtime"
+        // }],
+
         'transform-class-display-name',
         'transform-class-properties',
         'transform-flow-strip-types',
@@ -172,7 +189,7 @@ function getStyleRules(development) {
       include: path.resolve(projectRoot, 'src/app/font'),
       loader: 'file-loader',
       options: {
-        name: 'asset/font/[name].' + (development ? '' : '[hash].') + '[ext]',
+        name: 'asset/font/[name].' + (development ? '' : '[hash:7].') + '[ext]',
       },
     },
     {
@@ -182,29 +199,9 @@ function getStyleRules(development) {
           loader: 'url-loader',
           options: {
             limit: 2000,
-            name: 'asset/image/[name].' + (development ? '' : '[hash].') + '[ext]',
+            name: 'asset/image/[name].' + (development ? '' : '[hash:7].') + '[ext]',
           },
         },
-        // {
-        // 	loader: 'image-webpack-loader',
-        // 	options: {
-        // 		bypassOnDebug: true,
-        // 		progressive: true,
-        // 		optipng: {
-        // 			optimizationLevel: 7,
-        // 		},
-        // 		mozjpeg: {
-        // 			quality: 65,
-        // 		},
-        // 		pngquant: {
-        // 			quality: '65-90',
-        // 			speed: 4,
-        // 		},
-        // 		gifsicle: {
-        // 			interlaced: false,
-        // 		},
-        // 	},
-        // },
       ],
     },
     {
@@ -296,9 +293,83 @@ function getDirectoryNamedWebpackPlugin() {
   })
 }
 
+function addStandalone(webpackConfig, resolve) {
+  // read json files and generate a page for each json
+  recursive(
+    path.resolve(projectRoot, 'src/data'),
+    [(file, stats) => path.extname(file) !== '.json'],
+    function (err, files) {
+      // files is an array of filename
+      files
+        .map(f => path.basename(f, '.json'))
+        .sort()
+        .forEach(file => {
+          let page = file;
+          let content = require(path.resolve(projectRoot, 'src/data/' + file + '.json'));
+          const blockNames = content.blocks.map(b => b.name);
+
+          webpackConfig.entry[page.replace(/\./, '-')] = blockNames
+            .map(name => './src/app/component/blocks/' + name + '/' + name + '.hbs')
+            .concat(['./src/app/dist.js'])
+            .filter((value, index, list) => list.indexOf(value) === index);
+        });
+
+      resolve(webpackConfig);
+    }
+  );
+}
+
+function getESLintLoader(enabled) {
+  return enabled ? {
+    test: /\.js$/,
+    enforce: 'pre',
+    use: [
+      {
+        loader: 'eslint-loader'
+      },
+    ],
+    include: [
+      path.join(projectRoot, 'src')
+    ],
+  } : {};
+};
+
+function getTSLintLoader(enabled) {
+  return enabled ? {
+    test: /\.ts$/,
+    enforce: 'pre',
+    use: [
+      {
+        loader: 'tslint-loader',
+        options: {
+          tsConfigFile: path.resolve(projectRoot, 'tsconfig.json'),
+          configFile: path.resolve(projectRoot, '.tslintrc.js'),
+          emitErrors: true,
+          failOnHint: false,
+          typeCheck: true,
+        },
+      },
+    ],
+    include: [
+      path.join(projectRoot, 'src')
+    ],
+    exclude: /node_modules|vendor/
+  } : {};
+};
+
+function getStyleLintPlugin(enabled) {
+  return enabled ? new StyleLintPlugin({
+    syntax: 'scss'
+  }) : null;
+}
+
 module.exports = {
   getCodeRules,
   getStyleRules,
   getHandlebarsRules,
   getDirectoryNamedWebpackPlugin,
+  addStandalone,
+  getESLintLoader,
+  getTSLintLoader,
+  getStyleLintPlugin,
 };

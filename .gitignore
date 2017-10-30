@@ -58,5 +58,5 @@ node_modules/
 
 ### Project
 
-/build/
+/dist/
 bundlesize-profile.*
