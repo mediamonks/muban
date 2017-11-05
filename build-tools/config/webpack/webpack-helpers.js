@@ -6,6 +6,28 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
+function getHbsInlineLoaderConfig() {
+  return {
+    loader :'hbs-inline-loader',
+    options: {
+      hbsBuildOptions: {
+        removeScript: false,
+        removeStyle: false,
+        removeTemplate: false,
+        hot: true,
+      },
+      hbsOptions: {
+        extensions: ['.hbs', ''],
+        partialDirs: [
+          path.resolve(projectRoot, 'src/app/component'),
+        ],
+        ignoreHelpers: true,
+        debug: false,
+      },
+    },
+  }
+}
+
 function getBabelLoaderConfig() {
   return {
     loader :'babel-loader',
@@ -118,6 +140,7 @@ function getCodeRules() {
       test: /\.js$/,
       include: [
         /src[\/\\]app/,
+        /src[\/\\]storybook/,
       ],
       use: [
         getBabelLoaderConfig()
@@ -127,6 +150,7 @@ function getCodeRules() {
       test: /\.ts$/,
       include: [
         /src[\/\\]app/,
+        /src[\/\\]storybook/,
       ],
       use: [
         getBabelLoaderConfig(),
@@ -138,24 +162,22 @@ function getCodeRules() {
         }
       ]
     },
-    {
-      test: /\.modernizrrc$/,
-      use: [
-        { loader: "modernizr-loader" },
-        { loader: "json-loader" }
-      ]
-    },
   ]
 }
 
-function getStyleRules(development) {
+/**
+ * @param options
+ * @param options.development
+ * @return {*[]}
+ */
+function getStyleRules(options) {
   // used in both dev and dist
   var cssRules = [
     {
       loader: 'css-loader',
       options: {
         sourceMap: true,
-        minimize: !development
+        minimize: !options.development
       }
     },
     {
@@ -173,7 +195,7 @@ function getStyleRules(development) {
     }
   ];
 
-  if (development) {
+  if (options.development) {
     cssRules.unshift({
       loader: 'style-loader',
       options: {
@@ -189,7 +211,7 @@ function getStyleRules(development) {
       include: path.resolve(projectRoot, 'src/app/font'),
       loader: 'file-loader',
       options: {
-        name: 'asset/font/[name].' + (development ? '' : '[hash:7].') + '[ext]',
+        name: 'asset/font/[name].' + (options.development ? '' : '[hash:7].') + '[ext]',
       },
     },
     {
@@ -199,7 +221,7 @@ function getStyleRules(development) {
           loader: 'url-loader',
           options: {
             limit: 2000,
-            name: 'asset/image/[name].' + (development ? '' : '[hash:7].') + '[ext]',
+            name: 'asset/image/[name].' + (options.development ? '' : '[hash:7].') + '[ext]',
           },
         },
       ],
@@ -230,11 +252,26 @@ function getStyleRules(development) {
     },
   ];
 
-  if (development) {
+  if (options.development) {
     // dev uses 'use'
     styleRules.unshift({
       test: /\.scss$/,
       use: cssRules,
+    });
+    styleRules.unshift({
+      test: /\.css$/,
+      use: [{
+        loader: 'style-loader',
+        options: {
+          sourceMap: true,
+        },
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: true,
+          minimize: !options.development,
+        },
+      }],
     });
   } else {
     // dust uses single ExtractTextPlugin loader
@@ -242,23 +279,40 @@ function getStyleRules(development) {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract(cssRules),
     });
+    styleRules.unshift({
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract([{
+        loader: 'css-loader',
+        options: {
+          sourceMap: true,
+          minimize: !options.development,
+        },
+      }]),
+    });
   }
 
   return styleRules;
 }
 
-function getHandlebarsRules(development, buildType) {
+/**
+ *
+ * @param options
+ * @param options.development
+ * @param options.buildType
+ * @return {*[]}
+ */
+function getHandlebarsRules(options) {
   return [
     {
       test: /\.hbs/,
       use: [
         {
-          loader: path.resolve(__dirname, '../../hbs-build-loader'),
+          loader: 'hbs-build-loader',
           options: {
-            removeScript: development ? false : buildType !== 'code',
-            removeStyle: development ? false :  buildType !== 'code',
-            removeTemplate: development ? false : buildType === 'code',
-            hot: development,
+            removeScript: options.development ? false : options.buildType !== 'code',
+            removeStyle: options.development ? false :  options.buildType !== 'code',
+            removeTemplate: options.development ? false : options.buildType === 'code',
+            hot: options.development,
           }
         },
         {
@@ -272,8 +326,8 @@ function getHandlebarsRules(development, buildType) {
           }
         },
         {
-          loader: path.resolve(__dirname, '../../partial-comment-loader'),
-        }
+          loader: 'partial-comment-loader',
+        },
       ]
     }
   ];
@@ -284,7 +338,8 @@ function getDirectoryNamedWebpackPlugin() {
     honorIndex: false, // defaults to false
 
     ignoreFn: function(webpackResolveRequest) {
-      return !webpackResolveRequest.path.includes(path.join('app', 'component'));
+      return !(webpackResolveRequest.path.includes(path.join('app', 'component')) ||
+        webpackResolveRequest.path.includes(path.join('storybook')));
 
       // custom logic to decide whether request should be ignored
       // return true if request should be ignored, false otherwise
@@ -329,7 +384,7 @@ function getESLintLoader(enabled) {
       },
     ],
     include: [
-      path.join(projectRoot, 'src')
+      path.join(projectRoot, 'src'),
     ],
   } : {};
 };
@@ -351,7 +406,7 @@ function getTSLintLoader(enabled) {
       },
     ],
     include: [
-      path.join(projectRoot, 'src')
+      path.join(projectRoot, 'src'),
     ],
     exclude: /node_modules|vendor/
   } : {};
@@ -364,6 +419,8 @@ function getStyleLintPlugin(enabled) {
 }
 
 module.exports = {
+  getBabelLoaderConfig,
+  getHbsInlineLoaderConfig,
   getCodeRules,
   getStyleRules,
   getHandlebarsRules,

@@ -13,7 +13,12 @@ const config = require('../config');
 
 const projectRoot = path.resolve(__dirname, '../../');
 
-console.log(config.buildPath);
+function getJson(contentPath) {
+  let data = JSON.stringify(require(contentPath)).replace(/"import!(.*?\.json)"/gi, (match, group) => {
+    return JSON.stringify(getJson(path.resolve(__dirname, path.dirname(contentPath), group)));
+  });
+  return JSON.parse(data);
+}
 
 module.exports = function(cb) {
   const partialsPath = path.join(config.buildPath, 'asset/partials.js');
@@ -54,7 +59,7 @@ module.exports = function(cb) {
         .forEach(file => {
           const page = file;
           // eslint-disable-next-line import/no-dynamic-require, global-require
-          const data = require(`../../src/data/${file}.json`);
+          const data = getJson(`../../src/data/${file}.json`);
           const content = appTemplate(data);
 
           const templateResult = htmlTemplate({

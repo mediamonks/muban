@@ -44,9 +44,9 @@ module.exports = merge(require('./webpack.config.base'), {
   ].filter(_ => _),
   module: {
     rules: [
-      ...getHandlebarsRules(true),
+      ...getHandlebarsRules({ development: true }),
       ...getCodeRules(),
-      ...getStyleRules(true),
+      ...getStyleRules({ development: true }),
       getESLintLoader(config.dev.enableESLintLoader),
       getTSLintLoader(config.dev.enableTSLintLoader),
       {

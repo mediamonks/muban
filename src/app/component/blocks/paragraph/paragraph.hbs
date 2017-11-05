@@ -6,7 +6,9 @@
 
   <p>{{{content}}}</p>
 
+  {{#if contentMore }}
   <p class="js-content-more hidden">{{{contentMore}}}</p>
 
   {{> general/button text="read more..." }}
+  {{/if}}
 </div>

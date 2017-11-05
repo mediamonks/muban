@@ -27,6 +27,7 @@ module.exports = {
       {
         js: 'never',
         ts: 'never',
+        hbs: 'never',
       },
     ],
     // allow debugger during development

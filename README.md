@@ -97,10 +97,9 @@ yarn build html      # or yarn compile:html
 * `src/app/bundle.js` Webpack entry that will include all js and css files referenced from all
   template files.
 * `src/app/polyfills.js` List of polyfills to include in the bundles.
-* `src/app/component/layout/index/index.hbs` Template file to list all the pages, used during
-  development.
+* `src/app/component/layout/index/index.hbs` Template file to list all the pages.
 * `src/app/component/layout/app/app.hbs` Template file that is used for all pages, contains basic
-  page layout.
+  page layout (e.g. header, footer and wrapper).
 * `src/app/component/` Contains all components, each folder is made up of:
   * `component-name.hbs` The template file, can import a stylesheet using the html `link` tag, and a
     script using the html `script` tag.
@@ -110,7 +109,7 @@ yarn build html      # or yarn compile:html
     DOM attribute.
 * `src/app/component/blocks/` Contains all _block_ components. They are dynamically rendered based
   on the blocks entry in the json data file.
-* `src/app/util/components.ts` Helper function for registering, updating and initializing
+* `src/app/muban/componentUtils.ts` Helper function for registering, updating and initializing
   components.
 * `src/app/style` Folder containing global styles. All components will include their own stylesheet.
 * `src/app/style/main.scss` Main stylesheet file, only for setting up global styles.
@@ -121,3 +120,12 @@ yarn build html      # or yarn compile:html
 * `.modernizrrc` config file for Modernizrrc used by `modernizr-loader`, config rules can
   be found [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
 * `template/*` Template files for seng-generator, for creating pages, blocks and components.
+
+## Storybook
+
+Storybook is a web-app that lets you preview and interact with the components in your project.
+You can create presets that render your component with custom HTML, and pass different properties
+by providing a json object.
+
+Please read the
+[extended documentation](docs/storybook.md) for more information.

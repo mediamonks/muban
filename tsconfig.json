@@ -10,7 +10,8 @@
       "DOM",
       "DOM.Iterable",
       "ES2017"
-    ]
+    ],
+    "baseUrl": "./src/"
   },
   "include": [
     "./src/**/*"

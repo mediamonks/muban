@@ -6,30 +6,27 @@ import 'modernizr';
 import path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Handlebars from 'handlebars/runtime';
-import indexTemplate from './component/layout/index/index.hbs';
-import appTemplate from './component/layout/app/app.hbs';
+import indexTemplate from './component/layout/index/index';
+import appTemplate from './component/layout/app/app';
 
-import { initComponents } from './util/components';
-import { getModuleContext, getChanged } from './util/webpack';
+import { initComponents } from './muban/componentUtils';
+import { getComponentInfo } from './components';
+import { getModuleContext } from './muban/webpackUtils';
 
 /**
  * Register all templates beforehand with a require context, and save the partial by filename
  */
-const [partialModules, partialsContext] = getModuleContext(
-  require.context('./component/blocks/', true, /\.hbs$/),
-  (context, key, module) => {
-    Handlebars.registerPartial(/\/([^/]+)\.hbs/gi.exec(key)[1], module);
-  },
-);
-
-/**
- * json data context, for hot reloading
- */
-const [jsonModules, jsonContext] = getModuleContext(require.context('../data/', true, /\.json$/));
+getModuleContext(require.context('./component/blocks/', true, /\.hbs$/), (context, key, module) => {
+  Handlebars.registerPartial(/\/([^/]+)\.hbs/gi.exec(key)[1], module);
+});
 
 // Get info for current page
 const pageMatch = /\/(.*)\.html/i.exec(document.location.pathname);
 const jsonModuleName = (pageMatch && pageMatch[1]) || 'index';
+
+// eslint-disable-next-line no-use-before-define
+const { jsonModules } = getComponentInfo(render, jsonModuleName);
+
 const getJsonData = () => jsonModules[`./${jsonModuleName}.json`];
 
 function render() {
@@ -70,30 +67,4 @@ if (module.hot) {
       render();
     },
   );
-
-  module.hot.accept(partialsContext.id, () => {
-    // You can't use the previous context here. You _need_ to call require.context again to
-    // get the new version. Otherwise you might get errors about using disposed modules
-    const changedModules = getChanged(
-      require.context('./component/blocks/', true, /\.hbs$/),
-      partialModules,
-    );
-
-    changedModules.forEach(({ key, content }) => {
-      // register updated partials and re-render the page
-      Handlebars.registerPartial(/\/([^/]+)\.hbs/gi.exec(key)[1], content);
-      render();
-    });
-  });
-
-  module.hot.accept(jsonContext.id, () => {
-    const changedModules = getChanged(require.context('../data/', true, /\.json$/), jsonModules);
-
-    changedModules.forEach(({ key }) => {
-      // only re-render if the current page data is changed
-      if (key === `./${jsonModuleName}.json`) {
-        render(indexTemplate);
-      }
-    });
-  });
 }

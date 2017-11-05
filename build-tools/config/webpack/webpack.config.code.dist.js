@@ -34,7 +34,7 @@ const webpackConfig = merge(require('./webpack.config.code.base'), {
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: true,
-      statsFilename: path.resolve(projectRoot, 'bundlesize-profile.json'),
+      statsFilename: path.resolve(config.distPath, 'bundlesize-profile.json'),
     }),
     new ImageminPlugin({
       disable: !config.dist.enableImageOptimization,

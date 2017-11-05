@@ -38,7 +38,7 @@ To make the button look nice, and handle some logic, you could link to a style a
 ```
 
 ```
-import AbstractComponent from "../AbstractComponent";
+import AbstractComponent from "app/component/AbstractComponent";
 
 export default class Button extends AbstractComponent {
   // this should match the 'data-component' attribute value on the HTML element

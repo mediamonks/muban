@@ -1,0 +1,27 @@
+.story-info {
+  width: 100px;
+  padding: 20px;
+
+  h1 {
+    font-weight: 300;
+    color: #607d8b;
+  }
+
+  > a:hover h1 {
+    color: darken(#607d8b, 10%);
+  }
+
+  .path {
+    margin-top: 0;
+
+    a {
+      font-family: monospace;
+      color: #90a4ae;
+      margin: 0;
+
+      &:hover {
+        color: darken(#90a4ae, 10%);
+      }
+    }
+  }
+}
