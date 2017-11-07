@@ -4,21 +4,11 @@
  */
 import 'modernizr';
 import path from 'path';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import Handlebars from 'handlebars/runtime';
 import indexTemplate from './component/layout/index/index';
 import appTemplate from './component/layout/app/app';
 
 import { initComponents, cleanElement } from './muban/componentUtils';
 import { getComponentInfo } from './components';
-import { getModuleContext } from './muban/webpackUtils';
-
-/**
- * Register all templates beforehand with a require context, and save the partial by filename
- */
-getModuleContext(require.context('./component/blocks/', true, /\.hbs$/), (context, key, module) => {
-  Handlebars.registerPartial(/\/([^/]+)\.hbs/gi.exec(key)[1], module);
-});
 
 // Get info for current page
 const pageMatch = /\/(.*)\.html/i.exec(document.location.pathname);
