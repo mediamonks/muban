@@ -10,9 +10,11 @@ export default class Paragraph extends AbstractBlock {
     super(el);
 
     this.btn = this.element.querySelector('button');
-    this.btn.addEventListener('click', this.onButtonClick);
+    if (this.btn) {
+      this.btn.addEventListener('click', this.onButtonClick);
 
-    this.contentMore = <HTMLParagraphElement>this.element.querySelector('.js-content-more');
+      this.contentMore = <HTMLParagraphElement>this.element.querySelector('.js-content-more');
+    }
   }
 
   private onButtonClick = () => {
@@ -26,8 +28,10 @@ export default class Paragraph extends AbstractBlock {
   };
 
   public dispose() {
-    this.btn.removeEventListener('click', this.onButtonClick);
-    this.btn = null;
+    if (this.btn) {
+      this.btn.removeEventListener('click', this.onButtonClick);
+      this.btn = null;
+    }
 
     super.dispose();
   }

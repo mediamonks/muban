@@ -1,0 +1,160 @@
+.search-results {
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  width: 100%;
+  margin: 0;
+  padding: 20px 0;
+  box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.25);
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s linear 0.3s, opacity 0.15s linear;
+
+  &.active {
+    display: block;
+  }
+  &.opened {
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0s linear 0s, opacity 0.3s linear;
+  }
+
+  .backdrop {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .result-list {
+    position: relative;
+    z-index: 1;
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    background-color: white;
+
+    li {
+      width: 100%;
+      position: relative;
+
+      a {
+        text-decoration: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+        box-sizing: border-box;
+        max-width: 570px;
+        margin: 0 auto;
+        padding: 8px 0;
+        font-weight: 300;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      &:before,
+      &:after {
+        position: absolute;
+        width: 200%;
+        content: '';
+        height: 100%;
+        top: 0;
+        background-color: white;
+        transition: all 0.2s;
+      }
+
+      &:before {
+        left: -200%;
+      }
+      &:after {
+        right: -200%;
+      }
+
+      &:hover {
+        background-color: #eceff1;
+        &:before,
+        &:after {
+          background-color: #eceff1;
+        }
+
+        .right,
+        .file,
+        .description {
+          color: #90a4ae;
+        }
+
+        .label,
+        .name {
+          color: darken(#263238, 20%);
+        }
+      }
+
+      &.group {
+        margin-top: 7px;
+        padding-right: 0;
+      }
+
+      &.variant {
+        padding-left: 20px;
+
+        .row {
+          padding-right: 100px;
+        }
+      }
+
+      .row {
+        position: relative;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        box-sizing: border-box;
+        display: inline-block;
+        width: 100%;
+        color: #cfd8dc;
+      }
+
+      .name,
+      .file,
+      .label,
+      .description {
+        transition: color 0.2s;
+      }
+
+      .name {
+        color: #263238;
+        font-weight: 400;
+      }
+
+      .file {
+        font-family: monospace;
+        font-size: 12px;
+        padding-left: 10px;
+      }
+
+      .label {
+        color: #37474f;
+      }
+
+      .description {
+        padding-left: 10px;
+      }
+
+      .right {
+        flex-basis: 100px;
+        text-align: right;
+        color: #eceff1;
+        font-weight: 300;
+        transition: all 0.2s;
+      }
+    }
+  }
+}

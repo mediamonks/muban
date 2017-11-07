@@ -1,0 +1,24 @@
+.story-source {
+  display: flex;
+  flex-direction: column;
+
+  [data-component='tabs'] {
+    flex-grow: 0;
+  }
+
+  .tab-container {
+    flex-grow: 1;
+  }
+
+  pre {
+    max-height: 300px;
+    border: 1px solid #eee;
+    background-color: #f8f8f8;
+    margin: 0;
+    height: auto;
+    min-height: 55px;
+    overflow-x: auto;
+    line-height: 18px;
+    padding: 15px;
+  }
+}

@@ -32,6 +32,30 @@ const webpackConfig = {
       TweenLite: path.resolve(projectRoot, 'node_modules/gsap/src/uncompressed/TweenLite'),
     },
   },
+  resolveLoader: {
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, '../../loaders'),
+    ],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.modernizrrc$/,
+        use: [
+          { loader: "modernizr-loader" },
+          { loader: "json-loader" }
+        ]
+      },
+      {
+        test: /\.json$/,
+        use: [
+          { loader: "json-partial-loader" },
+          { loader: "json-loader" }
+        ]
+      },
+    ]
+  },
   plugins: [
     // Friendly webpack errors
     new FriendlyErrorsWebpackPlugin(),

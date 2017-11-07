@@ -33,9 +33,9 @@ module.exports = merge(require('./webpack.config.base'), {
   },
   module: {
     rules: [
-      ...getHandlebarsRules(false, 'code'),
+      ...getHandlebarsRules({ development: false, buildType: 'code'}),
       ...getCodeRules(),
-      ...getStyleRules(false),
+      ...getStyleRules({ development: false }),
     ]
   },
   plugins: [

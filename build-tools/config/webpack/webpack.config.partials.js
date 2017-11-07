@@ -23,7 +23,7 @@ module.exports = merge(require('./webpack.config.base'), {
   },
   module: {
     rules: [
-      ...getHandlebarsRules(false, 'partials'),
+      ...getHandlebarsRules({ development: false, buildType: 'partials' }),
       {
         test: /\.scss$/,
         use: [{

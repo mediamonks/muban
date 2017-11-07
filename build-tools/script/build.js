@@ -3,6 +3,7 @@ const ora = require('ora');
 const webpack = require('webpack');
 const webpackConfigCode = require('../config/webpack/webpack.config.code.dist');
 const webpackConfigPartials = require('../config/webpack/webpack.config.partials');
+const webpackConfigStorybook = require('../config/storybook/webpack.config.dist');
 const buildHtml = require('./build-html');
 const fs = require('fs-extra');
 const chalk = require('chalk');
@@ -21,6 +22,9 @@ const argv = require('yargs')
   })
   .command('html', 'Only generate html files', () => {}, (argv) => {
     buildHTML();
+  })
+  .command('storybook', 'Build the storybook', () => {}, (argv) => {
+    buildStorybook();
   })
   .command('clean', 'Cleans the dist folder', () => {}, (argv) => {
     cleanDist();
@@ -60,17 +64,17 @@ function cleanDist() {
 }
 
 function buildCode(cb) {
-  codeSpinner = ora('Staring webpack code...');
-  codeSpinner.start();
+  const spinner = ora('Starting webpack code...');
+  spinner.start();
   callWebpack(webpackConfigCode, (err, stats) => {
     if (err) {
-      codeSpinner.fail('webpack code failed');
+      spinner.fail('webpack code failed');
       throw err;
     }
     displayWebpacKStats(stats);
 
     console.log();
-    codeSpinner.succeed('webpack code done!');
+    spinner.succeed('webpack code done!');
     console.log();
 
     cb && cb(null);
@@ -78,17 +82,35 @@ function buildCode(cb) {
 }
 
 function buildPartials(cb) {
-  partialsSpinner = ora('Staring webpack partials...');
-  partialsSpinner.start();
+  const spinner = ora('Starting webpack partials...');
+  spinner.start();
   callWebpack(webpackConfigPartials, (err, stats) => {
     if (err) {
-      partialsSpinner.fail('webpack partials failed');
+      spinner.fail('webpack partials failed');
       throw err;
     }
     displayWebpacKStats(stats);
 
     console.log();
-    partialsSpinner.succeed('webpack partials done!');
+    spinner.succeed('webpack partials done!');
+    console.log();
+
+    cb && cb(null);
+  })
+}
+
+function buildStorybook(cb) {
+  const spinner = ora('Starting storybook build...');
+  spinner.start();
+  callWebpack(webpackConfigStorybook, (err, stats) => {
+    if (err) {
+      spinner.fail('Storybook build failed');
+      throw err;
+    }
+    displayWebpacKStats(stats);
+
+    console.log();
+    spinner.succeed('Storybook build done!');
     console.log();
 
     cb && cb(null);
@@ -96,7 +118,7 @@ function buildPartials(cb) {
 }
 
 function buildHTML(cb) {
-  htmlSpinner = ora('Staring html generation...');
+  htmlSpinner = ora('Starting html generation...');
   htmlSpinner.start();
   buildHtml((err) => {
     if (err) {

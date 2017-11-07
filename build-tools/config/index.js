@@ -56,6 +56,19 @@ module.exports = {
     enableTSLintLoader: false,
     enableStyleLintPlugin: false,
   },
+  storybook: {
+    env: {
+      NODE_ENV: JSON.stringify('development'),
+    },
+    port: 9002,
+    publicPath: '/',
+    staticPath: path.join(projectRoot, 'src/storybook/static'),
+    buildPath: path.join(distPath, 'storybook'),
+    // enables specific linters during webpack compilation, which will error your compile
+    enableESLintLoader: false,
+    enableTSLintLoader: false,
+    enableStyleLintPlugin: false,
+  },
   distPath,
   buildPath: path.join(distPath, 'site'),
   // enable for local HTTPS dev-server
