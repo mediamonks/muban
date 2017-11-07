@@ -5,7 +5,7 @@ declare const module: any;
 declare const require: any;
 
 // store instances
-let components: {
+const components: {
   [key: string]: Array<{
     instance: any;
     element: HTMLElement;
@@ -54,20 +54,15 @@ export function updateComponent(component): void {
  * @param {HTMLElement} rootElement
  */
 export function initComponents(rootElement: HTMLElement): void {
-  // first dispose all old instances
-  Object.values(components).forEach(group => {
-    group.forEach(b => {
-      b.instance.dispose && b.instance.dispose();
-    });
-  });
-  components = {};
-
   const list = [];
 
   componentModules.forEach(component => {
     const BlockConstructor = component;
     const displayName = BlockConstructor.displayName;
-    components[BlockConstructor.displayName] = [];
+
+    if (!components[BlockConstructor.displayName]) {
+      components[BlockConstructor.displayName] = [];
+    }
 
     // find all DOM elements that belong the this block
     Array.from(
@@ -111,9 +106,39 @@ export function initComponents(rootElement: HTMLElement): void {
  */
 export function getComponentForElement(element: HTMLElement): AbstractComponent {
   const displayName = element.getAttribute('data-component');
-  return (<any>((components[displayName] &&
-    components[displayName].find(b => b.element === element)) ||
-    {})).instance;
+
+  if (displayName && components[displayName]) {
+    return (<any>(components[displayName].find(b => b.element === element) || {})).instance;
+  }
+
+  return null;
+}
+
+/**
+ * Remove all instances bound to this html element or its children.
+ *
+ * Finds all elements with a data-component attribute, and disposes and removes the created
+ * component instance for that element.
+ *
+ * You should call this function before removing/replacing any piece of HTML that has components
+ * attached to it (e.g. when calling initComponents on replaced HTML)
+ *
+ * @param {HTMLElement} element
+ */
+export function cleanElement(element: HTMLElement): void {
+  const displayName = element.getAttribute('data-component');
+
+  // find instance linked to element and clean up
+  if (displayName && components[displayName]) {
+    const itemIndex = components[displayName].findIndex(b => b.element === element);
+    if (itemIndex !== -1) {
+      const item = components[displayName].splice(itemIndex, 1)[0];
+      item.instance.dispose();
+    }
+  }
+
+  // call recursively on all child data-components
+  Array.from(element.querySelectorAll('[data-component]')).forEach(cleanElement);
 }
 
 /**

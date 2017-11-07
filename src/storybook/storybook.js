@@ -6,14 +6,19 @@ import 'modernizr';
 import qs from 'qs';
 
 import 'app/style/main.scss';
-import { initComponents } from 'app/muban/componentUtils';
+import { initComponents, cleanElement } from 'app/muban/componentUtils';
 import { getAllStories, getStory } from './utils/utils';
 import { getStoryInfo } from './utils/getStoryInfo';
 
 import storybookTemplate from './component/storybook/storybook';
 
-function render() {
+function render(clean) {
   const div = document.getElementById('app');
+
+  if (clean) {
+    cleanElement(div);
+  }
+
   const params = qs.parse(document.location.search, { ignoreQueryPrefix: true });
 
   let data = {
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept(['./component/storybook/storybook.hbs'], () => {
-    render();
+  module.hot.accept(['./component/storybook/storybook'], () => {
+    render(true);
   });
 }

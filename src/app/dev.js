@@ -9,7 +9,7 @@ import Handlebars from 'handlebars/runtime';
 import indexTemplate from './component/layout/index/index';
 import appTemplate from './component/layout/app/app';
 
-import { initComponents } from './muban/componentUtils';
+import { initComponents, cleanElement } from './muban/componentUtils';
 import { getComponentInfo } from './components';
 import { getModuleContext } from './muban/webpackUtils';
 
@@ -25,12 +25,16 @@ const pageMatch = /\/(.*)\.html/i.exec(document.location.pathname);
 const jsonModuleName = (pageMatch && pageMatch[1]) || 'index';
 
 // eslint-disable-next-line no-use-before-define
-const { jsonModules } = getComponentInfo(render, jsonModuleName);
+const { jsonModules } = getComponentInfo(() => render(true), jsonModuleName);
 
 const getJsonData = () => jsonModules[`./${jsonModuleName}.json`];
 
-function render() {
+function render(clean) {
   const div = document.getElementById('app');
+
+  if (clean) {
+    cleanElement(div);
+  }
 
   if (jsonModuleName === 'index') {
     // render the index overview page
@@ -51,7 +55,6 @@ function render() {
     // render page with data
     div.innerHTML = appTemplate(getJsonData());
 
-    // TODO: should we cleanup ALL block JS modules?
     initComponents(div);
   }
 }
@@ -64,7 +67,7 @@ if (module.hot) {
   module.hot.accept(
     ['./component/layout/index/index.hbs', './component/layout/app/app.hbs'],
     () => {
-      render();
+      render(true);
     },
   );
 }
