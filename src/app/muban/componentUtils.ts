@@ -64,6 +64,14 @@ export function initComponents(rootElement: HTMLElement): void {
       components[BlockConstructor.displayName] = [];
     }
 
+    if (rootElement.getAttribute('data-component') === displayName) {
+      list.push({
+        component,
+        element: rootElement,
+        depth: getComponentDepth(rootElement as HTMLElement),
+      });
+    }
+
     // find all DOM elements that belong the this block
     Array.from(
       rootElement.querySelectorAll(`[data-component="${displayName}"]`),
@@ -139,6 +147,29 @@ export function cleanElement(element: HTMLElement): void {
 
   // call recursively on all child data-components
   Array.from(element.querySelectorAll('[data-component]')).forEach(cleanElement);
+}
+
+/**
+ * Updates the content of an element, including cleanup and initializing the new components.
+ * Useful when you retrieved new HTML from the backend and need to replace a section of the page.
+ *
+ * @param {HTMLElement} element
+ * @param {string} html
+ */
+export function updateElement(element: HTMLElement, html: string): void {
+  // dispose all created component instances
+  cleanElement(element);
+
+  // insert the new HTML into a temp container to construct the DOM
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  const newElement = temp.firstChild;
+
+  // replace the HTML on the page
+  element.parentNode.replaceChild(newElement, element);
+
+  // initialize new components for the new element
+  initComponents(<HTMLElement>newElement);
 }
 
 /**
