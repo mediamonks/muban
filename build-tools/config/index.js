@@ -8,6 +8,9 @@ Change the publicPath if site is running in a subfolder on the server.
 
 It's also possible to override this publicPath by using:
 yarn build --publicPath=/m/muban-site/
+
+When you don't know the publicPath at build time, you can set `window['webpackPublicPath']` before
+loading any script in your HTML.
 */
 let publicPath = '/';
 
