@@ -45,7 +45,9 @@ function render(clean) {
     // render page with data
     div.innerHTML = appTemplate(getJsonData());
 
-    initComponents(div);
+    // giving the browser some time to inject the styles
+    // so when components are constructed, the styles are all applied
+    setTimeout(() => initComponents(div), 100);
   }
 }
 document.addEventListener('DOMContentLoaded', () => {
