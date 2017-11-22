@@ -25,13 +25,13 @@ yarn add whatwg-fetch
 ``` 
 
 Import in the file in `dev.js` and `dist.js`:
-```
+```js
 import 'whatwg-fetch';
 ```
 
 
 ##### Getting HTML
-```
+```js
 fetch('/users.html')
   .then(response => response.text())
   .then(body => {
@@ -40,7 +40,7 @@ fetch('/users.html')
 ```
 
 ##### Getting JSON
-```
+```js
 fetch('/users.json')
   .then(response => response.json())
   .then(json => {
@@ -51,7 +51,7 @@ fetch('/users.json')
 ```
 
 ##### Post form
-```
+```js
 var form = document.querySelector('form')
 
 fetch('/users', {
@@ -61,7 +61,7 @@ fetch('/users', {
 ```
 
 ##### Post JSON
-```
+```js
 fetch('/users', {
   method: 'POST',
   headers: {
@@ -75,7 +75,7 @@ fetch('/users', {
 ```
 
 ##### File Upload
-```
+```js
 const input = document.querySelector('input[type="file"]')
 
 const data = new FormData()
@@ -103,7 +103,7 @@ snippet for that section. In that case we should:
 3. replace the HTML on the page
 4. initialize new component instances for that section and nested components
 
-```
+```typescript
 // code is located a component, where this.element points to HTML element for that section
 
 import { cleanElement, initComponents } from '../../../muban/componentUtils';
@@ -131,7 +131,7 @@ fetch(`/api/section/${id}`)
 
 Luckily there is a utility function for this:
 
-```
+```js
 // code is located a component, where this.element points to HTML element for that section
 
 import { updateElement } from '../../../muban/componentUtils';
@@ -153,7 +153,7 @@ especially when dealing with animation/transitions.
 This one might be a bit more work compared to just replacing HTML, but gives you way more control
 over what happens on the page. The big benefit is that the state doesn't reset, allowing you to
 make nice transitions while the new data is updated on the page.
-```
+```js
 fetch(`/api/section/${id}`)
   .then(response => response.json())
   .then(json => {
@@ -168,7 +168,7 @@ fetch(`/api/section/${id}`)
 ```
 
 Or when using knockout to update your HTML:
-```
+```typescript
 import { initTextBinding } from '../../../muban/knockoutUtils';
 import ko from 'knockout';
 
@@ -199,7 +199,7 @@ on the page, it's not that difficult.
 We can just query all the items, and retrieve the information we need to execute our logic, and
 add them back to the page.
 
-```
+```typescript
 constructor() {
   this.initItems();
   this.updateItems();
@@ -245,7 +245,6 @@ private sortOnTitle(itemData, ascending:boolean = false) {
 private filterOnTags(itemData, filter:string) {
   return itemData.filter(item => item.tags.some(tag => tag.includes(filter.toLowerCase())));
 }
-
 ```
 
 ### Load more items to the page
@@ -265,7 +264,7 @@ There are two options we can choose from.
 For smaller items, we could just clone the first element of the list, and create a function that
 updates all the data in that item, so we can append it to the DOM.
 
-```
+```typescript
 // get the template node to clone later
 const template = <HTMLELement>this.element.querySelector('.item');
 // create a documentFragment for better performance when adding items
@@ -289,7 +288,7 @@ This option works best when only used on the client, but when having server-rend
 DOM you would first need to convert them to data to properly render them.
 
 Handlebars template:
-```
+```html
 <!--
 List item template, keep in HTML since it will be used by javascript.
 The HTML in the script-template is similar to the html in the handlebars list below.
@@ -322,7 +321,7 @@ be used by knockout to render the list client-side (when new data comes in).
 ```
 
 Script:
-```
+```js
 // 1. transform old items to data
 // get all DOM nodes
 const items = Array.from(this.element.querySelectorAll('.item'));
@@ -349,7 +348,7 @@ itemData.push(...newData);
 
 The above can be simplified by using a util.
 The 3rd parameter can also be `oldData` extract above instead of the passed config for more control.
-```
+```js
 import { initListBinding } from '../../../muban/knockoutUtils';
 
 // 1+2+3. extract data, create observable and apply bindings

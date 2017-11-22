@@ -31,7 +31,7 @@ yarn storybook:preview  # preview the built storybook on port 9003
 
 Just create a `preset.js` file in your component folder and add a story like this:
 
-```
+```js
 import { storiesOf } from 'storybook/utils/utils';
 
 storiesOf('Paragraph', require('./paragraph'))
@@ -45,7 +45,7 @@ storiesOf('Paragraph', require('./paragraph'))
     </hbs>`,
     {
       title: 'What is Lorem Ipsum?',
-      content: 'industry. Lorem Ipsum has been the industry's standard ...',
+      content: 'industry. Lorem Ipsum has been the industry\'s standard ...',
       contentMore: 'Contrary to popular belief, Lorem Ipsum is not simply random text...',
     },
   )
@@ -53,7 +53,7 @@ storiesOf('Paragraph', require('./paragraph'))
 
 You can add multiple presets of the same component by chaining the `add()`:
 
-```
+```js
 storiesOf('Paragraph', require('./paragraph'))
   .add('preset 1', ...)
   .add('preset 2', ...)
@@ -68,7 +68,7 @@ is the object you pass as the last argument.
 
 You can also store the data objects in a json file in the same folder and just require it in place:
 
-```
+```js
 storiesOf('Paragraph', require('./paragraph'))
   .add(
     'default',
@@ -101,7 +101,7 @@ The only configuration available at the moment is loading the stories. When the 
 function is called, you have to require all the preset files, which can be done by
 using a webpack context:
 
-```
+```js
 import { configure } from 'storybook/utils/utils';
 
 const context = require.context('app/component/', true, /preset\.js$/);
