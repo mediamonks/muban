@@ -39,7 +39,7 @@ module.exports = function(content) {
 			}
 
 			return `{
-				compiled: require('!!hbs-build-loader?${hbsBuildLoaderParams}!handlebars-loader?${hbsLoaderParams}!extract-template-loader?target=${index++}!${currentModuleName}'),
+				compiled: require(${JSON.stringify(`!!hbs-build-loader?${hbsBuildLoaderParams}!handlebars-loader?${hbsLoaderParams}!extract-template-loader?target=${index++}!${currentModuleName}`)}),
 				raw: '${content.replace(/'/gi, '\\\'')}',
 			}`;
 		}
