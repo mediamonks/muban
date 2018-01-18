@@ -2,30 +2,32 @@
 <script src="./Header.ts"></script>
 
 <header data-component="header">
-	<a href="/"><span class="header-title">Muban</span></a>
+  <div class="header-block left">
+	  <a href="/"><span class="header-title">Muban</span></a>
+  </div>
 
-	<div class="search">
-		<input type="text" placeholder="Search..." />
-	</div>
+  <div class="header-block">
+    <div class="search">
+      <input type="text" placeholder="Search..." />
+    </div>
+  </div>
 
-	<ul class="header-nav">
-		<li class="device-emulator">
-			<a href="#">
-				<span class="device-icon">
-					&nbsp;
-					<span class="tablet"></span>
-					<span class="phone">
-						<span class="bezel"></span>
-					</span>
-				</span>
-			</a>
-		</li>
-		<!--<li class="size-xs"><a href="#" data-size="xs">XS</a></li>-->
-		<!--<li class="size-s"><a href="#" data-size="s">S</a></li>-->
-		<!--<li class="size-m"><a href="#" data-size="m">M</a></li>-->
-		<!--<li class="size-l"><a href="#" data-size="l">L</a></li>-->
-		<!--<li class="size-xl selected"><a href="#" data-size="xl">XL</a></li>-->
-	</ul>
+  <div class="header-block right align-right">
+    <ul class="header-nav">
+      <li class="device-emulator">
+        <a href="#">
+          <span class="device-icon">
+            &nbsp;
+            <span class="tablet"></span>
+            <span class="phone">
+              <span class="bezel"></span>
+            </span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
 
 	{{> ../search-results/search-results.hbs }}
 
