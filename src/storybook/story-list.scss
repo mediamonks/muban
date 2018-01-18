@@ -2,6 +2,14 @@ html,
 body {
   font-family: 'Roboto', sans-serif;
   background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 .hidden {
