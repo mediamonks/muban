@@ -2,6 +2,12 @@ html,
 body {
   height: 100%;
   font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .hidden {
@@ -59,6 +65,7 @@ a {
 
   .device-emulator & {
     display: block;
+    overflow: hidden;
   }
 
   .generic {

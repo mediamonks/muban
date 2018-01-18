@@ -13,6 +13,7 @@
     .story-info {
       flex: 4;
     }
+
     .story-source {
       flex: 6;
       width: 200px;
@@ -23,5 +24,19 @@
   .story-component {
     padding: 20px;
     border-top: 1px solid #ddd;
+  }
+
+  @include respond-to(SMALL) {
+    .story-top {
+      display: flex;
+      flex-direction: column;
+      .story-info {
+        width: 100%;
+      }
+
+      .story-source {
+        width: 100%;
+      }
+    }
   }
 }
