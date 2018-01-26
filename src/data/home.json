@@ -3,11 +3,11 @@
   "blocks": [
     {
       "name": "paragraph",
-      "data": "import!../app/component/blocks/paragraph/data.json"
+      "data": "import!../app/component/block/paragraph/data.json"
     },
     {
       "name": "two-col",
-      "data": "import!../app/component/blocks/two-col/data.json"
+      "data": "import!../app/component/block/two-col/data.json"
     }
   ]
 }

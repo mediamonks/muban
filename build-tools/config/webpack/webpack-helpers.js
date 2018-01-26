@@ -364,7 +364,7 @@ function addStandalone(webpackConfig, resolve) {
           const blockNames = content.blocks.map(b => b.name);
 
           webpackConfig.entry[page.replace(/\./, '-')] = blockNames
-            .map(name => './src/app/component/blocks/' + name + '/' + name + '.hbs')
+            .map(name => './src/app/component/block/' + name + '/' + name + '.hbs')
             .concat(['./src/app/dist.js'])
             .filter((value, index, list) => list.indexOf(value) === index);
         });
