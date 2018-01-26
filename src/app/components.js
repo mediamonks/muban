@@ -16,7 +16,7 @@ const [partialModules, partialsContext] = getModuleContext(
   require.context('./component/', true, /\.hbs$/),
   (context, key, module) => {
     // only blocks have to be registered, the others are automatically done by the hbs-loader
-    if (key.includes('/blocks/')) {
+    if (key.includes('/block/')) {
       Handlebars.registerPartial(/\/([^/]+)\.hbs/gi.exec(key)[1], module);
     }
   },
@@ -52,7 +52,7 @@ if (module.hot) {
 
     changedModules.forEach(({ key, content }) => {
       // register updated partials and re-render the page
-      if (key.includes('/blocks/')) {
+      if (key.includes('/block/')) {
         Handlebars.registerPartial(/\/([^/]+)\.hbs/gi.exec(key)[1], content);
       }
     });

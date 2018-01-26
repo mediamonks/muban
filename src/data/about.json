@@ -3,7 +3,7 @@
   "blocks": [
     {
       "name": "paragraph",
-      "data": "import!../app/component/blocks/paragraph/data.json"
+      "data": "import!../app/component/block/paragraph/data.json"
     }
   ]
 }
