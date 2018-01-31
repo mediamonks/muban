@@ -5,12 +5,11 @@ export default class AbstractComponent {
 
   constructor(public element: HTMLElement) {
     this.data = Object.values(element.attributes)
-      .map(attribute => ({ name: attribute.nodeName, value: attribute.value }))
-      .filter(node => node.name.includes('data-'))
+      .filter(attribute => attribute.nodeName.includes('data-'))
       .reduce(
-        (accumulator, node) => ({
+        (accumulator, attribute) => ({
           ...accumulator,
-          [camelCase(node.name.replace(/^data-/, ''))]: node.value,
+          [camelCase(attribute.nodeName.replace(/^data-/, ''))]: attribute.value,
         }),
         {},
       );
