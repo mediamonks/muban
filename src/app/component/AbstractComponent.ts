@@ -5,7 +5,7 @@ export default class AbstractComponent {
 
   constructor(public element: HTMLElement) {
     this.data = Object.values(element.attributes)
-      .filter(attribute => attribute.nodeName.includes('data-'))
+      .filter(attribute => attribute.nodeName.startsWith('data-'))
       .reduce(
         (accumulator, attribute) => ({
           ...accumulator,
