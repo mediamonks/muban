@@ -44,6 +44,8 @@ export default class Button extends AbstractComponent {
   // this should match the 'data-component' attribute value on the HTML element
   static displayName:string = 'button';
 
+  private btn:HTMLElement;
+
   // the html element from the handlebars template is passed
   constructor(el:HTMLElement) {
     super(el);
@@ -61,6 +63,45 @@ export default class Button extends AbstractComponent {
   public dispose() {
     this.btn.removeEventListener('click', this.handleButtonClick);
     this.btn = null;
+
+    super.dispose();
+  }
+}
+```
+
+Component data attributes are available in a component and can be accessed using data object on the component.
+The data attributes are stored as camelCased keys in the data object, without the data- prefix. So 
+attribute `data-slide-interval` can be referenced within a component using `this.data.slideInterval`.
+ 
+The component data object values are stored as strings. Validating and parsing this data is up to the component author.
+
+An example of using a data attribute
+```
+<script src="./Carousel.ts"></script>
+<div data-component="carousel" data-slide-interval="2000">...</div>
+```
+
+```
+import AbstractComponent from "app/component/AbstractComponent";
+
+export default class Carousel extends AbstractComponent {
+  static displayName:string = 'carousel';
+
+  private slideInterval:number;
+
+  constructor(el:HTMLElement) {
+    super(el);
+
+    const interval = (this.data.slideInterval && parseInt(this.data.slideInterval, 10)) || 5000;
+
+    this.slideInterval = setInterval(() => {
+      // Some code to slide your carousel
+    }, interval);
+  }
+
+  public dispose() {
+    clearInterval(this.slideInterval);
+    this.slideInterval = null;
 
     super.dispose();
   }
