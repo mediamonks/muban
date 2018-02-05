@@ -19,6 +19,6 @@ export default class Icon extends AbstractComponent {
   constructor(el: HTMLElement) {
     super(el);
 
-    el.innerHTML = require(`app/svg/${el.getAttribute('data-icon')}.svg`);
+    el.innerHTML = require(`app/svg/icon/${this.data.icon}.svg`);
   }
 }
