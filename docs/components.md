@@ -49,8 +49,8 @@ export default class Button extends AbstractComponent {
   // the html element from the handlebars template is passed
   constructor(el:HTMLElement) {
     super(el);
-    
-    // when selecing DOM elements, always search from 'this.element'
+
+    // when selecting DOM elements, always search from 'this.element'
     this.btn = this.element.querySelector('button');
     this.btn.addEventListener('click', this.handleButtonClick);
   }
@@ -69,10 +69,11 @@ export default class Button extends AbstractComponent {
 }
 ```
 
+### Data attributes
 Component data attributes are available in a component and can be accessed using data object on the component.
-The data attributes are stored as camelCased keys in the data object, without the data- prefix. So 
+The data attributes are stored as camelCased keys in the data object, without the data- prefix. So
 attribute `data-slide-interval` can be referenced within a component using `this.data.slideInterval`.
- 
+
 The component data object values are stored as strings. Validating and parsing this data is up to the component author.
 
 An example of using a data attribute
@@ -106,6 +107,27 @@ export default class Carousel extends AbstractComponent {
     super.dispose();
   }
 }
+```
+
+### Element selecting
+Selecting elements is usually done with the `querySelector` or the `querySelectorAll` methods, when using
+the querySelector the result will be typed as a `Node` and if you use the querySelectorAll it will be typed as a `NodeList`.
+In a lot of situations this is not the desired output since you will most likely want to loop over the `Nodes` in a
+forEach loop or use `HTMLElement` specific properties or eventListeners.
+
+This would mean casting the result or modifying the NodeList every time you use these selectors. To avoid typing a lot
+of the same code all `AbstractComponents` have two public methods available for selecting elements.
+
+```typescript
+const element = this.getElement('.some-selector');
+const elements = this.getElements('.some-selector');
+```
+By default the selector is based on the components root element, if you would like to use a different element you
+can provide a second parameter that should be used as a containing element.
+
+```typescript
+const element = this.getElements('.some-selector', document.body);
+const elements = this.getElements('.some-selector', document.body);
 ```
 
 ## Scaffolding
