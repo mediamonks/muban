@@ -70,13 +70,11 @@ export default class Button extends AbstractComponent {
 ```
 
 ### Data attributes
-Component data attributes are available in a component and can be accessed using data object on the component.
-The data attributes are stored as camelCased keys in the data object, without the data- prefix. So
-attribute `data-slide-interval` can be referenced within a component using `this.data.slideInterval`.
+Component data attributes are available in a component and can be accessed using an element its dataset object.
 
-The component data object values are stored as strings. Validating and parsing this data is up to the component author.
+Dataset values are stored as strings. Validating and parsing this data is up to the component author.
 
-An example of using a data attribute
+An example of using a data attribute using dataset
 ```
 <script src="./Carousel.ts"></script>
 <div data-component="carousel" data-slide-interval="2000">...</div>
@@ -93,7 +91,7 @@ export default class Carousel extends AbstractComponent {
   constructor(el:HTMLElement) {
     super(el);
 
-    const interval = (this.data.slideInterval && parseInt(this.data.slideInterval, 10)) || 5000;
+    const interval = (this.element.dataset.slideInterval && parseInt(this.element.dataset.slideInterval, 10)) || 5000;
 
     this.slideInterval = setInterval(() => {
       // Some code to slide your carousel
