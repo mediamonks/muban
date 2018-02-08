@@ -7,5 +7,5 @@ storiesOf('{{name_sc}}', require('./{{name_sc}}.hbs')).add(
   `<hbs>
 			\{{> {{name_sc}} @root}}
 		</hbs>`,
-  {},
+  require('./data'),
 );
