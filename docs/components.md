@@ -70,7 +70,7 @@ export default class Button extends AbstractComponent {
 ```
 
 ### Data attributes
-Component data attributes are available in a component and can be accessed using an element its dataset object.
+Component data attributes are available in a component and can be accessed using an element its [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) object.
 
 Dataset values are stored as strings. Validating and parsing this data is up to the component author.
 
