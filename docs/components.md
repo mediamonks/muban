@@ -9,20 +9,20 @@ To make things interactive it can also contain a script file.
 
 A simple component could look like this:
 
-```
+```html
 <button class="component-button">{{text}}</button>
 ```
 
 To make the button look nice, and handle some logic, you could link to a style and script file:
 
-```
+```html
 <link rel="stylesheet" href="./button.scss">
 <script src="./Button.ts"></script>
 
 <button data-component="button">{{text}}</button>
 ```
 
-```
+```scss
 [data-component="button"] {
   border: 1px solid #ddd;
   background-color: #eee;
@@ -37,7 +37,7 @@ To make the button look nice, and handle some logic, you could link to a style a
 }
 ```
 
-```
+```typescript
 import AbstractComponent from "app/component/AbstractComponent";
 
 export default class Button extends AbstractComponent {

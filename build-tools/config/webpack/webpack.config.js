@@ -54,6 +54,10 @@ module.exports = merge(require('./webpack.config.base'), {
         enforce: 'pre',
         loader: 'source-map-loader'
       },
+      {
+        test: /\.ko/,
+        loader: 'knockout-loader'
+      },
     ]
   },
   devServer: {

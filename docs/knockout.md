@@ -19,7 +19,7 @@ your view when the data updates.
 
 Some examples on how to use this:
 
-```
+```typescript
 // initiate the observable
 private searchOpened:KnockoutObservable<boolean> = ko.observable(false);
 
@@ -55,11 +55,11 @@ Within the data-bind values you can pass observables, but you have to do so with
 the `()`. If you do so, it will just return that value, and the changes won't be tracked.
 By supplying the observable itself, changes can be tracked to update the binding.
 
-```
+```js
 ko.applyBindingsToNode(element, object);
 ```
 
-```
+```js
 ko.applyBindingsToNode(this.element.querySelector('.search-results'), {
   'css' : { 'opened': this.searchOpened }
 });
@@ -79,7 +79,7 @@ observables will be tracked, just like in normal computeds.
 If one of the data-bind properties for an element needs to be a function, you have to switch to
 this method, and all of the properties have to be a function.
 
-```
+```js
 ko.applyBindingsToNode(element, object, viewModel);
 ```
 
@@ -87,7 +87,7 @@ Below, the `style` property has to be a function because we are using to observa
 a custom value. Because of this, the `css` property also has to be a function, but that one
 will just reference the observable (calling it would also work here).
 
-```
+```js
 ko.applyBindingAccessorsToNode(this.content, {
   'style' : () => ({
     maxWidth: model.deviceEmulateEnabled() ? model.viewportWidth() + 'px' : '100%',
@@ -100,12 +100,12 @@ The following example  applies a binding to a list of elements, where each eleme
 computed by introducing some logic. For better performance, the reading of the attributes
 should be done only once.
 
-```
+```js
 $('.bar').toArray().forEach((bar) => {
   ko.applyBindingAccessorsToNode(bar, {
     'css' : () => {
-      let min:any = bar.getAttribute('data-size-min');
-      let max:any = bar.getAttribute('data-size-max');
+      let min = bar.getAttribute('data-size-min');
+      let max = bar.getAttribute('data-size-max');
       min = min === '*' ? min : parseInt(min, 10);
       max = max === '*' ? max : parseInt(max, 10);
 
