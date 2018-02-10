@@ -1,13 +1,14 @@
 # Storybook
 
-Storybook is a web-app that lets you preview and interact with the components in your project.
-You can create presets that render your component with custom HTML, and pass different properties
-by providing a json object.
+Storybook is a web-app that lets you preview and interact with the components in your project. You
+can create presets that render your component with custom HTML, and pass different properties by
+providing a json object.
 
-Within the viewer you can list all components, list all variations of a single component, or view
-a single preset isolated.
+Within the viewer you can list all components, list all variations of a single component, or view a
+single preset isolated.
 
 Besides the component, it will show:
+
 * the name
 * the file path
 * the description
@@ -18,8 +19,8 @@ Besides the component, it will show:
 * the component .scss source
 * the rendered html
 
-The viewer also includes a media query viewer that read the media queries from your projects,
-just like it's done in Chrome DevTools.
+The viewer also includes a media query viewer that read the media queries from your projects, just
+like it's done in Chrome DevTools.
 
 ```
 yarn storybook          # start the storybook app on port 9002
@@ -49,7 +50,7 @@ storiesOf('Paragraph', require('./paragraph'))
       contentMore: 'Contrary to popular belief, Lorem Ipsum is not simply random text...',
     },
   )
-``` 
+```
 
 You can add multiple presets of the same component by chaining the `add()`:
 
@@ -63,8 +64,8 @@ storiesOf('Paragraph', require('./paragraph'))
 The `<hbs>` section will be parsed as a handlebars template by a custom webpack loader, so within
 there you can just use any html or hbs syntax to make up your preset.
 
-Using the `@root` in the partial will pass the complete context to that component. The context
-is the object you pass as the last argument.
+Using the `@root` in the partial will pass the complete context to that component. The context is
+the object you pass as the last argument.
 
 You can also store the data objects in a json file in the same folder and just require it in place:
 
@@ -87,9 +88,9 @@ needed to include certain assets from the main project in the storybook.
 
 One of theme are the main styles, these are included by default in the story frame.
 
-Other things could be svg sprites that should be available in the HTML. When it's plain HTML
-it can be added in the `/src/storybook/static/story.html` file. When it's a hbs partial, it
-can be added in `/src/storybook/story-list.hbs` and `/src/storybook/story-single.hbs`.
+Other things could be svg sprites that should be available in the HTML. When it's plain HTML it can
+be added in the `/src/storybook/static/story.html` file. When it's a hbs partial, it can be added in
+`/src/storybook/story-list.hbs` and `/src/storybook/story-single.hbs`.
 
 ## Configuration
 
@@ -98,8 +99,8 @@ The Storybook configuration files live in `build-tools/config/storybook`.
 The `config.js` file is included in the storybook build and is used configure the storybook.
 
 The only configuration available at the moment is loading the stories. When the `loadStories`
-function is called, you have to require all the preset files, which can be done by
-using a webpack context:
+function is called, you have to require all the preset files, which can be done by using a webpack
+context:
 
 ```
 import { configure } from 'storybook/utils/utils';
@@ -113,6 +114,6 @@ function loadStories() {
 configure(loadStories);
 ```
 
-Besides that, the config folder also contains the **webpack configuration** for development and
-a distribution build. It extends the base configuration from the project so it can reuse most
-of its (loader) configuration.
+Besides that, the config folder also contains the **webpack configuration** for development and a
+distribution build. It extends the base configuration from the project so it can reuse most of its
+(loader) configuration.

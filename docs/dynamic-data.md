@@ -5,32 +5,34 @@ the `js` and `css` to make the website look and work the way it should. The big 
 it's not possible to work with data-binding template engines that frameworks like Vue, React and
 Angular do, because they have control over the HTML.
 
-This means we create (interactive) components by passing the HTML element, and the component
-should use querySelectors and other DOM APIs to read from and write to the DOM. We have added
-Knockout to Muban to allow you to set up data-bindings from within JavaScript, but that only
-gets you so far.
+This means we create (interactive) components by passing the HTML element, and the component should
+use querySelectors and other DOM APIs to read from and write to the DOM. We have added Knockout to
+Muban to allow you to set up data-bindings from within JavaScript, but that only gets you so far.
 
 When having to deal with dynamic data fetched from JavaScript, or rendered lists that need to be
-sorted of filtered client-side, we need to think of something else. Below are some common
-scenarios and how you can deal with them.
+sorted of filtered client-side, we need to think of something else. Below are some common scenarios
+and how you can deal with them.
 
 ## fetch()
 
-For basic XHR calls, you should use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch).
-To support older browsers (IE), you should include the [fetch polyfill](https://github.com/github/fetch).
+For basic XHR calls, you should use the
+[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). To support
+older browsers (IE), you should include the [fetch polyfill](https://github.com/github/fetch).
 
 Install:
+
 ```
 yarn add whatwg-fetch
-``` 
+```
 
 Import in the file in `dev.js` and `dist.js`:
+
 ```
 import 'whatwg-fetch';
 ```
 
-
 ##### Getting HTML
+
 ```
 fetch('/users.html')
   .then(response => response.text())
@@ -40,6 +42,7 @@ fetch('/users.html')
 ```
 
 ##### Getting JSON
+
 ```
 fetch('/users.json')
   .then(response => response.json())
@@ -51,6 +54,7 @@ fetch('/users.json')
 ```
 
 ##### Post form
+
 ```
 var form = document.querySelector('form')
 
@@ -61,6 +65,7 @@ fetch('/users', {
 ```
 
 ##### Post JSON
+
 ```
 fetch('/users', {
   method: 'POST',
@@ -75,6 +80,7 @@ fetch('/users', {
 ```
 
 ##### File Upload
+
 ```
 const input = document.querySelector('input[type="file"]')
 
@@ -88,15 +94,13 @@ fetch('/avatars', {
 })
 ```
 
-
-
 ## Real world examples
 
 ### Backend returns HTML for an updated section
 
-Sometimes, a section rendered by the backend has multiple options, and when switching options
-you want new data for that section. If the backend cannot return JSON, they might return a HTML
-snippet for that section. In that case we should:
+Sometimes, a section rendered by the backend has multiple options, and when switching options you
+want new data for that section. If the backend cannot return JSON, they might return a HTML snippet
+for that section. In that case we should:
 
 1. fetch the new section
 2. clean up the old HTML element (remove attached classes, for memory leaks)
@@ -147,27 +151,28 @@ While this seams like a good option, keep in mind that the whole section will be
 default state, which could (depending on the contents of the section) be a bad experience,
 especially when dealing with animation/transitions.
 
-
 ### Backend returns JSON for an updated section
 
 This one might be a bit more work compared to just replacing HTML, but gives you way more control
-over what happens on the page. The big benefit is that the state doesn't reset, allowing you to
-make nice transitions while the new data is updated on the page.
+over what happens on the page. The big benefit is that the state doesn't reset, allowing you to make
+nice transitions while the new data is updated on the page.
+
 ```
 fetch(`/api/section/${id}`)
   .then(response => response.json())
   .then(json => {
     // this part really depends on what the data will be
-    
+
     // if it's just text, you could:
     this.element.querySelector('.js-content').innerHTML = json.content;
-    
+
     // or pass new data to a child component
     this.childComponent.setNewData(json.content);
   });
 ```
 
 Or when using knockout to update your HTML:
+
 ```
 import { initTextBinding } from '../../../muban/knockoutUtils';
 import ko from 'knockout';
@@ -193,11 +198,11 @@ fetch(`/api/section/${id}`)
 ### Sorting or filtering lists
 
 Sometimes the server renders a list of items on the page, but you have to sort or filter them
-client-side, based on specific data in those items. Since we already have all the items and data
-on the page, it's not that difficult.
+client-side, based on specific data in those items. Since we already have all the items and data on
+the page, it's not that difficult.
 
-We can just query all the items, and retrieve the information we need to execute our logic, and
-add them back to the page.
+We can just query all the items, and retrieve the information we need to execute our logic, and add
+them back to the page.
 
 ```
 constructor() {
@@ -245,7 +250,6 @@ private sortOnTitle(itemData, ascending:boolean = false) {
 private filterOnTags(itemData, filter:string) {
   return itemData.filter(item => item.tags.some(tag => tag.includes(filter.toLowerCase())));
 }
-
 ```
 
 ### Load more items to the page
@@ -254,9 +258,9 @@ Sometimes the server renders the first page of items, but they want to have the 
 loaded and displayed from the client. If the server returns HTML, we can just re-use some of the
 logic in our HTML example above.
 
-However, if the server returns JSON, we sort of want to re-use the markup of the existing items
-on the page. We _could_ build up the HTML ourselves from JavaScript, but that would mean the HTML
-lives in two places, on the server and in JavaScript, and it will be hard to keep them in sync.
+However, if the server returns JSON, we sort of want to re-use the markup of the existing items on
+the page. We _could_ build up the HTML ourselves from JavaScript, but that would mean the HTML lives
+in two places, on the server and in JavaScript, and it will be hard to keep them in sync.
 
 There are two options we can choose from.
 
@@ -289,6 +293,7 @@ This option works best when only used on the client, but when having server-rend
 DOM you would first need to convert them to data to properly render them.
 
 Handlebars template:
+
 ```
 <!--
 List item template, keep in HTML since it will be used by javascript.
@@ -322,6 +327,7 @@ be used by knockout to render the list client-side (when new data comes in).
 ```
 
 Script:
+
 ```
 // 1. transform old items to data
 // get all DOM nodes
@@ -347,8 +353,9 @@ ko.applyBindingsToNode(this.element.querySelector('.items'), {
 itemData.push(...newData);
 ```
 
-The above can be simplified by using a util.
-The 3rd parameter can also be `oldData` extract above instead of the passed config for more control.
+The above can be simplified by using a util. The 3rd parameter can also be `oldData` extract above
+instead of the passed config for more control.
+
 ```
 import { initListBinding } from '../../../muban/knockoutUtils';
 
