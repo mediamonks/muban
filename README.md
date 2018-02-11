@@ -14,6 +14,10 @@ use to integrate the pages in their server side templates or CMS of choice.
 
 Please read this [introduction](./docs/introduction.md) about why and how we created Muban.
 
+## Getting started
+
+Please read this [getting started guide](./docs/getting-started.md) if you're new to Muban.
+
 ## Setup
 
 After cloning this repos and removing the `.git` folder, run:
