@@ -18,27 +18,25 @@ module.exports = function(content) {
 	const done = this.async();
 	this.cacheable();
 
-	const options = loaderUtils.getOptions(this) || {};
+	// const options = loaderUtils.getOptions(this) || {};
 
 	const scripts = [];
 	const styles = [];
 
-	content = content.replace(/<script src=["']([^"']+)["']><\/script>/ig, (res, match) => {
+	content.replace(/<script src=["']([^"']+)["']><\/script>/ig, (res, match) => {
 		scripts.push(match);
 		return '';
 	});
 
-	content = content.replace(/<link rel=["']stylesheet["'] href=["']([^"']+)["']>/ig, (res, match) => {
+	content.replace(/<link rel=["']stylesheet["'] href=["']([^"']+)["']>/ig, (res, match) => {
 		styles.push(match);
 		return '';
 	});
 
-	let newContent = '';
-
 	const currentModuleName = './' + this.resourcePath.split(path.sep).pop();
 	const niceModulePath = this.resourcePath.replace(/\\/g, '/').split('src/app/')[1];
 
-	newContent = `
+	const newContent = `
 		module.exports = {
 		  path: '${niceModulePath}',
 			default: require(${loaderUtils.stringifyRequest(loaderContext, currentModuleName)}),

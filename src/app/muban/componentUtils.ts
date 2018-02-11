@@ -73,15 +73,15 @@ export function initComponents(rootElement: HTMLElement): void {
     }
 
     // find all DOM elements that belong the this block
-    Array.from(
-      rootElement.querySelectorAll(`[data-component="${displayName}"]`),
-    ).forEach(element => {
-      list.push({
-        component,
-        element,
-        depth: getComponentDepth(element as HTMLElement),
-      });
-    });
+    Array.from(rootElement.querySelectorAll(`[data-component="${displayName}"]`)).forEach(
+      element => {
+        list.push({
+          component,
+          element,
+          depth: getComponentDepth(element as HTMLElement),
+        });
+      },
+    );
   });
 
   // sort list by deepest element first

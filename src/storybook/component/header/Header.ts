@@ -4,7 +4,7 @@ import AbstractComponent from 'app/component/AbstractComponent';
 import model from '../../model';
 
 export default class Header extends AbstractComponent {
-  static displayName: string = 'header';
+  static displayName: string = 'storybook-header';
 
   private searchInput: HTMLInputElement;
   private searchResults: Element;

@@ -1,13 +1,15 @@
 /* eslint-disable max-len */
-import { storiesOf } from 'storybook/utils/utils';
+// TODO: muban has no svg's by default
 
-storiesOf('icon', require('./icon.hbs')).add(
-  'default',
-  'This component is used to render out svg icons.',
-  `<hbs>
-			{{> icon @root name=name}}
-		</hbs>`,
-  {
-    name: 'svg-name',
-  },
-);
+// import { storiesOf } from 'storybook/utils/utils';
+
+// storiesOf('icon', require('./icon.hbs')).add(
+//   'default',
+//   'This component is used to render out svg icons.',
+//   `<hbs>
+// 			{{> general/icon @root name=name}}
+// 		</hbs>`,
+//   {
+//     name: 'svg-name',
+//   },
+// );

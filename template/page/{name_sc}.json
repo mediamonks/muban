@@ -5,7 +5,7 @@
     {{#each blocks}}
     {
       "name" : "{{this}}",
-      "data" : {}
+      "data" : "import!../app/component/block/{{this}}/data.json"
     }{{#unless @last}},{{/unless}}
     {{/each}}
     {{/if}}

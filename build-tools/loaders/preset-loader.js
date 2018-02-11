@@ -14,7 +14,7 @@ module.exports = function(content) {
 
   const finish = (done) => {
     toReplace.forEach(r => {
-      content = content.replace(r.match, `require(${loaderUtils.stringifyRequest(loaderContext, 'hbs-source-loader!' + r.result)})`);
+      content = content.replace(r.match, `require(${loaderUtils.stringifyRequest(loaderContext, '!!hbs-source-loader!' + r.result)})`);
     });
     done(null, content);
   };
