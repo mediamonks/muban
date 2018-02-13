@@ -18,6 +18,12 @@ Please read this [introduction](./docs/introduction.md) about why and how we cre
 
 Please read this [getting started guide](./docs/getting-started.md) if you're new to Muban.
 
+## Distribution implementation guide
+
+If you're a developer that needs to implement the dist build into an existing backend/cms, please
+read the [implementation guide](./docs/dist-implementation-guide.md) that is also distributed with
+the build output.
+
 ## Setup
 
 After cloning this repos and removing the `.git` folder, run:

@@ -46,6 +46,30 @@ module.exports = merge(require('./webpack.config.base'), {
         from: '**/*',
         to: config.buildPath,
       },
+      {
+        // copy over hbs templates
+        context: path.resolve(projectRoot, 'src/app/component'),
+        from: '**/*.hbs',
+        to: path.resolve(config.distPath, 'templates'),
+      },
+      {
+        // copy over component json
+        context: path.resolve(projectRoot, 'src/app/component'),
+        from: '**/*.json',
+        to: path.resolve(config.distPath, 'data/component'),
+      },
+      {
+        // copy over data json
+        context: path.resolve(projectRoot, 'src/data'),
+        from: '**/*.json',
+        to: path.resolve(config.distPath, 'data'),
+      },
+      {
+        // copy over readme
+        context: path.resolve(projectRoot, 'docs'),
+        from: 'dist.md',
+        to: path.resolve(config.distPath),
+      },
     ]),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
