@@ -67,7 +67,7 @@ module.exports = merge(require('./webpack.config.base'), {
       {
         // copy over readme
         context: path.resolve(projectRoot, 'docs'),
-        from: 'dist.md',
+        from: 'dist-implementation-guide.md',
         to: path.resolve(config.distPath),
       },
     ]),
