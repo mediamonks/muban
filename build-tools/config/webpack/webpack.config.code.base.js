@@ -60,7 +60,7 @@ module.exports = merge(require('./webpack.config.base'), {
         to: path.resolve(config.distPath, 'templates') + '/[path]/[name].' + config.convertTemplates.extension,
         toType: 'template',
         transform (content) {
-          return convert(content.toString('utf8'), 'htl');
+          return convert(content.toString('utf8'), config.convertTemplates.convertTo);
         },
       } : null),
       {
