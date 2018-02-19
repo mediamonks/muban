@@ -43,12 +43,6 @@ module.exports = merge(require('./webpack.config.base'), {
     new CopyWebpackPlugin([
       {
         // copy files to public root (not versioned)
-        context: config.dist.staticPath,
-        from: '**/*',
-        to: config.storybook.buildPath,
-      },
-      {
-        // copy files to public root (not versioned)
         context: config.storybook.staticPath,
         from: '**/*',
         to: config.storybook.buildPath,

@@ -3,6 +3,7 @@
  */
 const path = require('path');
 const merge = require('webpack-merge');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('../index');
 
 const {
@@ -66,5 +67,13 @@ module.exports = merge(require('../webpack/webpack.config.base'), {
   },
   plugins: [
     getStyleLintPlugin(config.storybook.enableStyleLintPlugin),
+    new CopyWebpackPlugin([
+      {
+        // copy files to public root (not versioned)
+        context: config.dist.staticPath,
+        from: '**/*',
+        to: config.storybook.buildPath,
+      },
+    ]),
   ].filter(_ => _),
 });
