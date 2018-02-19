@@ -62,7 +62,10 @@ const webpackConfig = {
 
     // prints more readable module names in the browser console on HMR updates
     new webpack.NamedModulesPlugin(),
-  ]
+  ],
+  node: {
+    fs: 'empty'
+  }
 };
 
 module.exports = webpackConfig;

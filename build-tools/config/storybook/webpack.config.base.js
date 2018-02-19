@@ -35,6 +35,9 @@ module.exports = merge(require('../webpack/webpack.config.base'), {
   },
   resolve: {
     extensions: ['.hbs', '.ts', '.js', '.json'],
+    alias: {
+      'handlebars': 'handlebars/dist/handlebars.js'
+    }
   },
   module: {
     rules: [

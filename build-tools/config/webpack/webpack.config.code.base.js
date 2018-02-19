@@ -7,6 +7,7 @@ const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('../index');
+const convert = require('muban-convert-hbs').default;
 
 const {
   getStyleRules,
@@ -52,6 +53,16 @@ module.exports = merge(require('./webpack.config.base'), {
         from: '**/*.hbs',
         to: path.resolve(config.distPath, 'templates'),
       },
+      (config.convertTemplates.convertTo ? {
+        // convert hbs to htl templates
+        context: path.resolve(projectRoot, 'src/app/component'),
+        from: '**/*.hbs',
+        to: path.resolve(config.distPath, 'templates') + '/[path]/[name].' + config.convertTemplates.extension,
+        toType: 'template',
+        transform (content) {
+          return convert(content.toString('utf8'), 'htl');
+        },
+      } : null),
       {
         // copy over component json
         context: path.resolve(projectRoot, 'src/app/component'),
@@ -70,7 +81,7 @@ module.exports = merge(require('./webpack.config.base'), {
         from: 'dist-implementation-guide.md',
         to: path.resolve(config.distPath),
       },
-    ]),
+    ].filter(_ => _)),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
 

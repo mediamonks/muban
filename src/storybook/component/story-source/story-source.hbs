@@ -7,6 +7,9 @@
 		<pre class="tab-content" data-tab="{{tabData.tabId}}"><code>{{{usage}}}</code></pre>
 		<pre class="tab-content" data-tab="{{tabData.tabId}}"><code>{{{data}}}</code></pre>
 		<pre class="tab-content" data-tab="{{tabData.tabId}}"><code>{{{component}}}</code></pre>
+    {{#if templateTargetSource }}
+      <pre class="tab-content" data-tab="{{tabData.tabId}}"><code>{{{templateTargetSource}}}</code></pre>
+    {{/if}}
 		<pre class="tab-content" data-tab="{{tabData.tabId}}"><code>{{{templateSource}}}</code></pre>
 		<pre class="tab-content" data-tab="{{tabData.tabId}}"><code>{{{styleSource}}}</code></pre>
 		<pre class="tab-content" data-tab="{{tabData.tabId}}"><code>{{{scriptSource}}}</code></pre>
