@@ -6,9 +6,9 @@
 
   <meta httpEquiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, user-scalable=no">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="/asset/common.css">
-  <link rel="stylesheet" href="/asset/bundle.css">
+  <link rel="icon" href="/muban/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/muban/asset/common.css">
+  <link rel="stylesheet" href="/muban/asset/bundle.css">
 </head>
 
 <body>
@@ -17,75 +17,335 @@
   <div data-component="app-root">
 
     <!-- partial: component/layout/header/header.hbs -->
-    <div data-component="header">
-      <ul>
-        <li><a href="/home.html">Home</a></li>
-        <li><a href="/about.html">About</a></li>
-      </ul>
-    </div>
+    <nav data-component="header" class="navbar navbar-expand sticky-top navbar-dark">
+      <div class="container">
+        <a class="navbar-brand text-primary" href="#top">Muban</a>
+        <div class="collapse navbar-collapse">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="#dynamic-data">Dynamic Data</a>
+            <a class="nav-item nav-link" href="#vision">Vision</a>
+            <a class="nav-item nav-link" href="#workflow">Workflow</a>
+            <a class="nav-item nav-link" href="#storybook">Storybook</a>
+          </div>
+        </div>
+      </div>
+    </nav>
     <!-- / component/layout/header/header.hbs -->
 
-    <div class="wrapper">
-      <h1>Home</h1>
+    <div class="content">
 
-      <div class="content">
-
-        <!-- partial: component/block/paragraph/paragraph.hbs -->
-        <div data-component="paragraph">
-          <h2>What is Lorem Ipsum?</h2>
-
-          <p>industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.</p>
-
-          <p class="js-content-more hidden">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
-            looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
-            of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..",
-            comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-            exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-          </p>
-
-
-          <!-- partial: component/general/button/button.hbs -->
-          <button data-component="button">read more...</button>
-          <!-- / component/general/button/button.hbs -->
+      <!-- partial: component/block/hero/hero.hbs -->
+      <div data-component="hero">
+        <h1 class="display-1 text-primary">Muban</h1>
+        <p>A backend-agnostic framework for server-rendered HTML using a modern development setup.</p>
+        <div class="actions">
+          <a href="https://mediamonks.github.com/muban/docs/getting-started.md" class="btn btn-primary">Get Started</a>
+          <a href="https://mediamonks.github.com/muban/" class="btn btn-outline-primary">
+            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 499.36" focusable="false"><title>GitHub</title><path d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z" fill="currentColor" fill-rule="evenodd"></path></svg>
+            Github
+          </a>
         </div>
-        <!-- / component/block/paragraph/paragraph.hbs -->
-
-        <!-- partial: component/block/two-col/two-col.hbs -->
-        <div data-component="two-col">
-          <div class="col col-left">
-            <h3>Where does it come from?</h3>
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
-              looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
-              of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..",
-              comes from a line in section 1.10.32.<br /><br />The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced
-              in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-          </div>
-
-          <div class="col col-right">
-            <h3>Why do we use it?</h3>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content
-              here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-              Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-          </div>
-        </div>
-        <!-- / component/block/two-col/two-col.hbs -->
       </div>
+      <!-- / component/block/hero/hero.hbs -->
+
+      <!-- partial: component/block/perks/perks.hbs -->
+      <div data-component="perks" class="container">
+        <div class="row">
+          <div class="col-sm">
+
+            <!-- partial: component/paragraph-small/paragraph-small.hbs -->
+            <div data-component="paragraph-small">
+              <h3>Backend agnostic</h3>
+              <div class="content">
+                <p>Muban doesn't care what backend system you use, it uses Handlebars to render everything on the client when developing.</p>
+                <p>Never be slowed down by waiting on backend setup and integration, use mock data to preview all your components.</p>
+              </div>
+            </div>
+            <!-- / component/paragraph-small/paragraph-small.hbs -->
+          </div>
+          <div class="col-sm">
+
+            <!-- partial: component/paragraph-small/paragraph-small.hbs -->
+            <div data-component="paragraph-small">
+              <h3>Component based</h3>
+              <div class="content">
+                <p>Create small reusable components by keeping the template, style and script together, and compose them to build blocks that make up your site.</p>
+                <p>When the HTML is rendered on the server, Muban will attach components to the DOM and manage interaction between them.</p>
+              </div>
+            </div>
+            <!-- / component/paragraph-small/paragraph-small.hbs -->
+          </div>
+          <div class="col-sm">
+
+            <!-- partial: component/paragraph-small/paragraph-small.hbs -->
+            <div data-component="paragraph-small">
+              <h3>Webpack</h3>
+              <div class="content">
+                <p>Muban makes use of a common webpack setup, enhanced with custom loaders to even support hot reloading for your Handlebars templates.</p>
+                <p>You're free to adjust the webpack setup to your own liking to better suit your personal preference.</p>
+              </div>
+            </div>
+            <!-- / component/paragraph-small/paragraph-small.hbs -->
+          </div>
+        </div>
+      </div>
+      <!-- / component/block/perks/perks.hbs -->
+
+      <!-- partial: component/block/future/future.hbs -->
+      <a name="dynamic-data"></a>
+      <div data-component="future">
+        <div class="container">
+          <h2>Dynamic data</h2>
+          <div class="row">
+            <div class="col-sm">
+              <p>
+                Traditionally, server rendered websites only rendered on the server, and each action would require a page load. <abbr title="Single Page Application">SPA</abbr>s do the opposite, they render completely on the client without ever needing
+                a page load. They communicate strictly with API using <code>fetch</code>.
+              </p>
+              <p>
+                Wouldn't it be nice if there was a middle ground? Quickly load pages from the server, but also use <code>fetch</code> on highly dynamic pages, like auto-suggest searches or applying filters to search results. Depending on the backend,
+                data can be returned as HTML (reusing the same rendering as the original page) or as JSON.
+              </p>
+              <p>
+                When the server returns HTML, you can just replace a certain section of the page. But don't forget to re-initialize all the components that exists within that HTML. Muban supplies utils to make that process painless.
+              </p>
+              <p>
+                When working with JSON, you'll have to replace data in already rendered HTML, without a template engine like Vue or React. Muban makes use of the special created
+                <a href="https://www.npmjs.com/package/html-extract-data">html-extract-data</a> module where you can extract and convert any data from any html structure. Muban implements and describes best practices when working with existing HTML.
+              </p>
+            </div>
+            <div class="col-sm">
+              <p>
+                When working whit extracted or new data, sometimes you wish you had some sort of template language. Most template languages cannot be used, because they either require client-side rendering, or only work on string-based templates. We found
+                <a
+                  href="http://knockoutjs.com/">Knockout</a>
+                  to be a perfect candidate, since it allows you to define HTML-bindings from JavaScript. This means you never have to update your HTML when adding complex template logic. Muban adds some utils to convert rendered HTML to interactive templates. It's completely
+                  optional, but will add some additional bytes to your JS bundle, so use only when needed!
+              </p>
+              <p>
+                With knockout already available, it's super easy to make a small part of your site that doesn't have to render on the server, interactive on the client. Muban provides custom webpack loaders that allows the same setup for both Muban and Knockout components.
+                It even allows for integration with Redux if there is the need to communicate state between components.
+              </p>
+            </div>
+          </div>
+          <h2>Animation</h2>
+          <div class="row">
+            <div class="col-sm">
+              <p>
+                Not every site will need the same level of animation. Information focused sites would benefit from small details, like smooth hovers. But if your website is more focused towards creating an experience for the user, you might want to transition in components
+                when you scroll the page, create parallax effects, or manipulate the page in such a way that it just looks like a
+                <abbr title="Single Page Application">SPA</abbr>s.
+              </p>
+            </div>
+            <div class="col-sm">
+              <p>
+                Having a component-based setup that allows communication through the framework helps to create a foundation for setting up high level transitions and animations. Create animation timelines in your components that are automatically picked up when entering
+                the viewport.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / component/block/future/future.hbs -->
+
+      <!-- partial: component/block/vision/vision.hbs -->
+      <a name="vision"></a>
+      <div data-component="vision">
+        <div class="container">
+          <h2>Vision</h2>
+          <div class="row">
+            <div class="col-sm">
+              <p>
+                It's hard to explain exactly what Muban is. It's not just a framework or library, and it's more than a boilerplate.
+                <em>Muban is how we envision the frontend development workflow when building server-rendered websites.</em> It's a combination of a small runtime framework, a custom but adjustable webpack setup, and a set of tools to allow a efficient
+                way of working.
+              </p>
+              <p>
+                Traditionally those websites were made by including some scripts and styles, and writing javascript in a single file using a lot of jQuery plugins. A lot has changed since then, where most of the innovation has happened around Single Page Applications.
+              </p>
+              <p>
+                With the rise of webpack we got used to code with hot reloading, and it's hard to live without it. The choice to bring HTML rendering to the client makes it possible to hot reload everything; your scripts, styles and templates! We want to make use of
+                Babel or Typescript to write modern JavaScript, and we can compress and combine our code better than any server side framework can.
+              </p>
+            </div>
+            <div class="col-sm">
+              <p>
+                Another aspect that became popular with SPA frameworks is to make everything a component, and make that component reusable. Muban tries to embrace that philosophy by importing your script and style from your template file. Besides global styles, your
+                component stylesheet only cares about your component. To make components interactive, the framework creates a component class instance for each DOM component. It also facilitates communication between components by retrieve component instances
+                from DOM elements.
+              </p>
+              <p>
+                The reason we keep everything on the client, is that we want to avoid the backend as long as possible. Why? Because it only slows you down. You don't want to wait until the backend has created the Domain Model and set up all the controllers. You don't
+                want to have slow page loads and miss out on hot reloading. By using local json files you can mock all the data, and prepare for all possible scenarios.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / component/block/vision/vision.hbs -->
+
+      <!-- partial: component/block/phases/phases.hbs -->
+      <a name="workflow"></a>
+      <div data-component="phases">
+        <div class="container">
+          <h2>Workflow</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <p>
+                To better explain how Muban can benefit you, let's explain what a common workflow looks like. There are three different phases where all work passes through.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div class="info">
+                <h3 class="h1">Develop.</h3>
+              </div>
+            </div>
+            <div class="col-sm">
+              <p>
+                Development starts by copying the project, installing the node modules, executing <kbd>yarn dev</kbd> and opening the browser at <code>http://localhost:9000/</code>.
+              </p>
+              <p>
+                After that you can just create a page by <kbd>sg page blog-detail</kbd> and a component by <kbd>sg component hero-detail</kbd>.
+              </p>
+              <p>
+                Any changes you make to your template, script or style will automatically update in the browser without manual reloads.
+              </p>
+              <p>
+                You can also choose to run <kbd>yarn storybook</kbd> and open <code>http://localhost:9002/</code> to view your component in Storybook. This allows you to create multiple presets with different data to showcase and test different variations.
+                It'll also display component documentation and source code.
+              </p>
+              <p>
+                You can run <kbd>yarn build</kbd> and upload the generated HTML pages to a preview server to get design and QA sign-off without ever needing a backend system.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <p>
+                When your site or a part of it is completed and signed off, it's time to integrate it in the backend system.
+              </p>
+              <p>
+                Running <kbd>yarn build</kbd> will generate bundled and minified scripts and styles that can be directly used in your server-rendered pages. It will also collect all the mock data and development templates so the person that's going to
+                implement the templates in the backend will have a full overview. Storybook can also be used to gather information about components.
+              </p>
+              <p>
+                Depending on your server-side template language, the <a href="https://www.npmjs.com/package/muban-convert-hbs">muban-convert-hbs</a> module can transpile the Handlebars templates for you. It currently supports HTL, Django and Twig output
+                templates. If you kept the json mock files and the actual backend data model similar, the templates hardly need any manual updates.
+              </p>
+            </div>
+            <div class="col-sm">
+              <div class="info">
+                <h3 class="h1">Integrate.</h3>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div class="info">
+                <h3 class="h1">Update.</h3>
+              </div>
+            </div>
+            <div class="col-sm">
+              <p>
+                Of course, nothing is perfect the first time something is created. You get feedback, or something doesn't look quite right on a specific device. Whatever the reason, you'll have to update some components you created before.
+              </p>
+              <p>
+                By design, Muban tries to minimize the coupling between your templates and your scripts and styles. Because of this, most often your changes can be done in your script or style, without touching the template.
+              </p>
+              <p>
+                If you do need to update your template, you have to make a choice:
+              </p>
+              <ol>
+                <li>
+                  You could completely ignore the Handlebars templates and only update your server-side templates. This means you have to run the complete backend to see and test your changes, and you'll lose the template hot reloading feature. Even worse, Storybook isn't
+                  up-to-date anymore, so you'll have to disband it.
+                </li>
+                <li>
+                  You make the updates the same way you have developed it. This will keep the development workflow optimal and allows you to keep using Storybook. The downside is that you have to re-integrate the changes in the server-side templates, which is duplicate
+                  work and mistakes could slip in.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / component/block/phases/phases.hbs -->
+
+      <!-- partial: component/block/storybook/storybook.hbs -->
+      <a name="storybook"></a>
+      <div data-component="storybook">
+        <div class="container">
+          <h2>Storybook</h2>
+          <div class="row intro">
+            <div class="col-sm-6">
+              <p>
+                Inspired by React and Vue Storybook, it allows you to view all your components. It serves developers during the development phase, website owners to keep track of everything, and backend developers to do integration.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <h3 class="h5">Development</h3>
+              <p>Since Muban promotes component based development, we have Storybook to make this even easier.</p>
+              <p>
+                Every component folder can contain a <code>preset.js</code> file that registers a component with Storybook. When scaffolding a component, a default preset is generated automatically
+              </p>
+              <pre><code>
+      storiesOf('Button', require('./button.hbs'))
+        .add(
+          'with Foo',
+          'Just a normal button that says Foo.',
+          `&lt;hbs&gt;
+            {{&gt; button text=text}}
+          &lt;/hbs&gt;`,
+          { text: 'foo' },
+        )
+              </code></pre>
+              <p>
+                Every preset contains a name, description, a template and mock data. Using a custom webpack-loader, you can use inline Handlebars syntax to customize how your component is displayed on the page.
+              </p>
+              <p>
+                By adding multiple presets you can display your components in different scenarios, which could be hard to do when you only render your component on a single page.
+              </p>
+            </div>
+            <div class="col-sm">
+              <h3 class="h5">Integration</h3>
+              <p>
+                Storybook can be a big help during integration. Besides displaying the components, it will also show a ton of information.
+              </p>
+              <p>
+                The component description can contain information on how and where the component should be used or what variations are possible by adding certain classes or properties.
+              </p>
+              <p>
+                It also shows source code in multiple tabs; the preset code, mock data, rendered HTML, Handlebars source, script source and template source.
+              </p>
+              <p>
+                Additionally it can even show a tab with the template converted to the backend template language using the <a href="https://www.npmjs.com/package/muban-convert-hbs">muban-convert-hbs</a> plugin. Not having to convert the template manually
+                will save a lot of time!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / component/block/storybook/storybook.hbs -->
     </div>
 
 
     <!-- partial: component/layout/footer/footer.hbs -->
     <div data-component="footer">
-      <p>© 2017 MediaMonks B.V.</p>
+      <div class="container">
+        <p>Copyright © 2018 MediaMonks B.V.</p>
+      </div>
     </div>
     <!-- / component/layout/footer/footer.hbs -->
   </div>
   <!-- / component/layout/app/app.hbs -->
 
 
-  <script src="/asset/common.js"></script>
-  <script src="/asset/bundle.js"></script>
+  <script src="/muban/asset/common.js"></script>
+  <script src="/muban/asset/bundle.js"></script>
 </body>
 
 </html>
