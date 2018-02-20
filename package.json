@@ -18,7 +18,7 @@
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src --ext .js --cache",
     "lint:ts": "tslint src/**/*.ts -c .tslintrc.js -p tsconfig.json -t verbose",
-    "lint:css": "stylelint src/**/*.scss --cache",
+    "lint:scss": "stylelint src/**/*.scss --cache",
     "analyze": "webpack-bundle-analyzer dist/bundlesize-profile.json ./dist/site",
     "prettify": "prettier --write \"src/**/*.{js,ts,scss,json}\"",
     "precommit": "lint-staged"
@@ -37,7 +37,7 @@
         "npm run lint:ts"
       ],
       "src/**/*.scss": [
-        "npm run lint:css"
+        "npm run lint:scss"
       ]
     }
   },
