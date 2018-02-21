@@ -60,7 +60,19 @@ module.exports = merge(require('./webpack.config.base'), {
         to: path.resolve(config.distPath, 'templates') + '/[path]/[name].' + config.convertTemplates.extension,
         toType: 'template',
         transform (content) {
-          return convert(content.toString('utf8'), config.convertTemplates.convertTo);
+          // convert to target template
+          let template = convert(content.toString('utf8'), config.convertTemplates.convertTo);
+
+          // remove script/style includes
+
+          template = template.replace(/<script src=["']([^"']+)["']><\/script>[\r\n]*/ig, '');
+          template = template.replace(/<link rel=["']stylesheet["'] href=["']([^"']+)["']>[\r\n]*/ig, '');
+
+          // fix partial imports by adding additional folder that is not needed for webpack
+          template = template.replace(/\/([\w-]+)(\.html(:?\.twig)?)"/gi, '/$1/$1$2"');
+
+          return template;
+
         },
       } : null),
       {
