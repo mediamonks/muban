@@ -114,6 +114,6 @@ function loadStories() {
 configure(loadStories);
 ```
 
-Besides that, the config folder also contains the **webpack configuration** for development and a
-distribution build. It extends the base configuration from the project so it can reuse most of its
-(loader) configuration.
+the **webpack configuration** for development and a distribution build is located in
+`build-tools/config/storybook` It extends the base configuration from the project so it can reuse
+most of its (loader) configuration.

@@ -11,7 +11,7 @@
     "compile:partials": "npm run build partials",
     "compile:html": "npm run build html",
     "storybook": "webpack-dev-server --config build-tools/config/storybook/webpack.config.js",
-    "storybook:build": "npm run build storybook",
+    "storybook:build": "node ./build-tools/script/build storybook",
     "storybook:preview": "http-server ./dist/storybook --p 9003 -s -o",
     "clean": "npm run build clean",
     "test": "echo \"Error: no test specified\" && exit 1",
