@@ -65,7 +65,7 @@
     "qs": "^6.5.1",
     "seng-scss": "^1.0.0",
     "svg-inline-loader": "^0.8.0",
-    "svgo-loader": "^1.2.1"
+    "svgo-loader": "^2.1.0"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.0.8",
