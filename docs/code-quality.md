@@ -15,7 +15,7 @@ of choice.
 ## Prettier
 
 We use [Prettier](https://github.com/prettier/prettier) to format all our code. This is enabled for
-`js`, `ts`, `scss` and `json` files. The corresponding linters are configured to adhere to the rules
+`js`, `ts`, `scss` and `yaml` files. The corresponding linters are configured to adhere to the rules
 from prettier (so they won't conflict), and linting errors should only occur for non-stylistic
 errors.
 

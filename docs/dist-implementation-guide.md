@@ -95,7 +95,7 @@ missing features that a 3rd party template engine might want to use.
 The templates are set up in such a way that:
 
 * All dynamic data (copy or content) that needs to be displayed on the pages, is passed from the
-  mock json files. This means that everything else can be copied over as is.
+  mock yaml files. This means that everything else can be copied over as is.
 
 * Iteration over a list of items, or conditionally rendering something, is already present. This
   makes the intention of how templates should be used more clear than just looking at the preview
@@ -115,12 +115,12 @@ The templates are set up in such a way that:
 
 #### Data
 
-As mentioned above, to fill the html content with data we make mock json files. These contain
-the blocks we want to include in a page, and the data each block should display. Each `.json` file
-corresponds to a single page. Some pages have multiple json files, to show different variations,
+As mentioned above, to fill the html content with data we make mock yaml files. These contain
+the blocks we want to include in a page, and the data each block should display. Each `.yaml` file
+corresponds to a single page. Some pages have multiple yaml files, to show different variations,
 e.g. a carousel with 1 or 5 items, a search page with or without results.
 
-To make the integration easier, it is a good practice to keep the structure in the json files
+To make the integration easier, it is a good practice to keep the structure in the yaml files
 similar to the modals that are used on the server to render the actual dynamic pages. The more
 similar the models are, the less manual conversion has to be done.
   
@@ -177,6 +177,6 @@ it easy to integrate into any backend system. The benefits are:
   * Code quality tools such as editorconfig, eslint, stylelint and prettier
   
 * Handlebars as an easy to use template language which can be easily ported to other languages
-* Having local mock data in json files, so development can start without having a backend ready
+* Having local mock data in yaml files, so development can start without having a backend ready
 * Client and QA can checks and approve the static preview pages, without having a backend ready
 * Having storybook as a nice overview of all the components, with documentation

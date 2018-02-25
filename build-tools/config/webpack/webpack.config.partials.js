@@ -3,7 +3,7 @@
  */
 const path = require("path");
 const merge = require('webpack-merge');
-const { getHandlebarsRules } = require('./webpack-helpers');
+const { getHandlebarsRules } = require('../helpers/handlebars-rules');
 const config = require('../index');
 
 const projectRoot = path.resolve(__dirname, '../../../');
@@ -19,7 +19,7 @@ module.exports = merge(require('./webpack.config.base'), {
   },
   target: 'node',
   resolve: {
-    extensions: ['.hbs', '.js', '.json'],
+    extensions: ['.hbs', '.js', '.yaml', '.json'],
   },
   module: {
     rules: [

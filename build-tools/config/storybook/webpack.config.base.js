@@ -6,13 +6,14 @@ const merge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('../index');
 
+const { getBabelLoaderConfig } = require('../helpers/babel');
+const { getHbsInlineLoaderConfig } = require('../helpers/hbs-inline');
+
 const {
-  getBabelLoaderConfig,
-  getHbsInlineLoaderConfig,
   getESLintLoader,
   getTSLintLoader,
   getStyleLintPlugin,
-} = require('../webpack/webpack-helpers');
+} = require('../helpers/lint-config');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 const port = process.env.PORT || config.storybook.port;
@@ -35,7 +36,7 @@ module.exports = merge(require('../webpack/webpack.config.base'), {
     publicPath: config.storybook.publicPath,
   },
   resolve: {
-    extensions: ['.hbs', '.ts', '.js', '.json'],
+    extensions: ['.hbs', '.ts', '.js', '.yaml', '.json'],
     alias: {
       'handlebars': 'handlebars/dist/handlebars.js'
     }

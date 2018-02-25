@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import ko from 'knockout';
-import AbstractComponent from 'app/component/AbstractComponent';
+import { CoreComponent } from 'muban-core';
 import model from '../../model';
 
-export default class Header extends AbstractComponent {
+export default class Header extends CoreComponent {
   static displayName: string = 'storybook-header';
 
   private searchInput: HTMLInputElement;

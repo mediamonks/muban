@@ -1,0 +1,9 @@
+title: {{name_pc}}
+blocks:
+{{#if blocks}}
+{{#each blocks}}
+  - name: {{this}}
+    data: import!../app/component/block/{{this}}/data.yaml
+
+{{/each}}
+{{/if}}

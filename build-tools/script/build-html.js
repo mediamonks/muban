@@ -3,6 +3,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const Handlebars = require('handlebars');
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -13,11 +14,18 @@ const config = require('../config');
 
 const projectRoot = path.resolve(__dirname, '../../');
 
-function getJson(contentPath) {
-  let data = JSON.stringify(require(contentPath)).replace(/"import!(.*?\.json)"/gi, (match, group) => {
-    return JSON.stringify(getJson(path.resolve(__dirname, path.dirname(contentPath), group)));
-  });
-  return JSON.parse(data);
+function loadData(contentPath) {
+  if (path.extname(contentPath) === '.yaml') {
+    return yaml.safeLoad(fs.readFileSync(contentPath, 'utf8'));
+  } else {
+    return require(contentPath);
+  }
+}
+
+function getData(contentPath) {
+  return JSON.stringify(loadData(contentPath)).replace(/"import!(.*?\.(?:json|yaml))"/gi, (match, group) =>
+    getData(path.resolve(__dirname, path.dirname(contentPath), group))
+  );
 }
 
 module.exports = function(cb) {
@@ -51,15 +59,15 @@ module.exports = function(cb) {
 // read json files and generate a page for each json
   recursive(
     path.resolve(projectRoot, 'src/data'),
-    [file => path.extname(file) !== '.json'],
+    [file => path.extname(file) !== '.json' && path.extname(file) !== '.yaml'],
     (err, files) => {
       files
-        .map(f => path.basename(f, '.json'))
+        .map(f => path.basename(f))
         .sort()
         .forEach(file => {
-          const page = file;
+          const page = path.basename(file, `.${file.split('.').pop()}`);
           // eslint-disable-next-line import/no-dynamic-require, global-require
-          const data = getJson(`../../src/data/${file}.json`);
+          const data = JSON.parse(getData(path.resolve(__dirname, `../../src/data/${file}`)));
           const content = appTemplate(data);
 
           const templateResult = htmlTemplate({

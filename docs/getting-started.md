@@ -36,27 +36,20 @@ You can start the generator wizard by running `sg wizard` and choosing `block`. 
 A block is a special type of component that can be added to a page directly. Normal components can
 only be included by blocks or other components.
 
-To have this component show up on a page, we can update the `src/data/home.json`. Add your new
+To have this component show up on a page, we can update the `src/data/home.yaml`. Add your new
 component in the list, and see how your page updates in the browser:
 
-```
-{
-  "title": "Home",
-  "blocks": [
-    {
-      "name": "paragraph",
-      "data": "import!../app/component/block/paragraph/data.json"
-    },
-    {
-      "name": "two-col",
-      "data": "import!../app/component/block/two-col/data.json"
-    },
-    {
-      "name": "foo",
-      "data": "import!../app/component/block/foo/data.json"
-    }
-  ]
-}
+```yaml
+title: "Home"
+blocks:
+  - name: "paragraph"
+    data: "import!../app/component/block/paragraph/data.yaml"
+
+  - name: "two-col"
+    data: "import!../app/component/block/two-col/data.yaml"
+
+  - name: "foo"
+    data: "import!../app/component/block/foo/data.yaml"
 ```
 
 ## Adding a new page
@@ -65,7 +58,7 @@ It's more fun if your component is displayed alone on a page, so let's create a 
 `sg wizard` and select `page`. Give it the name `bar` and choose the default location. Let's also
 add our just created block by choosing `yes` and specify `foo` when asked for a list of blocks.
 
-Now inspect your new page at `src/data/bar.json`, it looks similar to the `home.json` before.
+Now inspect your new page at `src/data/bar.yaml`, it looks similar to the `home.yaml` before.
 
 ## Update your component
 
@@ -97,15 +90,17 @@ The last piece of the puzzle is the data we want to display in the HTML. We don'
 this, since it will later be filled by the backend, and it would also be nice to show different
 variations of our component by just passing different data.
 
-Open the `data.json` in your component folder, it contains an empty object by default, so just
+Open the `data.yaml` in your component folder, it contains an empty object by default, so just
 add some fields:
 
-```json
-{
-  "title": "Hello world",
-  "description": "<strong>Lorum</strong> ipsum dolor amet...",
-  "tags": ["muban", "handlebars", "webpack"]
-}
+```yaml
+title: Hello world
+description: |
+  <strong>Lorum</strong> ipsum dolor amet...
+tags:
+  - muban
+  - handlebars
+  - webpack
 ```
 
 #### template
@@ -228,17 +223,16 @@ storiesOf('foo', require('./foo.hbs'))
   );
 ```
 
-And add an additional preset file called `data-no-tags.json`:
+And add an additional preset file called `data-no-tags.yaml`:
 
-```json
-{
-  "title": "Hello world",
-  "description": "<strong>Lorum</strong> ipsum dolor amet..."
-}
+```yaml
+title: Hello world
+description: |
+  <strong>Lorum</strong> ipsum dolor amet...
 ```
 
-You can also directly add the data in the preset, but keeping it in a json files allows you to
-include it in any page json you want, giving you more flexibility.
+You can also directly add the data in the preset, but keeping it in yaml files allows you to
+include it in any page yaml you want, giving you more flexibility.
 
 Now, if you click the file path in the info panel in your browser (`component/block/foo/foo.hbs`),
 it will load the page to show all variants o the same component, and you'll see the component with

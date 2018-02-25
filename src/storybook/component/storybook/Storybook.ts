@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import ko from 'knockout';
-import AbstractComponent from 'app/component/AbstractComponent';
+import { CoreComponent } from 'muban-core';
 import model from '../../model';
 
 const RESIZER_WIDTH = 13;
 
-export default class Storybook extends AbstractComponent {
+export default class Storybook extends CoreComponent {
   static displayName: string = 'storybook';
 
   private offsetX: number;

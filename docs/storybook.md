@@ -2,7 +2,7 @@
 
 Storybook is a web-app that lets you preview and interact with the components in your project. You
 can create presets that render your component with custom HTML, and pass different properties by
-providing a json object.
+providing a yaml/json object.
 
 Within the viewer you can list all components, list all variations of a single component, or view a
 single preset isolated.
@@ -67,7 +67,7 @@ there you can just use any html or hbs syntax to make up your preset.
 Using the `@root` in the partial will pass the complete context to that component. The context is
 the object you pass as the last argument.
 
-You can also store the data objects in a json file in the same folder and just require it in place:
+You can also store the data objects in a yaml file in the same folder and just require it in place:
 
 ```
 storiesOf('Paragraph', require('./paragraph'))
@@ -77,7 +77,7 @@ storiesOf('Paragraph', require('./paragraph'))
     `<hbs>
       {{> paragraph @root }}
     </hbs>`,
-    require('./data.json'),
+    require('./data'),
   )
 ```
 

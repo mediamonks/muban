@@ -40,6 +40,9 @@ node_modules/
 # Optional stylelint cache
 .stylelintcache
 
+#c cache-loader cache
+.cache-loader
+
 # Optional REPL history
 .node_repl_history
 

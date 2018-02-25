@@ -85,11 +85,11 @@ concept of building a page by drag-and-dropping components in a grid from a list
 concept of 'blocks'. Blocks are sections that make up a page, and consist out of all kind of
 reusable components like headings, paragraphs, buttons, images, etc.
 
-So to build up a page when developing, we set up to have a json file per page that contains an array
+So to build up a page when developing, we set up to have a yaml file per page that contains an array
 of block names, and the data that it would need to display content. The data is there to mock the
 data that a backend system would need to render the actual page in the end.
 
-After that, we just needed an application template file that would loop over the json list, and
+After that, we just needed an application template file that would loop over the yaml list, and
 include the block component partials, so all html for the page would be rendered.
 
 And when the DOM is constructed, we just select all the elements that have a `data-component`
@@ -103,9 +103,9 @@ Now that the development setup was done, we only needed to create two things.
 * Preview html pages
 
 The preview pages are useful to upload and QA them; see if they match the design and don't contain
-any bugs. To generate those pages, we just use the same json page files, loop over the block
+any bugs. To generate those pages, we just use the same yaml page files, loop over the block
 components, and use the pre-compiled handlebar templates to generate the HTML. One file for each
-json.
+yaml.
 
 #### preview components
 
@@ -130,7 +130,7 @@ templates to an increasing amount of template systems. To complement this, we're
 of handlebar helpers to implement useful features of other backend template languages, so they are
 even more compatible.
 
-To streamline this process even more, it's important to keep the mock data in your json files
+To streamline this process even more, it's important to keep the mock data in your yaml files
 similar to the backend data model. In that case, you won't even have to rename your template
 variables.
 

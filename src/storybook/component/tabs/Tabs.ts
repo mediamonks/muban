@@ -1,6 +1,6 @@
-import AbstractComponent from 'app/component/AbstractComponent';
+import { CoreComponent } from 'muban-core';
 
-export default class Tabs extends AbstractComponent {
+export default class Tabs extends CoreComponent {
   static displayName: string = 'tabs';
 
   private tabs: Array<HTMLLIElement>;

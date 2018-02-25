@@ -8,7 +8,7 @@ module.exports = function(content) {
   const done = this.async();
   this.cacheable();
 
-  content = content.replace(/"import!(.*?\.json)"/gi, (match, group) => {
+  content = content.replace(/"import!(.*?\.(?:json|yaml))"/gi, (match, group) => {
     return `require(${loaderUtils.stringifyRequest(loaderContext, group)})`
   });
 

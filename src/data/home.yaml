@@ -1,0 +1,7 @@
+title: "Home"
+blocks:
+  - name: "paragraph"
+    data: "import!../app/component/block/paragraph/data.yaml"
+
+  - name: "two-col"
+    data: "import!../app/component/block/two-col/data.yaml"

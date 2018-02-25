@@ -110,7 +110,7 @@ for that section. In that case we should:
 ```
 // code is located a component, where this.element points to HTML element for that section
 
-import { cleanElement, initComponents } from '../../../muban/componentUtils';
+import { cleanElement, initComponents } from 'muban-core';
 
 fetch(`/api/section/${id}`)
   .then(response => response.text())
@@ -138,7 +138,7 @@ Luckily there is a utility function for this:
 ```
 // code is located a component, where this.element points to HTML element for that section
 
-import { updateElement } from '../../../muban/componentUtils';
+import { updateElement } from 'muban-core';
 
 fetch(`/api/section/${id}`)
   .then(response => response.text())

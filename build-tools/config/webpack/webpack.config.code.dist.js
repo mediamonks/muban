@@ -9,13 +9,13 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const config = require('../index');
-const { addStandalone } = require('./webpack-helpers');
+const { addStandalone } = require('../helpers/standalone');
 
 const {
   getESLintLoader,
   getTSLintLoader,
   getStyleLintPlugin,
-} = require('./webpack-helpers');
+} = require('../helpers/lint-config');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 

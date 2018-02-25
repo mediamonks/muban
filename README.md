@@ -128,8 +128,6 @@ yarn build html      # or yarn compile:html
     should have a static `block` property that corresponds with the `data-component` DOM attribute.
 * `src/app/component/blocks/` Contains all _block_ components. They are dynamically rendered based
   on the blocks entry in the json data file.
-* `src/app/muban/componentUtils.ts` Helper function for registering, updating and initializing
-  components.
 * `src/app/style` Folder containing global styles. All components will include their own stylesheet.
 * `src/app/style/main.scss` Main stylesheet file, only for setting up global styles.
 * `src/data` The json files for all preview pages. Each json file corresponds with a page. Using a

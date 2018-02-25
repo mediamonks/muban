@@ -1,13 +1,14 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const { addStandalone } = require('./webpack-helpers');
 const config = require('../index');
+
+const { addStandalone } = require('../helpers/standalone');
 
 const {
   getESLintLoader,
   getTSLintLoader,
   getStyleLintPlugin,
-} = require('./webpack-helpers');
+} = require('../helpers/lint-config');
 
 /**
  * Webpack config to compile production bundle

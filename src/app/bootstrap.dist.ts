@@ -1,4 +1,7 @@
 /**
+ * Code being executed on production builds on start
+ */
+/**
  * This file is the webpack entry for all scripts/styles that must be used in the website.
  */
 
@@ -11,6 +14,12 @@
  * If you know the publicPath during buildTime, you can do a build with the `--publicPath=...` flag
  * This feature is mostly useful when the publicPath can be different at runtime.
  */
+
+import { bootstrap } from 'muban-core/lib/dist';
+
+declare var __webpack_public_path__: string;
+declare var require: any;
+
 /* eslint-disable */
 if (window['webpackPublicPath']) {
   __webpack_public_path__ = window['webpackPublicPath'];
@@ -22,3 +31,6 @@ const context = require.context('./component/block/', true, /\.hbs$/);
 context.keys().forEach(key => {
   context(key);
 });
+
+// Makes the website interactive
+bootstrap(document.body);

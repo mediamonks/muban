@@ -6,7 +6,7 @@ import 'modernizr';
 import qs from 'qs';
 
 import 'app/style/main.scss';
-import { initComponents, cleanElement } from 'app/muban/componentUtils';
+import { initComponents, cleanElement } from 'muban-core';
 
 import { getStories } from './utils/utils';
 import { getStoryInfo } from './utils/getStoryInfo';

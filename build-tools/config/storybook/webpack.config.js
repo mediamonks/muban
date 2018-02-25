@@ -7,11 +7,9 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const config = require('../index');
 
-const {
-  getStyleRules,
-  getCodeRules,
-  getHandlebarsRules,
-} = require('../webpack/webpack-helpers');
+const { getStyleRules } = require('../helpers/style-rules');
+const { getCodeRules } = require('../helpers/code-rules');
+const { getHandlebarsRules } = require('../helpers/handlebars-rules');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 const port = process.env.PORT || config.storybook.port;

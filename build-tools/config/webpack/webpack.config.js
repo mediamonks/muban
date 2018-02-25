@@ -7,14 +7,15 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const config = require('../index');
 
+const { getStyleRules } = require('../helpers/style-rules');
+const { getCodeRules } = require('../helpers/code-rules');
+const { getHandlebarsRules } = require('../helpers/handlebars-rules');
+
 const {
-  getStyleRules,
-  getCodeRules,
-  getHandlebarsRules,
   getESLintLoader,
   getTSLintLoader,
   getStyleLintPlugin,
-} = require('./webpack-helpers');
+} = require('../helpers/lint-config');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 const port = process.env.PORT || config.dev.port;
@@ -23,14 +24,14 @@ module.exports = merge(require('./webpack.config.base'), {
   entry: {
     main: [
       './src/app/polyfills.js',
-      './src/app/dev.js',
+      './src/app/bootstrap.dev.js',
     ],
   },
   output: {
     publicPath: config.dev.publicPath,
   },
   resolve: {
-    extensions: ['.hbs', '.ts', '.js', '.json'],
+    extensions: ['.hbs', '.ts', '.js', '.yaml', '.json'],
   },
   plugins: [
     // enable HMR globally

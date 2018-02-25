@@ -3,12 +3,9 @@
  */
 const path = require('path');
 const webpack = require('webpack');
+const DirectoryNamedWebpackPlugin = require("directory-named-webpack-plugin");
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const config = require('../index');
-
-const {
-  getDirectoryNamedWebpackPlugin,
-} = require('./webpack-helpers');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
@@ -25,7 +22,18 @@ const webpackConfig = {
       'node_modules',
     ],
     plugins: [
-      getDirectoryNamedWebpackPlugin()
+      new DirectoryNamedWebpackPlugin({
+        honorIndex: false, // defaults to false
+
+        ignoreFn: function(webpackResolveRequest) {
+          return !(webpackResolveRequest.path.includes(path.join('app', 'component')) ||
+            webpackResolveRequest.path.includes(path.join('storybook')));
+
+          // custom logic to decide whether request should be ignored
+          // return true if request should be ignored, false otherwise
+          // return false; // default
+        },
+      })
     ],
     alias: {
       modernizr$: path.resolve(projectRoot, '.modernizrrc'),
@@ -36,6 +44,7 @@ const webpackConfig = {
     modules: [
       'node_modules',
       path.resolve(__dirname, '../../loaders'),
+      path.resolve(projectRoot, 'node_modules/muban-core/loaders'),
     ],
   },
   module: {
@@ -52,6 +61,14 @@ const webpackConfig = {
         use: [
           { loader: "json-partial-loader" },
           { loader: "json-loader" }
+        ]
+      },
+      {
+        test: /\.yaml$/,
+        use: [
+          { loader: "json-partial-loader" },
+          { loader: "json-loader" },
+          { loader: "yaml-loader" }
         ]
       },
     ]

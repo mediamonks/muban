@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config build-tools/config/webpack/webpack.config.js",
     "dev:code": "webpack --config build-tools/config/webpack/webpack.config.code.dev.js --watch",
-    "build": "node ./build-tools/script/build",
+    "build": "NODE_ENV=production node ./build-tools/script/build",
     "preview": "http-server ./dist/site --p 9001 -s -o",
     "compile:code": "npm run build dist",
     "compile:partials": "npm run build partials",
@@ -61,6 +61,7 @@
     "modernizr": "^3.3.1",
     "modernizr-loader": "^1.0.1",
     "muban-convert-hbs": "^1.0.0",
+    "muban-core": "^1.0.1",
     "normalize.css": "^7.0.0",
     "qs": "^6.5.1",
     "seng-scss": "^1.0.0",
@@ -83,6 +84,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-plugin-transform-strict-mode": "^6.22.0",
     "babel-preset-env": "^1.2.1",
+    "cache-loader": "^1.2.0",
     "chalk": "^2.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.1.1",
@@ -108,6 +110,7 @@
     "imagemin-mozjpeg": "^6.0.0",
     "imagemin-webpack-plugin": "^1.5.2",
     "js-beautify": "^1.6.11",
+    "js-yaml": "^3.10.0",
     "lint-staged": "^4.3.0",
     "loader-utils": "^1.0.2",
     "node-sass": "^4.5.0",
@@ -140,6 +143,7 @@
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.7.1",
     "webpack-merge": "^4.1.0",
+    "yaml-loader": "^0.5.0",
     "yargs": "^10.0.3"
   }
 }

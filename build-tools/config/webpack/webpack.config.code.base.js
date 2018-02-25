@@ -9,11 +9,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('../index');
 const convert = require('muban-convert-hbs').default;
 
-const {
-  getStyleRules,
-  getCodeRules,
-  getHandlebarsRules,
-} = require('./webpack-helpers');
+
+const { getStyleRules } = require('../helpers/style-rules');
+const { getCodeRules } = require('../helpers/code-rules');
+const { getHandlebarsRules } = require('../helpers/handlebars-rules');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
@@ -25,12 +24,11 @@ module.exports = merge(require('./webpack.config.base'), {
       './src/app/component/layout/app/app.hbs',
     ],
     bundle: [
-      './src/app/bundle.js',
-      './src/app/dist.js',
+      './src/app/bootstrap.dist.js',
     ],
   },
   resolve: {
-    extensions: ['.hbs', '.ts', '.js', '.json'],
+    extensions: ['.hbs', '.ts', '.js', '.yaml', '.json'],
   },
   module: {
     rules: [
