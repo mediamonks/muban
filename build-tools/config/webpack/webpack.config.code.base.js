@@ -24,7 +24,7 @@ module.exports = merge(require('./webpack.config.base'), {
       './src/app/component/layout/app/app.hbs',
     ],
     bundle: [
-      './src/app/bootstrap.dist.js',
+      './src/app/bootstrap.dist.ts',
     ],
   },
   resolve: {

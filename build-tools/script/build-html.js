@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const loadData = require('json-import-loader').loadData;
 // eslint-disable-next-line import/no-extraneous-dependencies
 const Handlebars = require('handlebars');
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -13,20 +14,6 @@ const beautifyHtml = require('js-beautify').html;
 const config = require('../config');
 
 const projectRoot = path.resolve(__dirname, '../../');
-
-function loadData(contentPath) {
-  if (path.extname(contentPath) === '.yaml') {
-    return yaml.safeLoad(fs.readFileSync(contentPath, 'utf8'));
-  } else {
-    return require(contentPath);
-  }
-}
-
-function getData(contentPath) {
-  return JSON.stringify(loadData(contentPath)).replace(/"import!(.*?\.(?:json|yaml))"/gi, (match, group) =>
-    getData(path.resolve(__dirname, path.dirname(contentPath), group))
-  );
-}
 
 module.exports = function(cb) {
   const partialsPath = path.join(config.buildPath, 'asset/partials.js');
@@ -67,7 +54,14 @@ module.exports = function(cb) {
         .forEach(file => {
           const page = path.basename(file, `.${file.split('.').pop()}`);
           // eslint-disable-next-line import/no-dynamic-require, global-require
-          const data = JSON.parse(getData(path.resolve(__dirname, `../../src/data/${file}`)));
+          const data = loadData(
+            path.resolve(__dirname, `../../src/data/${file}`),
+            {
+              resolvers: {
+                yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
+              },
+            }
+          );
           const content = appTemplate(data);
 
           const templateResult = htmlTemplate({

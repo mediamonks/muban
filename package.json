@@ -111,6 +111,7 @@
     "imagemin-webpack-plugin": "^1.5.2",
     "js-beautify": "^1.6.11",
     "js-yaml": "^3.10.0",
+    "json-import-loader": "^1.0.0",
     "lint-staged": "^4.3.0",
     "loader-utils": "^1.0.2",
     "node-sass": "^4.5.0",

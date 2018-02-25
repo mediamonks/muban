@@ -59,14 +59,14 @@ const webpackConfig = {
       {
         test: /\.json$/,
         use: [
-          { loader: "json-partial-loader" },
+          { loader: "json-import-loader" },
           { loader: "json-loader" }
         ]
       },
       {
         test: /\.yaml$/,
         use: [
-          { loader: "json-partial-loader" },
+          { loader: "json-import-loader" },
           { loader: "json-loader" },
           { loader: "yaml-loader" }
         ]

@@ -24,7 +24,7 @@ module.exports = merge(require('./webpack.config.base'), {
   entry: {
     main: [
       './src/app/polyfills.js',
-      './src/app/bootstrap.dev.js',
+      './src/app/bootstrap.dev.ts',
     ],
   },
   output: {
