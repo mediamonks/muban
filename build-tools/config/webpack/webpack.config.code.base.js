@@ -76,13 +76,13 @@ module.exports = merge(require('./webpack.config.base'), {
       {
         // copy over component json
         context: path.resolve(projectRoot, 'src/app/component'),
-        from: '**/*.json',
+        from: '**/*.{yaml,json}',
         to: path.resolve(config.distPath, 'data/component'),
       },
       {
         // copy over data json
         context: path.resolve(projectRoot, 'src/data'),
-        from: '**/*.json',
+        from: '**/*.{yaml,json}',
         to: path.resolve(config.distPath, 'data'),
       },
       {
