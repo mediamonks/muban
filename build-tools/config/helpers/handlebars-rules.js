@@ -31,8 +31,17 @@ function getHandlebarsRules(options) {
           loader: 'handlebars-loader',
           options: {
             extensions: ['.hbs', ''],
-            partialDirs: [path.resolve(projectRoot, 'src/app/component')],
+            partialDirs: [
+              path.resolve(projectRoot, 'src/app/component'),
+            ],
+            helperDirs: [
+              path.resolve(projectRoot, 'build-tools/helpers'),
+            ],
             debug: false,
+            // http://handlebarsjs.com/reference.html#base-compile
+            precompileOptions: {
+              preventIndent: true
+            }
           },
         },
         {

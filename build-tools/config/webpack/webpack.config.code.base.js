@@ -16,6 +16,17 @@ const { getHandlebarsRules } = require('../helpers/handlebars-rules');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
+function cleanupTemplate(template) {
+  // remove script/style includes
+  template = template.replace(/<script src=["']([^"']+)["']><\/script>[\r\n]*/ig, '');
+  template = template.replace(/<link rel=["']stylesheet["'] href=["'][^"']+["']>[\r\n]*/ig, '');
+
+  // fix partial imports by adding additional folder that is not needed for webpack
+  template = template.replace(/{{> ([\w-/]+)\/([\w-]+)/gi, '{{> $1/$2/$2');
+
+  return template;
+}
+
 module.exports = merge(require('./webpack.config.base'), {
   entry: {
     common: [
@@ -46,11 +57,26 @@ module.exports = merge(require('./webpack.config.base'), {
         to: config.buildPath,
       },
       {
-        // copy over hbs templates
+        // copy over hbs templates and remove muban-specific imports and partial paths
         context: path.resolve(projectRoot, 'src/app/component'),
         from: '**/*.hbs',
-        to: path.resolve(config.distPath, 'templates'),
+        to: path.resolve(config.distPath, 'templates') + '/[path]/[name].hbs',
+        toType: 'template',
+        transform (content) {
+          return cleanupTemplate(content.toString('utf8'))
+        },
       },
+      // {
+      //   // add support for TWIG/HBS drupal integration, generates a twig file that includes a hbs partial
+      //   context: path.resolve(projectRoot, 'src/app/component'),
+      //   from: '**/*.hbs',
+      //   to: path.resolve(config.distPath, 'templates') + '/[path]/[name].html.twig',
+      //   toType: 'template',
+      //   transform (content, path) {
+      //     return `{{ handlebars('${path.split(/[/\\]/gi).pop()}', data) }}`;
+      //   },
+      // },
+      // CONVERT HBS TEMPLATES
       (config.convertTemplates.convertTo ? {
         // convert hbs to htl templates
         context: path.resolve(projectRoot, 'src/app/component'),
@@ -59,25 +85,14 @@ module.exports = merge(require('./webpack.config.base'), {
         toType: 'template',
         transform (content) {
           // convert to target template
-          let template = convert(content.toString('utf8'), config.convertTemplates.convertTo);
-
-          // remove script/style includes
-
-          template = template.replace(/<script src=["']([^"']+)["']><\/script>[\r\n]*/ig, '');
-          template = template.replace(/<link rel=["']stylesheet["'] href=["']([^"']+)["']>[\r\n]*/ig, '');
-
-          // fix partial imports by adding additional folder that is not needed for webpack
-          template = template.replace(/\/([\w-]+)(\.html(:?\.twig)?)"/gi, '/$1/$1$2"');
-
-          return template;
-
+          return convert(cleanupTemplate(content.toString('utf8')), config.convertTemplates.convertTo);
         },
       } : null),
       {
         // copy over component json
         context: path.resolve(projectRoot, 'src/app/component'),
         from: '**/*.{yaml,json}',
-        to: path.resolve(config.distPath, 'data/component'),
+        to: path.resolve(config.distPath, 'templates'),
       },
       {
         // copy over data json
