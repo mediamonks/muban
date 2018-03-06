@@ -1,11 +1,82 @@
 {{!
   Index with all rendered pages for easy access
 }}
-<ul>
-  {{#each pages}}
-    <li>
-      <a href="{{link}}">{{page}}</a>
-      - {{data.title}} ({{data.blocks.length}})
-    </li>
-  {{/each}}
-</ul>
+
+<style>
+
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  html {
+    font-size: 10px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+    color: #102950;
+    background-color: #f8f8f8
+  }
+
+  .wrapper {
+    max-width: 80rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 4rem;
+    margin: 0.5rem 0;
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin: 2rem 0 1rem;
+  }
+
+  p, ul {
+    font-size: 1.6rem;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    padding: 3px 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 3px solid rgba(30, 144, 255, 0);
+    transition: border-bottom-color 0.2s;
+  }
+
+  a:hover {
+    border-bottom: 3px solid rgba(30, 144, 255, 1);
+  }
+
+  sup {
+    font-size: 60%;
+    margin-left: 5px;
+    opacity: 0.7;
+  }
+</style>
+
+<div class="wrapper">
+  <h1>Page overview</h1>
+  <p>This page contains an overview of all the different pages or variations of blocks.</p>
+
+  <h2>Pages</h2>
+  <ul>
+    {{#each pages}}
+      {{! any data from the page json can be used here as 'data.*'}}
+      <li>
+        <a href="{{link}}">{{page}}</a><sup>{{data.blocks.length}} blocks</sup>
+      </li>
+    {{/each}}
+  </ul>
+</div>
