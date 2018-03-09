@@ -6,6 +6,8 @@ export default class App extends AbstractComponent {
   constructor(element: HTMLElement) {
     super(element);
 
+    document.documentElement.classList.add('index');
+
     this.getElements('sup').forEach(sup => {
       sup.addEventListener('click', event => {
         const page = (<HTMLElement>event.currentTarget).closest('.page');

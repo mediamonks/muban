@@ -1,19 +1,16 @@
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-html {
+html.index {
+  height: 100%;
   font-size: 10px !important;
-  height: 100%;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
-    sans-serif !important;
-  color: #102950 !important;
-  background-color: #f8f8f8 !important;
-  height: 100%;
+  -webkit-font-smoothing: antialiased;
+
+  body {
+    height: 100%;
+
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+      sans-serif !important;
+    color: #102950 !important;
+    background-color: #f8f8f8 !important;
+  }
 }
 
 @mixin status-hover($color) {
@@ -30,6 +27,12 @@ $colorFeedback: #dc4832;
 $colorDone: #0eb415;
 
 [data-component='index-root'] {
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
   .content {
     min-height: calc(100% - 204px);
     padding-top: 40px;
