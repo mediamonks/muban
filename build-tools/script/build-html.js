@@ -26,11 +26,13 @@ module.exports = function(cb) {
   const htmlTemplate = Handlebars.compile(
     fs.readFileSync(path.resolve(__dirname, './template.hbs'), 'utf-8')
   );
-  const htmlTemplateStandalone = config.standaloneOutput ? Handlebars.compile(
-    fs.readFileSync(path.resolve(__dirname, './template-standalone.hbs'), 'utf-8')
-  ) : null;
+  const htmlTemplateStandalone = config.standaloneOutput
+    ? Handlebars.compile(
+        fs.readFileSync(path.resolve(__dirname, './template-standalone.hbs'), 'utf-8')
+      )
+    : null;
 
-// store json info to render overview page later
+  // store json info to render overview page later
   const dirIndex = [];
 
   const standalonePath = path.resolve(config.buildPath, 'standalone');
@@ -43,7 +45,7 @@ module.exports = function(cb) {
   console.log();
   console.log();
 
-// read json files and generate a page for each json
+  // read json files and generate a page for each json
   recursive(
     path.resolve(projectRoot, 'src/data'),
     [file => path.extname(file) !== '.json' && path.extname(file) !== '.yaml'],
@@ -54,14 +56,11 @@ module.exports = function(cb) {
         .forEach(file => {
           const page = path.basename(file, `.${file.split('.').pop()}`);
           // eslint-disable-next-line import/no-dynamic-require, global-require
-          const data = loadData(
-            path.resolve(__dirname, `../../src/data/${file}`),
-            {
-              resolvers: {
-                yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
-              },
-            }
-          );
+          const data = loadData(path.resolve(__dirname, `../../src/data/${file}`), {
+            resolvers: {
+              yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
+            },
+          });
           const content = appTemplate(data);
 
           const templateResult = htmlTemplate({
@@ -78,8 +77,8 @@ module.exports = function(cb) {
 
           dirIndex.push({
             page,
-            link: `${page}.html`,
             data,
+            link: `${page}.html`,
           });
 
           if (config.standaloneOutput) {
@@ -91,22 +90,64 @@ module.exports = function(cb) {
 
             html = beautifyHtml(templateStandaloneResult, { indent_size: 2 });
 
-            fs.writeFileSync(
-              path.resolve(standalonePath, `${page}.html`),
-              html,
-              'utf-8'
-            );
+            fs.writeFileSync(path.resolve(standalonePath, `${page}.html`), html, 'utf-8');
           }
         });
 
+      const pages = dirIndex
+        .map(item => {
+          if (!item.data.meta) {
+            item.data.meta = {};
+          }
+          if (item.page.includes('.')) {
+            item.data.meta.alt = true;
+          }
+          return item;
+        })
+        .sort((a, b) => {
+          if (a.data.meta.alt || b.data.meta.alt) {
+            // sort on alt
+            if (a.page.startsWith(b.page)) return 1;
+            if (b.page.startsWith(a.page)) return -1;
+            // return String(a.page).localeCompare(String(b.page));
+          }
+          return String(a.data.meta.id || a.page).localeCompare(String(b.data.meta.id || b.page));
+        })
+        .map(({ page, data }) => ({
+          page,
+          data,
+          link: `${page}.html`,
+        }));
+
+      const categoryMap = pages.reduce((cats, page) => {
+        const category = page.data.meta.category || 'default';
+        if (!cats[category]) {
+          cats[category] = [];
+        }
+        cats[category].push(page);
+        return cats;
+      }, {});
+
+      const categories = Object.keys(categoryMap).map(key => ({
+        name: key,
+        pages: categoryMap[key]
+      }));
+
       // render list overview page
       const content = indexTemplate({
-        pages: dirIndex,
+        pages,
+        categories,
+        showCategories: categories.length > 1,
       });
-      const indexResult = htmlTemplate({
+      let indexResult = htmlTemplate({
         content,
         page: 'Index',
       });
+
+      indexResult = indexResult
+        .replace('<link rel="stylesheet" href="asset/bundle.css">', '<link rel="stylesheet" href="asset/preview.css">\n\t<link rel="stylesheet" href="asset/bundle.css">')
+        .replace('<script src="asset/bundle.js"></script>', '<script src="asset/preview.js"></script>\n\t<script src="asset/bundle.js"></script>');
+
       fs.writeFileSync(path.resolve(config.buildPath, 'index.html'), indexResult, 'utf-8');
 
       // cleanup, doesn't belong in the build folder
@@ -115,4 +156,4 @@ module.exports = function(cb) {
       cb(null);
     }
   );
-}
+};

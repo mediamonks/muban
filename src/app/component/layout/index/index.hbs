@@ -1,82 +1,72 @@
+<link rel="stylesheet" href="./index.scss">
+<script src="./Index.ts"></script>
+
 {{!
   Index with all rendered pages for easy access
 }}
 
-<style>
+<div data-component="index-root">
+  <div class="wrapper content">
+    <h1>Page overview</h1>
+    <p>This page contains an overview of all the different pages or variations of blocks.</p>
 
-  * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
+    <h2>
+      Pages
+      <button class="action toggle-blocks">show blocks</button>
+      <!--<button class="action sort-status">sort by status</button>-->
+    </h2>
+    {{#if showCategories }}
+      {{#each categories}}
+        <h3>{{name}}</h3>
+        {{> './pages'}}
+      {{/each}}
+    {{else}}
+      {{> './pages'}}
+    {{/if}}
+  </div>
 
-  html {
-    font-size: 10px;
-  }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
-    color: #102950;
-    background-color: #f8f8f8
-  }
-
-  .wrapper {
-    max-width: 80rem;
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 4rem;
-    margin: 0.5rem 0;
-  }
-
-  h2 {
-    font-size: 3rem;
-    margin: 2rem 0 1rem;
-  }
-
-  p, ul {
-    font-size: 1.6rem;
-  }
-
-  ul {
-    list-style-type: none;
-  }
-
-  li {
-    padding: 3px 0;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 3px solid rgba(30, 144, 255, 0);
-    transition: border-bottom-color 0.2s;
-  }
-
-  a:hover {
-    border-bottom: 3px solid rgba(30, 144, 255, 1);
-  }
-
-  sup {
-    font-size: 60%;
-    margin-left: 5px;
-    opacity: 0.7;
-  }
-</style>
-
-<div class="wrapper">
-  <h1>Page overview</h1>
-  <p>This page contains an overview of all the different pages or variations of blocks.</p>
-
-  <h2>Pages</h2>
-  <ul>
-    {{#each pages}}
-      {{! any data from the page json can be used here as 'data.*'}}
-      <li>
-        <a href="{{link}}">{{page}}</a><sup>{{data.blocks.length}} blocks</sup>
-      </li>
-    {{/each}}
-  </ul>
+  <footer>
+    <div class="color"></div>
+    <div class="wrapper">
+      <div class="about">
+        <h4>About</h4>
+        <p>
+          The info above is extracted from the <code>page.yaml/json</code> files.
+          By adding a <code>meta</code> object with the fields shown here, you can supply
+          additional information about the page.
+        </p>
+        <p>
+          Blocks are the components/modules that build op the page.
+        </p>
+      </div>
+      <div class="legend">
+        <h4>Status</h4>
+        <p class="dev">in development</p>
+        <p class="qa">ready for qa</p>
+        <p class="feedback">work on feedback</p>
+        <p class="done">completed</p>
+      </div>
+      <div class="info">
+        <h4>Page data <code>meta</code> fields</h4>
+        <div class="table">
+          <div class="row">
+            <div><code>id</code></div>
+            <div>component id, to identify and sort</div>
+          </div>
+          <div class="row">
+            <div><code>status</code></div>
+            <div>any of the 4 colored options, to track progress</div>
+          </div>
+          <div class="row">
+            <div><code>category</code></div>
+            <div>to add some grouping, e.g. by type, sprint, etc</div>
+          </div>
+          <div class="row">
+            <div><code>notes</code></div>
+            <div>additional info, about the page or its status</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>

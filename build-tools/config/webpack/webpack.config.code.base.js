@@ -37,6 +37,9 @@ module.exports = merge(require('./webpack.config.base'), {
     bundle: [
       './src/app/bootstrap.dist.ts',
     ],
+    preview: [
+      './src/app/component/layout/index/index.hbs',
+    ],
   },
   resolve: {
     extensions: ['.hbs', '.ts', '.js', '.yaml', '.json'],
