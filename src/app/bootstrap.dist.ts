@@ -33,4 +33,4 @@ context.keys().forEach(key => {
 });
 
 // Makes the website interactive
-bootstrap(document.body);
+bootstrap(document.getElementById('app'));

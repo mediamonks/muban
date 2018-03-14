@@ -15,7 +15,7 @@ const dataContext = require.context('../data/', true, /\.yaml$/);
 const partialsContext = require.context('./component/', true, /\.hbs$/);
 
 // bootstrap the app
-const app = bootstrap(document.body, <any>{
+const app = bootstrap(document.getElementById('app'), <any>{
   Handlebars,
   dataContext,
   partialsContext,
