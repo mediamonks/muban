@@ -35,7 +35,7 @@ function getHandlebarsRules(options) {
               path.resolve(projectRoot, 'src/app/component'),
             ],
             helperDirs: [
-              path.resolve(projectRoot, 'build-tools/helpers'),
+              path.resolve(projectRoot, 'build-tools/handlebars-helpers'),
             ],
             debug: false,
             // http://handlebarsjs.com/reference.html#base-compile
