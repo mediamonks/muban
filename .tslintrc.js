@@ -12,13 +12,6 @@ module.exports = {
     'max-line-length': [true, 100],
     'no-increment-decrement': false,
     'strict-boolean-expressions': false,
-    'import-name': [ true, {
-      'jquery': '$',
-      'underscore': '_',
-      'lodash': '_',
-      'knockout': 'ko',
-      'gsap': 'TweenMax'
-    }],
-
+    'import-name': false,
   },
 };
