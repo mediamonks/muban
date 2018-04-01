@@ -1,5 +1,6 @@
 const path = require("path");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const jsonImporter = require('node-sass-json-importer');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
@@ -28,7 +29,8 @@ function getStyleRules(options) {
       loader: 'sass-loader',
       options: {
         sourceMap: true,
-        data: '@import "~seng-scss"; @import "src/app/style/global";'
+        data: '@import "~seng-scss"; @import "src/app/style/global";',
+        importer: jsonImporter,
       }
     }
   ];

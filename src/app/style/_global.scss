@@ -6,4 +6,6 @@
  * This file is used next to "seng-scss" which is imported globally as well and contain the default mixins/vars/functions
  */
 
+@import '~breakpoint-sass';
+
 @import 'util/variables';

@@ -1,0 +1,6 @@
+{
+  "breakpoint-medium": "(min-width: 768px)",
+  "breakpoint-large": "(min-width: 1024px)",
+  "breakpoint-xlarge": "(min-width: 1280px)",
+  "breakpoint-xxlarge": "(min-width: 1680px)"
+}

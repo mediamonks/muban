@@ -10,5 +10,4 @@ $zLayout: default;
 // Sizes
 $wrapperWidth: 960px;
 
-// Media queries
-$mediaQueries: (SMALL : '(max-width: 767px)');
+@import '../../data/variables/media-queries.json';
