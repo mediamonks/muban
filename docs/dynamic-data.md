@@ -13,7 +13,98 @@ When having to deal with dynamic data fetched from JavaScript, or rendered lists
 sorted of filtered client-side, we need to think of something else. Below are some common scenarios
 and how you can deal with them.
 
-## fetch()
+Please have a look at the [examples](./dynamic-data-examples.md)
+
+## Different types of dynamic data
+
+In this case, dynamic data is everything that is not rendered as visible HTML. There are different
+ways to pass down additional data to the browser so it can be used by JavaScript upon user
+interaction.
+
+* data-attributes
+* embedded json
+* http requests (fetch)
+
+### data-attributes
+
+If you don't have much additional data, it can be rendered within the data-attributes on the
+component DOM node.
+
+**Passing additional color presets:**
+
+```html
+<div data-component="foo" data-colors="#CC9933,#22AA88,#FF8822"></div>
+```
+```js
+const colors = this.element.dataset.colors.split(',');
+```
+
+**Structured data:**
+
+```html
+<div data-component="foo" data-json="{ &quot;users&quot;: [ { &quot;id&quot;: 0, &quot;name&quot;: &quot;Adam Carter&quot;, &quot;work&quot;: &quot;Unilogic&quot;, &quot;email&quot;: &quot;adam.carter@unilogic.com&quot;, &quot;dob&quot;: &quot;1978&quot;, &quot;address&quot;: &quot;83 Warner Street&quot;, &quot;city&quot;: &quot;Boston&quot;, &quot;optedin&quot;: true }, { &quot;id&quot;: 1, &quot;name&quot;: &quot;Leanne Brier&quot;, &quot;work&quot;: &quot;Connic&quot;, &quot;email&quot;: &quot;leanne.brier@connic.org&quot;, &quot;dob&quot;: &quot;13/05/1987&quot;, &quot;address&quot;: &quot;9 Coleman Avenue&quot;, &quot;city&quot;: &quot;Toronto&quot;, &quot;optedin&quot;: false } ], &quot;images&quot;: [ &quot;img0.png&quot;, &quot;img1.png&quot;, &quot;img2.png&quot; ], &quot;coordinates&quot;: { &quot;x&quot;: 35.12, &quot;y&quot;: -21.49 }, &quot;price&quot;: &quot;$59,395&quot; }"></div>
+```
+```js
+const data = JSON.parse(this.element.dataset.json);
+```
+
+Just be sure to properly encode the content, especially when outputting user generated content.
+
+When the data becomes too big to put in data-attributes, it might be better to embed them in the
+document.
+
+### Embedded json
+
+When needing quite a big payload on your page, you can embed it in a non-JS script tag, and parse
+it with JS afterwards.
+
+```html
+<div data-component="foo" data-colors="#CC9933,#22AA88,#FF8822">
+  <script type="text/json">
+    {
+      "users": [
+        {
+          "id": 0,
+          "name": "Adam Carter",
+          "email": "adam.carter@unilogic.com",
+          "dob": "1978",
+          "address": "83 Warner Street",
+          "city": "Boston"
+        },
+        {
+          "id": 1,
+          "name": "Leanne Brier",
+          "email": "leanne.brier@connic.org",
+          "dob": "13/05/1987",
+          "address": "9 Coleman Avenue",
+          "city": "Toronto"
+        }
+      ],
+      "images": [
+        "img0.png",
+        "img1.png",
+        "img2.png"
+      ],
+      "coordinates": {
+        "x": 35.12,
+        "y": -21.49
+      },
+      "price": "$59,395"
+    }
+  </script>
+  <div class="content">
+    foobar
+  </div>
+</div>
+```
+```js
+const data = JSON.parse(this.getElement<HTMLScriptElement>('script[type="text/json"]').innerHTML);
+```
+
+### fetch()
+
+If the data is too big, or too dynamic, and the backend has an API in place, we can also get more
+data that way.
 
 For basic XHR calls, you should use the
 [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). To support
@@ -25,7 +116,7 @@ Install:
 yarn add whatwg-fetch
 ```
 
-Import in the file in `dev.js` and `dist.js`:
+Import in the file in `bootstrap.dev.js` and `bootstrap.dist.js`:
 
 ```
 import 'whatwg-fetch';
@@ -94,286 +185,66 @@ fetch('/avatars', {
 })
 ```
 
-## Real world examples
+### Axios
 
-### Backend returns HTML for an updated section
+If you need more features, you could use [Axios](https://github.com/axios/axios). It's a wrapper
+around `fetch`, but with more configuration options.
 
-Sometimes, a section rendered by the backend has multiple options, and when switching options you
-want new data for that section. If the backend cannot return JSON, they might return a HTML snippet
-for that section. In that case we should:
+## Dynamic Templates
 
-1. fetch the new section
-2. clean up the old HTML element (remove attached classes, for memory leaks)
-3. replace the HTML on the page
-4. initialize new component instances for that section and nested components
+Getting the dynamic data is just the first part, we also need to display the data on the screen.
 
-```
-// code is located a component, where this.element points to HTML element for that section
+There are several ways to get this done, and choosing one depends on the complexity of the data and
+the template itself. 
 
-import { cleanElement, initComponents } from 'muban-core';
+The following scenarios can occur:
 
-fetch(`/api/section/${id}`)
-  .then(response => response.text())
-  .then(body => {
-    const currentElement = this.element;
+* moving around existing items in the DOM
+* toggling visibility of different parts of the DOM 
+* updating an existing view / item
+* adding new items based on an existing template
+* adding new items without an existing template
 
-    // 2. dispose all created component instances
-    cleanElement(currentElement);
+### Moving around existing items in the DOM
 
-    // insert the new HTML into a temp container to construct the DOM
-    const temp = document.createElement('div');
-    temp.innerHTML = body;
-    const newElement = temp.firstChild;
+This could happen when you render all items on the server, and having a client-side sort/filter.
 
-    // 3. replace the HTML on the page
-    currentElement.parentNode.replaceChild(newElement, currentElement);
+In this case you could simply pull all item DOM nodes from the container, extract the needed
+information to apply a sort/filter, and add the resulting items back in the DOM. 
 
-    // 4. initialize new components for the new element
-    initComponents(<HTMLElement>newElement);
-  });
-```
+### Toggling visibility of different parts of the DOM
 
-Luckily there is a utility function for this:
+This could happen when you have multiple views (e.g. a TabBar) that are all rendered on the server,
+but in the client you only show the 'active' view, and hide the other ones.
 
-```
-// code is located a component, where this.element points to HTML element for that section
+### Updating an existing view / item
 
-import { updateElement } from 'muban-core';
+This could happen when you have a detail view, and you want to show a different variant without
+reloading the page.
 
-fetch(`/api/section/${id}`)
-  .then(response => response.text())
-  .then(body => {
-    updateElement(this.element, body);
-  });
-```
+### Adding new items based on an existing template
 
-While this seams like a good option, keep in mind that the whole section will be reset into its
-default state, which could (depending on the contents of the section) be a bad experience,
-especially when dealing with animation/transitions.
+This could happen when you have a 'Load More' button to do client-side pagination.
 
-### Backend returns JSON for an updated section
+An existing template could be one of a few things:
 
-This one might be a bit more work compared to just replacing HTML, but gives you way more control
-over what happens on the page. The big benefit is that the state doesn't reset, allowing you to make
-nice transitions while the new data is updated on the page.
+* An existing DOM element of the item, we can then clone the element and update the content with
+  setting `textContent` or `innerHTML`.
+* Rendering a 'template' element (display:none, without any content), and use that the same way
+  as above.
+* Reusing the `.hbs` template in the JS bundle, by calling the `renderItem`/`renderItems` methods
+  from `muban-core`.
+* Creating a `knockout` template and render those. Normally the hbs templates are preferred, but if
+  you have additional logic to execute, this will be a nice solution. Or if you never render any
+  template on the server, and already include the knockout lib in your project, this is also fine.
+  
+The main thing you want to minimize, is duplicate templates. So if you already rendering something
+on the server, you want that to be the source of truth, without duplicating the template in the JS
+bundle. That's why reusing `.hbs` is normally better than knockout, you only have to maintain a
+single template (still keep them sync between server and client though).
 
-```
-fetch(`/api/section/${id}`)
-  .then(response => response.json())
-  .then(json => {
-    // this part really depends on what the data will be
+### Adding new items without an existing template
 
-    // if it's just text, you could:
-    this.element.querySelector('.js-content').innerHTML = json.content;
-
-    // or pass new data to a child component
-    this.childComponent.setNewData(json.content);
-  });
-```
-
-Or when using knockout to update your HTML:
-
-```
-import { initTextBinding } from '../../../muban/knockoutUtils';
-import ko from 'knockout';
-
-// when using knockout to bind your data, first init the observable with the correct intial data
-this.content = ko.observable(this.element.querySelector('.content').innerHTML);
-
-// then apply the observable to the HTML element
-ko.applyBindingsToNode(this.element.querySelector('.content'), {
-  'html': this.content,
-});
-
-// or a better way to do the above two steps:
-this.content = initTextBinding(<HTMLElement>this.element.querySelector('.content'), true);
-
-fetch(`/api/section/${id}`)
-  .then(response => response.json())
-  .then(json => {
-    this.content(json.content); // content is an knockout observable
-  });
-```
-
-### Sorting or filtering lists
-
-Sometimes the server renders a list of items on the page, but you have to sort or filter them
-client-side, based on specific data in those items. Since we already have all the items and data on
-the page, it's not that difficult.
-
-We can just query all the items, and retrieve the information we need to execute our logic, and add
-them back to the page.
-
-```
-constructor() {
-  this.initItems();
-  this.updateItems();
-}
-
-private initItems() {
-  // get all DOM nodes
-  const items = Array.from(this.element.querySelectorAll('.item'));
-
-  // convert to list of useful data to filter/sort on
-  this.itemData = items.map(item => ({
-    element: item,
-    title: item.querySelector('.title').textContent,
-    tags: Array.from(item.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase()),
-  }));
-}
-
-private updateItems() {
-  // empty the container
-  const container = this.element.querySelector('.items');
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
-  }
-
-  // filter on any tags that contains an 's'
-  let newItems = this.filterOnTags(this.itemData, 's');
-  // sort descending
-  newItems = this.sortOnTitle(newItems, false);
-
-  // append new items to the container
-  const fragment = document.createDocumentFragment();
-  newItems.forEach(item => fragment.appendChild(item.element));
-  container.appendChild(fragment);
-}
-
-
-// sort items base on the title attribute
-private sortOnTitle(itemData, ascending:boolean = false) {
-  return [...itemData].sort((a, b) => a.title.localeCompare(b.title) * (ascending ? 1 : -1));
-}
-
-// filter items based on the tags array
-private filterOnTags(itemData, filter:string) {
-  return itemData.filter(item => item.tags.some(tag => tag.includes(filter.toLowerCase())));
-}
-```
-
-### Load more items to the page
-
-Sometimes the server renders the first page of items, but they want to have the second page to be
-loaded and displayed from the client. If the server returns HTML, we can just re-use some of the
-logic in our HTML example above.
-
-However, if the server returns JSON, we sort of want to re-use the markup of the existing items on
-the page. We _could_ build up the HTML ourselves from JavaScript, but that would mean the HTML lives
-in two places, on the server and in JavaScript, and it will be hard to keep them in sync.
-
-There are two options we can choose from.
-
-##### Clone and update element
-
-For smaller items, we could just clone the first element of the list, and create a function that
-updates all the data in that item, so we can append it to the DOM.
-
-```
-// get the template node to clone later
-const template = <HTMLELement>this.element.querySelector('.item');
-// create a documentFragment for better performance when adding items
-const fragment = document.createDocumentFragment();
-
-// clone template, update data, and add to fragment
-newItems.forEach(item => {
-  const clone = template.cloneNode(true);
-  clone.querySelector('.title').textContent = item.title;
-  clone.querySelector('.description').textContent = item.description;
-  fragment.appendChild(clone);
-});
-
-// add fragment to the list
-this.element.querySelector('.list').appendChild(fragment);
-```
-
-##### Use Knockout with a template
-
-This option works best when only used on the client, but when having server-rendered items in the
-DOM you would first need to convert them to data to properly render them.
-
-Handlebars template:
-
-```
-<!--
-List item template, keep in HTML since it will be used by javascript.
-The HTML in the script-template is similar to the html in the handlebars list below.
-The handlebars template will be rendered on the server, and the script-template will
-be used by knockout to render the list client-side (when new data comes in).
--->
-<script type="text/html" id="item-template">
-  <h3 class="title" data-bind="text: title"></h3>
-  <p class="description" data-bind="html: description"></p>
-  <div class="tags">
-    <!-- ko foreach: tags -->
-      <span class="tag" data-bind="text: $data"></span>
-    <!-- /ko -->
-  </div>
-</script>
-
-<section class="items">
-  {{#each items}}
-    <article class="item">
-      <h3 class="title">{{title}}</h3>
-      <p class="description">{{description}}</p>
-      <div class="tags">
-        {{#each tags}}
-          <span class="tag">{{this}}</span>
-        {{/each}}
-      </div>
-    </article>
-  {{/each}}
-</section>
-```
-
-Script:
-
-```
-// 1. transform old items to data
-// get all DOM nodes
-const items = Array.from(this.element.querySelectorAll('.item'));
-
-// convert to list of useful data to filter/sort on
-const oldData = items.map(item => ({
-  title: item.querySelector('.title').textContent,
-  description: item.querySelector('.description').innerHTML,
-  tags: Array.from(item.querySelectorAll('.tag')).map(tag => tag.textContent),
-}));
-
-// 2. create observable and set old data
-const itemData = ko.observableArray(oldData);
-
-// 3. apply bindings to list, this will re-render the items
-ko.applyBindingsToNode(this.element.querySelector('.items'), {
-  'template' : { 'name': 'item-template', 'foreach': itemData },
-});
-
-// 4. add new data to the observable
-// or do any other funky stuff to the array, like sorting/filtering
-itemData.push(...newData);
-```
-
-The above can be simplified by using a util. The 3rd parameter can also be `oldData` extract above
-instead of the passed config for more control.
-
-```
-import { initListBinding } from '../../../muban/knockoutUtils';
-
-// 1+2+3. extract data, create observable and apply bindings
-const itemData = initListBinding(
-  <HTMLElement>this.element.querySelector('.items'),
-  'item-template',
-  {
-    query: '.item',
-    data: {
-      title: '.title',
-      description: { query: '.description', htm: true },
-      tags: { query: '.tag', list: true },
-    }
-  },
-);
-
-// 4. add new data to the observable
-// or do any other funky stuff to the array, like sorting/filtering
-itemData.push(...newData);
-```
+This is similar to the case above, but now we're not sure we have an existing item in the DOM we
+could clone. This could be conditionally (depending on which page you're on), or always (you never
+render the template on the server at all).
