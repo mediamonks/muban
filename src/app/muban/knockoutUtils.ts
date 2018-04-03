@@ -1,4 +1,5 @@
 import ko from 'knockout';
+import extract from 'html-extract-data';
 
 /**
  * Sets up a binding to the element, and sets the element's content as initial value
@@ -75,48 +76,27 @@ export function initTextBinding(
  *
  * @param {HTMLElement} container
  * @param {string} templateName
- * @param {Array<any> | any} extractData
- * @return {KnockoutObservable<Array<any>>}
+ * @param {Array<T> | any} configOrData
+ * @param [additionalData]
+ * @return {KnockoutObservable<Array<T>>}
  */
-export function initListBinding(
+export function initListBinding<T>(
   container: HTMLElement,
   templateName: string,
-  extractData: Array<any> | any,
-): KnockoutObservable<Array<any>> {
+  configOrData: Array<T> | any,
+  additionalData?: any,
+): KnockoutObservable<Array<T>> {
   let currentData;
-
-  if (Array.isArray(extractData)) {
-    currentData = extractData;
+  if (Array.isArray(configOrData)) {
+    currentData = configOrData;
   } else {
-    // 1. transform old items to data
-    // get all DOM nodes
-    const items = Array.from(container.querySelectorAll(extractData.query));
-
-    // convert to list of useful data to filter/sort on
-    currentData = items.map((item: HTMLElement) =>
-      Object.keys(extractData.data).reduce((obj, key): any => {
-        let info = extractData.data[key];
-        if (typeof info === 'string') info = { query: info };
-
-        if (!info.list) {
-          obj[key] = item.querySelector(info.query)[info.html ? 'innerHTML' : 'textContent'];
-        } else {
-          obj[key] = Array.from(item.querySelectorAll(info.query)).map(
-            child => child[info.html ? 'innerHTML' : 'textContent'],
-          );
-        }
-        return obj;
-      }, {}),
-    );
+    currentData = extract(container, { ...configOrData, list: true }, additionalData);
   }
-
   // 2. create observable and set old data
   const list = ko.observableArray(currentData);
-
   // 3. apply bindings to list, this will re-render the items
   ko.applyBindingsToNode(container, {
     template: { name: templateName, foreach: list },
   });
-
   return list;
 }
