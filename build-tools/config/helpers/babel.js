@@ -92,7 +92,6 @@ function getBabelLoaderConfig() {
         //   "moduleName": "babel-runtime"
         // }],
 
-        'transform-class-display-name',
         'transform-class-properties',
         'transform-flow-strip-types',
         'transform-object-rest-spread',
