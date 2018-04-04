@@ -7,7 +7,7 @@
     "dev:code": "webpack --config build-tools/config/webpack/webpack.config.code.dev.js --watch",
     "build": "cross-env NODE_ENV=production node ./build-tools/script/build",
     "preview": "http-server ./dist/site --p 9001 -s -o",
-    "compile:code": "npm run build dist",
+    "compile:code": "npm run build code",
     "compile:partials": "npm run build partials",
     "compile:html": "npm run build html",
     "storybook": "webpack-dev-server --config build-tools/config/storybook/webpack.config.js",
@@ -62,7 +62,7 @@
     "modernizr": "^3.3.1",
     "modernizr-loader": "^1.0.1",
     "muban-convert-hbs": "^1.0.0",
-    "muban-core": "^1.7.0",
+    "muban-core": "^1.8.0",
     "normalize.css": "^7.0.0",
     "qs": "^6.5.1",
     "seng-scss": "^1.0.0"

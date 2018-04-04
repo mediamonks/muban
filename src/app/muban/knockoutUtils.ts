@@ -93,7 +93,7 @@ export function initListBinding<T>(
     currentData = extract(container, { ...configOrData, list: true }, additionalData);
   }
   // 2. create observable and set old data
-  const list = ko.observableArray(currentData);
+  const list = ko.observableArray<T>(currentData);
   // 3. apply bindings to list, this will re-render the items
   ko.applyBindingsToNode(container, {
     template: { name: templateName, foreach: list },
