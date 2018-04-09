@@ -9,33 +9,56 @@ const EXT = '*.hbs';
 const questions = [
   {
     type: 'list',
-    name: 'type',
+    name: 'from',
     message:
-      'The script will generate diff reports for handlebars templates.\n What do you want to use as a diff to the current commit?',
+      'The script will generate diff reports for handlebars templates.\n What do you want to use as a first part of comparison?',
     choices: [
-      {
-        name: 'Commit hash',
-        value: 'hash',
-      },
       {
         name: 'Master branch',
         value: 'master',
+      },
+      {
+        name: 'Commit hash or branch name',
+        value: 'value',
       },
     ],
   },
   {
     type: 'input',
-    name: 'commitHash',
+    name: 'fromValue',
     message: 'Please enter a commit hash',
-    when: answers => answers.type === 'hash',
+    when: answers => answers.from === 'value',
+    validate: val => val.length > 0,
+  },
+  {
+    type: 'list',
+    name: 'to',
+    message: 'What do you want to use as a second part of comparison?',
+    choices: [
+      {
+        name: 'Branch HEAD',
+        value: 'head',
+      },
+      {
+        name: 'Commit hash or branch name',
+        value: 'value',
+      },
+    ],
+  },
+  {
+    type: 'input',
+    name: 'toValue',
+    message: 'Please enter a commit hash',
+    when: answers => answers.to === 'value',
     validate: val => val.length > 0,
   },
 ];
 
 inquirer.prompt(questions).then(answers => {
-  const diff = answers.type === 'hash' ? answers.commitHash : 'origin/master';
+  const from = answers.from === 'value' ? answers.fromValue : 'origin/master';
+  const to = answers.from === 'value' ? answers.toValue : '';
 
-  const command = `diff2html -s side -f html -F ${OUTPUT_DIR}/${REPORT_NAME} -- -M ${diff} -- ${EXT}`;
+  const command = `diff2html -s side -f html -F ${OUTPUT_DIR}/${REPORT_NAME} -- -M ${from} ${to} -- ${EXT}`;
 
   mkdirsSync(OUTPUT_DIR);
 
