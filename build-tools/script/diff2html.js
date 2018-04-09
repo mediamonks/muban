@@ -1,5 +1,5 @@
 const { exec } = require('child_process');
-const fs = require('fs');
+const { mkdirsSync } = require('fs-extra');
 const inquirer = require('inquirer');
 
 const OUTPUT_DIR = 'dist/diff';
@@ -32,24 +32,12 @@ const questions = [
   },
 ];
 
-const createDir = () => {
-  if (!fs.existsSync(OUTPUT_DIR)) {
-    const path = OUTPUT_DIR.replace(/\/$/, '').split('/');
-
-    for (let i = 1; i <= path.length; i++) {
-      const segment = path.slice(0, i).join('/');
-
-      !fs.existsSync(segment) ? fs.mkdirSync(segment) : null;
-    }
-  }
-};
-
 inquirer.prompt(questions).then(answers => {
   const diff = answers.type === 'hash' ? answers.commitHash : 'origin/master';
 
   const command = `diff2html -s side -f html -F ${OUTPUT_DIR}/${REPORT_NAME} -- -M ${diff} -- ${EXT}`;
 
-  createDir();
+  mkdirsSync(OUTPUT_DIR);
 
   exec(command, err => {
     if (err) {
