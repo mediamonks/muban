@@ -146,12 +146,12 @@ export default class Foo extends AbstractBlock {
 
   constructor(el:HTMLElement) {
     super(el);
-    
+
     this.getElements('[data-component="button"]').forEach(btn => {
       btn.addEventListener('click', this.handleButtonClick);
     });
   }
-  
+
   handleButtonClick = (event) => {
     console.log(event.currentTarget);
   }
@@ -160,7 +160,7 @@ export default class Foo extends AbstractBlock {
     this.getElements('[data-component="button"]').forEach(btn => {
       btn.removeEventListener('click', this.handleButtonClick);
     });
-    
+
     super.dispose();
   }
 }
@@ -251,6 +251,10 @@ time they are static html pages, that load a bundled js and css file, and is ver
 actual website where your frontend will be integrated. It's always a good practice to build and
 preview your site before sending it over to anyone else, so you know for sure everything works
 properly.
+
+Additionally you can run `yarn build:diff` to generate a diff report for all changed handlebars
+templates. Command will create a `dist/diff` folder and put a report inside. Script can compare changes
+with master branch or specific commit or git tag.
 
 ## Further reading
 
