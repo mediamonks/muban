@@ -40,7 +40,9 @@ const argv = require('yargs')
 
 function callWebpack(config, callback) {
   if (config && typeof config.then === 'function') {
-    config.then(result => webpack(result, callback));
+    config
+      .then(result => webpack(result, callback))
+      .catch(e => callback(e));
   } else if (typeof config === 'function') {
     webpack(config(), callback);
   } else {
@@ -48,7 +50,17 @@ function callWebpack(config, callback) {
   }
 }
 
-function displayWebpacKStats(stats) {
+function displayWebpackStats(stats) {
+  if (stats.hasErrors()) {
+    throw stats.toString({
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false,
+      reasons: false,
+    }) + '\n';
+  }
   process.stdout.write(stats.toString({
     colors: true,
     modules: false,
@@ -71,7 +83,7 @@ function buildCode(cb) {
       spinner.fail('webpack code failed');
       throw err;
     }
-    displayWebpacKStats(stats);
+    displayWebpackStats(stats);
 
     console.log();
     spinner.succeed('webpack code done!');
@@ -89,7 +101,7 @@ function buildPartials(cb) {
       spinner.fail('webpack partials failed');
       throw err;
     }
-    displayWebpacKStats(stats);
+    displayWebpackStats(stats);
 
     console.log();
     spinner.succeed('webpack partials done!');
@@ -107,7 +119,7 @@ function buildStorybook(cb) {
       spinner.fail('Storybook build failed');
       throw err;
     }
-    displayWebpacKStats(stats);
+    displayWebpackStats(stats);
 
     console.log();
     spinner.succeed('Storybook build done!');
