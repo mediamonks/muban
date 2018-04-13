@@ -10,6 +10,10 @@ html.index {
       sans-serif !important;
     color: #102950 !important;
     background-color: #f8f8f8 !important;
+
+    #app {
+      height: 100%;
+    }
   }
 }
 
@@ -27,6 +31,8 @@ $colorFeedback: #dc4832;
 $colorDone: #0eb415;
 
 [data-component='index-root'] {
+  height: 100%;
+
   * {
     margin: 0;
     padding: 0;
@@ -34,7 +40,7 @@ $colorDone: #0eb415;
   }
 
   .content {
-    min-height: calc(100% - 204px);
+    min-height: calc(100% - 206px);
     padding-top: 40px;
     padding-bottom: 40px;
 
@@ -96,6 +102,11 @@ $colorDone: #0eb415;
 
   ul {
     list-style-type: none;
+  }
+
+  .build-date {
+    margin-top: 20px;
+    font-size: 1.2rem;
   }
 
   .page {

@@ -134,10 +134,12 @@ module.exports = function(cb) {
       }));
 
       // render list overview page
+      const date = new Date();
       const content = indexTemplate({
         pages,
         categories,
         showCategories: categories.length > 1,
+        date: `${getLeadingZero(date.getDate())}-${getLeadingZero(date.getMonth() + 1)}-${date.getFullYear()} ${getLeadingZero(date.getHours())}:${getLeadingZero(date.getMinutes())}`
       });
       let indexResult = htmlTemplate({
         content,
@@ -157,3 +159,7 @@ module.exports = function(cb) {
     }
   );
 };
+
+function getLeadingZero(nr) {
+  return nr < 10 ? `0${nr}` : nr;
+}
