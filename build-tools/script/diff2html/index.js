@@ -4,8 +4,9 @@ const { mkdirsSync } = require('fs-extra');
 const inquirer = require('inquirer');
 const addRootDir = require('app-root-dir');
 const Diff2HtmlReportBuilder = require('./diff2html-report-builder');
+const config = require('../../config');
 
-const OUTPUT_DIR = 'dist/diff';
+const OUTPUT_DIR = path.resolve(config.distPath, 'diff');
 const REPORT_NAME = 'templates.html';
 const EXT = '*.hbs';
 
