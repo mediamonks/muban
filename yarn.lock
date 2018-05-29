@@ -61,6 +61,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@types/gsap@^1.19.1":
+  version "1.19.2"
+  resolved "https://registry.yarnpkg.com/@types/gsap/-/gsap-1.19.2.tgz#ffa045fe9ca25f18a175fac4918e17d6a7ef8d7b"
+
 "@types/joi@^13.0.3":
   version "13.0.7"
   resolved "https://registry.yarnpkg.com/@types/joi/-/joi-13.0.7.tgz#89cd7092fc24160b9d59597270cd0d3620e709d8"
@@ -166,6 +170,10 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+andlog@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/andlog/-/andlog-1.0.1.tgz#afc6512b6e809f5bba63c6646d8685ccead19f11"
 
 ansi-escapes@^1.0.0:
   version "1.4.0"
@@ -1208,6 +1216,16 @@ boom@5.x.x:
   resolved "https://registry.yarnpkg.com/boom/-/boom-5.2.0.tgz#5dd9da6ee3a5f302077436290cb717d3f4a54e02"
   dependencies:
     hoek "4.x.x"
+
+bows@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/bows/-/bows-1.7.0.tgz#a3598ed9cef61a7a0cab1a7240f291654865ec76"
+  dependencies:
+    andlog "^1.0.0"
+
+bowser@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/bowser/-/bowser-1.9.3.tgz#6643ae4d783f31683f6d23156976b74183862162"
 
 brace-expansion@^1.0.0, brace-expansion@^1.1.7:
   version "1.1.11"
@@ -2635,6 +2653,10 @@ elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
 
+element-size@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/element-size/-/element-size-1.1.1.tgz#64e5f159d97121631845bcbaecaf279c39b5e34e"
+
 elliptic@^6.0.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.0.tgz#cac9af8762c85836187003c8dfe193e5e2eae5df"
@@ -3783,6 +3805,10 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
 "graceful-readlink@>= 1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
+
+gsap@^1.20.3:
+  version "1.20.4"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-1.20.4.tgz#005fba2a7bfbb3b9d27bd77e1634d2bad365a86a"
 
 gulp-decompress@^1.2.0:
   version "1.2.0"
@@ -5406,7 +5432,7 @@ lodash@4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
-lodash@^4.0.0, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.4:
+lodash@^4.0.0, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.4:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
@@ -5825,20 +5851,34 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-muban-convert-hbs@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/muban-convert-hbs/-/muban-convert-hbs-1.0.0.tgz#8e723a1de4718b3ac09f3fe3a3a732f9ec72ff55"
+muban-convert-hbs@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/muban-convert-hbs/-/muban-convert-hbs-1.1.1.tgz#9556d4028cfe539dd9af297e507f2aabb284cca4"
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     handlebars "^4.0.11"
 
-muban-core@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.8.0.tgz#9325e00b82d44cc9515b2ea806f9b366e0ce60d0"
+muban-core@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.8.3.tgz#1aa0b90eb423a525e4de3ebb261abf56233dc64f"
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"
     seng-disposable "^1.1.3"
+
+muban-transition-component@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/muban-transition-component/-/muban-transition-component-1.0.7.tgz#29c130124b62721d6a5e562038fd7e77d47d2d5d"
+  dependencies:
+    "@babel/runtime" "^7.0.0-beta.35"
+    bows "^1.7.0"
+    bowser "^1.9.3"
+    lodash "^4.17.5"
+    muban-core "^1.8.3"
+    seng-disposable "^1.1.3"
+    seng-event "^1.2.3"
+    seng-scroll-tracker "^1.1.2"
+    transition-controller "^0.1.12"
 
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"
@@ -7818,6 +7858,22 @@ seng-disposable@^1.1.3:
   dependencies:
     tslib "^1.2.0"
 
+seng-event@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/seng-event/-/seng-event-1.2.3.tgz#073ae3fa5e9d49677361a3dc97da752285b6467d"
+  dependencies:
+    seng-disposable "^1.1.3"
+    tslib "^1.2.0"
+
+seng-scroll-tracker@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/seng-scroll-tracker/-/seng-scroll-tracker-1.1.2.tgz#8e0ecfad61149677c90e45f5b7479ebf050b4c9c"
+  dependencies:
+    element-size "^1.1.1"
+    lodash "^4.17.4"
+    seng-event "^1.2.3"
+    tslib "^1.2.0"
+
 seng-scss@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/seng-scss/-/seng-scss-1.1.1.tgz#dd01475aee6a69a02750198947d9c0c3222acbf0"
@@ -8948,6 +9004,16 @@ tough-cookie@~2.3.0, tough-cookie@~2.3.3:
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.3.tgz#0b618a5565b6dea90bf3425d04d55edc475a7561"
   dependencies:
     punycode "^1.4.1"
+
+transition-controller@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/transition-controller/-/transition-controller-0.1.12.tgz#c3d2c5200ad8bc321b2b3742aaadacd767142aab"
+  dependencies:
+    "@babel/runtime" "^7.0.0-beta.35"
+    "@types/gsap" "^1.19.1"
+    gsap "^1.20.3"
+    lodash "^4.17.4"
+    seng-event "^1.2.3"
 
 trim-left-x@^3.0.0:
   version "3.0.0"
