@@ -86,9 +86,15 @@ module.exports = merge(require('./webpack.config.base'), {
         from: '**/*.hbs',
         to: path.resolve(config.distPath, 'templates') + '/[path]/[name].' + config.convertTemplates.extension,
         toType: 'template',
-        transform (content) {
+        transform (content, path) {
           // convert to target template
-          return convert(cleanupTemplate(content.toString('utf8')), config.convertTemplates.convertTo);
+          try {
+            return convert(cleanupTemplate(content.toString('utf8')), config.convertTemplates.convertTo);
+          } catch (e) {
+            console.log(`failed converting "${path}"`);
+            console.log(e);
+            throw e;
+          }
         },
       } : null),
       {
