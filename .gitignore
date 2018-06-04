@@ -58,6 +58,8 @@ node_modules/
 # idea project files
 .idea
 
+# muban zipped files
+muban*.zip
 
 ### Project
 

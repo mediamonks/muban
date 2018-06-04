@@ -15,6 +15,8 @@
     "storybook:preview": "http-server ./dist/storybook --p 9003 -s -o",
     "clean": "npm run build clean",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "zip": "npm run build zip",
+    "zip:project": "npm run build zip --type project",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src --ext .js --cache",
     "lint:ts": "tslint src/**/*.ts -c .tslintrc.js -p tsconfig.json -t verbose",
@@ -68,6 +70,7 @@
     "seng-scss": "^1.0.0"
   },
   "devDependencies": {
+    "archiver": "^2.1.1",
     "awesome-typescript-loader": "^3.0.8",
     "babel-core": "^6.23.1",
     "babel-eslint": "^8.0.1",

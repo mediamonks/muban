@@ -74,6 +74,7 @@ module.exports = Object.assign({},
       enableTSLintLoader: false,
       enableStyleLintPlugin: false,
     },
+    projectRoot,
     distPath,
     buildPath: path.join(distPath, 'site'),
     // enable for local HTTPS dev-server

@@ -1,6 +1,8 @@
 const config = require('../config');
+const path = require('path');
 const ora = require('ora');
 const webpack = require('webpack');
+const archiver = require('archiver');
 const webpackConfigCode = require('../config/webpack/webpack.config.code.dist');
 const webpackConfigPartials = require('../config/webpack/webpack.config.partials');
 const webpackConfigStorybook = require('../config/storybook/webpack.config.dist');
@@ -29,6 +31,27 @@ const argv = require('yargs')
   .command('clean', 'Cleans the dist folder', () => {}, (argv) => {
     cleanDist();
   })
+  .command(
+    'zip [type]',
+    'Zip dist folder',
+    yargs => yargs.option('type', { default: 'dist' }),
+    ({ type }) => {
+      switch(type) {
+        case 'project':{
+          zipProject();
+          break;
+        }
+        case 'dist': {
+          zipDist();
+          break;
+        }
+        default: {
+          zipDist();
+        }
+      }
+  })
+  .example('$0 zip', 'Creates an archive of the dist folder')
+  .example('$0 zip --type=project', 'Creates an archive that can be used to setup a new project')
   .example('$0 --publicPath=/m/muban-site/', 'Build with a different publicPath')
   .example('$0 -p /m/muban-site/', 'Build with a different publicPath')
   .alias('p', 'publicPath')
@@ -127,6 +150,81 @@ function buildStorybook(cb) {
 
     cb && cb(null);
   })
+}
+
+function zipProject(cb) {
+  const spinner = ora('Archiving muban...');
+  spinner.start();
+
+  const output = fs.createWriteStream(path.join(config.projectRoot, 'muban.zip'));
+  const archive = archiver('zip', {
+    zlib: { level: 9 }
+  });
+
+  output.on('close', function() {
+    spinner.succeed(`muban.zip created (${archive.pointer()} bytes)`);
+  });
+
+  archive.pipe(output);
+
+  const ignore = [
+    '.DS_Store',
+    '.npm/**',
+    '.git/**',
+    '.idea/**',
+    '.eslintcache',
+    '.stylelintcache',
+    '.cache-loader',
+    '.node_repl_history',
+    '.yarn-integrity',
+    '.env',
+    '.nyc_output',
+    'coverage/**',
+    'lib-cov/**',
+    '*.log',
+    'dist/**',
+    'muban*.zip',
+    'node_modules/**',
+    'npm-debug.log*',
+    'yarn-debug.log*',
+    'yarn-error.log*',
+  ];
+
+  archive.glob(`**/*`, {
+    ignore,
+    dot: true,
+    cwd: config.projectRoot
+  });
+
+  archive.finalize();
+
+  cb && cb(null);
+}
+
+function zipDist(cb) {
+  const spinner = ora('Archiving dist...');
+  spinner.start();
+
+  const outputFile = `muban-dist-${new Date().getTime()}.zip`;
+  const output = fs.createWriteStream(path.join(config.projectRoot, outputFile));
+  const archive = archiver('zip', {
+    zlib: { level: 9 }
+  });
+
+  output.on('close', function() {
+    spinner.succeed(`${outputFile} created (${archive.pointer()} bytes)`);
+  });
+
+  archive.glob(`**/*`, {
+    dot: true,
+    cwd: config.distPath
+  });
+
+  archive.pipe(output);
+
+  archive.finalize();
+
+  cb && cb(null);
 }
 
 function buildHTML(cb) {
