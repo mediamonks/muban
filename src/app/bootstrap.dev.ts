@@ -11,7 +11,7 @@ declare var require: any;
 declare var module: any;
 
 // create context for json data and handlebar templates
-const dataContext = require.context('../data/', true, /\.yaml$/);
+const dataContext = require.context('../data/', true, /\.(yaml|json)$/);
 const partialsContext = require.context('./component/', true, /\.hbs$/);
 
 // bootstrap the app
