@@ -30,13 +30,13 @@
         "git add"
       ],
       "src/**/*.js": [
-        "npm run lint:js"
+        "eslint --ext .js --cache"
       ],
       "src/**/*.ts": [
-        "npm run lint:ts"
+        "tslint -c .tslintrc.js -p tsconfig.json -t verbose"
       ],
       "src/**/*.scss": [
-        "npm run lint:css"
+        "stylelint --cache"
       ]
     }
   },
