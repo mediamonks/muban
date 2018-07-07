@@ -136,7 +136,7 @@ yarn build html      # or yarn compile:html
   overview page.
 * `.modernizrrc` config file for Modernizrrc used by `modernizr-loader`, config rules can be found
   [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
-* `template/*` Template files for seng-generator, for creating pages, blocks and components.
+* `build-tools/template/*` Template files for seng-generator, for creating pages, blocks and components.
 
 ## Storybook
 
