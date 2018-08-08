@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "noImplicitAny": false,
+    "strict": true,
     "target": "es6",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -15,5 +15,8 @@
   },
   "include": [
     "./src/**/*"
+  ],
+  "exclude": [
+    "./src/storybook/**/*"
   ]
 }
