@@ -7,6 +7,7 @@ module.exports = function(api) {
         },
         "modules": false,
         "useBuiltIns": 'entry',
+        "loose": true,
 
         // for uglifyjs...
         "forceAllTransforms": api.env("production"),
@@ -68,7 +69,8 @@ module.exports = function(api) {
           "es6.string.iterator",
           "es6.string.link",
         ]
-      }]
+      }],
+      "@babel/preset-typescript",
     ],
     plugins: [
       // NOTE: adding helpers will reduce the filesize if you have a lot off classes,
@@ -99,7 +101,7 @@ module.exports = function(api) {
       "@babel/plugin-proposal-throw-expressions",
 
       // needed to register muban-components
-      "@babel/plugin-transform-react-display-name"
+      "@babel/plugin-transform-react-display-name",
     ]
   };
 };
