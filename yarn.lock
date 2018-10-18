@@ -5994,9 +5994,9 @@ muban-convert-hbs@^1.1.1:
     "@babel/runtime" "^7.0.0-beta.35"
     handlebars "^4.0.11"
 
-muban-core@^1.8.3:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.8.3.tgz#1aa0b90eb423a525e4de3ebb261abf56233dc64f"
+muban-core@^1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.9.2.tgz#06be289082513e503cc826b672a762ac951fbb5c"
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"
