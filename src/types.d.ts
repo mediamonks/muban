@@ -1,3 +1,5 @@
+/// <reference path="./app/component/block/AbstractBlock.ts" />
+
 declare module '*.hbs?include';
 declare module '*.json';
 declare module '*.yml';
@@ -13,3 +15,7 @@ type Constructor<T = {}> = new (...args: any[]) => T;
 interface Window {
   webpackPublicPath: string;
 }
+
+// declare class AbstractBlock {
+//
+// }

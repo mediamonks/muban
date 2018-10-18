@@ -7,6 +7,7 @@
   },
   "description": "",
   "scripts": {
+    "build:babel": "babel ./src/app -x \".ts\" -x \".js\" --out-dir ./dist/site/babel",
     "dev": "webpack-dev-server --config build-tools/config/webpack/webpack.conf.dev.js",
     "dev:code": "webpack --config build-tools/config/webpack/webpack.conf.code.dev.js --info-verbosity none --watch",
     "build": "cross-env NODE_ENV=production node ./build-tools/script/build",

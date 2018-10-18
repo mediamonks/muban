@@ -1,8 +1,10 @@
-import { getComponentForElement } from 'muban-core';
-import Icon from '../../general/icon/Icon';
-import AbstractBlock from '../AbstractBlock';
+/// <reference path="../AbstractBlock.ts" />
 
-export default class Paragraph extends AbstractBlock {
+// import { getComponentForElement } from 'muban-core';
+// import Icon from '../../general/icon/Icon';
+// import AbstractBlock from '../AbstractBlock';
+
+class Paragraph extends AbstractBlock {
   public static readonly displayName: string = 'paragraph';
 
   private button: HTMLButtonElement | null;
