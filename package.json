@@ -61,7 +61,7 @@
     "modernizr": "^3.3.1",
     "modernizr-loader": "^1.0.1",
     "muban-convert-hbs": "^1.1.1",
-    "muban-core": "^1.9.2",
+    "muban-core": "^1.9.3",
     "normalize.css": "^7.0.0",
     "qs": "^6.5.1",
     "seng-scss": "^1.0.0"
@@ -97,6 +97,7 @@
     "eslint-plugin-html": "^3.2.2",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "2.6.0",
+    "extract-loader": "^3.0.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
     "friendly-errors-webpack-plugin": "^1.6.1",
