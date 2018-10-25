@@ -2,14 +2,9 @@
   "destination": "./src/data",
   "variables": [{
     "name": "blocks",
-    "type": "confirm",
-    "message": "Do you want to add blocks?",
-    "isBoolean": true,
-    "default": false
-  },{
-    "name": "blocks",
-    "message": "Add a list of comma separated blocks",
+   	"type": "input",
+    "message": "Add a list of comma separated blocks (optional)",
     "isArray": true,
-    "default": false
+    "default": []
   }]
 }
