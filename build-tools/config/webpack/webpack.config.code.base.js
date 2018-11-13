@@ -11,7 +11,6 @@ const convert = require('muban-convert-hbs').default;
 
 
 const { getStyleRules } = require('../helpers/style-rules');
-const { getCodeRules } = require('../helpers/code-rules');
 const { getHandlebarsRules } = require('../helpers/handlebars-rules');
 
 const projectRoot = path.resolve(__dirname, '../../../');
@@ -30,24 +29,15 @@ function cleanupTemplate(template) {
 module.exports = merge(require('./webpack.config.base'), {
   entry: {
     common: [
-      './src/app/polyfills.js',
-      'modernizr',
       './src/app/component/layout/app/app.hbs',
-    ],
-    bundle: [
-      './src/app/bootstrap.dist.ts',
-    ],
-    preview: [
-      './src/app/component/layout/index/index.hbs',
     ],
   },
   resolve: {
-    extensions: ['.hbs', '.ts', '.js', '.yaml', '.json'],
+    extensions: ['.hbs', '.yaml', '.json'],
   },
   module: {
     rules: [
       ...getHandlebarsRules({ development: false, buildType: 'code'}),
-      ...getCodeRules(),
       ...getStyleRules({ development: false }),
     ]
   },
@@ -79,24 +69,6 @@ module.exports = merge(require('./webpack.config.base'), {
       //     return `{{ handlebars('${path.split(/[/\\]/gi).pop()}', data) }}`;
       //   },
       // },
-      // CONVERT HBS TEMPLATES
-      (config.convertTemplates.convertTo ? {
-        // convert hbs to htl templates
-        context: path.resolve(projectRoot, 'src/app/component'),
-        from: '**/*.hbs',
-        to: path.resolve(config.distPath, 'templates') + '/[path]/[name].' + config.convertTemplates.extension,
-        toType: 'template',
-        transform (content, path) {
-          // convert to target template
-          try {
-            return convert(cleanupTemplate(content.toString('utf8')), config.convertTemplates.convertTo);
-          } catch (e) {
-            console.log(`failed converting "${path}"`);
-            console.log(e);
-            throw e;
-          }
-        },
-      } : null),
       {
         // copy over component json
         context: path.resolve(projectRoot, 'src/app/component'),

@@ -3,7 +3,6 @@ const ora = require('ora');
 const webpack = require('webpack');
 const webpackConfigCode = require('../config/webpack/webpack.config.code.dist');
 const webpackConfigPartials = require('../config/webpack/webpack.config.partials');
-const webpackConfigStorybook = require('../config/storybook/webpack.config.dist');
 const buildHtml = require('./build-html');
 const fs = require('fs-extra');
 const chalk = require('chalk');
@@ -14,6 +13,9 @@ const argv = require('yargs')
   .command(['$0', 'all'], 'Only build code bundle', () => {}, (argv) => {
     buildAll();
   })
+  .command('dev', 'Build code in dev mode', () => {}, (argv) => {
+    buildDev();
+  })
   .command('code', 'Only build code bundle', () => {}, (argv) => {
     buildCode();
   })
@@ -22,9 +24,6 @@ const argv = require('yargs')
   })
   .command('html', 'Only generate html files', () => {}, (argv) => {
     buildHTML();
-  })
-  .command('storybook', 'Build the storybook', () => {}, (argv) => {
-    buildStorybook();
   })
   .command('clean', 'Cleans the dist folder', () => {}, (argv) => {
     cleanDist();
@@ -38,20 +37,47 @@ const argv = require('yargs')
   .alias('h', 'help')
   .argv;
 
-function callWebpack(config, callback) {
-  if (config && typeof config.then === 'function') {
-    config
-      .then(result => webpack(result, callback))
-      .catch(e => callback(e));
-  } else if (typeof config === 'function') {
-    webpack(config(), callback);
-  } else {
-    webpack(config, callback);
-  }
+function getWebpackConfig(config) {
+  return new Promise((resolve) => {
+    if (config && typeof config.then === 'function') {
+      config
+        .then(result => resolve(result))
+    } else if (typeof config === 'function') {
+      resolve(config());
+    } else {
+      resolve(config);
+    }
+  });
 }
 
-function displayWebpackStats(stats) {
-  if (stats.hasErrors()) {
+function getWebpackCompiler(config) {
+  return getWebpackConfig(config).then(config => {
+    return webpack(config);
+  });
+}
+
+function callWebpack(config, callback) {
+  getWebpackCompiler(config)
+    .then(compiler => {
+      compiler.run(callback);
+    }).catch(e => callback(e));
+}
+
+function callWebpackWatch(config, callback) {
+  getWebpackCompiler(config)
+    .then(compiler => {
+      compiler.watch({
+
+      }, callback);
+    }).catch(e => callback(e));
+}
+
+function displayWebpackStats(stats, exitOnError = true) {
+  if (Array.isArray(stats.stats)) {
+    stats.stats.forEach(s => displayWebpackStats(s, exitOnError));
+    return;
+  }
+  if (stats.hasErrors() && exitOnError) {
     throw stats.toString({
       colors: true,
       modules: false,
@@ -111,24 +137,6 @@ function buildPartials(cb) {
   })
 }
 
-function buildStorybook(cb) {
-  const spinner = ora('Starting storybook build...');
-  spinner.start();
-  callWebpack(webpackConfigStorybook, (err, stats) => {
-    if (err) {
-      spinner.fail('Storybook build failed');
-      throw err;
-    }
-    displayWebpackStats(stats);
-
-    console.log();
-    spinner.succeed('Storybook build done!');
-    console.log();
-
-    cb && cb(null);
-  })
-}
-
 function buildHTML(cb) {
   htmlSpinner = ora('Starting html generation...');
   htmlSpinner.start();
@@ -157,4 +165,30 @@ function buildAll() {
       })
     })
   })
+}
+
+
+function buildDev() {
+  cleanDist();
+
+  Promise.all([
+    getWebpackConfig(webpackConfigCode),
+    getWebpackConfig(webpackConfigPartials),
+  ]).then((configs) => {
+    require('./preview-server');
+    webpack(configs).watch({}, (err, stats) => {
+      if (err) {
+        return console.log(err);
+      }
+      displayWebpackStats(stats, false);
+
+      console.log();
+      console.log('webpack code & partials done!');
+      console.log();
+
+      buildHTML(() => {
+        console.log('html done!');
+      }, false);
+    });
+  });
 }

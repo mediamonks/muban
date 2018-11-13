@@ -12,8 +12,6 @@ const config = require('../index');
 const { addStandalone } = require('../helpers/standalone');
 
 const {
-  getESLintLoader,
-  getTSLintLoader,
   getStyleLintPlugin,
 } = require('../helpers/lint-config');
 
@@ -22,15 +20,12 @@ const projectRoot = path.resolve(__dirname, '../../../');
 const webpackConfig = merge(require('./webpack.config.code.base'), {
   module: {
     rules: [
-      getESLintLoader(config.dist.enableESLintLoader),
-      getTSLintLoader(config.dist.enableTSLintLoader),
     ]
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dist.env,
     }),
-    new UglifyJSPlugin(),
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: true,
@@ -55,11 +50,7 @@ const webpackConfig = merge(require('./webpack.config.code.base'), {
 });
 
 const configPromise = new Promise(function(resolve, reject) {
-  if (config.standaloneOutput) {
-    addStandalone(webpackConfig, resolve);
-  } else {
-    resolve(webpackConfig);
-  }
+  addStandalone(webpackConfig, resolve);
 });
 
 module.exports = configPromise;

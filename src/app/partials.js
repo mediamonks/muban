@@ -4,7 +4,6 @@
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const Handlebars = require('handlebars/runtime');
-const indexTemplate = require('./component/layout/index/index.hbs');
 const appTemplate = require('./component/layout/app/app.hbs');
 
 const context = require.context('./component/', true, /\.hbs$/);
@@ -13,6 +12,5 @@ context.keys().forEach(key => {
 });
 
 module.exports = {
-  indexTemplate,
   appTemplate,
 };

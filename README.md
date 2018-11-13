@@ -1,13 +1,12 @@
 # Muban boilerplate
 
 Muban is a backend-agnostic framework and development setup to enhance server-rendered HTML with
-[TypeScript](https://www.typescriptlang.org/) or [Babel](https://babeljs.io/) components and
 [SCSS](http://sass-lang.com/) stylesheets.
 
-During development, [webpack](https://webpack.js.org/) will supply fast compilation and hot
-reloading, while using [Handlebars](http://handlebarsjs.com/) templates to render everything.
+During development, [webpack](https://webpack.js.org/) will supply fast compilation, while using
+[Handlebars](http://handlebarsjs.com/) templates to render everything.
 
-The dist build will generates preview html pages and a js and css bundle that backend developers can
+The dist build will generates preview html pages and a css bundle that backend developers can
 use to integrate the pages in their server side templates or CMS of choice.
 
 ## Why Muban?
@@ -47,7 +46,7 @@ Open your browser at [http://localhost:9000](http://localhost:9000).
 **Using own server for html**
 
 When using server-generated html instead of the handlebars templates, you can use the following
-command to just compile the `js` and `css` bundles (incl other assets).
+command to just compile the `css` bundles (incl other assets).
 
 ```
 yarn dev:code
@@ -110,13 +109,7 @@ yarn build html      # or yarn compile:html
 
 ## Files and folders
 
-* `src/app/dev.js` Main dev file, you should never have to change anything here
-
-* `src/app/dist.js` Webpack entry file for production build, contains code that runs immediately.
 * `src/app/partials.js` Webpack entry file for generating output html files.
-* `src/app/bundle.js` Webpack entry that will include all js and css files referenced from all
-  template files.
-* `src/app/polyfills.js` List of polyfills to include in the bundles.
 * `src/app/component/layout/index/index.hbs` Template file to list all the pages.
 * `src/app/component/layout/app/app.hbs` Template file that is used for all pages, contains basic
   page layout (e.g. header, footer and wrapper).
@@ -124,8 +117,6 @@ yarn build html      # or yarn compile:html
   * `component-name.hbs` The template file, can import a stylesheet using the html `link` tag, and a
     script using the html `script` tag.
   * `component-name.scss` The stylesheet, best to use a `component` prefix for your outer selector.
-  * `ComponentName.ts/js` An optional TS/JS file for the component, receives the DOM element, and
-    should have a static `block` property that corresponds with the `data-component` DOM attribute.
 * `src/app/component/blocks/` Contains all _block_ components. They are dynamically rendered based
   on the blocks entry in the json data file.
 * `src/app/style` Folder containing global styles. All components will include their own stylesheet.
@@ -134,14 +125,4 @@ yarn build html      # or yarn compile:html
   `.` in the filename will allow to group alternative variations for a single page. E.g. `home.json`
   is the main page, and `home.alt.json` is an alternative version that can be visited via the
   overview page.
-* `.modernizrrc` config file for Modernizrrc used by `modernizr-loader`, config rules can be found
-  [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
 * `build-tools/template/*` Template files for seng-generator, for creating pages, blocks and components.
-
-## Storybook
-
-Storybook is a web-app that lets you preview and interact with the components in your project. You
-can create presets that render your component with custom HTML, and pass different properties by
-providing a json object.
-
-Please read the [extended documentation](docs/storybook.md) for more information.

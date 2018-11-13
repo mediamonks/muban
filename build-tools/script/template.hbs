@@ -1,24 +1,21 @@
 {{!
-  Production page template
+  Production page template, requires standalone js/css files instead of the complete bundle
 }}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charSet="utf-8">
-  <title>Muban - {{page}}</title>
+  <title>Muban AMP - {{page}}</title>
 
   <meta httpEquiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <link rel="icon" href="{{publicPath}}favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="{{publicPath}}asset/common.css">
-  <link rel="stylesheet" href="{{publicPath}}asset/bundle.css">
+  <link rel="stylesheet" href="{{publicPath}}asset/{{page}}.css">
 </head>
 <body>
   <div id="app">
     {{{content}}}
   </div>
-
-  <script src="{{publicPath}}asset/common.js"></script>
-  <script src="{{publicPath}}asset/bundle.js"></script>
 </body>
 </html>

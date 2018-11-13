@@ -36,8 +36,6 @@ const webpackConfig = {
       })
     ],
     alias: {
-      modernizr$: path.resolve(projectRoot, '.modernizrrc'),
-      TweenLite: path.resolve(projectRoot, 'node_modules/gsap/src/uncompressed/TweenLite'),
     },
   },
   resolveLoader: {
@@ -49,13 +47,6 @@ const webpackConfig = {
   },
   module: {
     rules: [
-      {
-        test: /\.modernizrrc$/,
-        use: [
-          { loader: "modernizr-loader" },
-          { loader: "json-loader" }
-        ]
-      },
       {
         test: /\.json$/,
         use: [
