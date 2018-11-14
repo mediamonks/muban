@@ -18,6 +18,7 @@ module.exports = function(cb, cleanupAfter = true) {
   if (!fs.existsSync(partialsPath)) {
     throw new Error('Partials file not present, run `yarn build partials` first.');
   }
+  delete require.cache[require.resolve(partialsPath)];
   // eslint-disable-next-line import/no-unresolved
   const { indexTemplate, appTemplate } = require(partialsPath);
 
