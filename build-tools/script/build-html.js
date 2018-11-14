@@ -19,7 +19,10 @@ module.exports = function(cb, cleanupAfter = true) {
     throw new Error('Partials file not present, run `yarn build partials` first.');
   }
   // eslint-disable-next-line import/no-unresolved
-  const { appTemplate } = require(partialsPath);
+  const { indexTemplate, appTemplate } = require(partialsPath);
+
+  // store json info to render overview page later
+  const dirIndex = [];
 
   const htmlTemplate = Handlebars.compile(
     fs.readFileSync(path.resolve(__dirname, './template.hbs'), 'utf-8'),
@@ -48,6 +51,12 @@ module.exports = function(cb, cleanupAfter = true) {
 
           console.log(`Generating... ${page}.html`);
 
+          dirIndex.push({
+            page,
+            data,
+            link: `${page}.html`,
+          });
+
           let html = htmlTemplate({
             content,
             page,
@@ -58,6 +67,69 @@ module.exports = function(cb, cleanupAfter = true) {
 
           fs.writeFileSync(path.resolve(config.buildPath, `${page}.html`), html, 'utf-8');
         });
+
+      const renderIndex = !dirIndex.some(p => p.page === 'index');
+
+      // INDEX STUFF
+      if (renderIndex) {
+        const pages = dirIndex
+          .map(item => {
+            if (!item.data.meta) {
+              item.data.meta = {};
+            }
+            if (item.page.includes('.')) {
+              item.data.meta.alt = true;
+            }
+            return item;
+          })
+          .sort((a, b) => {
+            if (a.data.meta.alt || b.data.meta.alt) {
+              // sort on alt
+              if (a.page.startsWith(b.page)) return 1;
+              if (b.page.startsWith(a.page)) return -1;
+              // return String(a.page).localeCompare(String(b.page));
+            }
+            return String(a.data.meta.id || a.page).localeCompare(String(b.data.meta.id || b.page));
+          })
+          .map(({ page, data }) => ({
+            page,
+            data,
+            link: `${page}.html`,
+          }));
+
+        const categoryMap = pages.reduce((cats, page) => {
+          const category = page.data.meta.category || 'default';
+          if (!cats[category]) {
+            cats[category] = [];
+          }
+          cats[category].push(page);
+          return cats;
+        }, {});
+
+        const categories = Object.keys(categoryMap).map(key => ({
+          name: key,
+          pages: categoryMap[key]
+        }));
+
+        // render list overview page
+        const date = new Date();
+        const content = indexTemplate({
+          pages,
+          categories,
+          showCategories: categories.length > 1,
+          date: `${getLeadingZero(date.getDate())}-${getLeadingZero(date.getMonth() + 1)}-${date.getFullYear()} ${getLeadingZero(date.getHours())}:${getLeadingZero(date.getMinutes())}`
+        });
+        let indexResult = htmlTemplate({
+          content,
+          page: 'Index',
+        });
+
+        indexResult = indexResult
+          .replace('<link rel="stylesheet" amp-custom>', '<link rel="stylesheet" href="asset/preview.css">\n\t<link rel="stylesheet" href="asset/common.css">')
+          .replace(/<html(.*)>/gi, '<html$1 class="index">');
+
+        fs.writeFileSync(path.resolve(config.buildPath, 'index.html'), indexResult, 'utf-8');
+      }
 
       // cleanup, doesn't belong in the build folder
       if (cleanupAfter) {
@@ -94,4 +166,8 @@ function inline(html, page) {
   );
 
   return html;
+}
+
+function getLeadingZero(nr) {
+  return nr < 10 ? `0${nr}` : nr;
 }

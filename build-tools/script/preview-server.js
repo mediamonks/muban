@@ -24,13 +24,13 @@ server.use('/', express.static(root));
 
 const uri = (config.useHttps ? 'https' : 'http') + '://localhost:' + port;
 
-console.log('> Listening at ' + uri + '\n');
-
 const onServerRunning = function(err) {
   if (err) {
     console.log(err);
     return;
   }
+
+  console.log('> Listening at ' + uri + '\n');
 
   opn(uri);
 };

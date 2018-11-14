@@ -31,6 +31,9 @@ module.exports = merge(require('./webpack.config.base'), {
     common: [
       './src/app/component/layout/app/app.hbs',
     ],
+    preview: [
+      './src/app/component/layout/index/index.hbs',
+    ],
   },
   resolve: {
     extensions: ['.hbs', '.yaml', '.json'],

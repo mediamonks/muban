@@ -7,6 +7,7 @@ const buildHtml = require('./build-html');
 const fs = require('fs-extra');
 const chalk = require('chalk');
 const shell = require('shelljs');
+const debounce = require('lodash/debounce');
 
 const argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
@@ -167,15 +168,14 @@ function buildAll() {
   })
 }
 
-
 function buildDev() {
   cleanDist();
+
 
   Promise.all([
     getWebpackConfig(webpackConfigCode),
     getWebpackConfig(webpackConfigPartials),
   ]).then((configs) => {
-    require('./preview-server');
     webpack(configs).watch({}, (err, stats) => {
       if (err) {
         return console.log(err);
@@ -186,9 +186,19 @@ function buildDev() {
       console.log('webpack code & partials done!');
       console.log();
 
-      buildHTML(() => {
-        console.log('html done!');
-      }, false);
+      buildHtmlDev();
     });
   });
 }
+
+let opened = false;
+
+const buildHtmlDev = debounce(() => {
+  buildHtml(() => {
+    console.log('html done!');
+    if (!opened) {
+      require('./preview-server');
+      opened = true;
+    }
+  }, false);
+}, 200);
