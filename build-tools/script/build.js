@@ -1,3 +1,4 @@
+const path = require('path');
 const config = require('../config');
 const ora = require('ora');
 const webpack = require('webpack');
@@ -8,6 +9,9 @@ const fs = require('fs-extra');
 const chalk = require('chalk');
 const shell = require('shelljs');
 const debounce = require('lodash/debounce');
+const previewServer = require('./preview-server');
+
+const projectRoot = path.resolve(__dirname, '../../');
 
 const argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
@@ -190,15 +194,19 @@ function buildDev() {
     });
   });
 }
-
-let opened = false;
-
+let lrserver;
 const buildHtmlDev = debounce(() => {
   buildHtml(() => {
     console.log('html done!');
-    if (!opened) {
-      require('./preview-server');
-      opened = true;
+    const serverConfig = previewServer();
+
+    if (!lrserver) {
+      var livereload = require('livereload');
+      lrserver = livereload.createServer({
+        exts: ['html'],
+      });
+      lrserver.watch(projectRoot + "/dist/site");
     }
+
   }, false);
 }, 200);
