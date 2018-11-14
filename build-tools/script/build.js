@@ -77,12 +77,16 @@ function callWebpackWatch(config, callback) {
     }).catch(e => callback(e));
 }
 
-function displayWebpackStats(stats, exitOnError = true) {
+function displayWebpackStats(stats, dev) {
   if (Array.isArray(stats.stats)) {
-    stats.stats.forEach(s => displayWebpackStats(s, exitOnError));
+    stats.stats.forEach(s => displayWebpackStats(s, dev));
     return;
   }
-  if (stats.hasErrors() && exitOnError) {
+  if (dev) {
+    return;
+  }
+
+  if (stats.hasErrors() && !dev) {
     throw stats.toString({
       colors: true,
       modules: false,
@@ -172,6 +176,8 @@ function buildAll() {
   })
 }
 
+let count = 1;
+
 function buildDev() {
   cleanDist();
 
@@ -184,29 +190,35 @@ function buildDev() {
       if (err) {
         return console.log(err);
       }
-      displayWebpackStats(stats, false);
+      displayWebpackStats(stats, true);
 
-      console.log();
-      console.log('webpack code & partials done!');
-      console.log();
+      if (++count % 2 === 0) {
+        console.log();
+        console.log('webpack code & partials done!');
+        console.log();
 
-      buildHtmlDev();
+        buildHtmlDev();
+      }
     });
   });
 }
 let lrserver;
-const buildHtmlDev = debounce(() => {
-  buildHtml(() => {
-    console.log('html done!');
-    const serverConfig = previewServer();
+const buildHtmlDev = () => {
+  try {
+    buildHtml(() => {
+      console.log('html done!');
+      const serverConfig = previewServer();
 
-    if (!lrserver) {
-      var livereload = require('livereload');
-      lrserver = livereload.createServer({
-        exts: ['html'],
-      });
-      lrserver.watch(projectRoot + "/dist/site");
-    }
+      if (!lrserver) {
+        var livereload = require('livereload');
+        lrserver = livereload.createServer({
+          exts: ['html'],
+        });
+        lrserver.watch(projectRoot + "/dist/site");
+      }
 
-  }, false);
-}, 200);
+    }, false);
+  } catch (e) {
+    console.log('errrorrr');
+  }
+};
