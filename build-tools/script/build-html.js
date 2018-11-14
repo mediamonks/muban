@@ -9,8 +9,6 @@ const loadData = require('json-import-loader').loadData;
 const Handlebars = require('handlebars');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const recursive = require('recursive-readdir');
-// eslint-disable-next-line import/no-extraneous-dependencies
-const beautifyHtml = require('js-beautify').html;
 const config = require('../config');
 
 const projectRoot = path.resolve(__dirname, '../../');
@@ -50,13 +48,11 @@ module.exports = function(cb, cleanupAfter = true) {
 
           console.log(`Generating... ${page}.html`);
 
-          const templateResult = htmlTemplate({
+          let html = htmlTemplate({
             content,
             page,
             publicPath: config.dist.publicPath,
           });
-
-          let html = beautifyHtml(templateResult, { indent_size: 2 });
 
           html = inline(html, page);
 
@@ -86,21 +82,16 @@ function inline(html, page) {
   //   });
   // }
 
-  // this will inline css, when just checking filesize, you can comment this out so it will load them separately in devtools
-  let css = fs.readFileSync(path.resolve(projectRoot, 'dist/site/asset/common.css'), 'utf-8');
+  const commonCss = fs.readFileSync(path.resolve(projectRoot, 'dist/site/asset/common.css'), 'utf-8');
+  const pageCss = fs.readFileSync(path.resolve(projectRoot, `dist/site/asset/${page}.css`), 'utf-8');
+
+  // CSS needs tbe merged into one custom amp style tag
   html = html.replace(
-    '<link rel="stylesheet" href="/asset/common.css">',
-    `<style>
-  ${css}
-</style>`,
+    '<link rel="stylesheet" amp-custom>',
+    `<style amp-custom>
+    ${commonCss}${pageCss}
+  </style>`,
   );
 
-  css = fs.readFileSync(path.resolve(projectRoot, `dist/site/asset/${page}.css`), 'utf-8');
-  html = html.replace(
-    `<link rel="stylesheet" href="/asset/${page}.css">`,
-    `<style>
-  ${css}
-</style>`,
-  );
   return html;
 }
