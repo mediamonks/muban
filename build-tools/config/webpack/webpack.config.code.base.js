@@ -36,7 +36,7 @@ module.exports = merge(require('./webpack.config.base'), {
     ],
   },
   resolve: {
-    extensions: ['.hbs', '.yaml', '.json'],
+    extensions: ['.hbs', '.yaml', '.json', '.js'],
   },
   module: {
     rules: [
