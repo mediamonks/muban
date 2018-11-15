@@ -66,11 +66,8 @@ function getStyleRules(options) {
     },
     {
       test: /\.svg$/,
-      use: [
-        {
-          loader: 'svg-inline-loader',
-        },
-        {
+      oneOf: (() => {
+        const svgoLoaderConfig = {
           loader: 'svgo-loader',
           options: {
             plugins: [
@@ -78,16 +75,27 @@ function getStyleRules(options) {
               { removeComments: true },
               { removeDesc: true },
               { removeUselessDefs: true },
-              { removeTitle: true, },
-              { removeMetadata: true, },
-              { removeComments: true, },
+              { removeTitle: true },
+              { removeMetadata: true },
+              { removeComments: true },
               { cleanupIDs: { remove: true, prefix: '' } },
               { convertColors: { shorthex: false } },
             ],
           },
-        },
-      ],
+        };
+
+        return [
+          {
+            exclude: /svg[\/\\]icon/,
+            use: [{ loader: 'url-loader' }, svgoLoaderConfig],
+          },
+          {
+            use: [{ loader: 'svg-inline-loader' }, svgoLoaderConfig],
+          },
+        ];
+      })(),
     },
+
   ];
 
   if (options.development) {
