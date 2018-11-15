@@ -10,6 +10,7 @@ const Handlebars = require('handlebars');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const recursive = require('recursive-readdir');
 const config = require('../config');
+const ampComponentMap = require('./amp-component-map');
 
 const projectRoot = path.resolve(__dirname, '../../');
 
@@ -58,9 +59,26 @@ module.exports = function(cb, cleanupAfter = true) {
             link: `${page}.html`,
           });
 
+          const ampComponents = {};
+
+          data.blocks.forEach(({ data }) => {
+            if (data && data.ampComponents) {
+              data.ampComponents.forEach(ampComponent => {
+                if (!ampComponents[ampComponent]) {
+                  if (!ampComponentMap[ampComponent])
+                    throw new Error(
+                      `Unknown AMP component (${ampComponent}), please add it to the amp-component-map.js first.`,
+                    );
+                  ampComponents[ampComponent] = ampComponentMap[ampComponent];
+                }
+              });
+            }
+          });
+
           let html = htmlTemplate({
             content,
             page,
+            ampComponents,
             publicPath: config.dist.publicPath,
           });
 
@@ -109,7 +127,7 @@ module.exports = function(cb, cleanupAfter = true) {
 
         const categories = Object.keys(categoryMap).map(key => ({
           name: key,
-          pages: categoryMap[key]
+          pages: categoryMap[key],
         }));
 
         // render list overview page
@@ -118,7 +136,11 @@ module.exports = function(cb, cleanupAfter = true) {
           pages,
           categories,
           showCategories: categories.length > 1,
-          date: `${getLeadingZero(date.getDate())}-${getLeadingZero(date.getMonth() + 1)}-${date.getFullYear()} ${getLeadingZero(date.getHours())}:${getLeadingZero(date.getMinutes())}`
+          date: `${getLeadingZero(date.getDate())}-${getLeadingZero(
+            date.getMonth() + 1,
+          )}-${date.getFullYear()} ${getLeadingZero(date.getHours())}:${getLeadingZero(
+            date.getMinutes(),
+          )}`,
         });
         let indexResult = htmlTemplate({
           content,
@@ -126,7 +148,10 @@ module.exports = function(cb, cleanupAfter = true) {
         });
 
         indexResult = indexResult
-          .replace('<link rel="stylesheet" amp-custom>', '<link rel="stylesheet" href="asset/preview.css">\n\t<link rel="stylesheet" href="asset/common.css">')
+          .replace(
+            '<link rel="stylesheet" amp-custom>',
+            '<link rel="stylesheet" href="asset/preview.css">\n\t<link rel="stylesheet" href="asset/common.css">',
+          )
           .replace(/<html(.*)>/gi, '<html$1 class="index">');
 
         fs.writeFileSync(path.resolve(config.buildPath, 'index.html'), indexResult, 'utf-8');
@@ -155,8 +180,14 @@ function inline(html, page) {
   //   });
   // }
 
-  const commonCss = fs.readFileSync(path.resolve(projectRoot, 'dist/site/asset/common.css'), 'utf-8');
-  const pageCss = fs.readFileSync(path.resolve(projectRoot, `dist/site/asset/${page}.css`), 'utf-8');
+  const commonCss = fs.readFileSync(
+    path.resolve(projectRoot, 'dist/site/asset/common.css'),
+    'utf-8',
+  );
+  const pageCss = fs.readFileSync(
+    path.resolve(projectRoot, `dist/site/asset/${page}.css`),
+    'utf-8',
+  );
 
   // CSS needs tbe merged into one custom amp style tag
   html = html.replace(

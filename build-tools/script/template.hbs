@@ -15,6 +15,9 @@
   <link rel="stylesheet" amp-custom>
 
   <script async src="https://cdn.ampproject.org/v0.js"></script>
+  {{#each ampComponents}}
+  <script async custom-{{type}}="{{@key}}" src="https://cdn.ampproject.org/v0/{{@key}}-{{version}}.js"></script>
+  {{/each}}
 </head>
 <body>
   <div id="app">
