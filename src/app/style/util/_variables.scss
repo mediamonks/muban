@@ -2,13 +2,13 @@
 $pathAsset: '~app';
 
 // Fonts
-$fontArial: Arial, sans-serif;
+$baseFont: Arial, sans-serif;
 
 // Z-Index
-$zLayout: default;
+$zIndex: default, middle, top;
 
-// Sizes
-$wrapperWidth: 960px;
+// Colors
+$colorPrimaryTheme: #ff6e3f;
 
 // Media queries
 $mediaQueries: (SMALL : '(max-width: 767px)');
