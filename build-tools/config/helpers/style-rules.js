@@ -31,6 +31,7 @@ function getStyleRules(options) {
         sourceMap: true,
         data: '@import "~seng-scss"; @import "src/app/style/global";',
         importer: jsonImporter,
+        includePaths: ['src/app/style'],
       }
     }
   ];

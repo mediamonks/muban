@@ -54,7 +54,6 @@
   "dependencies": {
     "@types/knockout": "^3.4.46",
     "babel-polyfill": "^6.23.0",
-    "breakpoint-sass": "^2.7.1",
     "highlight.js": "^9.12.0",
     "html-extract-data": "^1.0.1",
     "jquery": "^3.2.1",

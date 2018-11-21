@@ -1,17 +1,17 @@
 /* global process */
 
-import DeviceStateTracker, { DeviceStateEvent } from 'seng-device-state-tracker';
-import { DeviceState } from '../data/enum/DeviceState';
-import mediaQueries from '../data/variables/media-queries.json';
+import DeviceStateTracker from 'seng-device-state-tracker';
+import mq from '../data/variable/media-queries.json';
+
+const cleanMediaQueries = Object.keys(mq.mediaQueries).reduce((result, key) => {
+  // eslint-disable-next-line no-param-reassign
+  result[key] = mq.mediaQueries[key].replace(/'/g, '');
+  return result;
+}, {});
 
 const deviceStateTracker: DeviceStateTracker = new DeviceStateTracker({
-  mediaQueries: {
-    MEDIUM: mediaQueries['breakpoint-medium'],
-    LARGE: mediaQueries['breakpoint-large'],
-    X_LARGE: mediaQueries['breakpoint-xlarge'],
-    XX_LARGE: mediaQueries['breakpoint-xxlarge'],
-  },
-  deviceState: DeviceState,
+  deviceState: mq.deviceState,
+  mediaQueries: cleanMediaQueries,
   showStateIndicator: process.env.NODE_ENV === 'development',
 });
 
