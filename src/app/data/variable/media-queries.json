@@ -1,13 +1,17 @@
 {
-  "comments": ["'NOTE: The below can be a start, change according to your ux/project'", "'Only add key to deviceState that are used in the DeviceStateTracker'", "'Please mind the quotes: https://github.com/Updater/node-sass-json-importer#importing-strings'"],
+  "comments": [
+    "'NOTE: The below can be a start, change according to your ux/project'",
+    "'Only add key to deviceState that are used in the DeviceStateTracker'",
+    "'Please mind the quotes: https://github.com/Updater/node-sass-json-importer#importing-strings'"
+  ],
   "mediaQueries": {
-    "XSMALL": "(max-width: 479px)",
-    "SMALL": "(min-width: 480px)",
-    "MEDIUM": "(min-width: 768px)",
-    "LARGE": "(min-width: 1024px)",
-    "XLARGE": "(min-width: 1280px)",
-    "XXLARGE": "(min-width: 1440px)",
-    "XXXLARGE": "(min-width: 1680px)"
+    "XSMALL": "'(max-width: 479px)'",
+    "SMALL": "'(min-width: 480px)'",
+    "MEDIUM": "'(min-width: 768px)'",
+    "LARGE": "'(min-width: 1024px)'",
+    "XLARGE": "'(min-width: 1280px)'",
+    "XXLARGE": "'(min-width: 1440px)'",
+    "XXXLARGE": "'(min-width: 1680px)'"
   },
   "deviceState": {
     "XSMALL": 0,
