@@ -28,7 +28,7 @@ the build output.
 
 After cloning this repos and removing the `.git` folder, run:
 
-```
+```sh
 yarn
 ```
 
@@ -38,7 +38,7 @@ The most basic settings can be found and changed in `build-tools/config/index.js
 
 ### Development
 
-```
+```sh
 yarn dev
 ```
 
@@ -49,7 +49,7 @@ Open your browser at [http://localhost:9000](http://localhost:9000).
 When using server-generated html instead of the handlebars templates, you can use the following
 command to just compile the `js` and `css` bundles (incl other assets).
 
-```
+```sh
 yarn dev:code
 ```
 
@@ -61,13 +61,13 @@ The files will be outputted/updated in the same folder as the normal build is do
 With seng-generator you're able to create pages, blocks and components with the CLI. The
 seng-generator needs to be installed globally.
 
-```
+```sh
 yarn add -g seng-generator
 ```
 
 The easiest way to use it is by using the wizard
 
-```
+```sh
 sg wizard
 ```
 
@@ -82,7 +82,7 @@ Muban uses multiple code quality tools like linters and formatters. Please read 
 
 ## Build
 
-```
+```sh
 yarn build
 ```
 
@@ -90,23 +90,34 @@ The code is outputted in `/dist`.
 
 To preview the build in the browser, run:
 
-```
+```sh
 yarn preview
 ```
 
 To analyze the created bundle, run:
 
-```
+```sh
 yarn analyze
 ```
 
 Using the build script, you can also run some parts of the process separately:
 
-```
+```sh
 yarn build code      # or yarn compile:code
 yarn build partials  # or yarn compile:partials
 yarn build html      # or yarn compile:html
 ```
+
+### Diff
+
+If you want to generate a report on what has changed in the handlebars templates,
+you can generate a diff report between two git commits (default to `master` and `HEAD`).
+
+```sh
+yarn build:diff
+```
+
+It will generate a file in `dist/diff/templates.html` with a proper formatted diff.
 
 ## Files and folders
 
