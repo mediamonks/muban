@@ -74,7 +74,7 @@ inquirer.prompt(questions).then(answers => {
     {
       from,
       to,
-      ext: EXT
+      ext: `src/**/${EXT}`
     },
     // `-M ${from} ${to} -- ${EXT}`,
     path.resolve(addRootDir.get(), OUTPUT_DIR, REPORT_NAME),
