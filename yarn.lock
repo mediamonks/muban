@@ -4833,6 +4833,12 @@ is-nil-x@^1.4.1:
     lodash.isnull "^3.0.0"
     validate.io-undefined "^1.0.3"
 
+is-npm-not-yarn@^2.0.3:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/is-npm-not-yarn/-/is-npm-not-yarn-2.0.4.tgz#cdf64c89cbfd564ad949808382723177a109ec39"
+  dependencies:
+    slash "^1.0.0"
+
 is-number@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-2.1.0.tgz#01fcbbb393463a548f2f466cce16dece49db908f"
@@ -9687,6 +9693,13 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-yarn@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/use-yarn/-/use-yarn-2.2.0.tgz#355da1edf17acc56d7b243fcaa817bd92fd0be4a"
+  dependencies:
+    is-npm-not-yarn "^2.0.3"
+    minimist "^1.2.0"
 
 use@^2.0.0:
   version "2.0.2"
