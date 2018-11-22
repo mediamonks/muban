@@ -32,6 +32,19 @@ After cloning this repos and removing the `.git` folder, run:
 yarn
 ```
 
+This boilerplate comes with some sample pages, blocks and components.
+If you don't need them in your project, you can remove them all with a simple command:
+
+```sh
+yarn clean:boilerplate
+```
+
+You can also remove the storybook config, source and preset files if you don't need it:
+
+```sh
+yarn clean:storybook
+```
+
 ### Config
 
 The most basic settings can be found and changed in `build-tools/config/index.js`.
