@@ -1,5 +1,6 @@
 const { exec } = require('child_process');
 const path = require('path');
+const chalk = require('chalk');
 const { mkdirsSync } = require('fs-extra');
 const inquirer = require('inquirer');
 const addRootDir = require('app-root-dir');
@@ -15,7 +16,7 @@ const questions = [
     type: 'list',
     name: 'from',
     message:
-      'The script will generate diff reports for handlebars templates.\n What do you want to use as a first part of comparison?',
+      `The script will generate diff reports for handlebars templates.\n What do you want to use as a first part of comparison, your ${chalk.yellow('previous')} version ?`,
     choices: [
       {
         name: 'Master branch',
@@ -37,7 +38,7 @@ const questions = [
   {
     type: 'list',
     name: 'to',
-    message: 'What do you want to use as a second part of comparison?',
+    message: `What do you want to use as a second part of comparison, your ${chalk.yellow('current')} version ?`,
     choices: [
       {
         name: 'Branch HEAD',
@@ -78,4 +79,7 @@ inquirer.prompt(questions).then(answers => {
     // `-M ${from} ${to} -- ${EXT}`,
     path.resolve(addRootDir.get(), OUTPUT_DIR, REPORT_NAME),
   );
+  console.log('');
+  console.log(`Diff output generated at ${chalk.blue(path.resolve(addRootDir.get(), OUTPUT_DIR, REPORT_NAME))}`);
+  console.log('');
 });
