@@ -1,15 +1,16 @@
 const shell = require('shelljs');
 const path = require('path');
+const fs = require('fs');
 
 const projectRoot = path.resolve(__dirname, '../../');
 
 const argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
   .command(['$0', 'boilerplate'], 'Clean boilerplate files', () => {}, (argv) => {
-    clean();
-    if (argv.storybook) {
-      cleanStorybook();
-    }
+      clean();
+      if (argv.storybook) {
+        cleanStorybook();
+      }
   })
   .command(['storybook'], 'Clean storybook files', () => {}, (argv) => {
       cleanStorybook();
@@ -44,7 +45,6 @@ function clean() {
 
     // components
     path.join(projectRoot, 'src/app/component/general/button'),
-
   ]);
 }
 
@@ -68,4 +68,11 @@ function cleanStorybook() {
     // storybook
     path.join(projectRoot, 'src/storybook'),
   ]);
+
+  const packagePath = path.resolve(projectRoot, 'package.json');
+  fs.writeFileSync(
+    packagePath,
+    fs.readFileSync(packagePath, { encoding: 'utf8' }).replace(/(^.*storybook.*[\r\n]*)/gim, ''),
+    { encoding: 'utf8' },
+  );
 }
