@@ -62,7 +62,7 @@
     "modernizr": "^3.3.1",
     "modernizr-loader": "^1.0.1",
     "muban-convert-hbs": "^1.1.1",
-    "muban-core": "^1.9.3",
+    "muban-core": "^1.10.0",
     "normalize.css": "^7.0.0",
     "qs": "^6.5.1",
     "seng-scss": "^1.0.0"
