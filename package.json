@@ -1,6 +1,6 @@
 {
   "name": "muban",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server --config build-tools/config/webpack/webpack.config.js",
@@ -15,6 +15,8 @@
     "storybook:build": "node ./build-tools/script/build storybook",
     "storybook:preview": "http-server ./dist/storybook --p 9003 -s -o",
     "clean": "npm run build clean",
+    "clean:boilerplate": "node ./build-tools/script/cleanup",
+    "clean:storybook": "node ./build-tools/script/cleanup storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src --ext .js --cache",
@@ -128,7 +130,7 @@
     "recursive-readdir": "^2.1.1",
     "sass-loader": "^6.0.2",
     "sassify-webpack-plugin": "^1.0.17",
-    "shelljs": "^0.7.8",
+    "shelljs": "^0.8.3",
     "shx": "^0.2.2",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.0",

@@ -3,7 +3,10 @@ const ora = require('ora');
 const webpack = require('webpack');
 const webpackConfigCode = require('../config/webpack/webpack.config.code.dist');
 const webpackConfigPartials = require('../config/webpack/webpack.config.partials');
-const webpackConfigStorybook = require('../config/storybook/webpack.config.dist');
+let webpackConfigStorybook;
+try {
+  webpackConfigStorybook = require('../config/storybook/webpack.config.dist');
+} catch (e) {}
 const buildHtml = require('./build-html');
 const fs = require('fs-extra');
 const chalk = require('chalk');
@@ -114,19 +117,23 @@ function buildPartials(cb) {
 function buildStorybook(cb) {
   const spinner = ora('Starting storybook build...');
   spinner.start();
-  callWebpack(webpackConfigStorybook, (err, stats) => {
-    if (err) {
-      spinner.fail('Storybook build failed');
-      throw err;
-    }
-    displayWebpackStats(stats);
+  if (webpackConfigStorybook) {
+    callWebpack(webpackConfigStorybook, (err, stats) => {
+      if (err) {
+        spinner.fail('Storybook build failed');
+        throw err;
+      }
+      displayWebpackStats(stats);
 
-    console.log();
-    spinner.succeed('Storybook build done!');
-    console.log();
+      console.log();
+      spinner.succeed('Storybook build done!');
+      console.log();
 
-    cb && cb(null);
-  })
+      cb && cb(null);
+    })
+  } else {
+    console.log('No storybook present in this project');
+  }
 }
 
 function buildHTML(cb) {

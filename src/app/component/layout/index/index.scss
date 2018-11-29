@@ -109,6 +109,16 @@ $colorDone: #0eb415;
     font-size: 1.2rem;
   }
 
+  .no-pages {
+    p {
+      padding: 10px 0;
+    }
+
+    code {
+      color: dodgerblue;
+    }
+  }
+
   .page {
     position: relative;
     left: -12px;
