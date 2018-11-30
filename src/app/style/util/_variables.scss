@@ -10,5 +10,4 @@ $zLayout: default;
 // Colors
 $colorPrimaryTheme: #ff6e3f;
 
-// Media queries
-$mediaQueries: (SMALL : '(max-width: 767px)');
+@import '../../data/shared-variable/media-queries.json';

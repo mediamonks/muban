@@ -5004,6 +5004,10 @@ is-tar@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-tar/-/is-tar-1.0.0.tgz#2f6b2e1792c1f5bb36519acaa9d65c0d26fe853d"
 
+is-there@^4.0.0:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/is-there/-/is-there-4.4.3.tgz#a2c49366c6a487f719dbcad80cbde21248d2c18d"
+
 is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
@@ -5211,7 +5215,7 @@ json3@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
 
-json5@^0.5.0, json5@^0.5.1:
+json5@0.5.1, json5@^0.5.0, json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
@@ -5627,7 +5631,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@3.x:
+lodash@3.x, lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
@@ -6240,6 +6244,14 @@ node-pre-gyp@^0.6.39:
     semver "^5.3.0"
     tar "^2.2.1"
     tar-pack "^3.4.0"
+
+node-sass-json-importer@^3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/node-sass-json-importer/-/node-sass-json-importer-3.1.6.tgz#88fdc6c00934d248430d94fb2cafe93b21ef1cdb"
+  dependencies:
+    is-there "^4.0.0"
+    json5 "0.5.1"
+    lodash "^3.10.1"
 
 node-sass@^4.5.0:
   version "4.7.2"
@@ -8132,10 +8144,24 @@ send@0.16.1:
     range-parser "~1.2.0"
     statuses "~1.3.1"
 
+seng-device-state-tracker@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/seng-device-state-tracker/-/seng-device-state-tracker-1.1.4.tgz#1616aff9ea48a7e5bf770abac6f180262de1d0b3"
+  dependencies:
+    seng-event "^1.2.3"
+    tslib "^1.8.0"
+
 seng-disposable@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/seng-disposable/-/seng-disposable-1.1.3.tgz#b8aeb960f17f136107ac6ca1923e8d2ca5fbb630"
   dependencies:
+    tslib "^1.2.0"
+
+seng-event@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/seng-event/-/seng-event-1.2.3.tgz#073ae3fa5e9d49677361a3dc97da752285b6467d"
+  dependencies:
+    seng-disposable "^1.1.3"
     tslib "^1.2.0"
 
 seng-scss@^1.0.0:
