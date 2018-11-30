@@ -31,8 +31,13 @@ const versionPath = 'version/' + new Date().getTime() + '/'; // TODO
 const staticPath = path.join(projectRoot, 'src/static');
 const distPath = path.join(projectRoot, 'dist');
 
+let storyBookConfig = {};
+try {
+  storyBookConfig = require('../../src/storybook/config');
+} catch (e) {}
+
 module.exports = Object.assign({},
-  require('../../src/storybook/config'),
+  storyBookConfig,
   {
     dist: {
       env: {

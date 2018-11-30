@@ -11,5 +11,19 @@
         {{/each}}
       </ul>
     </li>
+  {{else}}
+    <li class="no-pages">
+      <p>You currently don't have any pages.</p>
+      <p>
+        You can use seng-generator to create an new page:<br />
+        <code>sg page foo -v blocks=header,footer</code>
+      </p>
+      <p>Or create a <code>page.yaml</code> yourself in <code>/src/data/</code>.</p>
+
+      <p>
+        Blocks can be added by running:<br />
+        <code>sg block BlockName</code>
+      </p>
+    </li>
   {{/each}}
 </ul>
