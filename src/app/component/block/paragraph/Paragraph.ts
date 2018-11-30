@@ -3,8 +3,8 @@ import AbstractBlock from '../AbstractBlock';
 export default class Paragraph extends AbstractBlock {
   static displayName: string = 'paragraph';
 
-  private btn: HTMLButtonElement;
-  private contentMore: HTMLParagraphElement;
+  private btn: HTMLButtonElement | null;
+  private contentMore: HTMLParagraphElement | undefined;
 
   constructor(el: HTMLElement) {
     super(el);
@@ -18,12 +18,12 @@ export default class Paragraph extends AbstractBlock {
   }
 
   private onButtonClick = () => {
-    this.contentMore.classList.toggle('hidden');
+    this.contentMore!.classList.toggle('hidden');
 
-    if (this.contentMore.classList.contains('hidden')) {
-      this.btn.textContent = 'read more...';
+    if (this.contentMore!.classList.contains('hidden')) {
+      this.btn!.textContent = 'read more...';
     } else {
-      this.btn.textContent = 'read less...';
+      this.btn!.textContent = 'read less...';
     }
   };
 

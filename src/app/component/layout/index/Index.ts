@@ -11,8 +11,10 @@ export default class App extends AbstractComponent {
     this.getElements('sup').forEach(sup => {
       sup.addEventListener('click', event => {
         const page = (<HTMLElement>event.currentTarget).closest('.page');
-        page.classList.toggle('show-blocks');
-        this.updateBlocksButton();
+        if (page) {
+          page.classList.toggle('show-blocks');
+          this.updateBlocksButton();
+        }
       });
     });
 

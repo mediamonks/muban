@@ -17,7 +17,11 @@ const dataContext = require.context('../data/', true, /\.(yaml|json)$/);
 const partialsContext = require.context('./component/', true, /\.hbs$/);
 
 // bootstrap the app
-const app = bootstrap(document.getElementById('app'), <any>{
+const appElement = document.getElementById('app');
+if (!appElement) {
+  throw new ReferenceError('Could not find DOM element with id "app"');
+}
+const app = bootstrap(appElement, <any>{
   Handlebars,
   dataContext,
   partialsContext,
