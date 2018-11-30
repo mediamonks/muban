@@ -17,6 +17,7 @@
     "./src/**/*"
   ],
   "exclude": [
+    "./build-tools/config/storybook/config.js",
     "./src/storybook/**/*"
   ]
 }
