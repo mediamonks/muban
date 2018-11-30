@@ -9,3 +9,7 @@ declare const process: {
     NODE_ENV: 'production' | 'development';
   };
 };
+
+interface Window {
+  webpackPublicPath: string;
+}
