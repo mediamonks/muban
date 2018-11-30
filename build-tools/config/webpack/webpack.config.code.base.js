@@ -80,7 +80,7 @@ module.exports = merge(require('./webpack.config.base'), {
       //   },
       // },
       // CONVERT HBS TEMPLATES
-      (config.convertTemplates.convertTo ? {
+      (config.convertTemplates && config.convertTemplates.convertTo ? {
         // convert hbs to htl templates
         context: path.resolve(projectRoot, 'src/app/component'),
         from: '**/*.hbs',

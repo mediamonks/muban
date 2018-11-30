@@ -4833,6 +4833,12 @@ is-nil-x@^1.4.1:
     lodash.isnull "^3.0.0"
     validate.io-undefined "^1.0.3"
 
+is-npm-not-yarn@^2.0.3:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/is-npm-not-yarn/-/is-npm-not-yarn-2.0.4.tgz#cdf64c89cbfd564ad949808382723177a109ec39"
+  dependencies:
+    slash "^1.0.0"
+
 is-number@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-2.1.0.tgz#01fcbbb393463a548f2f466cce16dece49db908f"
@@ -6065,9 +6071,10 @@ muban-convert-hbs@^1.1.1:
     "@babel/runtime" "^7.0.0-beta.35"
     handlebars "^4.0.11"
 
-muban-core@^1.9.3:
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.9.3.tgz#85f0ac5aaa09458ff919f305dffb5fb051a23283"
+muban-core@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.10.0.tgz#3e42e3ae7efc535fb068071753ddc4822bbee2ea"
+  integrity sha512-ujg3SzzMMBNgOv46+mmNYNEfQG2IuBgxpDTfiB9tMqKaYvjesPQTS/aKYCfmyCWVCq64P2qGLR9oFH+sappUQA==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"
@@ -8249,9 +8256,17 @@ shell-quote@^1.6.1:
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
 
-shelljs@^0.7.3, shelljs@^0.7.7, shelljs@^0.7.8:
+shelljs@^0.7.3, shelljs@^0.7.7:
   version "0.7.8"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.8.tgz#decbcf874b0d1e5fb72e14b164a9683048e9acb3"
+  dependencies:
+    glob "^7.0.0"
+    interpret "^1.0.0"
+    rechoir "^0.6.2"
+
+shelljs@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.3.tgz#a7f3319520ebf09ee81275b2368adb286659b097"
   dependencies:
     glob "^7.0.0"
     interpret "^1.0.0"
@@ -9713,6 +9728,13 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-yarn@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/use-yarn/-/use-yarn-2.2.0.tgz#355da1edf17acc56d7b243fcaa817bd92fd0be4a"
+  dependencies:
+    is-npm-not-yarn "^2.0.3"
+    minimist "^1.2.0"
 
 use@^2.0.0:
   version "2.0.2"

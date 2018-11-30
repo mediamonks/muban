@@ -1,6 +1,6 @@
 {
   "name": "muban",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server --config build-tools/config/webpack/webpack.config.js",
@@ -15,6 +15,8 @@
     "storybook:build": "node ./build-tools/script/build storybook",
     "storybook:preview": "http-server ./dist/storybook --p 9003 -s -o",
     "clean": "npm run build clean",
+    "clean:boilerplate": "node ./build-tools/script/cleanup",
+    "clean:storybook": "node ./build-tools/script/cleanup storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src --ext .js --cache",
@@ -22,7 +24,8 @@
     "lint:css": "stylelint src/**/*.scss --cache",
     "analyze": "webpack-bundle-analyzer dist/bundlesize-profile.json ./dist/site",
     "prettify": "prettier --write \"src/**/*.{js,ts,scss,json}\"",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "preinstall": "npx use-yarn -m 'Please use yarn!'"
   },
   "lint-staged": {
     "linters": {
@@ -62,7 +65,7 @@
     "modernizr": "^3.3.1",
     "modernizr-loader": "^1.0.1",
     "muban-convert-hbs": "^1.1.1",
-    "muban-core": "^1.9.3",
+    "muban-core": "^1.10.0",
     "normalize.css": "^7.0.0",
     "qs": "^6.5.1",
     "seng-device-state-tracker": "^1.1.4",
@@ -129,7 +132,7 @@
     "recursive-readdir": "^2.1.1",
     "sass-loader": "^6.0.2",
     "sassify-webpack-plugin": "^1.0.17",
-    "shelljs": "^0.7.8",
+    "shelljs": "^0.8.3",
     "shx": "^0.2.2",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.0",
@@ -148,6 +151,7 @@
     "typescript": "^2.2.1",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "url-loader": "^0.6.2",
+    "use-yarn": "^2.2.0",
     "webpack": "^3.8.1",
     "webpack-babel-env-deps": "^1.4.3",
     "webpack-bundle-analyzer": "^2.9.0",
