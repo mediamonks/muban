@@ -50,6 +50,7 @@ const webpackConfig = {
   module: {
     rules: [
       {
+        type: 'javascript/auto',
         test: /\.modernizrrc$/,
         use: [
           { loader: "modernizr-loader" },
@@ -58,6 +59,7 @@ const webpackConfig = {
       },
       {
         test: /\.json$/,
+        type: 'javascript/auto',
         use: [
           { loader: "json-import-loader" },
           { loader: "json-loader" }
@@ -74,11 +76,8 @@ const webpackConfig = {
     ]
   },
   plugins: [
-    // Friendly webpack errors
-    new FriendlyErrorsWebpackPlugin(),
-
     // prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
+    // new webpack.NamedModulesPlugin(),
   ],
   node: {
     fs: 'empty'

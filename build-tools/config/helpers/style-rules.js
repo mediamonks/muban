@@ -1,5 +1,5 @@
 const path = require("path");
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const jsonImporter = require('node-sass-json-importer');
 
 const projectRoot = path.resolve(__dirname, '../../../');
@@ -30,7 +30,7 @@ function getStyleRules(options) {
       options: {
         sourceMap: true,
         data: '@import "~seng-scss"; @import "src/app/style/global";',
-        importer: jsonImporter,
+        importer: jsonImporter(),
         includePaths: ['src/app/style'],
       }
     }
@@ -128,20 +128,22 @@ function getStyleRules(options) {
       }],
     });
   } else {
+    cssRules.unshift(MiniCssExtractPlugin.loader);
     // dust uses single ExtractTextPlugin loader
     styleRules.unshift({
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract(cssRules),
+      loader: cssRules,
     });
     styleRules.unshift({
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract([{
-        loader: 'css-loader',
-        options: {
-          sourceMap: true,
-          minimize: !options.development,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+          }
         },
-      }]),
+        "css-loader"
+      ]
     });
   }
 

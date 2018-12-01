@@ -20,11 +20,22 @@ webpackConfig = merge(require('./webpack.config.code.base'), {
       getTSLintLoader(config.dev.enableTSLintLoader),
     ]
   },
+  optimization: {
+    concatenateModules: true,
+    minimize: false,
+    splitChunks: {
+      chunks: 'all'
+    },
+    runtimeChunk: true
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env,
     }),
     getStyleLintPlugin(config.dev.enableStyleLintPlugin),
+
+    // Friendly webpack errors
+    new FriendlyErrorsWebpackPlugin(),
   ].filter(_ => _),
   devtool: 'eval-source-map'
 });

@@ -9,6 +9,7 @@ const config = require('../index');
 const projectRoot = path.resolve(__dirname, '../../../');
 
 module.exports = merge(require('./webpack.config.base'), {
+  mode: 'production',
   entry: {
     partials: [
       './src/app/partials.js',

@@ -19,18 +19,32 @@ const {
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
-const webpackConfig = merge(require('./webpack.config.code.base'), {
+const webpackConfig = merge(require('./webpack.config.code.base')[0], {
   module: {
     rules: [
       getESLintLoader(config.dist.enableESLintLoader),
       getTSLintLoader(config.dist.enableTSLintLoader),
     ]
   },
+  optimization: {
+    concatenateModules: true,
+    minimize: false,
+    // splitChunks: {
+    //   chunks: 'all',
+    //   cacheGroups: {
+    //     commons: {
+    //       test: /[\\/]node_modules[\\/]/,
+    //       name: "common",
+    //       enforce: true,
+    //     },
+    //   },
+    // },
+    runtimeChunk: false
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dist.env,
     }),
-    new UglifyJSPlugin(),
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: true,
@@ -55,11 +69,11 @@ const webpackConfig = merge(require('./webpack.config.code.base'), {
 });
 
 const configPromise = new Promise(function(resolve, reject) {
-  if (config.standaloneOutput) {
-    addStandalone(webpackConfig, resolve);
-  } else {
-    resolve(webpackConfig);
-  }
+  // if (config.standaloneOutput) {
+  //   addStandalone(webpackConfigs, resolve);
+  // } else {
+    resolve([webpackConfig, require('./webpack.config.code.base')[1]]);
+  // }
 });
 
 module.exports = configPromise;

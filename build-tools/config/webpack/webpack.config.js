@@ -21,6 +21,7 @@ const projectRoot = path.resolve(__dirname, '../../../');
 const port = process.env.PORT || config.dev.port;
 
 module.exports = merge(require('./webpack.config.base'), {
+  mode: 'development',
   entry: {
     main: [
       './src/app/polyfills.js',
@@ -33,9 +34,15 @@ module.exports = merge(require('./webpack.config.base'), {
   resolve: {
     extensions: ['.hbs', '.ts', '.js', '.yaml', '.json'],
   },
+  optimization: {
+    noEmitOnErrors: true,
+  },
   plugins: [
     // enable HMR globally
     new webpack.HotModuleReplacementPlugin(),
+
+    // Friendly webpack errors
+    new FriendlyErrorsWebpackPlugin(),
 
     new webpack.DefinePlugin({
       'process.env': config.dev.env,

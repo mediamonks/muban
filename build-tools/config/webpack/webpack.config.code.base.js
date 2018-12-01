@@ -4,7 +4,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('../index');
 const convert = require('muban-convert-hbs').default;
@@ -27,19 +27,24 @@ function cleanupTemplate(template) {
   return template;
 }
 
-module.exports = merge(require('./webpack.config.base'), {
+const wpConfig = merge(require('./webpack.config.base'), {
+  mode: 'production',
   entry: {
-    common: [
-      './src/app/polyfills.js',
+    // common: [
+    // ],
+    bundle: [
       'modernizr',
       './src/app/component/layout/app/app.hbs',
-    ],
-    bundle: [
+      './src/app/polyfills.js',
       './src/app/bootstrap.dist.ts',
     ],
-    preview: [
-      './src/app/component/layout/index/index.hbs',
-    ],
+    // preview: [
+    //   './src/app/component/layout/index/index.hbs',
+    //   'modernizr',
+    //   './src/app/component/layout/app/app.hbs',
+    //   './src/app/polyfills.js',
+    //   './src/app/bootstrap.dist.ts',
+    // ],
   },
   resolve: {
     extensions: ['.hbs', '.ts', '.js', '.yaml', '.json'],
@@ -116,16 +121,25 @@ module.exports = merge(require('./webpack.config.base'), {
         to: path.resolve(config.distPath),
       },
     ].filter(_ => _)),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-
-      minChunks: function(module){
-        return module.context && module.context.indexOf("node_modules") !== -1;
-      }
-    }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'asset/[name].css',
       allChunks : true,
     }),
   ]
 });
+
+const previewConfig = merge(wpConfig, {
+  entry: {
+    preview: [
+      './src/app/component/layout/index/index.hbs',
+      'modernizr',
+      './src/app/component/layout/app/app.hbs',
+      './src/app/polyfills.js',
+      './src/app/bootstrap.dist.ts',
+    ],
+  },
+});
+
+delete previewConfig.entry.bundle;
+
+module.exports = [wpConfig, previewConfig];

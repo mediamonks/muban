@@ -1,6 +1,6 @@
 const path = require("path");
 const { getBabelLoaderConfig } = require('./babel');
-const { include } = require('webpack-babel-env-deps');
+// const { include } = require('webpack-babel-env-deps');
 
 function getCodeRules() {
   return [
@@ -9,7 +9,7 @@ function getCodeRules() {
       include: [
         /src[\/\\]app/,
         /src[\/\\]storybook/,
-        include(),
+        // include(),
       ],
       use: [
         {

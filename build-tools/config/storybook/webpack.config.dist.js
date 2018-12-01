@@ -19,6 +19,7 @@ const projectRoot = path.resolve(__dirname, '../../../');
 const port = process.env.PORT || config.storybook.port;
 
 module.exports = merge(require('./webpack.config.base'), {
+  mode: 'production',
   output: {
     path: config.storybook.buildPath,
     publicPath: config.storybook.publicPath,

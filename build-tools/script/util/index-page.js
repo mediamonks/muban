@@ -87,11 +87,11 @@ function renderIndex(indexTemplate, htmlTemplate) {
   indexResult = indexResult
     .replace(
       '<link rel="stylesheet" href="asset/bundle.css">',
-      '<link rel="stylesheet" href="asset/preview.css">\n\t<link rel="stylesheet" href="asset/bundle.css">',
+      '<link rel="stylesheet" href="asset/preview.css">',
     )
     .replace(
       '<script src="asset/bundle.js"></script>',
-      '<script src="asset/preview.js"></script>\n\t<script src="asset/bundle.js"></script>',
+      '<script src="asset/preview.js"></script>',
     );
 
   fs.writeFileSync(path.resolve(config.buildPath, 'index.html'), indexResult, 'utf-8');

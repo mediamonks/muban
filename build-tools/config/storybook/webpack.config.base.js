@@ -19,6 +19,7 @@ const projectRoot = path.resolve(__dirname, '../../../');
 const port = process.env.PORT || config.storybook.port;
 
 module.exports = merge(require('../webpack/webpack.config.base'), {
+  mode: 'development',
   entry: {
     storybook: [
       './src/app/polyfills.js',
@@ -64,6 +65,11 @@ module.exports = merge(require('../webpack/webpack.config.base'), {
         enforce: 'pre',
         loader: 'source-map-loader'
       },
+      // {
+      //   type: 'javascript/auto',
+      //   test: /\.json$/,
+      //   loader: 'json-loader'
+      // },
     ]
   },
   plugins: [
