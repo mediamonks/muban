@@ -109,6 +109,25 @@ $colorDone: #0eb415;
     font-size: 1.2rem;
   }
 
+  .id {
+    position: absolute;
+    right: calc(100% + 12px);
+    text-align: right;
+    white-space: nowrap;
+    font-size: 1rem;
+    font-variant: small-caps;
+  }
+
+  .blocks {
+    display: none;
+    font-size: 1.2rem;
+    margin: 3px 15px;
+
+    li {
+      margin: 2px 0;
+    }
+  }
+
   .no-pages {
     p {
       padding: 10px 0;
@@ -152,15 +171,6 @@ $colorDone: #0eb415;
         display: block;
       }
     }
-  }
-
-  .id {
-    position: absolute;
-    right: calc(100% + 12px);
-    text-align: right;
-    white-space: nowrap;
-    font-size: 1rem;
-    font-variant: small-caps;
   }
 
   a {
@@ -221,16 +231,6 @@ $colorDone: #0eb415;
       font-weight: 500;
 
       @include status-hover($colorDone);
-    }
-  }
-
-  .blocks {
-    display: none;
-    font-size: 1.2rem;
-    margin: 3px 15px;
-
-    li {
-      margin: 2px 0;
     }
   }
 

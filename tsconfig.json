@@ -20,7 +20,6 @@
   ],
   "exclude": [
     "./src/**/preset.js",
-    "./build-tools/config/storybook/config.js",
-    "./src/storybook/**/*"
+    "./build-tools/config/storybook/config.js"
   ]
 }
