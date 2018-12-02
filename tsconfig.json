@@ -2,10 +2,11 @@
   "compilerOptions": {
     "sourceMap": true,
     "strict": true,
-    "target": "es6",
+    "target": "esnext",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "Node",
+    "module": "esnext",
+    "moduleResolution": "node",
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -14,9 +15,11 @@
     "baseUrl": "./src/"
   },
   "include": [
-    "./src/types.d.ts"
+    "./src/types.d.ts",
+    "./src/**/*.ts"
   ],
   "exclude": [
+    "./src/**/preset.js",
     "./build-tools/config/storybook/config.js",
     "./src/storybook/**/*"
   ]

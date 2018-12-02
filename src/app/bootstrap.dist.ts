@@ -19,8 +19,6 @@ import { bootstrap } from 'muban-core/lib/dist';
 
 declare var __webpack_public_path__: string;
 
-console.log('Dist.ts');
-
 /* eslint-disable */
 if (window['webpackPublicPath']) {
   __webpack_public_path__ = window['webpackPublicPath'];

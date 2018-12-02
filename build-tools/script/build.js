@@ -5,9 +5,9 @@ const { createTaskSpinner } = require('./util/spinner');
 const { compileWebpack, handleWebpackComplete } = require('./util/webpack');
 const buildHtml = require('./build-html');
 
-const config = require('../config');
-const webpackConfigCode = require('../config/webpack/webpack.config.code.dist');
-const webpackConfigPartials = require('../config/webpack/webpack.config.partials');
+const config = require('../config/config');
+const webpackConfigCode = require('../config/webpack/webpack.conf.code.dist');
+const webpackConfigPartials = require('../config/webpack/webpack.conf.partials');
 let webpackConfigStorybook;
 try {
   webpackConfigStorybook = require('../config/storybook/webpack.config.dist');

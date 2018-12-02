@@ -7,9 +7,11 @@ const path = require('path');
 const Handlebars = require('handlebars');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const beautifyHtml = require('js-beautify').html;
-const config = require('../config');
+const config = require('../config/config');
 const { addToIndex, renderIndex, startNewIndex } = require('./util/index-page');
 const getPages = require('./util/getPages');
+
+const templatePath = path.resolve(__dirname, '../templates');
 
 module.exports = function(options) {
   // load partials
@@ -22,11 +24,11 @@ module.exports = function(options) {
 
   // compile normal and standalone page templates
   const htmlTemplate = Handlebars.compile(
-    fs.readFileSync(path.resolve(__dirname, './template.hbs'), 'utf-8'),
+    fs.readFileSync(path.join(templatePath, 'build-html-template.hbs'), 'utf-8'),
   );
   const htmlTemplateStandalone = config.standaloneOutput
     ? Handlebars.compile(
-        fs.readFileSync(path.resolve(__dirname, './template-standalone.hbs'), 'utf-8'),
+        fs.readFileSync(path.join(templatePath, 'build-html-template-standalone.hbs'), 'utf-8'),
       )
     : null;
 

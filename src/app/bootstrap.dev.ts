@@ -3,7 +3,6 @@
  * It's set up to render the hbs templates in the DOM using javascript, and supports hot reloading.
  */
 import 'modernizr';
-// tslint:disable import-name
 import Handlebars from 'handlebars/runtime';
 import { bootstrap } from 'muban-core/lib/dev';
 import symbol from 'core-js/es6/symbol';
@@ -32,7 +31,7 @@ const app = bootstrap(appElement, <any>{
 // Hot reloading support
 if (module.hot) {
   module.hot.accept(dataContext.id, () => {
-    const changedContext = require.context('../data/', true, /\.yaml$/);
+    const changedContext = require.context('../data/', true, /\.(yaml|json)$/);
     app.updateData(changedContext);
   });
 
