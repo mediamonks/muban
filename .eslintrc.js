@@ -15,7 +15,7 @@ module.exports = {
     // webpack integration
     'import/resolver': {
       webpack: {
-        config: 'build-tools/config/webpack/webpack.config.js',
+        config: 'build-tools/config/webpack/webpack.conf.base.js',
       },
     },
   },

@@ -9,5 +9,24 @@
     padding-right: 40px;
     box-sizing: border-box;
     vertical-align: top;
+
+    img {
+      width: 100%;
+      height: 200px;
+      display: block;
+      background-size: cover;
+      margin-bottom: 10px;
+    }
+
+    &.col-left {
+      img {
+        background-image: url('./image/demo.jpg');
+      }
+    }
+    &.col-right {
+      img {
+        background-image: url('./image/demo.png');
+      }
+    }
   }
 }

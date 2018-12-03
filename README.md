@@ -47,7 +47,7 @@ yarn clean:storybook
 
 ### Config
 
-The most basic settings can be found and changed in `build-tools/config/index.js`.
+The most basic settings can be found and changed in `build-tools/config/config.js`.
 
 ### Development
 
@@ -154,13 +154,14 @@ It will generate a file in `dist/diff/templates.html` with a proper formatted di
   on the blocks entry in the json data file.
 * `src/app/style` Folder containing global styles. All components will include their own stylesheet.
 * `src/app/style/main.scss` Main stylesheet file, only for setting up global styles.
-* `src/data` The json files for all preview pages. Each json file corresponds with a page. Using a
+* `src/data` The yaml files for all preview pages. Each json file corresponds with a page. Using a
   `.` in the filename will allow to group alternative variations for a single page. E.g. `home.json`
   is the main page, and `home.alt.json` is an alternative version that can be visited via the
   overview page.
 * `.modernizrrc` config file for Modernizrrc used by `modernizr-loader`, config rules can be found
   [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
-* `build-tools/template/*` Template files for seng-generator, for creating pages, blocks and components.
+* `build-tools/generator-template/*` Template files for seng-generator, for creating pages, blocks
+  and components.
 
 ## Storybook
 

@@ -1,9 +1,13 @@
+import { getComponentForElement } from 'muban-core';
+import Icon from '../../general/icon/Icon';
 import AbstractBlock from '../AbstractBlock';
 
 export default class Paragraph extends AbstractBlock {
   static displayName: string = 'paragraph';
 
   private btn: HTMLButtonElement | null;
+  private btnLabel: HTMLSpanElement | undefined | null;
+  private btnIcon: HTMLElement | undefined | null;
   private contentMore: HTMLParagraphElement | undefined;
 
   constructor(el: HTMLElement) {
@@ -12,6 +16,8 @@ export default class Paragraph extends AbstractBlock {
     this.btn = this.element.querySelector('button');
     if (this.btn) {
       this.btn.addEventListener('click', this.onButtonClick);
+      this.btnLabel = this.getElement<HTMLSpanElement>('.label', this.btn);
+      this.btnIcon = this.getElement<HTMLElement>('.icon', this.btn);
 
       this.contentMore = <HTMLParagraphElement>this.element.querySelector('.js-content-more');
     }
@@ -21,9 +27,15 @@ export default class Paragraph extends AbstractBlock {
     this.contentMore!.classList.toggle('hidden');
 
     if (this.contentMore!.classList.contains('hidden')) {
-      this.btn!.textContent = 'read more...';
+      this.btnLabel!.textContent = 'read more...';
+      if (this.btnIcon) {
+        getComponentForElement<Icon>(this.btnIcon).setIcon('arrow-down');
+      }
     } else {
-      this.btn!.textContent = 'read less...';
+      this.btnLabel!.textContent = 'read less...';
+      if (this.btnIcon) {
+        getComponentForElement<Icon>(this.btnIcon).setIcon('arrow-up');
+      }
     }
   };
 

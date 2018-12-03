@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
-const config = require('../../config');
+const config = require('../../config/config');
 
 // store json info to render overview page later
 let dirIndex;
@@ -28,6 +28,11 @@ function addToIndex({ page, data }) {
  * @param htmlTemplate
  */
 function renderIndex(indexTemplate, htmlTemplate) {
+  // skip index rendering if there is already an index page
+  if (dirIndex.some(p => p.page === 'index')) {
+    return;
+  }
+
   const pages = dirIndex
     .map(item => {
       if (!item.data.meta) {
@@ -87,11 +92,11 @@ function renderIndex(indexTemplate, htmlTemplate) {
   indexResult = indexResult
     .replace(
       '<link rel="stylesheet" href="asset/bundle.css">',
-      '<link rel="stylesheet" href="asset/preview.css">\n\t<link rel="stylesheet" href="asset/bundle.css">',
+      '<link rel="stylesheet" href="asset/bundle.css">\n\t<link rel="stylesheet" href="asset/preview.css">',
     )
     .replace(
       '<script src="asset/bundle.js"></script>',
-      '<script src="asset/preview.js"></script>\n\t<script src="asset/bundle.js"></script>',
+      '<script src="asset/bundle.js"></script>\n\t<script src="asset/preview.js"></script>',
     );
 
   fs.writeFileSync(path.resolve(config.buildPath, 'index.html'), indexResult, 'utf-8');

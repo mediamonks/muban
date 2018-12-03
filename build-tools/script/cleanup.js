@@ -33,6 +33,7 @@ function clean() {
   shell.rm('-rf', [
     // assets
     path.join(projectRoot, 'src/static/demo.*'),
+    path.join(projectRoot, 'src/app/svg/icon/*.svg'),
 
     // pages
     path.join(projectRoot, 'src/data/*'),
