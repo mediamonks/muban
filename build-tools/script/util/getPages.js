@@ -7,6 +7,14 @@ const loadData = require('json-import-loader').loadData;
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
+const resolvers = {
+  yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
+};
+
+const replaceVariables = loadData(path.resolve(projectRoot, 'src/data/_variables.yaml'), {
+  resolvers,
+});
+
 /**
  * Get all data files, and return an array of page/file
  * @returns {Promise}
@@ -16,7 +24,11 @@ module.exports = function() {
     // read json files and generate a page for each json
     recursive(
       path.resolve(projectRoot, 'src/data'),
-      [file => path.extname(file) !== '.json' && path.extname(file) !== '.yaml'],
+      [
+        file =>
+          (path.extname(file) !== '.json' && path.extname(file) !== '.yaml') ||
+          path.basename(file).startsWith('_'),
+      ],
       (err, files) => {
         const pages = files
           .map(f => path.basename(f))
@@ -24,14 +36,16 @@ module.exports = function() {
           .map(file => {
             // eslint-disable-next-line import/no-dynamic-require, global-require
             const data = loadData(path.resolve(projectRoot, `src/data/${file}`), {
-              resolvers: {
-                yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
-              },
+              resolvers,
             });
+
+            // replace ${foo} occurrences in the data to be rendered.
+            const replacedData = JSON.parse(Object.keys(replaceVariables).reduce((data, varName) =>
+              data.replace(new RegExp('\\${' + varName +'}'), () => replaceVariables[varName]), JSON.stringify(data)));
 
             return {
               file,
-              data,
+              data: replacedData,
               page: path.basename(file, `.${file.split('.').pop()}`),
             };
           });

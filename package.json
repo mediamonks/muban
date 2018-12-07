@@ -68,7 +68,7 @@
     "modernizr": "^3.6.0",
     "modernizr-loader": "^1.0.1",
     "muban-convert-hbs": "^1.1.1",
-    "muban-core": "^1.10.5",
+    "muban-core": "^1.11.1",
     "normalize.css": "^8.0.1",
     "qs": "^6.6.0",
     "seng-device-state-tracker": "^1.1.4",
