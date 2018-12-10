@@ -41,7 +41,7 @@ module.exports = function() {
 
             // replace ${foo} occurrences in the data to be rendered.
             const replacedData = JSON.parse(Object.keys(replaceVariables).reduce((data, varName) =>
-              data.replace(new RegExp('\\${' + varName +'}'), () => replaceVariables[varName]), JSON.stringify(data)));
+              data.replace(new RegExp('\\${' + varName +'}', 'g'), () => replaceVariables[varName]), JSON.stringify(data)));
 
             return {
               file,

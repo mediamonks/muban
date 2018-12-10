@@ -33,7 +33,7 @@ const app = bootstrap(appElement, <any>{
       Object.keys(replaceVariables).reduce(
         (data, varName) =>
           // replace ${foo} occurrences in the data to be rendered.
-          data.replace(new RegExp(`\\$\{${varName}}`), () => replaceVariables[varName]),
+          data.replace(new RegExp(`\\$\{${varName}}`, 'g'), () => replaceVariables[varName]),
         JSON.stringify(data),
       ),
     ),
