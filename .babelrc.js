@@ -1,4 +1,6 @@
 module.exports = function(api) {
+  api.cache(!api.env("production"));
+
   return {
     presets: [
       ["@babel/preset-env", {
@@ -7,9 +9,6 @@ module.exports = function(api) {
         },
         "modules": false,
         "useBuiltIns": 'entry',
-
-        // for uglifyjs...
-        "forceAllTransforms": api.env("production"),
 
         "exclude": [
           // we don't use generators or async/await by default
