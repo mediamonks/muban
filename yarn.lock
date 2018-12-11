@@ -6447,10 +6447,10 @@ json-buffer@3.0.0:
   resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
   integrity sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=
 
-json-import-loader@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/json-import-loader/-/json-import-loader-1.2.0.tgz#aa89d8707cbd9990641727e5a92cb2b7b1bdb4d1"
-  integrity sha512-MvqvzaYEyOw28EQbmWZJ6RAUkV/SGYgDZosO4gbSg5hfJcaB3PpN8jSdoZjd/XJVreAFHinWUA/Z+5jP25tx/Q==
+json-import-loader@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/json-import-loader/-/json-import-loader-1.2.1.tgz#fc60139ac051e8240cad0a32ef869ed52c4e67bc"
+  integrity sha512-CQctdesx8/cUhzoZuJCy6jmnt7B3D5JE9+TYUFBq6jVhRsUS7SpHjNMBG9oM1SpNvU2BvthnVIs6tJDW8KmP2w==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"
@@ -7568,10 +7568,10 @@ muban-convert-hbs@^1.1.1:
     "@babel/runtime" "^7.0.0-beta.35"
     handlebars "^4.0.11"
 
-muban-core@^1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.11.1.tgz#c4de99ddc16f0c38593c706bab95f9454211d346"
-  integrity sha512-8wTxOpekBd3rVUFelhIGkdf6rv4pCk70q7gWWA4JAXOsVF+4fGq8AbFufrSxll4yWe9LRMWxhWoy0gh2TqkdaQ==
+muban-core@^1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.11.2.tgz#90f1c0ac009c1fc8113bf1ffb915052ec30e4783"
+  integrity sha512-9uLQUR83il2mzgSqe1L8eSWedbZI8k39FozKkleMCO3th8p6muS/+OZKYQv8oKWZZal4Zaty3QW5Un8Y/SD5jQ==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"

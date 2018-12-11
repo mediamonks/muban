@@ -1,9 +1,10 @@
 # Data
 
 The data files, located at `src/data/`, provide the content and the structure of your pages.
-Every page has it's own data file, which can be either `yaml` or `json`.
+Every page has it's own data file, which can be either `yaml`, `json` or `js`.
 Since `yaml` is less verbose, and can better handle multiline content, we've chosen
-that as the default.
+that as the default. `js` can be useful for more dynamic data, when creating loops or needing
+something from `process.env`.
 
 To reader a page, the `src/app/component/layout/app/app.hbs` is provided with the data for the page,
 and will decide how it will be rendered.
@@ -14,7 +15,7 @@ in the data files.
 
 ## Using data
 
-The data used in Muban is used as a static mock representation of the eventual backen data that
+The data used in Muban is used as a static mock representation of the eventual backend data that
 will be used to render the templates on the server. Because of that it's good to communicate
 with backed to set up a data structure that makes sense.
 
@@ -36,7 +37,7 @@ blocks:
     data: "import!../app/component/block/paragraph/data.yaml"
 
   - name: "two-col"
-    data: "import!../app/component/block/two-col/data.yaml"
+    data: "import!../app/component/block/two-col/data.json"
 ```
 
 **paragraph/data.yaml**
@@ -55,7 +56,7 @@ Imports can be done by adding `"import!path-to-file"` on the place where a 'valu
 should be located. The object or array in the data file will be inlined at the
 location of the import statement.
 
-Importing works for both `yaml` and `json`, can be nested without recursion, and
+Importing works for `yaml`, `json` and `js`, can be nested without recursion, and
 the path is relative from the file the import statement is located in.
 
 For more information, check out the [ThaNarie/json-import-loader](https://github.com/ThaNarie/json-import-loader)
@@ -69,8 +70,6 @@ code to create mock data, a large collection with little code, or use environmen
 to specify certain values.
 
 Example: https://github.com/ThaNarie/json-import-loader/blob/master/test/_fixtures/e.js
-
-Using .js files as top level data is not yet supported in Muban, but can easily be added.
 
 ## dev & dist
 
@@ -124,4 +123,8 @@ const app = bootstrap(appElement, {
 });
 ```
 
-_**Note**: data files that should not end up as a page, should start with a `_`, so they are skipped._
+**Note**: data files that should not end up as a page, should start with a `_`, so they are skipped.
+
+**Note**: You can change the extension of the variable file, and replace the require in
+`src/app/bootstrap.dev.ts` and `build-tools/script/util/getPages.js`.
+

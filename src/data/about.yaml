@@ -11,7 +11,7 @@ blocks:
     data: {}
 
   - name: paragraph
-    data: import!../app/component/block/paragraph/data.yaml
+    data: import!../app/component/block/paragraph/data.js
 
   - name: footer
     data: {}

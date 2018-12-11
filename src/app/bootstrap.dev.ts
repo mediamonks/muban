@@ -13,7 +13,7 @@ declare var module: any;
 
 // create context for json data and handlebar templates
 // pick any json/yaml file that doesn't start with a _ in the filename
-const dataContext = require.context('../data/', true, /^(.*[\/\\])?[^_][^\/\\]+\.(yaml|json)$/);
+const dataContext = require.context('../data/', true, /^(.*[\/\\])?[^_][^\/\\]+\.(yaml|json|js)$/);
 const partialsContext = require.context('./component/', true, /\.hbs$/);
 const replaceVariables = require('../data/_variables.yaml');
 
@@ -42,7 +42,11 @@ const app = bootstrap(appElement, <any>{
 // Hot reloading support
 if (module.hot) {
   module.hot.accept(dataContext.id, () => {
-    const changedContext = require.context('../data/', true, /\.(yaml|json)$/);
+    const changedContext = require.context(
+      '../data/',
+      true,
+      /^(.*[\/\\])?[^_][^\/\\]+\.(yaml|json|js)$/,
+    );
     app.updateData(changedContext);
   });
 

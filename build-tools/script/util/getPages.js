@@ -26,7 +26,7 @@ module.exports = function() {
       path.resolve(projectRoot, 'src/data'),
       [
         file =>
-          (path.extname(file) !== '.json' && path.extname(file) !== '.yaml') ||
+          (path.extname(file) !== '.json' && path.extname(file) !== '.yaml' && path.extname(file) !== '.js') ||
           path.basename(file).startsWith('_'),
       ],
       (err, files) => {
