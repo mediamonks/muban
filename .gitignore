@@ -58,6 +58,8 @@ node_modules/
 # idea project files
 .idea
 
+# VisualStudio Code files
+.vscode
 
 ### Project
 
