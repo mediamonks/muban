@@ -17,7 +17,7 @@ module.exports = {
     },
     {
       name: 'two-col',
-      data: 'import!../app/component/block/two-col/data.yaml',
+      data: 'import!../app/component/block/two-col/data.js',
     },
     {
       name: 'footer',
