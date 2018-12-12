@@ -100,7 +100,7 @@ right before it gets rendered. During dev this can be done using the `onData` ca
 that is passed to the dev `bootstrap` as an option. During build you can change the data
 in `build-html.js` for each page before rendering it to HTML.
 
-By default, Muban already allow you to use variables in your data files, that will be
+By default, Muban already allows you to use variables in your data files, that will be
 replaced by the contents of the `src/data/_variables.yaml`. This can be useful for
 files you are linking to the `static` folder or are fetching from a `CDN`, where you want
 to change the server location easily (or dynamically per build).
