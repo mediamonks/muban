@@ -58,8 +58,8 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
         // Use multi-process parallel running to improve the build speed
         // Default number of concurrent runs: os.cpus().length - 1
         parallel: true,
-        // Enable file caching
-        cache: true,
+        // Disable file caching
+        cache: false,
         sourceMap: buildType === config.buildTypes.DEVELOPMENT,
       }),
       new OptimizeCSSAssetsPlugin({
