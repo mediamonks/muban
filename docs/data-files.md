@@ -6,7 +6,7 @@ Since `yaml` is less verbose, and can better handle multiline content, we've cho
 that as the default. `js` can be useful for more dynamic data, when creating loops or needing
 something from `process.env`.
 
-To reader a page, the `src/app/component/layout/app/app.hbs` is provided with the data for the page,
+To render a page, the `src/app/component/layout/app/app.hbs` is provided with the data for the page,
 and will decide how it will be rendered.
 By default, a page will render a set of blocks, that are different for each page.
 Blocks can be reused across different pages. Each block can be made up from multiple
