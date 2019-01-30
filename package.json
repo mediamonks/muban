@@ -1,6 +1,10 @@
 {
   "name": "muban",
   "version": "3.0.0",
+  "skeleton": {
+    "name": "muban",
+    "version": "3.0.0"
+  },
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server --config build-tools/config/webpack/webpack.conf.dev.js",
