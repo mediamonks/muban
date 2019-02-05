@@ -1,8 +1,8 @@
-// import CoreComponent from 'muban-core/lib/CoreComponent';
-// import abstractBlockMixin from 'app/component/block/AbstractBlockMixin';
-// import abstractComponentMixin from 'app/component/AbstractComponentMixin';
+import CoreComponent from 'muban-core/lib/CoreComponent';
+import abstractBlockMixin from 'app/component/block/AbstractBlockMixin';
+import abstractComponentMixin from 'app/component/AbstractComponentMixin';
 
-class AbstractBlock extends abstractBlockMixin(abstractComponentMixin(CoreComponent)) {
+export default class AbstractBlock extends abstractBlockMixin(abstractComponentMixin(CoreComponent)) {
   constructor(element: HTMLElement) {
     super(element);
   }

@@ -44,63 +44,44 @@ const staticPath = path.join(projectRoot, 'src/static');
 const distPath = path.join(projectRoot, 'dist');
 const buildPath = path.join(distPath, 'site');
 
-let storyBookConfig = {};
-try {
-  storyBookConfig = require('../../src/storybook/config');
-} catch (e) {}
+module.exports = {
+  buildTypes,
 
-module.exports = Object.assign({},
-  storyBookConfig,
-  {
-    buildTypes,
+  /* paths */
+  projectRoot,
+  staticPath,
+  distPath,
+  buildPath,
 
+  /* EXPERIMENTAL: enable to generate per-page bundles. For each json file a .js and .css file are generated */
+  standaloneOutput: false,
+
+  devServer: {
+    port: process.env.PORT || 9000,
+    proxyTable: {},
+    autoOpenBrowser: false,
+    useHttps: false,
+  },
+
+  /* non-development builds */
+  dist: {
     /* paths */
-    projectRoot,
-    staticPath,
-    distPath,
-    buildPath,
+    publicPath,
 
-    /* EXPERIMENTAL: enable to generate per-page bundles. For each json file a .js and .css file are generated */
-    standaloneOutput: false,
+    /* optimization */
+    enableImageOptimization: true,
+    enablePNGQuant: true,  // Best PNG optimizer, but PNGQuant crashes on some images so use with caution.
+  },
 
-    devServer: {
-      port: process.env.PORT || 9000,
-      proxyTable: {},
-      autoOpenBrowser: false,
-      useHttps: false,
+  /* environment variables (set using DefinePlugin) */
+  env: {
+    [buildTypes.PRODUCTION]: {
+      NODE_ENV: JSON.stringify('production'),
+      PUBLIC_PATH: JSON.stringify(publicPath),
     },
-
-    /* non-development builds */
-    dist: {
-      /* paths */
-      publicPath,
-
-      /* optimization */
-      enableImageOptimization: true,
-      enablePNGQuant: true,  // Best PNG optimizer, but PNGQuant crashes on some images so use with caution.
-    },
-
-    /* custom storybook build */
-    storybook: {
-      env: {
-        NODE_ENV: JSON.stringify('development'),
-      },
-      port: 9002,
-      publicPath,
-      staticPath: path.join(projectRoot, 'src/storybook/static'),
-      buildPath: path.join(distPath, 'storybook'),
-    },
-
-    /* environment variables (set using DefinePlugin) */
-    env: {
-      [buildTypes.PRODUCTION]: {
-        NODE_ENV: JSON.stringify('production'),
-        PUBLIC_PATH: JSON.stringify(publicPath),
-      },
-      [buildTypes.DEVELOPMENT]: {
-        NODE_ENV: JSON.stringify('development'),
-        PUBLIC_PATH: JSON.stringify('/'),
-      }
-    },
+    [buildTypes.DEVELOPMENT]: {
+      NODE_ENV: JSON.stringify('development'),
+      PUBLIC_PATH: JSON.stringify('/'),
+    }
   }
-);
+};

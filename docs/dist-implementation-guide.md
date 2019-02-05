@@ -18,8 +18,6 @@ The package content:
     should normally be served dynamically (so should not be copied over, it's just sample content).
 * **template/** - the developer templates, can be used as reference
 * **data/** - the developer mock data, can be used as reference
-* **storybook/** - optionally, a component viewer 'site', where all components can be previewed,
-  together with all the source code and documentation
 
 #### Preview
 
@@ -131,19 +129,6 @@ To make implementation easier, a tool is in the works that can convert most (if 
 templates to another template language (e.g. twig, django, htl). In that case, there is an
 additional folder with the converted template files. This means that there is less (or none at all)
 manual conversion of templates needed.
-
-## Storybook
-
-Storybook is inspired by the [React and Vue Storybook](https://storybook.js.org/). It is a UI
-development environment for your UI components. With it, you can visualize different states of your
-UI components and develop them interactively.
-                                                                                   
-Storybook runs outside of your app. So you can develop UI components in isolation without worrying
-about app specific dependencies and requirements.
-
-Besides showing the component in isolation, it also shows the source files
-(template, script, style), the mock data that is used, the rendered html, and some documentation
-about how the component can be used.
                                                                                    
 ## Caching
 
@@ -179,4 +164,3 @@ it easy to integrate into any backend system. The benefits are:
 * Handlebars as an easy to use template language which can be easily ported to other languages
 * Having local mock data in yaml files, so development can start without having a backend ready
 * Client and QA can checks and approve the static preview pages, without having a backend ready
-* Having storybook as a nice overview of all the components, with documentation

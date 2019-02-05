@@ -18,7 +18,6 @@ done by passing the `--publicPath` flag:
 
 ```
 yarn build --publicPath=/nested/folder/
-yarn storybook:build --publicPath=/nested/folder/
 ```
 
 When you don't know the publicPath during build time, you can also set it at runtime by setting the

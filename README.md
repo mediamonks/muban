@@ -39,12 +39,6 @@ If you don't need them in your project, you can remove them all with a simple co
 yarn clean:boilerplate
 ```
 
-You can also remove the storybook config, source and preset files if you don't need it:
-
-```sh
-yarn clean:storybook
-```
-
 ### Config
 
 The most basic settings can be found and changed in `build-tools/config/config.js`.
@@ -162,11 +156,3 @@ It will generate a file in `dist/diff/templates.html` with a proper formatted di
   [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
 * `build-tools/generator-template/*` Template files for seng-generator, for creating pages, blocks
   and components.
-
-## Storybook
-
-Storybook is a web-app that lets you preview and interact with the components in your project. You
-can create presets that render your component with custom HTML, and pass different properties by
-providing a json object.
-
-Please read the [extended documentation](docs/storybook.md) for more information.

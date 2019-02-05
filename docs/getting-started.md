@@ -178,70 +178,6 @@ is reloaded.
 
 You could also make everything look a bit nicer by updating `foo.scss`, but that's all up to you!
 
-## Storybook
-
-Previewing components on the page is one thing, but sometimes it's more useful to see them in
-isolation. For this we have storybook. You can close your dev server, and start `yarn storybook`.
-
-When opening `http://localhost:9002/` in your browser, you should immediately see your new 'foo'
-component. If you click the `foo - default` link, it will just show that component preset, and all
-information moves to the bottom.
-
-The component is loaded in an iframe to be completely isolated, and you can click the 'responsive'
-icon in the top-left to play around with breakpoints (this works in every browser).
-
-At the bottom you see all the available information about the component, it's name, location and
-description (that you must enter yourself). It also shows the preset source, the passed data, the
-rendered HTML, and the source code of the template, style and script files. This is not only useful
-for you as the frontend develop, but also for a backend developer that needs to implement your
-templates.
-
-### presets
-
-Now let's add a second preset so to see how this works. Open the `preset.js` in your foo component
-folder, and add a second preset:
-
-```typescript
-import { storiesOf } from 'storybook/utils/utils';
-
-storiesOf('foo', require('./foo.hbs'))
-  .add(
-    'default',
-    'No description yet...',
-    `<hbs>
-			{{> block/foo @root}}
-		</hbs>`,
-    require('./data'),
-  )
-  .add(
-    'no tags',
-    'A version without any tag buttons',
-    `<hbs>
-			{{> block/foo @root}}
-		</hbs>`,
-    require('./data-no-tags'),
-  );
-```
-
-And add an additional preset file called `data-no-tags.yaml`:
-
-```yaml
-title: Hello world
-description: |
-  <strong>Lorum</strong> ipsum dolor amet...
-```
-
-You can also directly add the data in the preset, but keeping it in yaml files allows you to
-include it in any page yaml you want, giving you more flexibility.
-
-Now, if you click the file path in the info panel in your browser (`component/block/foo/foo.hbs`),
-it will load the page to show all variants o the same component, and you'll see the component with
-or without the tag buttons.
-
-This will help you out to test styling whe certain elements are different or missing. It could also
-help you spot script errors if you expect certain elements to exist, but will give an error if you
-add an event listener to non-existing elements.
-
 ## Building
 
 Now that your site is 'done', it's time to make a distribution build by running `yarn build`. After
@@ -261,7 +197,7 @@ with master branch or specific commit or git tag.
 This is just the basics of working with Muban, to dive a bit deeper, check out the following:
 
 * The `docs/` folder that contains a lot more in-depth information about certain topics (like more
-  util functions, how to work with dynamic data, how to preview your build and storybook online,
+  util functions, how to work with dynamic data,
   and much much more).
 * The [webpack documentation](https://webpack.js.org/) and the webpack config located in
   `build-tools/config` (where `indedx.js` is a config file with paths and other settings).

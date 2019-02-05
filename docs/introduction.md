@@ -107,13 +107,6 @@ any bugs. To generate those pages, we just use the same yaml page files, loop ov
 components, and use the pre-compiled handlebar templates to generate the HTML. One file for each
 yaml.
 
-#### preview components
-
-While those preview pages are useful in their own way, sometimes you want to have an overview of
-individual components, with some documentation, and maybe the used data, and the source files that
-make up those components. For this we created muban-storybook, inspired by
-[React Storybook](https://storybook.js.org/), but with some additional features.
-
 #### integration
 
 While the above makes for an amazing frontend development experience, the job is not done. Getting

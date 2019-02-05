@@ -8,10 +8,6 @@ const buildHtml = require('./build-html');
 const config = require('../config/config');
 const webpackConfigCode = require('../config/webpack/webpack.conf.code.dist');
 const webpackConfigPartials = require('../config/webpack/webpack.conf.partials');
-let webpackConfigStorybook;
-try {
-  webpackConfigStorybook = require('../config/storybook/webpack.config.dist');
-} catch (e) {}
 
 const argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
@@ -21,7 +17,6 @@ const argv = require('yargs')
   .command('code', 'Only build code bundle', () => {}, buildCode)
   .command('partials', 'Only build partials bundle', () => {}, buildPartials)
   .command('html', 'Only generate html files', () => {}, buildHTML)
-  .command('storybook', 'Build the storybook', () => {}, buildStorybook)
   .command('clean', 'Cleans the dist folder', () => {}, cleanDist)
   .option('p', {
     alias: 'publicPath',
@@ -45,16 +40,6 @@ function buildCode() {
 function buildPartials() {
   const spinner = createTaskSpinner('webpack partials');
   return handleWebpackComplete(spinner, compileWebpack(webpackConfigPartials));
-}
-
-function buildStorybook() {
-  if (webpackConfigStorybook) {
-    const spinner = createTaskSpinner('storybook build');
-    return handleWebpackComplete(spinner, compileWebpack(webpackConfigStorybook));
-  } else {
-    console.log('No storybook present in this project');
-    return Promise.resolve();
-  }
 }
 
 function buildHTML(options) {
