@@ -57,7 +57,6 @@ module.exports = function(api) {
           "es6.string.blink",
           "es6.string.bold",
           "es6.string.code-point-at",
-          "es6.string.ends-with",
           "es6.string.fixed",
           "es6.string.fontcolor",
           "es6.string.fontsize",
