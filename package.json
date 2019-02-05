@@ -19,7 +19,6 @@
     "compile:html": "npm run build html",
     "clean": "npm run build clean",
     "clean:boilerplate": "node ./build-tools/script/cleanup",
-    "clean:storybook": "node ./build-tools/script/cleanup storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src --ext .js --cache",

@@ -1,5 +1,7 @@
 /// <reference path="./app/component/block/AbstractBlock.ts" />
 
+// import TAbstractBlock from './app/component/block/AbstractBlock';
+
 declare module '*.hbs?include';
 declare module '*.json';
 declare module '*.yml';
@@ -16,6 +18,10 @@ interface Window {
   webpackPublicPath: string;
 }
 
-// declare class AbstractBlock {
-//
-// }
+// declare const foo: {
+//   AbstractBlock:typeof TAbstractBlock;
+// };
+
+declare class AbstractBlock {
+
+}

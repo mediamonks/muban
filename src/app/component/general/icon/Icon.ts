@@ -1,4 +1,4 @@
-import AbstractComponent from 'app/component/AbstractComponent';
+import { Lib } from 'Lib';
 
 // declare var require:any;
 
@@ -15,7 +15,7 @@ const svgContext = require.context('app/svg/icon/?inline', false, /\.svg/);
  * {{> general/icon name="logo-gap" }}
  * ```
  */
-export default class Icon extends AbstractComponent {
+export default class Icon extends Lib.Muban.AbstractComponent {
   public static readonly displayName: string = 'icon';
 
   constructor(el: HTMLElement) {
@@ -28,3 +28,5 @@ export default class Icon extends AbstractComponent {
     this.element.innerHTML = svgContext(`./${name}.svg`);
   }
 }
+
+Lib.MubanCore.registerComponent(Icon);

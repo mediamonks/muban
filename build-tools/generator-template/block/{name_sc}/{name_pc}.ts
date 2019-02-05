@@ -1,6 +1,6 @@
-import AbstractBlock from '../AbstractBlock';
+import { Lib } from 'Lib';
 
-export default class {{name_pc}} extends AbstractBlock {
+export default class {{name_pc}} extends Lib.Muban.AbstractBlock {
   public static readonly displayName:string = '{{name_sc}}';
 
   constructor(el:HTMLElement) {
@@ -11,3 +11,5 @@ export default class {{name_pc}} extends AbstractBlock {
     super.dispose();
   }
 }
+
+Lib.MubanCore.registerComponent({{name_pc}});

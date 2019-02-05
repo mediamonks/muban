@@ -1,10 +1,9 @@
-/// <reference path="../AbstractBlock.ts" />
+import { Lib } from 'Lib';
 
-// import { getComponentForElement } from 'muban-core';
-// import Icon from '../../general/icon/Icon';
-// import AbstractBlock from '../AbstractBlock';
+// types only
+import Icon from '../../general/icon/Icon';
 
-class Paragraph extends AbstractBlock {
+class Paragraph extends Lib.Muban.AbstractBlock {
   public static readonly displayName: string = 'paragraph';
 
   private button: HTMLButtonElement | null;
@@ -31,12 +30,12 @@ class Paragraph extends AbstractBlock {
     if (this.contentMore!.classList.contains('hidden')) {
       this.buttonLabel!.textContent = 'read more...';
       if (this.buttonIcon) {
-        getComponentForElement<Icon>(this.buttonIcon).setIcon('arrow-down');
+        Lib.MubanCore.getComponentForElement<Icon>(this.buttonIcon).setIcon('arrow-down');
       }
     } else {
       this.buttonLabel!.textContent = 'read less...';
       if (this.buttonIcon) {
-        getComponentForElement<Icon>(this.buttonIcon).setIcon('arrow-up');
+        Lib.MubanCore.getComponentForElement<Icon>(this.buttonIcon).setIcon('arrow-up');
       }
     }
   };
@@ -50,3 +49,5 @@ class Paragraph extends AbstractBlock {
     super.dispose();
   }
 }
+
+Lib.MubanCore.registerComponent(Paragraph);
