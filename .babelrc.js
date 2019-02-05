@@ -62,7 +62,6 @@ module.exports = function(api) {
           "es6.string.fontcolor",
           "es6.string.fontsize",
           "es6.string.from-code-point",
-          "es6.string.includes",
           "es6.string.italics",
           "es6.string.iterator",
           "es6.string.link",
