@@ -22,6 +22,10 @@ const replaceVariables: { [index: string]: any } =
     require.context('../data/', false, /_variables.yaml/),
   ) || {};
 
+// load all scss separately and include it
+const styleContext = require.context('./component/', true, /\.scss$/);
+styleContext.keys().forEach(styleContext);
+
 // bootstrap the app
 const appElement = document.getElementById('app');
 if (!appElement) {
@@ -60,6 +64,13 @@ if (module.hot) {
   module.hot.accept(partialsContext.id, () => {
     const changedContext = require.context('./component/', true, /\.hbs$/);
     app.updatePartials(changedContext);
+  });
+
+  // TODO: optimize
+  module.hot.accept(styleContext.id, () => {
+    const changedContext = require.context('./component/', true, /\.scss$/);
+
+    changedContext.keys().forEach(changedContext);
   });
 
   module.hot.accept(['./component/layout/index', './component/layout/app'], () => {
