@@ -25,6 +25,15 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
         use: [
           getCacheLoader(config, buildType, isDevelopment),
           {
+            loader: 'hbs-build-loader',
+            options: {
+              removeScript: isDevelopment ? false : isPartials,
+              removeStyle: isDevelopment ? false : isPartials,
+              removeTemplate: isDevelopment ? false : isCode,
+              hot: isDevelopment,
+            },
+          },
+          {
             loader: 'handlebars-loader',
             options: {
               extensions: ['.hbs', ''],
