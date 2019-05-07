@@ -16,6 +16,10 @@
  */
 
 import { bootstrap } from 'muban-core/lib/dist';
+import { Lib } from '../Lib';
+
+// add Lib to the window for use by the blocks
+window.Lib = Lib;
 
 declare var __webpack_public_path__: string;
 
