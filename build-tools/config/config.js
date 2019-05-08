@@ -71,6 +71,11 @@ module.exports = {
     /* optimization */
     enableImageOptimization: true,
     enablePNGQuant: true,  // Best PNG optimizer, but PNGQuant crashes on some images so use with caution.
+
+    /* settings for component building */
+    componentRootPath: path.join(projectRoot, 'src/app/component'),
+    componentGlobPath: '/**/*.+(ts|scss)',
+    componentGlobIgnore: ['**/Abstract*', '**/layout/**/*', '**/_*']
   },
 
   /* environment variables (set using DefinePlugin) */

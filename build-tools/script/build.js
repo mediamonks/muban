@@ -4,10 +4,13 @@ const shell = require('shelljs');
 const { createTaskSpinner } = require('./util/spinner');
 const { compileWebpack, handleWebpackComplete } = require('./util/webpack');
 const buildHtml = require('./build-html');
+const buildComponents = require('./build-components');
 
 const config = require('../config/config');
 const webpackConfigCode = require('../config/webpack/webpack.conf.code.dist');
 const webpackConfigPartials = require('../config/webpack/webpack.conf.partials');
+
+
 
 const argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
@@ -17,6 +20,7 @@ const argv = require('yargs')
   .command('code', 'Only build code bundle', () => {}, buildCode)
   .command('partials', 'Only build partials bundle', () => {}, buildPartials)
   .command('html', 'Only generate html files', () => {}, buildHTML)
+  .command('components', 'Only build components', () => {}, buildComponents)
   .command('clean', 'Cleans the dist folder', () => {}, cleanDist)
   .option('p', {
     alias: 'publicPath',
@@ -57,7 +61,8 @@ function buildAll() {
 
   buildCode()
     .then(buildPartials)
-    .then(() => buildHTML({ cleanPartials: true}))
+    .then(buildComponents)
+    .then((componentFiles) => buildHTML({ cleanPartials: true, componentFiles}))
     .then(() => {
       console.log();
       console.log(
