@@ -102,7 +102,6 @@ module.exports = function(api) {
 
       // needed to register muban-components
       "@babel/plugin-transform-react-display-name",
-      api.env("production") ? require('./build-tools/babel-plugins/babel-plugin-transform-remove-import') : null,
-    ].filter(Boolean)
+    ]
   };
 };
