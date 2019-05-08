@@ -30,6 +30,11 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
     plugins.push(
       // enable HMR globally
       new webpack.HotModuleReplacementPlugin(),
+      new CopyWebpackPlugin([
+        {
+          from: config.assetPath,
+          to: config.rawAssetPath,
+        }]),
     );
   } else {
     /*
@@ -51,6 +56,12 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
           context: config.staticPath,
           from: '**/*',
           to: config.buildPath,
+        },
+        {
+          // copy files to public root (not versioned)
+          context: config.assetPath,
+          from: '**/*',
+          to: config.buildAssetPath,
         },
         {
           // copy over hbs templates and remove muban-specific imports and partial paths

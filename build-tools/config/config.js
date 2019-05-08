@@ -41,8 +41,11 @@ const buildTypes = {
 
 const versionPath = 'version/' + new Date().getTime() + '/'; // TODO
 const staticPath = path.join(projectRoot, 'src/static');
+const assetPath = path.join(projectRoot, 'src/asset');
 const distPath = path.join(projectRoot, 'dist');
 const buildPath = path.join(distPath, 'site');
+const rawAssetPath = 'etc.clientlibs/weretail/clientlibs/clientlib-site/resources';
+const buildAssetPath = path.join(buildPath, rawAssetPath);
 
 module.exports = {
   buildTypes,
@@ -52,6 +55,9 @@ module.exports = {
   staticPath,
   distPath,
   buildPath,
+  buildAssetPath,
+  assetPath,
+  rawAssetPath,
 
   /* EXPERIMENTAL: enable to generate per-page bundles. For each json file a .js and .css file are generated */
   standaloneOutput: false,
