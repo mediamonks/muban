@@ -12,6 +12,10 @@
   <link rel="icon" href="{{publicPath}}favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="{{publicPath}}asset/common.css">
   <link rel="stylesheet" href="{{publicPath}}asset/{{page}}.css">
+
+  {{#each componentStyles}}
+  <link rel="stylesheet" href="{{this}}">
+  {{/each}}
 </head>
 <body>
   <div id="app">
@@ -20,5 +24,9 @@
 
   <script src="{{publicPath}}asset/common.js"></script>
   <script src="{{publicPath}}asset/{{page}}.js"></script>
+
+  {{#each componentScripts}}
+    <script src="{{this}}"></script>
+  {{/each}}
 </body>
 </html>

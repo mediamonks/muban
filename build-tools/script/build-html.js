@@ -40,6 +40,9 @@ module.exports = function(options) {
     }
   }
 
+  const componentScripts = getComponentPaths(options.componentFiles || [], '.js');
+  const componentStyles = getComponentPaths(options.componentFiles || [], '.css');
+
   console.log();
   console.log();
 
@@ -57,11 +60,11 @@ module.exports = function(options) {
         const content = appTemplate(data);
 
         // render normal page
-        return renderPage(htmlTemplate, content, page, config.buildPath)
+        return renderPage(htmlTemplate, content, page, config.buildPath, componentScripts, componentStyles)
           .then(() => {
             // render standalone page
             if (config.standaloneOutput) {
-              return renderPage(htmlTemplateStandalone, content, page, standalonePath);
+              return renderPage(htmlTemplateStandalone, content, page, standalonePath, componentScripts, componentStyles);
             }
           })
           .then(() => {
@@ -87,12 +90,14 @@ module.exports = function(options) {
  * @param outputPath
  * @returns {Promise}
  */
-function renderPage(template, content, page, outputPath) {
+function renderPage(template, content, page, outputPath, componentScripts = [], componentStyles = []) {
   // render full html page
   const templateStandaloneResult = template({
     content,
     page,
     publicPath: config.dist.publicPath,
+    componentScripts,
+    componentStyles,
   });
 
   // make it pretty
@@ -107,6 +112,12 @@ function renderPage(template, content, page, outputPath) {
         resolve(res);
       }
     });
+  });
+}
+
+function getComponentPaths(paths, extension) {
+  return paths.filter((componentPath) => componentPath.includes(extension)).map((componentPath) => {
+    return config.dist.publicPath + path.relative(config.buildPath, componentPath);
   });
 }
 
