@@ -8,6 +8,7 @@ const chokidar = require('chokidar');
 const { createTaskSpinner } = require('./util/spinner');
 const { compileWebpack, handleWebpackComplete, displayWebpackStats, getWebpackConfig } = require('./util/webpack');
 const buildHtml = require('./build-html');
+const buildComponents = require('./build-components');
 const previewServer = require('./preview-server');
 
 const config = require('../config/config');
@@ -29,7 +30,8 @@ const argv = require('yargs')
   .command('dev', 'A dev build with live reload', () => {}, buildDev)
   .command('code', 'Only build code bundle', () => {}, buildCode)
   .command('partials', 'Only build partials bundle', () => {}, buildPartials)
-  .command('html', 'Only generate html files', () => {}, () => buildHTML({ skipPartials: true }))
+  .command('html', 'Only generate html files', () => {}, buildHTML)
+  .command('components', 'Only build components', () => {}, buildComponents)
   .command('storybook', 'Build the storybook', () => {}, buildStorybook)
   .command('clean', 'Cleans the dist folder', () => {}, cleanDist)
   .option('p', {
@@ -152,7 +154,8 @@ function buildAll() {
   cleanDist();
 
   buildCode()
-    .then(() => buildHTML({ cleanPartials: true}))
+    .then(buildComponents)
+    .then((componentFiles) => buildHTML({ cleanPartials: true, componentFiles}))
     .then(() => {
       console.log();
       console.log(
