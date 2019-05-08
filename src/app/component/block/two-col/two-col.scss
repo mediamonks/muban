@@ -20,12 +20,12 @@
 
     &.col-left {
       img {
-        background-image: url("./image/demo.jpg");
+        background-image: url("#{$assetRoot}demo.jpg");
       }
     }
     &.col-right {
       img {
-        background-image: url("./image/demo.png");
+        background-image: url("#{$assetRoot}demo.png");
       }
     }
   }
