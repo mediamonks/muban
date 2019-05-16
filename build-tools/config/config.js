@@ -81,7 +81,7 @@ module.exports = {
     /* settings for component building */
     componentRootPath: path.join(projectRoot, 'src/app/component'),
     componentGlobPath: '/**/*.+(ts|scss)',
-    componentGlobIgnore: ['**/Abstract*', '**/layout/**/*', '**/_*']
+    componentGlobIgnore: ['**/Abstract*', '**/layout/**/*', '**/_*', '**/icon/**/*']
   },
 
   /* environment variables (set using DefinePlugin) */

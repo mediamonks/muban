@@ -15,7 +15,7 @@ const svgContext = require.context('app/svg/icon/?inline', false, /\.svg/);
  * {{> general/icon name="logo-gap" }}
  * ```
  */
-export default class Icon extends Lib.Muban.AbstractComponent {
+class Icon extends Lib.Muban.AbstractComponent {
   static displayName: string = 'icon';
 
   constructor(el: HTMLElement) {
@@ -28,5 +28,7 @@ export default class Icon extends Lib.Muban.AbstractComponent {
     this.element.innerHTML = svgContext(`./${name}.svg`);
   }
 }
+
+export default Icon;
 
 Lib.MubanCore.registerComponent(Icon);

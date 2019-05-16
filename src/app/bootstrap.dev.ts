@@ -11,9 +11,18 @@ symbol;
 declare var require: any;
 declare var module: any;
 
+import { Lib } from '../Lib';
+
+// add Lib to the window for use by the blocks
+window.Lib = Lib;
+
 // create context for json data and handlebar templates
 const dataContext = require.context('../data/', true, /\.(yaml|json)$/);
 const partialsContext = require.context('./component/', true, /\.hbs$/);
+
+// load all ts separately and include it
+const codeContext = require.context('./component/', true, /\.ts$/);
+codeContext.keys().forEach(codeContext);
 
 // load all scss separately and include it
 const styleContext = require.context('./component/', true, /\.scss$/);

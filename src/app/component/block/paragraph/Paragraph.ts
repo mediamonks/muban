@@ -2,6 +2,7 @@ import { Lib } from 'Lib';
 
 // types only
 import Icon from '../../general/icon/Icon';
+import ParagraphHelper from './ParagraphHelper';
 
 class Paragraph extends Lib.Muban.AbstractBlock {
   static displayName: string = 'paragraph';
@@ -13,6 +14,9 @@ class Paragraph extends Lib.Muban.AbstractBlock {
 
   constructor(el: HTMLElement) {
     super(el);
+
+    const helper = Lib.createShared<typeof ParagraphHelper>('ParagraphHelper');
+    helper.help();
 
     this.btn = this.element.querySelector('button');
     if (this.btn) {
