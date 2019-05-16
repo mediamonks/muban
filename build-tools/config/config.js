@@ -96,7 +96,7 @@ module.exports = Object.assign({},
     /* settings for component building */
     componentRootPath: path.join(projectRoot, 'src/app/component'),
     componentGlobPath: '/**/*.+(ts|scss)',
-    componentGlobIgnore: ['**/Abstract*', '**/layout/**/*', '**/_*']
+    componentGlobIgnore: ['**/Abstract*', '**/layout/**/*', '**/_*', '**/icon/**/*']
   },
 
     /* custom storybook build */

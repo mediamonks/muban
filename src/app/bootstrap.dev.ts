@@ -12,6 +12,11 @@ symbol;
 declare var require: any;
 declare var module: any;
 
+import { Lib } from '../Lib';
+
+// add Lib to the window for use by the blocks
+window.Lib = Lib;
+
 // create context for json data and handlebar templates
 // pick any json/yaml file that doesn't start with a _ in the filename
 const dataContext = require.context('../data/', true, /^(.*[\/\\])?[^_][^\/\\]+\.(yaml|json|js)$/);
@@ -21,6 +26,10 @@ const replaceVariables: { [index: string]: any } =
   ((r: RequireContext) => r.keys()[0] && r(r.keys()[0]))(
     require.context('../data/', false, /_variables.yaml/),
   ) || {};
+
+// load all ts separately and include it
+const codeContext = require.context('./component/', true, /\.ts$/);
+codeContext.keys().forEach(codeContext);
 
 // load all scss separately and include it
 const styleContext = require.context('./component/', true, /\.scss$/);
