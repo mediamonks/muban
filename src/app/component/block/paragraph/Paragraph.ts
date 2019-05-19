@@ -2,15 +2,18 @@ import { Lib } from 'Lib';
 
 // types only
 import Icon from '../../general/icon/Icon';
+import AbstractBlock from '../AbstractBlock';
 import ParagraphHelper from './ParagraphHelper';
 
 class Paragraph extends Lib.Muban.AbstractBlock {
   static displayName: string = 'paragraph';
 
   // this is the best we can do currently without proper namespace typings for Lib
-  private ab: InstanceType<typeof Lib.Muban.AbstractBlock> = new Lib.Muban.AbstractBlock(
+  private ab1: InstanceType<typeof Lib.Muban.AbstractBlock> = new Lib.Muban.AbstractBlock(
     document.getElementById('foo')!,
   );
+  // or just directly import the class / node_module, since imports will be stripped anyway
+  private ab2: AbstractBlock = new Lib.Muban.AbstractBlock(document.getElementById('foo')!);
 
   private btn: HTMLButtonElement | null;
   private btnLabel: HTMLSpanElement | undefined | null;
