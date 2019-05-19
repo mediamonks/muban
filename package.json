@@ -166,7 +166,7 @@
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "1.17.0",
     "tslint-loader": "^3.5.4",
-    "typescript": "^3.2.1",
+    "typescript": "^3.4.5",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.2",
     "use-yarn": "^2.2.0",

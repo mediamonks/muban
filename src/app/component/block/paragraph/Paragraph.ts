@@ -7,6 +7,11 @@ import ParagraphHelper from './ParagraphHelper';
 class Paragraph extends Lib.Muban.AbstractBlock {
   static displayName: string = 'paragraph';
 
+  // this is the best we can do currently without proper namespace typings for Lib
+  private ab: InstanceType<typeof Lib.Muban.AbstractBlock> = new Lib.Muban.AbstractBlock(
+    document.getElementById('foo')!,
+  );
+
   private btn: HTMLButtonElement | null;
   private btnLabel: HTMLSpanElement | undefined | null;
   private btnIcon: HTMLElement | undefined | null;
@@ -15,8 +20,13 @@ class Paragraph extends Lib.Muban.AbstractBlock {
   constructor(el: HTMLElement) {
     super(el);
 
-    const helper = Lib.createShared<typeof ParagraphHelper>('ParagraphHelper');
-    helper.help();
+    // example of getting a class and constructing it with proper typescript
+    const helper1 = new (Lib.getShared<typeof ParagraphHelper>('ParagraphHelper'))('msg');
+    helper1.help();
+
+    // example of getting a new instance of a class with the correct constructor arguments
+    const helper2 = Lib.createShared<typeof ParagraphHelper>('ParagraphHelper', 'msg');
+    helper2.help();
 
     this.btn = this.element.querySelector('button');
     if (this.btn) {
