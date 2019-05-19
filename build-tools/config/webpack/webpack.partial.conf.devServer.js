@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const express = require('express');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
@@ -22,6 +23,8 @@ module.exports = ({ config }) => webpackConfig => ({
     port: config.devServer.port,
     proxy: config.devServer.proxyTable,
     before(app) {
+      app.use('/' + config.proxyAssetPath, express.static(config.assetPath));
+
       // render basic default index.html for all html files (path will be picked by JS)
       app.use((req, res, next) => {
         if (req.path.includes('.html')) {
@@ -29,7 +32,7 @@ module.exports = ({ config }) => webpackConfig => ({
           if (config.devServer.proxyTable && Object.keys(config.devServer.proxyTable).some(p => req.path.indexOf(p) === 0)) {
             return next();
           }
-          res.send(fs.readFileSync(path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'), 'utf-8'));
+          res.send(fs.readFileSync(path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'), 'utf-8').replace('{{aemPath}}', `${config.aemSharedPath}js/`));
         } else {
           next();
         }
@@ -37,7 +40,7 @@ module.exports = ({ config }) => webpackConfig => ({
 
       // also render index.html on /
       app.get('/', function(req, res) {
-        res.send(fs.readFileSync(path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'), 'utf-8'));
+        res.send(fs.readFileSync(path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'), 'utf-8').replace('{{aemPath}}', `${config.aemSharedPath}js/`));
       });
     },
     https: config.devServer.useHttps

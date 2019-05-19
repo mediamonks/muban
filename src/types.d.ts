@@ -16,9 +16,3 @@ interface Window {
   webpackPublicPath: string;
   Lib: any;
 }
-
-// declare const foo: {
-//   AbstractBlock:typeof TAbstractBlock;
-// };
-
-declare class AbstractBlock {}

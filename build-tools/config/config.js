@@ -52,8 +52,11 @@ const staticPath = path.join(projectRoot, 'src/static');
 const assetPath = path.join(projectRoot, 'src/asset');
 const distPath = path.join(projectRoot, 'dist');
 const buildPath = path.join(distPath, 'site');
-const rawAssetPath = 'etc.clientlibs/weretail/clientlibs/clientlib-site/resources';
+const aemSharedPath = 'aem/clientlibs/clientlibs-shared/bundle/clientlibs/';
+const rawAssetPath = 'aem/clientlibs/clientlibs-site/resources/';
+const proxyAssetPath = 'etc.clientlibs/project-name/clientlibs/clientlibs-site/resources/';
 const buildAssetPath = path.join(buildPath, rawAssetPath);
+const buildProxyAssetPath = path.join(buildPath, proxyAssetPath);
 
 let storyBookConfig = {};
 try {
@@ -65,14 +68,17 @@ module.exports = Object.assign({},
   {
     buildTypes,
 
-    /* paths */
-    projectRoot,
-    staticPath,
-    distPath,
-    buildPath,
-    buildAssetPath,
-    assetPath,
-    rawAssetPath,
+  /* paths */
+  projectRoot,
+  staticPath,
+  distPath,
+  buildPath,
+  buildAssetPath,
+  proxyAssetPath,
+  buildProxyAssetPath,
+  assetPath,
+  rawAssetPath,
+  aemSharedPath,
 
     /* EXPERIMENTAL: enable to generate per-page bundles. For each json file a .js and .css file are generated */
     standaloneOutput: false,

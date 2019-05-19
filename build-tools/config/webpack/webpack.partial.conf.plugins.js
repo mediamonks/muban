@@ -57,7 +57,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
       new webpack.NamedChunksPlugin(),
 
       new MiniCssExtractPlugin({
-        filename: 'asset/[name].css',
+        filename: config.aemSharedPath + 'css/[name].css',
         allChunks: true,
       }),
 
@@ -73,6 +73,12 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
           context: config.assetPath,
           from: '**/*',
           to: config.buildAssetPath,
+        },
+        {
+          // copy asset resources to fake the AEM proxy
+          context: config.assetPath,
+          from: '**/*',
+          to: config.buildProxyAssetPath,
         },
         {
           // copy over hbs templates and remove muban-specific imports and partial paths

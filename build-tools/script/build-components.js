@@ -38,25 +38,83 @@ function getFiles(rootDirectory, globPath, globIgnore) {
   })
 }
 
-function processFiles(files) {
-  const componentRoot = config.dist.componentRootPath;
+/*
+source/aem/<project-name>/ui.apps/src/main/content/jcr_root/apps/<project-name>
+source/frontend/
 
+<project-name>
+  clientlibs
+    clientlibs-ui
+    clientlibs-site
+      resources
+        demo.jpg
+    clientlibs-shared
+      button
+        clientlib
+          js
+            Button.js
+          css
+            button.css
+          js.txt
+          css.txt
+      bundle
+        clientlib
+          js
+            common.js
+          css
+            common.css
+          js.txt
+          css.txt
+  components
+    content
+      paragraph
+        v1
+          clientlib
+            js
+              Paragraph.js
+            css
+              paragraph.css
+            js.txt
+            css.txt
+ */
+
+function createPath(type, file) {
+  const componentRoot = config.dist.componentRootPath;
+  const extension = '.' + file.split('.').reverse()[0];
+  const segmentMatch = path.relative(componentRoot, file).match(/^([^\/\\]+?)[\/\\]([^\/\\]+?)[\/\\](.*$)/i);
+
+  if (segmentMatch) {
+    const [, group, component, file] = segmentMatch;
+    const targetExtension = `.${type}`;
+
+    let targetPath;
+    if (group === 'general') {
+      targetPath = path.resolve(config.buildPath, './aem/clientlibs/clientlibs-shared',  component, 'clientlib', type, file.replace(extension, targetExtension));
+    } else {
+      targetPath = path.resolve(config.buildPath, './aem/components/content',  component, 'v1', 'clientlib', type, file.replace(extension, targetExtension));
+    }
+    console.log(targetPath);
+    return targetPath;
+  }
+  else {
+    throw new Error(`Could not correctly parse path "${path.relative(componentRoot, file)}"`);
+  }
+
+}
+
+function processFiles(files) {
   return Promise.all(files.map((file) => {
       return readFile(file).then((fileContent) => {
         const extension = '.' + file.split('.').reverse()[0];
 
         if(extension === '.scss') {
           return processScss(file, fileContent).then((result) => {
-            const targetExtension = '.css';
-            const targetPath = path.resolve(path.resolve(config.buildPath, './asset/components'),  path.relative(componentRoot, file)).replace(extension, targetExtension);
-
+            const targetPath = createPath('css', file);
             return writeFile(targetPath, result);
           });
         } else if (extension === '.ts') {
           return processTs(file, fileContent).then((result) => {
-            const targetExtension = '.js';
-            const targetPath = path.resolve(path.resolve(config.buildPath, './asset/components'),  path.relative(componentRoot, file)).replace(extension, targetExtension);
-
+            const targetPath = createPath('js', file);
             return writeFile(targetPath, result);
           });
         }

@@ -55,6 +55,7 @@ function cleanDist() {
   shell.rm('-rf', config.distPath);
 }
 
+
 function buildCode() {
   const spinner = createTaskSpinner('webpack code');
   return handleWebpackComplete(spinner, compileWebpack(webpackConfigCode));
