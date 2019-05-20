@@ -10,6 +10,9 @@ your template language of choice.
 The package content:
 
 - **site/** - _the preview site_
+  - **aem/** - contains all assets that should be copied over and included in the page HTML
+  - **etc.clientlibs/** - This is duplicated from `aem/clientlibs/clientlibs-site/resources`
+  to work outside of AEM.
   - **asset/** - contains all assets that should be copied over and included in the page HTML
     - **font/** - custom fonts, will be loaded by the css
     - **image/** - images required for the design/markup, will be loaded by css or js
@@ -30,12 +33,13 @@ To view the preview pages, you must upload or run a local http server, where the
 
 Follow the steps below to integrate the files in this package into your own website.
 
-1. Copy over the `asset` folder over your own webroot (keeping the same folder name).
-
+1. Copy over the `aem` folder over your own webroot (keeping the same folder name). Or move the
+  contents of the `aem` folder within your AEM file structure (this step can be automated as part)
+  of the build script once the source is also available in your repo.
 2. Use the `*.html` preview pages and the `template/*.hbs` templates to implement the HTML in your
    own website.
-3. Include the `asset/common.css` and `asset/bundle.css` in the html `<head>`, and the
-   `asset/common.js` and `asset/bundle.js` just before the closing `</body>` tag.
+3. Include the contents from `aem/clientlibs/clientlibs-shared/bundle/clientlibs` in your HTML as
+   dependency ofo all components, so they are loaded before any component file.
 4. Copy over the `<head>` section from `site/index.html` as good as possible, so all information
    like doctype, charset, meta tags, icons, etc are present on your own website. Some tags like
    icons are optional, but the `<meta ...>` are all needed to guaranty the website is displayed
