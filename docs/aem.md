@@ -95,7 +95,7 @@ If you were to write `export default class Foo {}` the whole class would be stri
 Within the shared files webpack can be used to import and bundle assets. Component files cannot.
 They have to load all their files from network requests through the `etc.clientlibs` proxy.
 
-This means that any file from css should be referenced using this variable frrom `_variables.scss`:
+This means that any file from css should be referenced using this variable from `_variables.scss`:
 ```scss
 $assetRoot: '/etc.clientlibs/project-name/clientlibs/clientlibs-site/resources/';
 ```
@@ -104,6 +104,12 @@ These files should be placed into the `src/asset` folder. During dev the webpack
 make those files available through the proper URL, and during a build these files are copied over
 the the right locations; one in the correct AEM structure, and a duplicate on the proxy location
 to make static preview builds work.
+
+**Note:** This css variable needs to be in sync with `proxyAssetPath` in
+`build-tools/config/config.js`.
+```js
+const proxyAssetPath = 'etc.clientlibs/project-name/clientlibs/clientlibs-site/resources/';
+```
 
 ### Components
 
@@ -163,6 +169,22 @@ export default ParagraphHelper;
 // make this class available to others at runtime
 Lib.addShared({ ParagraphHelper });
 ```
+
+#### Exceptions
+
+Some components require webpack to nicely include assets. This can be done, but it means they will
+be included in the main bundle instead as separate component. This will be fine, but only for
+general small atoms that are used across all components. Besides those, the `layout/app` is also
+included in the main bundle by default.
+
+To include a component in the main bundle instead of a standalone version, add its glob to the
+`componentGlobIgnore` array in `build-tools/config/config.js`:
+```
+componentGlobIgnore: ['**/Abstract*', '**/layout/**/*', '**/_*', '**/icon/**/*']
+```
+
+Anything not specified in that array that is present in the `app/component` folder will end up as an
+individual component in the build output.
 
 ### Lib.ts
 
