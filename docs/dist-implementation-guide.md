@@ -10,14 +10,11 @@ implementing the html in your template language of choice.
 The package content:
 
 * **site/** - _the preview site_
-  * **asset/** - contains all assets that should be copied over and included in the page HTML
-    * **font/** - custom fonts, will be loaded by the css
-    * **image/** - images required for the design/markup, will be loaded by css or js
+  * **aem/** - contains all assets that should be copied over and included in the page HTML
+  * **etc.clientlibs/** - This is duplicated from `aem/clientlibs/clientlibs-site/resources`
+  to work outside of AEM.
   * **\*.html** - statically rendered preview pages (with index.html as overview)
-  * The other folders contain static assets that are referenced from the preview html pages, and
-    should normally be served dynamically (so should not be copied over, it's just sample content).
-* **template/** - the developer templates, can be used as reference
-* **data/** - the developer mock data, can be used as reference
+* **template/** - the developer templates and mock data, can be used as reference
 
 #### Preview
 
@@ -28,57 +25,19 @@ To view the preview pages, you must upload or run a local http server, where the
 
 Follow the steps below to integrate the files in this package into your own website.
 
-1. Copy over the `asset` folder over your own webroot (keeping the same folder name).
-
+1. Copy over the `aem` folder over your own webroot (keeping the same folder name). Or move the
+  contents of the `aem` folder within your AEM file structure (this step can be automated as part)
+  of the build script once the source is also available in your repo.
 2. Use the `*.html` preview pages and the `template/*.hbs` templates to implement the HTML in your
    own website.
-3. Include the `asset/common.css` and `asset/bundle.css` in the html `<head>`, and the
-   `asset/common.js` and `asset/bundle.js` just before the closing `</body>` tag.
+3. Include the contents from `aem/clientlibs/clientlibs-shared/bundle/clientlibs` in your HTML as
+   dependency ofo all components, so they are loaded before any component file.
 4. Copy over the `<head>` section from `site/index.html` as good as possible, so all information
    like doctype, charset, meta tags, icons, etc are present on your own website. Some tags like
    icons are optional, but the `<meta ...>` are all needed to guaranty the website is displayed
    correctly.
 
 Read the sections below for more information about certain files or folders.
-
-## Assets
-
-The content in the `site/asset/` folder is the output of our webpack build. Webpack takes all
-development source files, which are nicely structured per component and written using modern web
-standards. It then transpiles, minifies, optimizes and bundles all the assets it encounters,
-and places them in the output folder.
-
-The JS and CSS that should be included in the HTML have a default filename, which stays the same
-for each build. All other assets (that are loaded from JS and CSS) will get a unique filename with
-the content-hash in the filename (see below for caching).
-
-The JS and CSS files are split between `common` and `bundle`. The common files contain all
-library/vendor code that doesn't change (often), and the bundle files contain all application
-code that could change more often. If desired, they can be outputted into a single file.
-
-By default, all those files are placed into the `asset` folder. This path is also included in the
-JS and CSS files that load other assets (like fonts and images). This means that the folder should
-be accessible at `https://www.example.com/asset/*`. When a different folder (structure) is desired,
-we have two options:
-
-1. We can build the files using a different (or nested) folder, or
-
-2. The path (called the `publicPath`) can be configured at runtime. The default is set to `/`, but
-   can be changed to any path or domain. _Please note that this is just a prefix, and you still
-   need the `asset` folder after that._
-
-   You can do this by setting the `webpackPublicPath` variable in a `<script>` tag on the window
-   before any script file is loaded:
-
-   ```js
-    window.webpackPublicPath = '/nested/folder/';
-    // results in '/nested/folder/assets/...'
-
-    // or
-    
-    window.webpackPublicPath = 'https://cdn-domain.site.com/nested/folder/';
-    // results in 'https://cdn-domain.site.com/nested/folder/assets/...'
-   ```
 
 ## Templates
 
@@ -121,31 +80,6 @@ e.g. a carousel with 1 or 5 items, a search page with or without results.
 To make the integration easier, it is a good practice to keep the structure in the yaml files
 similar to the modals that are used on the server to render the actual dynamic pages. The more
 similar the models are, the less manual conversion has to be done.
-  
-
-#### Automatic template conversion
-
-To make implementation easier, a tool is in the works that can convert most (if not all) handlebar
-templates to another template language (e.g. twig, django, htl). In that case, there is an
-additional folder with the converted template files. This means that there is less (or none at all)
-manual conversion of templates needed.
-                                                                                   
-## Caching
-
-All (static) assets should be cached by the server or a CDN. When files update you have two options,
-either invalidating the cache, or changing the filename.
-
-By default, the js and css files that should be included in the HTML have a normal filename that
-doesn't change when the content updates, so the responsibility of managing the cache is the
-responsibility of the implementation party. When desired, the build output can also be configured
-to include a hash in the filename that is derived from the file's content, so it only updates
-when the file content is changed (e.g. `common.5486f02.js`).
-
-Besides the js and css files that should be included in the HTML, there are also files in the assets
-folder that are loaded internally. Those files have the checksum content hash in the filename by
-default, so the filename changes when the content of that file changes. This means that the cache
-of those files can be configured to be very long, since they will never update, and will improve
-load performance.
 
 ## Development
 
