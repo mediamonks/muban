@@ -91,12 +91,12 @@ function renderIndex(indexTemplate, htmlTemplate) {
 
   indexResult = indexResult
     .replace(
-      '<link rel="stylesheet" href="asset/bundle.css">',
-      '<link rel="stylesheet" href="asset/bundle.css">\n\t<link rel="stylesheet" href="asset/preview.css">',
+      '<link rel="stylesheet" href="css/bundle.css">',
+      '<link rel="stylesheet" href="css/bundle.css">\n\t<link rel="stylesheet" href="css/preview.css">',
     )
     .replace(
-      '<script src="asset/bundle.js"></script>',
-      '<script src="asset/bundle.js"></script>\n\t<script src="asset/preview.js"></script>',
+      '<script src="js/bundle.js"></script>',
+      '<script src="js/bundle.js"></script>\n\t<script src="js/preview.js"></script>',
     );
 
   fs.writeFileSync(path.resolve(config.buildPath, 'index.html'), indexResult, 'utf-8');

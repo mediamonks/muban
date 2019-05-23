@@ -3,8 +3,8 @@ const path = require('path');
 module.exports = ({ config, isDevelopment, isPartials }) => webpackConfig => {
   const output = {
     path: config.buildPath,
-    filename: 'asset/[name].js',
-    chunkFilename: 'asset/[id].js',
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[id].js',
     publicPath: isDevelopment ? '/' : config.dist.publicPath,
   };
 

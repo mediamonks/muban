@@ -181,7 +181,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
             loader: 'url-loader',
             options: {
               limit: 2000,
-              name: 'asset/image/[name].' + (isDevelopment ? '' : '[hash:7].') + '[ext]',
+              name: 'img/[name].' + (isDevelopment ? '' : '[hash:7].') + '[ext]',
             },
           },
         ],
@@ -227,7 +227,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
         include: path.resolve(config.projectRoot, 'src/app/font'),
         loader: 'file-loader',
         options: {
-          name: 'asset/font/[name].' + (isDevelopment ? '' : '[hash:7].') + '[ext]',
+          name: 'font/[name].' + (isDevelopment ? '' : '[hash:7].') + '[ext]',
         },
       },
       /*

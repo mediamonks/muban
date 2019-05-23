@@ -15,7 +15,7 @@ const templatePath = path.resolve(__dirname, '../templates');
 
 module.exports = function(options) {
   // load partials
-  const partialsPath = path.join(config.buildPath, 'asset/partials.js');
+  const partialsPath = path.join(config.buildPath, 'js/partials.js');
   if (!fs.existsSync(partialsPath)) {
     throw new Error('Partials file not present, run `yarn build partials` first.');
   }

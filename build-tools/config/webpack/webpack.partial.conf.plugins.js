@@ -41,7 +41,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
       new webpack.NamedChunksPlugin(),
 
       new MiniCssExtractPlugin({
-        filename: 'asset/[name].css',
+        filename: 'css/[name].css',
         allChunks : true,
       }),
 
