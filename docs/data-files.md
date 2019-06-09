@@ -93,12 +93,35 @@ _**Tip**: You can change the seng-generator template to make this work for all n
 
 _**Note**: data files that should not end up as a page, should start with a `_`, so they are skipped._
 
+```yaml
+title: Home
+
+extra: "import!_extra.yaml"
+
+meta:
+  id: '' # can be number or string, used for ordering
+  status: '' # dev, qa, feedback, done
+  notes: '' # add some information about the page
+  category: '' # to group pages in the overview
+```
+
+In your templates, you can access any page-level data using the `@root` context:
+```hbs
+<div data-component="paragraph">
+  <h2>{{title}} {{@root.extra.foo}}</h2>
+</div>
+```
+
+**Note:** See below for a slightly better approach for some cases making use of `_variables.yaml`.
+The variables in that file are always available in all your pages and hbs files, so they won't have
+to be imported manually in each page file.
+
 ## Modify data & variables
 
 If you want to have a bit more control over your data, you are able to change the data
 right before it gets rendered. During dev this can be done using the `onData` callback
 that is passed to the dev `bootstrap` as an option. During build you can change the data
-in `build-html.js` for each page before rendering it to HTML.
+in `build-tools/script/util/getPages.js` for each page before rendering it to HTML.
 
 By default, Muban already allows you to use variables in your data files, that will be
 replaced by the contents of the `src/data/_variables.yaml`. This can be useful for
@@ -117,9 +140,18 @@ const replaceVariables = require('../data/_variables.yaml');
 
 const app = bootstrap(appElement, {
   ...otherStuff,
-  onData: data => JSON.parse(Object.keys(replaceVariables).reduce((data, varName) =>
-    // replace ${foo} occurrences in the data to be rendered.
-    data.replace(new RegExp(`\\$\{${varName}}`), () => replaceVariables[varName]), JSON.stringify(data))),
+  onData: (data) => ({
+      // include the _variables content by default in all page files
+      ...replaceVariables,
+      ...JSON.parse(
+        Object.keys(replaceVariables).reduce(
+          (data, varName) =>
+            // replace ${foo} occurrences in the data to be rendered.
+            data.replace(new RegExp(`\\$\{${varName}}`, 'g'), () => replaceVariables[varName]),
+          JSON.stringify(data),
+        ),
+      ),
+    }),
 });
 ```
 

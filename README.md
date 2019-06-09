@@ -154,9 +154,9 @@ It will generate a file in `dist/diff/templates.html` with a proper formatted di
   on the blocks entry in the json data file.
 * `src/app/style` Folder containing global styles. All components will include their own stylesheet.
 * `src/app/style/main.scss` Main stylesheet file, only for setting up global styles.
-* `src/data` The yaml files for all preview pages. Each json file corresponds with a page. Using a
-  `.` in the filename will allow to group alternative variations for a single page. E.g. `home.json`
-  is the main page, and `home.alt.json` is an alternative version that can be visited via the
+* `src/data` The yaml files for all preview pages. Each yaml file corresponds with a page. Using a
+  `.` in the filename will allow to group alternative variations for a single page. E.g. `home.yaml`
+  is the main page, and `home.alt.yaml` is an alternative version that can be visited via the
   overview page.
 * `.modernizrrc` config file for Modernizrrc used by `modernizr-loader`, config rules can be found
   [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
