@@ -75,7 +75,7 @@ With seng-generator you're able to create pages, blocks and components with the 
 seng-generator needs to be installed globally.
 
 ```sh
-yarn add -g seng-generator
+yarn global add seng-generator
 ```
 
 The easiest way to use it is by using the wizard
