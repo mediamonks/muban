@@ -28,8 +28,9 @@ const app = bootstrap(appElement, <any>{
   partialsContext,
   indexTemplate: require('./component/layout/index'),
   appTemplate: require('./component/layout/app'),
-  onData: (data: any) =>
-    JSON.parse(
+  onData: (data: any) => ({
+    ...replaceVariables,
+    ...JSON.parse(
       Object.keys(replaceVariables).reduce(
         (data, varName) =>
           // replace ${foo} occurrences in the data to be rendered.
@@ -37,6 +38,7 @@ const app = bootstrap(appElement, <any>{
         JSON.stringify(data),
       ),
     ),
+  }),
 });
 
 // Hot reloading support

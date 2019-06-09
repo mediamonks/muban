@@ -26,7 +26,9 @@ module.exports = function() {
       path.resolve(projectRoot, 'src/data'),
       [
         file =>
-          (path.extname(file) !== '.json' && path.extname(file) !== '.yaml' && path.extname(file) !== '.js') ||
+          (path.extname(file) !== '.json' &&
+            path.extname(file) !== '.yaml' &&
+            path.extname(file) !== '.js') ||
           path.basename(file).startsWith('_'),
       ],
       (err, files) => {
@@ -40,8 +42,19 @@ module.exports = function() {
             });
 
             // replace ${foo} occurrences in the data to be rendered.
-            const replacedData = JSON.parse(Object.keys(replaceVariables).reduce((data, varName) =>
-              data.replace(new RegExp('\\${' + varName +'}', 'g'), () => replaceVariables[varName]), JSON.stringify(data)));
+            const replacedData = {
+              ...replaceVariables,
+              ...JSON.parse(
+                Object.keys(replaceVariables).reduce(
+                  (data, varName) =>
+                    data.replace(
+                      new RegExp('\\${' + varName + '}', 'g'),
+                      () => replaceVariables[varName],
+                    ),
+                  JSON.stringify(data),
+                ),
+              ),
+            };
 
             return {
               file,

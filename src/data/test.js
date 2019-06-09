@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Home',
+  title: 'Test',
   meta: {
     id: '', // can be number or string, used for ordering
     status: '', // dev, qa, feedback, done
@@ -14,10 +14,6 @@ module.exports = {
     {
       name: 'paragraph',
       data: 'import!../app/component/block/paragraph/data.js',
-    },
-    {
-      name: 'two-col',
-      data: 'import!../app/component/block/two-col/data.yaml',
     },
     {
       name: 'footer',
