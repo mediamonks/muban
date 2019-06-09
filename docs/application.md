@@ -6,4 +6,4 @@ TODO
 * App component
 * Difference between dev and dist mode
 * global state / events -- `model.ts` + Knockout observables
-* JSON/Yaml files and pages
+* [data files](./data-files.md)

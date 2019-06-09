@@ -56,6 +56,15 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
        * JavaScript and TypeScript
        * ------------------------------------------------
        */
+      {
+        // Allow support for JS as data files
+        test: /\.js$/,
+        include: [
+          /src[\/\\]data/,
+          /src[\/\\]app[\/\\]component[\/\\].*data(-.*)\.js/,
+        ],
+        use: [{ loader: 'json-import-loader' }],
+      },
       ...(() => {
         const babelLoaderConfig = {
           loader: 'babel-loader',

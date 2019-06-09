@@ -6635,10 +6635,10 @@ json-buffer@3.0.0:
   resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
   integrity sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=
 
-json-import-loader@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/json-import-loader/-/json-import-loader-1.2.0.tgz#aa89d8707cbd9990641727e5a92cb2b7b1bdb4d1"
-  integrity sha512-MvqvzaYEyOw28EQbmWZJ6RAUkV/SGYgDZosO4gbSg5hfJcaB3PpN8jSdoZjd/XJVreAFHinWUA/Z+5jP25tx/Q==
+json-import-loader@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/json-import-loader/-/json-import-loader-1.2.1.tgz#fc60139ac051e8240cad0a32ef869ed52c4e67bc"
+  integrity sha512-CQctdesx8/cUhzoZuJCy6jmnt7B3D5JE9+TYUFBq6jVhRsUS7SpHjNMBG9oM1SpNvU2BvthnVIs6tJDW8KmP2w==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"

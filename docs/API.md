@@ -268,13 +268,15 @@ Bootstraps the Muban application during a development build.
 bootstrap(
   appRoot: HTMLElement,
   options: {
-    indexTemplate: any;
-    appTemplate: any;
+    indexTemplate: (data: any) => string;
+    appTemplate: (data: any) => string;
     dataContext: any;
     partialsContext: any;
     Handlebars: any;
+    onBeforeInit?: () => void;
     onInit?: () => void;
     onUpdate?: () => void;
+    onData: (data: object, pageName: string) => object;
     registerPartialMap?: Array<(path: string) => string | null>;
     pageName?: string;
   } = {}): {
@@ -291,8 +293,10 @@ bootstrap(
 * **dataContext** - A webpack context with all data (yaml/json) files.
 * **partialsContext** - A webpack context with component hbs files.
 * **Handlebars** - The Handlebars instance to register templates to.
+* **onBeforeInit** - Optional callback that gets called right before the application becomes fully interactive.
 * **onInit** - Optional callback that gets called after the application is fully interactive.
 * **onUpdate** - Optional callback that gets called after hot reloading did an update.
+* **onData** - Optional callback that gets called before rendering the page, and gives you the opportunity to modify the data before rendering.
 * **registerPartialMap** - A map with functions to define if and how partials should be registered.
 * **pageName** - Override a pageName to render, when you don't want to make use of the default url
   parsing logic of Muban.

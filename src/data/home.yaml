@@ -1,4 +1,4 @@
-title: "Home"
+title: Home
 
 meta:
   id: '' # can be number or string, used for ordering
@@ -13,9 +13,8 @@ blocks:
   - name: "paragraph"
     data: "import!../app/component/block/paragraph/data.yaml"
 
-  - name: "two-col"
-    data: "import!../app/component/block/two-col/data.yaml"
+  - name: 'two-col'
+    data: 'import!../app/component/block/two-col/data.yaml'
 
   - name: "footer"
     data: {}
-
