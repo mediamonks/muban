@@ -61,7 +61,7 @@ function cleanStorybook() {
     path.join(projectRoot, 'build-tools/loaders/extract-template-loader.js'),
 
     // generator
-    path.join(projectRoot, 'build-tools/template/**/preset.js'),
+    path.join(projectRoot, 'build-tools/generator-template/**/preset.js'),
 
     // preset files
     path.join(projectRoot, 'src/app/component/**/preset.js'),
