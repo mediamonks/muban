@@ -63,18 +63,19 @@
    2. Data-attributes
    3. Element selecting
    4. Creating a component
-      1. Manual
-      2. Command-line-interface
+      1. Using the wizard
+      2. Using the shorthand
 4. Page
-   1. Meta data
-   2. Blocks
+   1. Title
+   2. Meta
+   3. Blocks
       1. Name
       2. Data
          1. Local data
-         2. Referenced data
-   3. Creating a page
-      1. Manual
-      2. Command-line-interface
+         2. Imported data
+   4. Creating a page
+      1. Using the wizard
+      2. Using the shorthand
 5. Application
    1. Bootstrapping
    2. Lifecycles
@@ -108,18 +109,31 @@
 11. Transitions & Animations
     1. muban-transition-component
 12. Tutorials
-    1. Muban
+    1. Webstorm
+       1. Prettier shortcut
+    2. Muban
        1. Create your first block
        2. Create your first component
        3. Create your first page
        4. Do not use the default index template.
-    2. Handlebars
+       5. Using JSON for data files.
+       6. Using JavaScript for data files.
+       7. Using JSON for page files
+    3. TypeScript
+       1. Ensure all components have been initalised.
+       2. Adding event listeners to components.
+       3. Use data in your TypeScript file.
+       4. Select child element/elements
+    4. Handlebars
        1. Render data in your component
        2. Render data as HTML in your component
        3. Render a component
        4. Reference assets
        5. Dynamically render components
-       6. Create a custom helper
-    3. Knockout 
+       6. Dynamically render out components that are not in the general folder.
+       7. Create a custom helper
+    5. Knockout 
        1. Create a global state
        2. Apply bindings to the entire component
+    6. Seng-generator
+       1. Create a custom template
