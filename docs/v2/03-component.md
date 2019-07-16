@@ -35,7 +35,7 @@ The `.hbs` file is the core of any component within Muban. It contains the HTML 
 
 The most basic example of a Muban component could be a file called `button.hbs` 
 
-```html
+```handlebars
 <div class="my-component">Hi 👋</div>
 ```
 
@@ -43,7 +43,7 @@ The most basic example of a Muban component could be a file called `button.hbs`
 
 Since you will probably never render out HTML without styling there is also a `.scss` file available. This file contains all the styling for your component. To make sure it's loaded you will have to add it to the `.hbs` file. This way webpack will make sure it is bundled in your main css file.
 
-```html
+```handlebars
 <link rel="stylesheet" href="./my-component.scss">
 
 <div class="my-component">Hi! 👋</div>
@@ -83,7 +83,7 @@ my-smart-component/
 
 In the handlebars the only difference is that the root element of your component will have an extra data attribute that is used to initialise the component.
 
-```html
+```handlebars
 <div class="my-smart-component" data-component="my-smart-component">I'm smart! 🤓</div>
 ```
 
@@ -99,7 +99,7 @@ The `preset.js` file for the smart-component is exactly the same as the one for 
 
 The smart part of the smart-component is the TypeScript file. This file adds all the logic to your component. To enable it simply load it in your `.hbs` the same way you did as for the `.scss` file.
 
-```html
+```handlebars
 <link rel="stylesheet" href="./my-smart-component.scss">
 <script src="./MySmartComponent.ts"></script>
 
@@ -211,7 +211,7 @@ Now that we have covered all the parts that make up the different component type
 
 Start by opening the terminal in the root of your project and run the following command.
 
-```bash
+```
 sg wizard
 ```
 
@@ -219,7 +219,7 @@ This will start up the wizard and it will prompt you with a couple of questions.
 
 *Note: Leave the page for what it is now, we will cover this in the section on pages.*
 
-```bash
+```
 ? Which template do you want to use? (Use arrow keys)
   block
 > component
@@ -240,7 +240,7 @@ After you've provided the name you can choose the location where the component s
 
 *Note: If you want to provide a different location please provide the full relative path from the root of your project.*
 
-```bash
+```
 ? Which template do you want to use? component
 ? What name do you want to use? my-component
 ? Where do you want to create the component? (./src/app/component) 
@@ -248,7 +248,7 @@ After you've provided the name you can choose the location where the component s
 
 After you pressed enter it will notify you that the component has been successfully created.
 
-```bash
+```
 ? Which template do you want to use? component
 ? What name do you want to use? my-component
 ? Where do you want to create the component? ./src/app/component

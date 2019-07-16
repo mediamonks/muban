@@ -43,10 +43,12 @@ meta:
 
 ### Blocks
 
-The blocks section is the list of blocks that should be rendered to display the page. The block list exists of two values. 
+The blocks section is the list of blocks that should be rendered to display the page. 
 
-1. name
-2. data
+A block exists of two values. 
+
+1. `name`
+2. `data`
 
 #### Name
 

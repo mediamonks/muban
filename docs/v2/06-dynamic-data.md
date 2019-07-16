@@ -45,8 +45,8 @@ This could happen when you have a 'Load More' button to do client-side paginatio
 An existing template could be one of a few things:
 
 * An existing DOM element of the item, we can then clone the element and update the content with setting textContent or innerHTML.
-* Rendering a 'template' element (display:none, without any content), and use that the same way as above.
-* Reusing the .hbs template in the JS bundle, by calling the renderItem/renderItems methods from muban-core.
+* Rendering a `template` element (display:none, without any content), and use that the same way as above.
+* Reusing the `.hbs` template in the JS bundle, by calling the renderItem/renderItems methods from muban-core.
 * Creating a knockout template and render those. Normally the hbs templates are preferred, but if you have additional logic to execute, this will be a nice solution. Or if you never render any template on the server, and already include the knockout lib in your project, this is also fine.
 
 The main thing you want to minimize, is duplicate templates. So if you already rendering something on the server, you want that to be the source of truth, without duplicating the template in the JS bundle. That's why reusing .hbs is normally better than knockout, you only have to maintain a single template (still keep them sync between server and client though).
