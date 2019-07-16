@@ -24,12 +24,12 @@ The basic component has the following structure.
 
 ```
 my-component/
-	- my-component.hbs
-	- my-component.scss
-	- preset.js
+  - my-component.hbs
+  - my-component.scss
+  - preset.js
 ```
 
-#### Handlebars
+#### Handlebars [Component]
 
 The `.hbs` file is the core of any component within Muban. It contains the HTML that is required for component
 
@@ -39,7 +39,7 @@ The most basic example of a Muban component could be a file called `button.hbs`
 <div class="my-component">Hi 👋</div>
 ```
 
-#### SCSS
+#### SCSS [Component]
 
 Since you will probably never render out HTML without styling there is also a `.scss` file available. This file contains all the styling for your component. To make sure it's loaded you will have to add it to the `.hbs` file. This way webpack will make sure it is bundled in your main css file.
 
@@ -53,13 +53,13 @@ Since we are now trying to load a file called `my-button.scss` we will have to a
 
 ```scss
 .my-component {
-	color: red;
+  color: red;
 }
 ```
 
 *Note: The `.scss` file is technically optional so if you don't need it you could remove it.*
 
-#### Preset
+#### Preset [Component]
 
 *Note: If you have removed storybook from your Muban project you can skip this part.*
 
@@ -73,13 +73,13 @@ The smart-component has the following structure.
 
 ```
 my-smart-component/
-	- my-smart-component.hbs
-	- my-smart-component.scss
-	- MySmartComponent.ts
-	- preset.js
+  - my-smart-component.hbs
+  - my-smart-component.scss
+  - MySmartComponent.ts
+  - preset.js
 ```
 
-#### Handlebars
+#### Handlebars [Smart-component]
 
 In the handlebars the only difference is that the root element of your component will have an extra data attribute that is used to initialise the component.
 
@@ -87,15 +87,15 @@ In the handlebars the only difference is that the root element of your component
 <div class="my-smart-component" data-component="my-smart-component">I'm smart! 🤓</div>
 ```
 
-#### SCSS
+#### SCSS [Smart-component]
 
 The `.scss` file for the smart-component is exactly the same as the one for the basic component. 
 
-#### Preset
+#### Preset [Smart-component]
 
 The `preset.js` file for the smart-component is exactly the same as the one for the basic component. 
 
-#### TypeScript
+#### TypeScript [Smart-component]
 
 The smart part of the smart-component is the TypeScript file. This file adds all the logic to your component. To enable it simply load it in your `.hbs` the same way you did as for the `.scss` file.
 
@@ -136,26 +136,26 @@ A block has the following structure.
 
 ```
 my-block/
-	- my-block.hbs
-	- my-block.scss
-	- MyBlock.ts
-	- data.yaml
-	- preset.js
+  - my-block.hbs
+  - my-block.scss
+  - MyBlock.ts
+  - data.yaml
+  - preset.js
 ```
 
-#### Handlebars
+#### Handlebars [Block]
 
 The `.hbs` file for a block is exactly the same as the one  for a smart-component.
 
-#### SCSS
+#### SCSS [Block]
 
 The `.scss` file for a block is exactly the same as the one  for a smart-component.
 
-#### Preset
+#### Preset [Block]
 
 The `preset.js` file for a block is exactly the same as the one for the smart-component. 
 
-#### Data
+#### Data [Block]
 
 One of the main things that separates a block from a smart-component is the data that is attached to it. The data files provide the content and structure of your block, they represent the eventual backend data that will be used to render the templates on the server.
 
@@ -176,7 +176,7 @@ Inside of your data file we can add the content that will be rendered in the blo
 
 *Note: Make sure to match your data structure with the backend to avoid major differences while implementing*
 
-##### Local data
+##### Local data [Block]
 
 The local data is the data dat is entered directly in your data file. It is the most simple way of adding data but in the long run this could cause a lot of duplication.
 
@@ -185,7 +185,7 @@ title: "Hi I'm a block! 💪"
 content: "I'm the body copy for the block."
 ````
 
-##### Imported data
+##### Imported data [Block]
 
 This imported data is fetched from another file using the [json-import-loader](https://www.npmjs.com/package/json-import-loader). You can import other files by adding the following prefix to your path.
 

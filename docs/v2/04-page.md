@@ -76,8 +76,8 @@ Local data is data that is directly defined in the data key of your block. You w
 blocks:
   - name: 'my-block'
     data: 
-    	title: "Hi I'm a the same block but with different content! 💪"
-			content: "I'm the specific body copy for the block."
+      title: "Hi I'm a the same block but with different content! 💪"
+      content: "I'm the specific body copy for the block."
 ```
 
 *Note: keep in mind that if you choose to use local data you will have to write all data for that block locally.*
@@ -100,7 +100,7 @@ Now that we have covered all the parts that make up a page you could create them
 
 Start by opening the terminal in the root of your project and run the following command.
 
-```bash
+```
 sg wizard
 ```
 
@@ -108,7 +108,7 @@ This will start up the wizard and it will prompt you with a couple of questions.
 
 *Note: Leave the block, component and smart-component for what it is now, we will cover this in the section on components.*
 
-```bash
+```
 ? Which template do you want to use? (Use arrow keys)
   block
   component
@@ -129,7 +129,7 @@ After you've provided the name you can choose the location where the page should
 
 *Note: If you want to provide a different location please provide the full relative path from the root of your project.*
 
-```bash
+```
 ? Which template do you want to use? page
 ? What name do you want to use? my-page
 ? Where do you want to create the page? (./src/data) 
@@ -137,7 +137,7 @@ After you've provided the name you can choose the location where the page should
 
 After that you can provide an optional list of blocks that you want to render out on that page. If you want to skip this step you can just press `enter`. Otherwise provide a `slug-cased` list of components that you want to render.
 
-```bash
+```
 ? Which template do you want to use? page
 ? What name do you want to use? my-page
 ? Where do you want to create the page? ./src/data
@@ -146,7 +146,7 @@ After that you can provide an optional list of blocks that you want to render ou
 
 After you pressed enter it will notify you that the page has been successfully created.
 
-```bash
+```
 ? Which template do you want to use? page
 ? What name do you want to use? my-page
 ? Where do you want to create the page? ./src/data
@@ -162,7 +162,7 @@ While using the wizard to generate your pages is very easy and descriptive of wh
 
 Open up the terminal in the root of your project and run the following command:
 
-```bash
+```
 sg page my-page
 ```
 

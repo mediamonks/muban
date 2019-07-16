@@ -168,7 +168,7 @@ To make live a little easier you can run the following command in the root of yo
 yarn clean:boilerplate
 ```
 
-#### Clean storybook
+#### Clean Storybook
 
 If for any reason you would want to totally remove Storybook from Muban you can easily do this by running the following command in the root of your project. 
 
