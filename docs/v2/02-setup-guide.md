@@ -121,8 +121,8 @@ There are two ways of getting the Muban source code:
    ```
 
 2. Download the zip directly from GitHub and extract the contents in the newly create project root.
-  
-   1. https://github.com/mediamonks/muban/archive/master.zip
+
+[⇨ Download the zip file](https://github.com/mediamonks/muban/archive/master.zip)
 
 #### Install dependencies
 
@@ -190,11 +190,11 @@ Once this is done you will end up with a `dist` folder in the root of your proje
 
 ```
 - dist/
-	- site/
-	- data/
-	- templates/
-	- bundlesize-profile.json
-	- dist-implementation-guide.md
+  - site/
+  - data/
+  - templates/
+  - bundlesize-profile.json
+  - dist-implementation-guide.md
 ```
 
 #### Preview your distribution build

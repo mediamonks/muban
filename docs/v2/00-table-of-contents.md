@@ -75,41 +75,37 @@
       1. [Using the wizard](./04-page.md#Using-the-wizard)
       2. [Using the shorthand](./04-page.md#Using-the-shorthand)
 5. [Application](./05-application.md)
-   1. [Bootstrapping](./05-application.md#Bootstrapping)
-      2. [Development bootstrapping](./05-application.md#Development-bootstrapping)
-      3. [Production bootstrapping](./05-application.md#Production-bootstrapping)
+	1. [Bootstrapping](./05-application.md#Bootstrapping)
+		2. [Development bootstrapping](./05-application.md#Development-bootstrapping)
+		3. [Production bootstrapping](./05-application.md#Production-bootstrapping)
    2. [Application Lifecycle](./05-application.md#Application-Lifecycle)
 6. [Dynamic data](./06-dynamic-data.md)
-   1. Data provider
-      1. data-attributes
-      2. Embedded json
-      3. Http-requests
-   2. Data templates
+   1. [Data provider](./06-dynamic-data.md#Data-provider)
+   2. [Data templates](./06-dynamic-data.md#Data-templates)
 7. [Handlebars](./07-handlebars.md)
-   1. Helpers etc 
+   1. Helpers
 8. [Knockout](./08-knockout.md)
-   1. API Reference
-      1. applyBindingsToNode
-      2. applyBindingAccessorsToNode
-9. API Reference
-   1. Muban
-      1. initComponents
-      2. cleanElement
-      3. updateElement
-      4. getComponentForElement
-   2. Handlebars
-      1. renderItem
-      2. renderItems
-   3. Knockout
-      1. initTextBinding
-      2. initListBinding
-   4. Bootstrap
-      1. Dist
-      2. Dev
-10. Storybook
-11. Transitions & Animations
-    1. muban-transition-component
-12. Guides
+   1. [API Reference](./08-knockout.md#API-reference)
+      1. [applyBindingsToNode](./08-knockout.md#applyBindingsToNode)
+      2. [applyBindingAccessorsToNode](./08-knockout.md#applyBindingAccessorsToNode)
+9. [API Reference](./09-api-reference.md)
+   1. [Muban](./09-api-reference.md#Muban)
+      1. [initComponents](./09-api-reference.md#initComponents)
+      2. [cleanElement](./09-api-reference.md#cleanElement)
+      3. [updateElement](./09-api-reference.md#updateElement)
+      4. [getComponentForElement](./09-api-reference.md#getComponentForElement)
+   2. [Handlebars](./09-api-reference.md#Handlebars)
+      1. [renderItem](./09-api-reference.md#renderItem)
+      2. [renderItems](./09-api-reference.md#renderItems)
+   3. [Knockout](./09-api-reference.md#Knockout)
+      1. [initTextBinding](./09-api-reference.md#initTextBinding)
+      2. [initListBinding](./09-api-reference.md#initListBinding)
+   4. [Bootstrap](./09-api-reference.md#Bootstrap)
+      1. [Development](./09-api-reference.md#Development)
+      2. [Distribution](./09-api-reference.md#Distribution)
+10. [Storybook](./09-storybook.md)
+11. [Transitions and animations](./10-transitions-and-animations.md)
+12. [Guides](./10-guides.md)
     1. Muban
        1. Create a component.
        2. Create a smart-component.
