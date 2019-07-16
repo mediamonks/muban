@@ -26,7 +26,7 @@ So whatever we choose to create, or update in the future, it will adhere to the 
 
 ## What we came up with
 
-###Webpack
+### Webpack
 
 We know we wanted to use [webpack](https://webpack.js.org/), for the bundling feature and the hot reloading. But also for the great loader and plugin system, which will come up below.
 
