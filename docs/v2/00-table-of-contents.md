@@ -85,7 +85,10 @@ This file serves as an overview of all the pages available in the Muban docs.
    1. [Data provider](./06-dynamic-data.md#Data-provider)
    2. [Data templates](./06-dynamic-data.md#Data-templates)
 7. [Handlebars](./07-handlebars.md)
-   1. Helpers
+   1. [Partials](./07-handlebars.md#Partials)
+   2. [Helpers](./07-handlebars.md#Helpers)
+   	   1. [Condition](./07-handlebars.md#Condition)
+   	   2. [Custom helpers](./07-handlebars.md#Custom-helpers)
 8. [Knockout](./08-knockout.md)
    1. [API Reference](./08-knockout.md#API-reference)
       1. [applyBindingsToNode](./08-knockout.md#applyBindingsToNode)
@@ -106,46 +109,49 @@ This file serves as an overview of all the pages available in the Muban docs.
       1. [Development](./09-api-reference.md#Development)
       2. [Distribution](./09-api-reference.md#Distribution)
 10. [Storybook](./10-storybook.md)
+	1. [Example](./10-storybook.md#Example)
+	2. [Customize](./10-storybook.md#Customize)
+	3. [Configuration](./10-storybook.md#Configuration)
 11. [Transitions and animations](./11-transitions-and-animations.md)
 12. [Guides](./12-guides.md)
-    1. Muban
-       1. Create a component.
-       2. Create a smart-component.
-       3. Create a component block.
-       4. Create a page.
-       5. Do not use the default index template.
-       6. Using JSON for data files.
-       7. Using JavaScript for data files.
-       8. Using JSON for page files
-       9. Use custom variables in your data
-       10. Add scripts/meta data to the head of your page.
-    2. TypeScript
-       1. Ensure all components have been initalised.
-       2. Select child element/elements.
-       3. Adding event listeners to components.
-       4. Get data from data-attributes.
-       5. Get data from embedded json.
-       6. Get data from through a http-request.
-       7. Update an entire section through a http-request.
-           1. The API returns HTML.
-           2. The API returns Json. 
-       8. Sort or filter items already in the DOM.
-       9. Load more itmes to the page.
-           1. Use an existing DOM element.
-           2. Use a handlebars template
-           3. Use a knockout template
-    3. Handlebars
-       1. Render data in your component
-       2. Render data as HTML in your component
-       3. Render a component
-       4. Reference static assets
-       5. Dynamically render components
-       6. Dynamically render out components that are not in the general folder.
-       7. Create a custom helper
-    4. Knockout 
-       1. Create a global state
-       2. Apply bindings to the entire component
-    5. Webstorm
-       1. Prettier shortcut       
-    6. Seng-generator
-       1. Create a custom template
+    1. [Muban](./12-guides.md#Muban)
+       1. [Create a component](./12-guides.md#Create-a-component)
+       2. [Create a smart-component](./12-guides.md#Create-a-smart-component)
+       3. [Create a block](./12-guides.md#Create-a-block)
+       4. [Create a page](./12-guides.md#Create-a-page)
+       5. [Do not use the default index template](./12-guides.md#Do-not-use-the-default-index-template)
+       6. [Using JSON for data files](./12-guides.md#Using-json-for-data-files)
+       7. [Using JavaScript for data files](./12-guides.md#Using-javascript-for-data-files)
+       8. [Using JSON for page files](./12-guides.md#Using-json-for-page-files)
+       9. [Use custom variables in your data](./12-guides.md#Use-custom-variables-in-your-data)
+       10. [Add scripts/meta data to the head of your page.](./12-guides.md#Add-scripts-meta-data-to-the-head-of-your-page)
+    2. [TypeScript](./12-guides.md#TypeScript)
+       1. [Ensure all components have been initalised](./12-guides.md#Ensure-all-components-have-been-initialised)
+       2. [Select child element/elements](./12-guides.md#Select-child-element-elements)
+       3. [Adding event listeners to components](./12-guides.md#Adding-event-listeners-to-components)
+       4. [Get data from data-attributes](./12-guides.md#Get-data-from-data-attributes)
+       5. [Get data from embedded json](./12-guides.md#Get-data-from-embedded-json)
+       6. [Get data through a http-request](./12-guides.md#Get-data-through-a-http-request)
+       7. [Update an entire section through a http-request](./12-guides.md#Update-an-entire-section-through-a-http-request)
+           1. [The API returns HTML](./12-guides.md#The-API-returns-HTML)
+           2. [The API returns JSON](./12-guides.md#The-API-returns-JSON) 
+       8. [Sort or filter items already in the DOM.](./12-guides.md#Sort-or-filter-items-already-in-the-DOM)
+       9. [Load more items to the page](./12-guides.md#Load-more-items-on-the-page)
+           1. [Use an existing DOM element](./12-guides.md#Use-an-existing-DOM-element)
+           2. [Use a handlebars template](./12-guides.md#Use-a-handlebars-template)
+           3. [Use a knockout template](./12-guides.md#Use-a-knockout-template)
+    3. [Handlebars](./12-guides.md#Handlebars)
+       1. [Render data in your component](./12-guides.md#Render-data-in-your-component)
+       2. [Render data as HTML in your component](./12-guides.md#Render-data-as-HTML-in-your-comonent)
+       3. [Render a component](./12-guides.md#Render-a-component)
+       4. [Reference static assets](./12-guides.md#Reference-static-assets)
+       5. [Dynamically render components](./12-guides.md#Dynamically-render-components)
+       6. [Dynamically render out components that are not in the block folder.](./12-guides.md#Dynamically-render-out-components-that-are-not-in-the-block-folder)
+       7. [Create a custom helper](./12-guides.md#Create-a-custom-helper)
+    4. [Knockout](./12-guides.md#Knockout)
+       1. [Create a global state](./12-guides.md#Create-a-global-state)
+       2. [Apply bindings to the entire component](./12-guides.md#Apply-bindings-to-the-entire-element)
+    5. [Webstorm](./12-guides.md#Webstorm)
+       1. [Prettier shortcut](./12-guides.md#Prettier-shortcut)
+    6. [Seng-generator](./12-guides.md#Seng-generator)
+       1. [Create a custom template](./12-guides.md#Create-a-custom-template)
