@@ -40,7 +40,7 @@ meta:
   category: 'pages' # to group pages in the overview
 ```
 
-*Note: These values are not used in a production build and are only there for development purpose.*
+> **Note:** These values are not used in a production build and are only there for development purpose.
 
 ### Blocks
 
@@ -55,7 +55,7 @@ A block exists of two values.
 
 The name is the name of the block component that should be rendered. 
 
-*Note: Keep in mind that the casing should be in `slug-case`*
+> **Note:** Keep in mind that the casing should be in `slug-case`
 
 ```yaml
 blocks:
@@ -83,7 +83,7 @@ blocks:
       content: "I'm the specific body copy for the block."
 ```
 
-*Note: keep in mind that if you choose to use local data you will have to write all data for that block locally.*
+> **Note:** keep in mind that if you choose to use local data you will have to write all data for that block locally.
 
 ##### Imported data
 

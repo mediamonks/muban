@@ -30,13 +30,13 @@ As described in the introduction, you'll need to get familiar with a couple of t
 
 [TypeScript](https://www.typescriptlang.org/) starts from the same syntax and semantics that millions of JavaScript developers know today. Use existing JavaScript code, incorporate popular JavaScript libraries, and call TypeScript code from JavaScript. 
 
-*Note: The default language in Muban is TypeScript but if you want to you can still use JavaScript if you want to.*
+> **Note:** The default language in Muban is TypeScript but if you want to you can still use JavaScript if you want to.
 
 #### Knockout
 
 [Knockout](https://knockoutjs.com/) is a JavaScript library that helps you to create rich, responsive display and editor user interfaces with a clean underlying data model. Any time you have sections of UI that update dynamically (e.g., changing depending on the user’s actions or when an external data source changes), KO can help you implement it more simply and maintainably.
 
-*Note: By default knockout is not loaded because for simple operations it is most likely not needed, so keep in mind that loading knockout will increase your bundle size!*
+> **Note:** By default knockout is not loaded because for simple operations it is most likely not needed, so keep in mind that loading knockout will increase your bundle size!
 
 ### Setup your environment
 
@@ -90,13 +90,13 @@ The [seng-generator](https://www.npmjs.com/package/seng-generator) is an optiona
 yarn global add seng-generator
 ```
 
-*Note: On all the other documentation if a CLI is referenced it will be the seng-generator!*
+> **Note:** On all the other documentation if a CLI is referenced it will be the seng-generator!
 
 ## Getting started
 
 Once all the preparations have been completed you can follow these steps to get started building websites!
 
-*Note: In these examples assume you want the latest stable version of Muban.*
+> **Note:** In these examples assume you want the latest stable version of Muban.
 
 ### Setup the project
 
@@ -176,7 +176,7 @@ If for any reason you would want to totally remove Storybook from Muban you can 
 yarn clean:storybook
 ```
 
-*Note:  Once you remove Storybook all scripts related to storybook will no longer be available.*
+> **Note:** Once you remove Storybook all scripts related to storybook will no longer be available.
 
 ### Create a distribution build
 
@@ -209,7 +209,7 @@ yarn preview
 
 Once the server has started you can open your browser up at [http://localhost:9001](http://localhost:9001/) to preview the build.
 
-*Note: It is always good practice to build and preview your site before sending it over to anyone else, so you now for sure everything works properly.*
+> **Note:** It is always good practice to build and preview your site before sending it over to anyone else, so you now for sure everything works properly.
 
 #### Generate a difference report
 
@@ -221,7 +221,7 @@ You can do this by running the following in the root of your project
 yarn build:diff
 ```
 
-*Note: To use the difference report you will need to make sure you are within a [Git repository](https://git-scm.com/). it can use either the `master branch`, a [tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) or `commit hash`  to make the diff file.*
+> **Note:** To use the difference report you will need to make sure you are within a [Git repository](https://git-scm.com/). it can use either the `master branch`, a [tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) or `commit hash`  to make the diff file.
 
 ## Code quality
 
@@ -256,7 +256,7 @@ Settings can be changed in `.prettierrc` and files can be ignored in `.prettieri
 
 Please check the [editor integration](https://github.com/prettier/prettier#editor-integration) section of the Prettier readme to enable running Prettier within your IDE of choice.
 
-*Note: Keep in mind, that if you choose to automatically run Prettier when saving your file, Webpack will run twice (on your manual save, and when prettier reformats your code), slowing down the developer experience.*
+> **Note:** Keep in mind, that if you choose to automatically run Prettier when saving your file, Webpack will run twice (on your manual save, and when prettier reformats your code), slowing down the developer experience.
 
 ### Linting
 
@@ -276,7 +276,7 @@ To triger eslint you should open up the terminal in the root of your project and
 yarn lint:js
 ```
 
-*Note: Settings can be changed in `.eslintrc.js` and files can be ignored in `.eslintignore`.*
+> **Note:** Settings can be changed in `.eslintrc.js` and files can be ignored in `.eslintignore`.
 
 #### tslint
 
@@ -288,7 +288,7 @@ To triger tslint you should open up the terminal in the root of your project and
 yarn lint:ts
 ```
 
-*Note: Settings can be changed in `.tslintrc.js`.*
+> **Note:** Settings can be changed in `.tslintrc.js`.
 
 #### stylelint
 
@@ -300,7 +300,7 @@ To triger stylelint you should open up the terminal in the root of your project 
 yarn lint:css
 ```
 
-*Note: Settings can be changed in `.stylelintrc` and files can be ignored in `.stylelintignore`.*
+> **Note:** Settings can be changed in `.stylelintrc` and files can be ignored in `.stylelintignore`.
 
 ### Pre-commit hook
 
@@ -314,5 +314,5 @@ You can also run the command manually in the root of your project:
 yarn precommit
 ```
 
-*Note: Keep in mind that some lint errors might pop up in files that are not updated by changing other things (like imports that are not correct after renaming a file), so it's good practice to run `yarn lint` once in while to verify the complete codebase is valid.*
+> **Note:** Keep in mind that some lint errors might pop up in files that are not updated by changing other things (like imports that are not correct after renaming a file), so it's good practice to run `yarn lint` once in while to verify the complete codebase is valid.
 

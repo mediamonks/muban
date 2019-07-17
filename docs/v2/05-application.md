@@ -25,7 +25,7 @@ If you would want to add some HTML that appears on all pages (for example a head
 </div>
 ```
 
-*Note: If you want to more information about smart components please see smart-components section on the page about components!*
+> **Note:** If you want to more information about smart components please see smart-components section on the page about components!
 
 ## Bootstrapping
 The bootstrap file is the starting point of your Muban project, it is the entry point for webpack and can be found in the root of the `/src/app` folder. This file bootstraps Muban with the required configuration.

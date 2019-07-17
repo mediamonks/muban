@@ -3,7 +3,7 @@
 
 This page be the starting point for the core functionality of handlebars within Muban. For more detailed documentation please check the official [Handlebars](https://handlebarsjs.com/) documentation.
 
-*Note: You can read why handlebars was chosen in the introduction section. *
+> **Note:** You can read why handlebars was chosen in the introduction section. 
 
 ## Partials
 Handlebars allows for template reuse through partials. Partials are normal Handlebars templates that may be called directly by other templates. 
@@ -18,7 +18,7 @@ So for example if you create a component in the general directory called `my-com
 </div>
 ```
 
-*Note: Dynamically loading partials, like on the `app` compoennt is a bit more complex, see the guide on this for an example on how to do this.*
+> **Note:** Dynamically loading partials, like on the `app` compoennt is a bit more complex, see the guide on this for an example on how to do this.
 
 ## Helpers
 Besides the default helpers that are shipped with Handlebars itself, Muban includes additional helpers to make dynamic templates easier, and to be more compatible with backend template languages that these templates will be converted to.

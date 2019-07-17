@@ -175,7 +175,7 @@ Inside of your data file we can add the content that will be rendered in the blo
 1. Local data
 2. Referenced data
 
-*Note: Make sure to match your data structure with the backend to avoid major differences while implementing*
+> **Note:** Make sure to match your data structure with the backend to avoid major differences while implementing
 
 ##### Local data [Block]
 
@@ -202,4 +202,4 @@ content: "I'm the body copy for the block."
 otherContent: "import!./some-other-content.yaml"
 ```
 
-*Note: Keep in mind that import paths are relative!*
+> **Note:** Keep in mind that import paths are relative!

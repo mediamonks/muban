@@ -17,7 +17,7 @@ sg wizard
 
 This will start up the wizard and it will prompt you with a couple of questions. Use the provided instructions to select the template that you want to use. 
 
-*Note: Leave the page for what it is now, we will cover this in the section on pages.*
+> **Note:** Leave the page for what it is now, we will cover this in the section on pages.
 
 ```
 ? Which template do you want to use? (Use arrow keys)
@@ -29,7 +29,7 @@ This will start up the wizard and it will prompt you with a couple of questions.
 
 After that enter the desired name of your component.
 
-*Note: The casing will automatically be changed to the required format.*
+> **Note:** The casing will automatically be changed to the required format.
 
 ```
 ? Which template do you want to use? component
@@ -38,7 +38,7 @@ After that enter the desired name of your component.
 
 After you've provided the name you can choose the location where the component should be created. The default directory is shown so if you don't want to change this just press `enter`  to continue.
 
-*Note: If you want to provide a different location please provide the full relative path from the root of your project.*
+> **Note:** If you want to provide a different location please provide the full relative path from the root of your project.
 
 ```
 ? Which template do you want to use? component
@@ -90,7 +90,7 @@ sg wizard
 
 This will start up the wizard and it will prompt you with a couple of questions. Use the provided instructions to select the template that you want to use. 
 
-*Note: Leave the block, component and smart-component for what it is now, we will cover this in the section on components.*
+> **Note:** Leave the block, component and smart-component for what it is now, we will cover this in the section on components.
 
 ```
 ? Which template do you want to use? (Use arrow keys)
@@ -102,7 +102,7 @@ This will start up the wizard and it will prompt you with a couple of questions.
 
 After that enter the desired name of your page.
 
-*Note: The casing will automatically be changed to the required format.*
+> **Note:** The casing will automatically be changed to the required format.
 
 ```
 ? Which template do you want to use? my-page
@@ -111,7 +111,7 @@ After that enter the desired name of your page.
 
 After you've provided the name you can choose the location where the page should be created. The default directory is shown so if you don't want to change this just press `enter`  to continue.
 
-*Note: If you want to provide a different location please provide the full relative path from the root of your project.*
+> **Note:** If you want to provide a different location please provide the full relative path from the root of your project.*
 
 ```
 ? Which template do you want to use? page
@@ -150,7 +150,7 @@ Open up the terminal in the root of your project and run the following command:
 sg page my-page
 ```
 
-*Note: This will generate a page file for you, but leave out the step to render in blocks.*
+> **Note:** This will generate a page file for you, but leave out the step to render in blocks.
 
 ### Do not use the default index template
 The index overview template is always rendered in the development mode, if for any reason you would not want this in the distrubution build you can simply create a page called `index`.
@@ -257,7 +257,7 @@ After defining the variable you can use it in your data by wrapping it in the `$
 image: ${assetBase}/some/path/to/image.jpg
 ```
 
-*Note: Make sure the current `_src/data/_variables.yaml` file is not empty.*
+> ⚠️ Make sure the current `_src/data/_variables.yaml` file is not empty.
 
 ### Add scripts/meta data to the head of your page
 Sometimes you 
