@@ -878,9 +878,112 @@ export default class MySmartComponent extends AbstractComponent {
 }
 ```
 
-#### use a knockout template
+#### Use a knockout template
+This option works best when only used on the client, but when having server-rendered items in the DOM you would first need to convert them to data to properly render them.
 
-> ⚙️ TODO.
+```handlebars
+<!--
+List item template, keep in HTML since it will be used by javascript.
+The HTML in the script-template is similar to the html in the handlebars list below.
+The handlebars template will be rendered on the server, and the script-template will
+be used by knockout to render the list client-side (when new data comes in).
+-->
+<script type="text/html" id="item-template">
+  <h3 class="title" data-bind="text: title"></h3>
+  <p class="description" data-bind="html: description"></p>
+  <div class="tags">
+    <!-- ko foreach: tags -->
+      <span class="tag" data-bind="text: $data"></span>
+    <!-- /ko -->
+  </div>
+</script>
+
+<section class="items">
+  {{#each items}}
+    <article class="item">
+      <h3 class="title">{{title}}</h3>
+      <p class="description">{{description}}</p>
+      <div class="tags">
+        {{#each tags}}
+          <span class="tag">{{this}}</span>
+        {{/each}}
+      </div>
+    </article>
+  {{/each}}
+</section>
+```
+
+```typescript
+import ko from 'knockout';
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  constructor(el: HTMLElement) {
+    super(el); 
+    
+    // 1. transform old items to data get all DOM nodes
+    const items = this.getElements('.item');
+    
+    // Convert to list of useful data to filter/sort on
+    const oldData = items.map(item => ({
+      title: item.querySelector('.title').textContent,
+      description: item.querySelector('.description').innerHTML,
+      tags: Array.from(item.querySelectorAll('.tag')).map(tag => tag.textContent),
+    }));
+    
+    // 2. create observable and set old data
+    const itemData = ko.observableArray(oldData);
+    
+    // 3. apply bindings to list, this will re-render the items
+    ko.applyBindingsToNode(this.element.querySelector('.items'), {
+      'template' : { 'name': 'item-template', 'foreach': itemData },
+    });
+    
+    // 4. add new data to the observable or do any other funky stuff to the array, like sorting/filtering
+    itemData.push(...newData);
+  }
+      
+  public dispose() {
+    super.dispose();
+  }
+}
+```
+
+Even though the previous example is quite simple, it still requires a lot of typing to get it done. To do this more efficient there is a [util available](./09-api-reference.md#initListBinding) in Muban to do this for you.
+
+```typescript
+import ko from 'knockout';
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  constructor(el: HTMLElement) {
+    super(el); 
+    
+    const itemData = initListBinding(
+      this.getElements('.items'),
+      'item-template',
+      {
+        query: '.item',
+        data: {
+          title: '.title',
+          description: { query: '.description', htm: true },
+          tags: { query: '.tag', list: true },
+        }
+      },
+    );
+    // 4. add new data to the observable or do any other funky stuff to the array, like sorting/filtering
+    itemData.push(...newData);
+  }
+      
+  public dispose() {
+    super.dispose();
+  }
+}
+```
 
 ## Handlebars
 
