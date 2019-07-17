@@ -168,10 +168,7 @@ Add a `data.json` file with the following structure:
 
 ```
 
-If you are planning on using JSON for all files, it is recommended to remove the `.yml` the template files and add the `json` variant.
-
-- `build-tools/generator-templates/block`
-
+> If you are planning on using JSON for all data files, it is recommended to remove the template file `{name_sc}.yaml` from the page directory: `build-tools/generator-templates/block/` and add a JSON variant: `{name_sc}.json`.
 
 ### Using JavaScript for data files
 If you want dynamic data, add loops or something from the `process.env` you can use JavaScript as the source of your data. 
@@ -184,6 +181,8 @@ module.exports = {
   content: 'I\'m the body copy for the block.',
 };
 ```
+
+> If you are planning on using JavaScript for all data files, it is recommended to remove the template file `{name_sc}.yaml` from the page directory: `build-tools/generator-templates/block/` and add a JavaScript variant: `{name_sc}.js`
 
 ### Using JSON for page files
 Using JSON as the source for your pages is not recommended but if for any reason you would want to do this you can. 
@@ -208,6 +207,8 @@ Add a `my-page.json` file in the data `src/data/` folder, with the following str
 }
 ```
 
+> If you are planning on using JSON for all pages, it is recommended to remove the template file `{name_sc}.yaml` from the page directory: `build-tools/generator-templates/page/` and add a JSON variant: `{name_sc}.json`
+
 ### Using JavaScript for page files
 If you want dynamic data, add loops or something from the `process.env` you can use JavaScript as the source of your data. 
 
@@ -231,10 +232,7 @@ module.exports = {
 };
 ```
 
-
-If you are planning on using JSON for all pages, it is recommended to remove the `{name_sc}.yaml` the template files and add a json variant: `{name_sc}.json`
-
-- `build-tools/generator-templates/page`
+> If you are planning on using JavaScript for all pages, it is recommended to remove the template file `{name_sc}.yaml` from the page directory: `build-tools/generator-templates/page/` and add a JavaScript variant: `{name_sc}.js`
 
 ### Use custom variables in your data
 Using variables in your data can be really usefull if you have to modify certain parts multiple times. Imagine a situation where your all data files contain absolute paths to images and you would have to change this for any reason.
