@@ -10,9 +10,9 @@ There are multiple ways of providing the dynamic data to the component. Here we 
 
 In this case, dynamic data is everything that is not rendered as visible HTML. There are different ways to pass down additional data to the browser so it can be used by JavaScript upon user interaction. See the tutorial section for a detailed instruction on how to do this.
 
-* data-attributes
-* embedded json
-* http-requests (fetch)
+* [data-attributes](./12-guides.md#Get-data-from-data-attributes)
+* [embedded json](./12-guides.md#Get-data-from-embedded-json)
+* [http-requests](./12-guides.md#Get-data-through-a-http-request)
 
 ## Data templates
 

@@ -423,8 +423,68 @@ export default class MySmartComponent extends AbstractComponent {
 ```
 
 ### Get data from embedded json
+When needing quite a big payload on your page, you can embed it in a non-JS script tag, and parse it with JS afterwards. 
 
-> ⚙️ TODO.
+```handlebars
+<div class="my-component" data-component="my-component">
+  <script type="text/json">
+    {
+      "users": [
+        {
+          "id": 0,
+          "name": "Adam Carter",
+          "email": "adam.carter@unilogic.com",
+          "dob": "1978",
+          "address": "83 Warner Street",
+          "city": "Boston"
+        },
+        {
+          "id": 1,
+          "name": "Leanne Brier",
+          "email": "leanne.brier@connic.org",
+          "dob": "13/05/1987",
+          "address": "9 Coleman Avenue",
+          "city": "Toronto"
+        }
+      ],
+      "images": [
+        "img0.png",
+        "img1.png",
+        "img2.png"
+      ],
+      "coordinates": {
+        "x": 35.12,
+        "y": -21.49
+      },
+      "price": "$59,395"
+    }
+  </script>
+</div>
+```
+
+After that you can access it by using the [`getElement`](#Select-child-element-elements) method.
+
+```typescript
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  constructor(el: HTMLElement) {
+    super(el);
+
+    // 1. Get the script element from the DOM.
+    const scriptElement = this.getElement('script[type="text/json"]');
+    // 2. Parse the contents as JSON.
+    const data = JSON.parse(scriptElement.innerHTML);
+  }
+
+  public dispose() {
+    super.dispose();
+  }
+}
+```
+
 
 ### Get data through a http-request
 
