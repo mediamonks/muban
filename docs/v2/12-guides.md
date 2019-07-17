@@ -109,7 +109,7 @@ After you've provided the name you can choose the location where the page should
 ? What name do you want to use? my-page
 ? Where do you want to create the page? (./src/data) 
 ```
-> **Note:** If you want to provide a different location please provide the full relative path from the root of your project.*
+> **Note:** If you want to provide a different location please provide the full relative path from the root of your project.
 
 After that you can provide an optional list of blocks that you want to render out on that page. If you want to skip this step you can just press `enter`. Otherwise provide a `slug-cased` list of components that you want to render.
 
