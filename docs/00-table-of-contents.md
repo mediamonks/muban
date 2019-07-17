@@ -72,10 +72,11 @@ This file serves as an overview of all the pages available in the Muban docs.
       2. [Data](./04-page.md#Data)
          1. [Local data](./04-page.md#Local-data)
          2. [Imported data](./04-page.md#Imported-data)
-5. [Application](./05-application.md) 1. [Bootstrapping](./05-application.md#Bootstrapping) 1.
-   [Development bootstrapping](./05-application.md#Development-bootstrapping) 2.
-   [Production bootstrapping](./05-application.md#Production-bootstrapping)
-   2. [Application Lifecycle](./05-application.md#Application-Lifecycle)
+5. [Application](./05-application.md)
+   1. [Bootstrapping](./05-application.md#Bootstrapping)
+   2. [Development bootstrapping](./05-application.md#Development-bootstrapping)
+   3. [Production bootstrapping](./05-application.md#Production-bootstrapping)
+   4. [Application Lifecycle](./05-application.md#Application-Lifecycle)
 6. [Dynamic data](./06-dynamic-data.md)
    1. [Data provider](./06-dynamic-data.md#Data-provider)
    2. [Data templates](./06-dynamic-data.md#Data-templates)
