@@ -646,7 +646,6 @@ export default class MySmartComponent extends AbstractComponent {
 default state, which could (depending on the contents of the section) be a bad experience,
 especially when dealing with animation/transitions.
 
-
 #### The API returns JSON
 This one might be a bit more work compared to just replacing HTML, but gives you way more control
 over what happens on the page. The big benefit is that the state doesn't reset, allowing you to make
@@ -679,8 +678,79 @@ export default class MySmartComponent extends AbstractComponent {
 ```
 
 ### Sort or filter items already in the DOM
+Sometimes the server renders a list of items on the page, but you have to sort or filter them
+client-side, based on specific data in those items. Since we already have all the items and data on
+the page, it's not that difficult.
 
-> ⚙️ TODO.
+We can just query all the items, and retrieve the information we need to execute our logic, and add
+them back to the page.
+
+```typescript
+import { updateElement } from 'muban-core';
+import AbstractComponent from '../AbstractComponent';
+
+interface ItemData { element:HTMLElement; title:string; tags:Array<string> }
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  private itemData:Array<ItemData>;
+
+  constructor(el: HTMLElement) {
+    super(el);
+    
+    this.initItems();
+    this.updateItems();
+  }
+  
+  private initItems():void {
+    // 1. Get all DOM nodes.
+    const items = this.getItems('.item');
+    
+    // 2. Convert to list of useful data to filter/sort on.
+    this.itemData = items.map(item => ({
+      element: item,
+      title: item.querySelector('.title').textContent,
+      tags: Array.from(item.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase()),
+    }));
+  }
+  
+  private updateItems():void {
+    // 1. Empty the container.
+    const container = this.element.querySelector('.items');
+    
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+
+    // 2. filter on any tags that contains an 's'.
+    let newItems = this.filterOnTags(this.itemData, 's');
+  
+    // 3. Sort descending.
+    newItems = this.sortOnTitle(newItems, false);
+
+    // 4. append new items to the container.
+    const fragment = document.createDocumentFragment();
+    newItems.forEach(item => fragment.appendChild(item.element));
+    container.appendChild(fragment);
+  }
+ 
+  private sortOnTitle(itemData, ascending:boolean = false):Array<ItemData> {
+    // Sort items base on the title attribute.
+    return [...itemData].sort((a, b) => a.title.localeCompare(b.title) * (ascending ? 1 : -1));
+  }
+
+  private filterOnTags(itemData, filter:string):Array<ItemData> {
+    // Filter items based on the tags array.
+    return itemData.filter(item => item.tags.some(tag => tag.includes(filter.toLowerCase())));
+  }
+  
+  public dispose() {
+    super.dispose();
+  }
+}
+
+```
 
 ### Load more items to the page
 
