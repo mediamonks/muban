@@ -570,15 +570,113 @@ fetch('/avatars', {
 
 ### Update an entire section through a http-request
 
-> ⚙️ TODO.
-
 #### The API returns HTML
+Sometimes, a section rendered by the backend has multiple options, and when switching options you want new data for that section. If the backend cannot return JSON, they might return a HTML snippet for that section. In that case we should:
 
-> ⚙️ TODO.
+1. Fetch the new section.
+2. Clean up the old HTML element (remove attached classes, for memory leaks).
+3. Replace the HTML on the page.
+4. Initialize new component instances for that section and nested components.
+
+```typescript
+import { cleanElement, initComponents } from 'muban-core';
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  constructor(el: HTMLElement) {
+    super(el);
+  }
+  
+  private update() {
+    fetch('/api/section/some-slug')
+      .then(response => response.text())
+      .then(body => {
+        // 1. dispose all created component instances.
+        cleanElement(this.element);
+
+        // 2. insert the new HTML into a temp container to construct the DOM.
+        const temp = document.createElement('div');
+        temp.innerHTML = body;
+        const newElement = temp.firstChild;
+
+        // 3. replace the HTML on the page.
+        this.element.parentNode.replaceChild(newElement, this.element);
+
+        // 4. initialize new components for the new element.
+        initComponents(<HTMLElement>newElement);
+      });   
+  }
+  
+  public dispose() {
+    super.dispose();
+  }
+}
+```
+
+Since this is a lot of typoing there is a utility to do the exact same thing.
+
+```typescript
+import { updateElement } from 'muban-core';
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  constructor(el: HTMLElement) {
+    super(el);
+  }
+  
+  private update() {
+    fetch('/api/section/some-slug')
+      .then(response => response.text())
+      .then(body => {
+        updateElement(this.element, body);
+      });
+  }
+  
+  public dispose() {
+    super.dispose();
+  }
+}
+```
+
+> ⚠️ While this seams like a good option, keep in mind that the whole section will be reset into its
+default state, which could (depending on the contents of the section) be a bad experience,
+especially when dealing with animation/transitions.
+
 
 #### The API returns JSON
+This one might be a bit more work compared to just replacing HTML, but gives you way more control
+over what happens on the page. The big benefit is that the state doesn't reset, allowing you to make
+nice transitions while the new data is updated on the page.
 
-> ⚙️ TODO.
+```typescript
+import { updateElement } from 'muban-core';
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  constructor(el: HTMLElement) {
+    super(el);
+  }
+  
+  private update() {
+    fetch('/api/section/some-slug')
+      .then(response => response.json())
+      .then(json => {
+        // 1. Update the text in the DOM.
+        this.getElement('.js-content).innerHTML = json.content.
+      });
+  }
+  
+  public dispose() {
+    super.dispose();
+  }
+}
+```
 
 ### Sort or filter items already in the DOM
 
@@ -632,11 +730,15 @@ fetch('/avatars', {
 
 ## Knockout
 
-### Create a global state
+### Apply bindings to a node.
 
 > ⚙️ TODO.
 
 ### Apply bindings to the entire component
+
+> ⚙️ TODO.
+
+### Create a global state
 
 > ⚙️ TODO.
 
