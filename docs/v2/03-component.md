@@ -1,6 +1,7 @@
 # Component
-
 A component is a potentially re-usable set of logic, behaviours and interface elements that speeds up the creation of an application. If you work on a Muban project its good too keep in mind that everything is a component.  
+
+> ⚠️ [See the guide](./12-guides.md#Create-a-component) on how to create your own component! 
 
 ## Types
 
@@ -159,11 +160,11 @@ The `preset.js` file for a block is exactly the same as the one for the smart-co
 
 One of the main things that separates a block from a smart-component is the data that is attached to it. The data files provide the content and structure of your block, they represent the eventual backend data that will be used to render the templates on the server.
 
-Data files an be one of the following formats.
+Data files can be one of the following formats and can be used interchangeably.
 
 1. Yaml
-2. Json
-3. JavaScript
+2. [Json](./12-guides.md#Using-JSON-for-data-files)
+3. [JavaScript](./12-guides.md#Using-JavaScript-for-data-files)
 
 Since `yaml` is less verbose, and can better handle multiline content, we've chosen that as the default. If you want to use any of the other formats please see the Tutorial section.
 
@@ -202,70 +203,3 @@ otherContent: "import!./some-other-content.yaml"
 ```
 
 *Note: Keep in mind that import paths are relative!*
-
-## Creating a component
-
-Now that we have covered all the parts that make up the different component types you could create them manually. This process takes up a lot of time and increases chance of errors! To avoid this you can use the [seng-generator](https://www.npmjs.com/package/seng-generator) to generate them for you! If you followed the preparation instructions you will by now have this installed. 
-
-### Using the wizard
-
-Start by opening the terminal in the root of your project and run the following command.
-
-```
-sg wizard
-```
-
-This will start up the wizard and it will prompt you with a couple of questions. Use the provided instructions to select the template that you want to use. 
-
-*Note: Leave the page for what it is now, we will cover this in the section on pages.*
-
-```
-? Which template do you want to use? (Use arrow keys)
-  block
-> component
-  page
-  smart-component
-```
-
-After that enter the desired name of your component.
-
-*Note: The casing will automatically be changed to the required format.*
-
-```
-? Which template do you want to use? component
-? What name do you want to use? () 
-```
-
-After you've provided the name you can choose the location where the component should be created. The default directory is shown so if you don't want to change this just press `enter`  to continue.
-
-*Note: If you want to provide a different location please provide the full relative path from the root of your project.*
-
-```
-? Which template do you want to use? component
-? What name do you want to use? my-component
-? Where do you want to create the component? (./src/app/component) 
-```
-
-After you pressed enter it will notify you that the component has been successfully created.
-
-```
-? Which template do you want to use? component
-? What name do you want to use? my-component
-? Where do you want to create the component? ./src/app/component
-Generating files from 'component' template with name: my-component
-
-Done!
-```
-
-### Using the shorthand
-
-While using the wizard to generate your components is very easy and descriptive of what's happening it requires quite a lot of interaction. If you do not want to go through this every time you can use the shorthand to create the components.
-
-Open up the terminal in the root of your project and run the following command:
-
-```bash
-sg component my-component
-```
-
-This have the same result as when the wizard is followed.
-
