@@ -77,7 +77,7 @@ This have the same result as when the wizard is followed.
 > ⚠️ Creating a block uses the same steps as described in the [creation of a basic component](#Create-a-component).
 
 ### Create a page
-Creating a page can be done manually by creating the files as described in the [page on the pages](./03-page.md). This process takes up a lot of time and increases chance of errors! To avoid this you can use the [seng-generator](https://www.npmjs.com/package/seng-generator) to generate them for you! If you followed the preparation instructions you will by now have this installed. 
+Creating a page can be done manually by creating the files as described in the [page on the pages](./04-page.md). This process takes up a lot of time and increases chance of errors! To avoid this you can use the [seng-generator](https://www.npmjs.com/package/seng-generator) to generate them for you! If you followed the preparation instructions you will by now have this installed. 
 
 ### Using the wizard
 
