@@ -948,13 +948,14 @@ export default class MySmartComponent extends AbstractComponent {
   public dispose() {
     super.dispose();
   }
-}
+}``
 ```
+
+> ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will increase a lot.
 
 Even though the previous example is quite simple, it still requires a lot of typing to get it done. To do this more efficient there is a [util available](./09-api-reference.md#initListBinding) in Muban to do this for you.
 
 ```typescript
-import ko from 'knockout';
 import AbstractComponent from '../AbstractComponent';
 
 export default class MySmartComponent extends AbstractComponent {
