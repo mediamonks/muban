@@ -9,15 +9,15 @@ single preset isolated.
 
 Besides the component, it will show:
 
-* the name
-* the file path
-* the description
-* the preset html
-* the preset data
-* the component .hbs source
-* the component .ts source
-* the component .scss source
-* the rendered html
+- the name
+- the file path
+- the description
+- the preset html
+- the preset data
+- the component .hbs source
+- the component .ts source
+- the component .scss source
+- the rendered html
 
 The viewer also includes a media query viewer that read the media queries from your projects, just
 like it's done in Chrome DevTools.
@@ -32,7 +32,7 @@ yarn storybook:preview  # preview the built storybook on port 9003
 
 Just create a `preset.js` file in your component folder and add a story like this:
 
-```
+```typescript
 import { storiesOf } from 'storybook/utils/utils';
 
 storiesOf('Paragraph', require('./paragraph'))
@@ -54,7 +54,7 @@ storiesOf('Paragraph', require('./paragraph'))
 
 You can add multiple presets of the same component by chaining the `add()`:
 
-```
+```typescript
 storiesOf('Paragraph', require('./paragraph'))
   .add('preset 1', ...)
   .add('preset 2', ...)
@@ -69,16 +69,15 @@ the object you pass as the last argument.
 
 You can also store the data objects in a yaml file in the same folder and just require it in place:
 
-```
-storiesOf('Paragraph', require('./paragraph'))
-  .add(
-    'default',
-    'A Paragraph block with a "read more" section you can show by clicking a button.',
-    `<hbs>
+```typescript
+storiesOf('Paragraph', require('./paragraph')).add(
+  'default',
+  'A Paragraph block with a "read more" section you can show by clicking a button.',
+  `<hbs>
       {{> paragraph @root }}
     </hbs>`,
-    require('./data'),
-  )
+  require('./data'),
+);
 ```
 
 ## Customize
@@ -102,7 +101,7 @@ The only configuration available at the moment is loading the stories. When the 
 function is called, you have to require all the preset files, which can be done by using a webpack
 context:
 
-```
+```typescript
 import { configure } from 'storybook/utils/utils';
 
 const context = require.context('app/component/', true, /preset\.js$/);
