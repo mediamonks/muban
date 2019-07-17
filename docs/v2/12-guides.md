@@ -15,9 +15,7 @@ Start by opening the terminal in the root of your project and run the following 
 sg wizard
 ```
 
-This will start up the wizard and it will prompt you with a couple of questions. Use the provided instructions to select the template that you want to use. 
-
-> **Note:** Leave the page for what it is now, we will cover this in the section on pages.
+This will start up the wizard and it will prompt you with a couple of questions. Use the `up` and `down` keys to select the template that you want to use and press the `enter` key to continue.
 
 ```
 ? Which template do you want to use? (Use arrow keys)
@@ -27,16 +25,15 @@ This will start up the wizard and it will prompt you with a couple of questions.
   smart-component
 ```
 
-After that enter the desired name of your component.
-
-> **Note:** The casing will automatically be changed to the required format.
+After that enter the desired name of your component and press `enter` again.
 
 ```
 ? Which template do you want to use? component
 ? What name do you want to use? () 
 ```
+> **Note:** The casing will automatically be changed to the required format.
 
-After you've provided the name you can choose the location where the component should be created. The default directory is shown so if you don't want to change this just press `enter`  to continue.
+After you've provided the name you can choose the location where the component should be created. The default directory is shown so if you don't want to change this just press `enter` to continue.
 
 > **Note:** If you want to provide a different location please provide the full relative path from the root of your project.
 
@@ -87,9 +84,7 @@ Start by opening the terminal in the root of your project and run the following 
 sg wizard
 ```
 
-This will start up the wizard and it will prompt you with a couple of questions. Use the provided instructions to select the template that you want to use. 
-
-> **Note:** Leave the block, component and smart-component for what it is now, we will cover this in the section on components.
+This will start up the wizard and it will prompt you with a couple of questions. Use the `up` and `down` keys to select the *page template* and press `enter` to continue.
 
 ```
 ? Which template do you want to use? (Use arrow keys)
@@ -99,24 +94,22 @@ This will start up the wizard and it will prompt you with a couple of questions.
   smart-component
 ```
 
-After that enter the desired name of your page.
-
-> **Note:** The casing will automatically be changed to the required format.
+After that enter the desired name of your page and press `enter` again.
 
 ```
 ? Which template do you want to use? my-page
 ? What name do you want to use? () 
 ```
+> **Note:** The casing will automatically be changed to the required format.
 
-After you've provided the name you can choose the location where the page should be created. The default directory is shown so if you don't want to change this just press `enter`  to continue.
-
-> **Note:** If you want to provide a different location please provide the full relative path from the root of your project.*
+After you've provided the name you can choose the location where the page should be created. The default directory is shown so if you don't want to change this just press `enter` to continue.
 
 ```
 ? Which template do you want to use? page
 ? What name do you want to use? my-page
 ? Where do you want to create the page? (./src/data) 
 ```
+> **Note:** If you want to provide a different location please provide the full relative path from the root of your project.*
 
 After that you can provide an optional list of blocks that you want to render out on that page. If you want to skip this step you can just press `enter`. Otherwise provide a `slug-cased` list of components that you want to render.
 
