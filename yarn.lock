@@ -7769,10 +7769,10 @@ muban-convert-hbs@^1.1.1:
     "@babel/runtime" "^7.0.0-beta.35"
     handlebars "^4.0.11"
 
-muban-core@^1.11.7:
-  version "1.11.7"
-  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.11.7.tgz#f2dd5aa26d14a7e7128574ea169e23391ad73585"
-  integrity sha512-/3nBlXlRo2zTkGySnT5VSNaBqVA+oMndUcXRBqgeIU8kmuDeDp2W8Ez+KzEsGcqi1N3DId6A6lbs1hGrfEcD3Q==
+muban-core@^1.12.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.12.0.tgz#bb226f69f1a7d1e40af856df6367d143f827b141"
+  integrity sha512-0v8S7BGTg6lpsQAsE5QKe3KFgZROF2qTc+47YDoYHwh12zC3gnEZ3J2d3eCCPr8bgiwTTQBF2CYfgg0XOCnbmQ==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"

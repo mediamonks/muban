@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = () => ({
   title: 'Test',
   meta: {
     id: '', // can be number or string, used for ordering
@@ -20,4 +20,4 @@ module.exports = {
       data: {},
     },
   ],
-};
+});
