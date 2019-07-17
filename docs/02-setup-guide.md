@@ -155,7 +155,7 @@ There are two ways of getting the Muban source code:
 
 2. Download the zip directly from GitHub and extract the contents in the newly create project root.
 
-   [⇨ Download the zip file](https://github.com/mediamonks/muban/archive/master.zip)
+   [📦 Download the zip file](https://github.com/mediamonks/muban/archive/master.zip)
 
 #### Install dependencies
 
