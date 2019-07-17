@@ -753,16 +753,130 @@ export default class MySmartComponent extends AbstractComponent {
 ```
 
 ### Load more items to the page
+Sometimes the server renders the first page of items, but they want to have the second page to be loaded and displayed from the client. If the server returns HTML, we can just re-use some of the logic in our HTML example above.
 
-> ⚙️ TODO.
+However, if the server returns JSON, we sort of want to re-use the markup of the existing items on the page. We could build up the HTML ourselves from JavaScript, but that would mean the HTML lives in two places, on the server and in JavaScript, and it will be hard to keep them in sync.
+
+There are two options we can choose from.
 
 #### Clone and update element
+For smaller items, we could just clone the first element of the list, and create a function that updates all the data in that item, so we can append it to the DOM.
 
-> ⚙️ TODO.
+```typescript
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  private template:HTMLElement;
+  private fragment:DocumentFragment;
+
+  constructor(el: HTMLElement) {
+    super(el);
+    
+    this.template = this.getElement('.item');
+    this.fragment = document.createDocumentFragment();
+    
+    this.addNewItems([{title: 'foo'}, {title: 'bar'}])
+  }
+  
+  private addNewItems(items:Array<{title:string;>):void {
+    // 1. Clone template, update data, and add to fragment
+    items.forEach(item => {
+      const clone = template.cloneNode(true);
+      clone.querySelector('.title').textContent = item.title;
+      clone.querySelector('.description').textContent = item.description;
+      fragment.appendChild(clone);
+    });
+   
+    // 2. Add fragment to the list.
+    this.element.querySelector('.list').appendChild(fragment);
+  }
+  
+    
+  public dispose() {
+    super.dispose();
+  }
+}
+```
 
 #### Use a handlebars template
+If we already have a `.hbs` template, we can use this in JavaScript as well. If we import the .hbs file, it will be pre-compiled by webpack to a JavaScript function. This function accepts 1 parameter, the data, and returns the HTML string.
 
-> ⚙️ TODO.
+```typescript
+import { initComponents } from 'muban-core';
+import itemTemplate from '../../general/item/item.hbs?include';
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+  
+  private container:HTMLElement;
+
+  constructor(el: HTMLElement) {
+    super(el);
+        
+    this.container = this.getElement('.list');
+    
+    this.addNewItems([{title: 'foo'}, {title: 'bar'}])
+  }
+  
+  private addNewItems(items:Array<{title:string;>):void {
+    items.forEach(item => {
+      // 1. Create the element based on the handlebars template.
+      const content = itemTemplate(item)
+      // 2. Append to the container.
+      this.container.appendChild(content);
+    });
+   
+    // 3. If the new item has any logicy you can optionally call the 
+    // init components method to make them interactive.
+    initComponents(this.container);
+  }
+  
+    
+  public dispose() {
+    super.dispose();
+  }
+}
+```
+
+##### Data util methods
+Even though the previous example is quite simple, it still requires a lot of typing to get it done. To do this more efficient there are two render helpers available in Muban.
+
+1. [renderItem](./09-api-reference.md#renderItem)
+2. [renderItems](./09-api-reference.md#renderItems)
+
+```typescript
+import { renderItem, renderItems } from 'muban-core/lib/utils/dataUtils';
+import itemTemplate from '../../general/item/item.hbs?include';
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+  
+  private container:HTMLElement;
+
+  constructor(el: HTMLElement) {
+    super(el);
+        
+    this.container = this.getElement('.list');
+    
+    // 1. This will replace the current item in the container and initialise it.
+    renderItem(this.container, itemTemplate, {title: 'foo'});
+    // 2. This will append a new item to the container and only initialise that one.
+    renderItem(this.container, itemTemplate, {title: 'foo'}, true);
+    // 3. This will replace an entire list of items and initialise all of them.
+    renderItems(this.container, itemTemplate, [{title: 'foo'}, {title: 'bar'}]);
+    // 4. This will append a new list to the container and ony initialise the new ones.
+    renderItems(this.container, itemTemplate, [{title: 'foo'}, {title: 'bar'}, true]);  
+  }
+      
+  public dispose() {
+    super.dispose();
+  }
+}
+```
 
 #### use a knockout template
 
