@@ -4,7 +4,7 @@ A component is a potentially re-usable set of logic, behaviours and interface el
 up the creation of an application. If you work on a Muban project its good too keep in mind that
 everything is a component.
 
-> ⚠️ [See the guide](./12-guides.md#Create-a-component) on how to create your own component!
+> ⚠️ [See the guide](./13-guides.md#Create-a-component) on how to create your own component!
 
 ## Types
 
@@ -186,8 +186,8 @@ backend data that will be used to render the templates on the server.
 Data files can be one of the following formats and can be used interchangeably.
 
 1. Yaml
-2. [Json](./12-guides.md#Using-JSON-for-data-files)
-3. [JavaScript](./12-guides.md#Using-JavaScript-for-data-files)
+2. [Json](./13-guides.md#Using-JSON-for-data-files)
+3. [JavaScript](./13-guides.md#Using-JavaScript-for-data-files)
 
 Since `yaml` is less verbose, and can better handle multiline content, we've chosen that as the
 default. If you want to use any of the other formats please see the Tutorial section.

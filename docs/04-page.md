@@ -7,8 +7,8 @@ contains the structure and the data for that page.
 A page can be in one of the following formats and can be used interchangeably.
 
 1. Yaml
-2. [Json](./12-guides.md#Using-JSON-for-page-files)
-3. [JavaScript](./12-guides.md#Using-JavaScript-for-page-files)
+2. [Json](./13-guides.md#Using-JSON-for-page-files)
+3. [JavaScript](./13-guides.md#Using-JavaScript-for-page-files)
 
 Since `yaml` is less verbose, and can better handle multiline content, we've chosen that as the
 default. If you want to use any of the other formats please see the Tutorial section.
