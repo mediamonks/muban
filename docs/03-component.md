@@ -78,7 +78,7 @@ folder.
 }
 ```
 
-_Note: The `.scss` file is technically optional so if you don't need it you could remove it._
+> **Note:** The `.scss` file is technically optional so if you don't need it you could remove it.
 
 #### Preset [Component]
 

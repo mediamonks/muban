@@ -31,7 +31,7 @@ you would add it here. Just make sure you leave the loop in there!
 ```
 
 > **Note:** If you want to more information about smart components please see smart-components
-> section on the page about components!
+> section on the [page about components](./03-component.md)
 
 ## Bootstrapping
 
@@ -49,8 +49,8 @@ production version of the bootstrap.
 
 The development version of the bootstrap file exists of two sections. The first one is the
 initialisation of Muban with all the confiugration and the second one enables hot reloading for the
-development server. For a full detailed description of the development bootstrap method see the API
-reference page!
+development server. For a full detailed description of the development bootstrap method
+[see the API reference page](./09-api-reference.md)!
 
 ### Production bootstrapping
 
@@ -59,7 +59,8 @@ creation of a require context for all the blocks. The second part is the actual 
 Muban, compared to the development version this initialisation does not require any more
 configuration since everything is already bundled.
 
-For a full detailed description of the production bootstrap method see the API reference page!
+For a full detailed description of the production bootstrap method
+[see the API reference page](./09-api-reference.md)!
 
 ## Application lifecycle
 
