@@ -154,10 +154,9 @@ Add a `data.json` file with the following structure:
 
 ```json
 {
-	"title": "Hi I'm a block! 💪",
-	"content": "I'm the body copy for the block."
+  "title": "Hi I'm a block! 💪",
+  "content": "I'm the body copy for the block."
 }
-
 ```
 
 > If you are planning on using JSON for all data files, it is recommended to remove the template file `{name_sc}.yaml` from the page directory: `build-tools/generator-templates/block/` and add a JSON variant: `{name_sc}.json`.
@@ -481,7 +480,7 @@ When needing quite a big payload on your page, you can embed it in a non-JS scri
 </div>
 ```
 
-After that you can access it by using the [`getElement`](#Select-child-element-elements) method.
+After that you can access it by using the [`getElement`](#Select-child-elementelements) method.
 
 ```typescript
 import AbstractComponent from '../AbstractComponent';
