@@ -119,7 +119,7 @@ This file serves as an overview of all the pages available in the Muban docs.
        8. [Using JSON for page files](./12-guides.md#Using-json-for-page-files)
        9. [Using JavaScript for page files](./12-guides.md#Using-javascript-for-page-files)
        10. [Use custom variables in your data](./12-guides.md#Use-custom-variables-in-your-data)
-       11. [Add scripts/meta data to the head of your page.](./12-guides.md#Add-scripts-meta-data-to-the-head-of-your-page)
+       11. [Updating the HTML boilerplate](./12-guides.md#Updating-the-HTML-boilerplate)
     2. [TypeScript](./12-guides.md#TypeScript)
        1. [Ensure all components have been initalised](./12-guides.md#Ensure-all-components-have-been-initialised)
        2. [Select child element/elements](./12-guides.md#Select-child-element-elements)

@@ -73,7 +73,6 @@ This have the same result as when the wizard is followed.
 ### Create a smart-component
 > ⚠️ Creating a smart-component uses the same steps as described in the [creation of a basic component](#Create-a-component).
 
-
 ### Create a block
 > ⚠️ Creating a block uses the same steps as described in the [creation of a basic component](#Create-a-component).
 
@@ -259,12 +258,19 @@ image: ${assetBase}/some/path/to/image.jpg
 
 > ⚠️ Make sure the current `_src/data/_variables.yaml` file is not empty.
 
-### Add scripts/meta data to the head of your page
-Sometimes you 
+### Updating the HTML boilerplate
+The HTML templates of your project can be found in the `build-tools/templates` folder. This folder contains three files that are used for the different layouts. 
 
-### Excluding data files from distribution builds
+| File | Description |
+|---	|---	|
+| `build-html-template.hbs` |  This template is used with all bundled assets. |
+| `build-html-template-standalone` | This template is used with page specific assets. |
+| `devserver-index.html` | This template is used to run the development server |``
 
-> ⚙️ TODO.
+### Excluding page files.
+If for any reason you would like to keep the page files but have them excluded from the Muban project you can do this by prefixing them with an underscore.
+
+Example: `_my-page.yaml`
 
 ## TypeScript
 
