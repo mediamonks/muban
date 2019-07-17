@@ -11,10 +11,6 @@ initComponents(rootElement: HTMLElement): void
   be searched for Muban components (using the `data-component` attribute), and a new class instance
   will be created for every component. All HTML outside of this component will be ignored.
   
-Once the component tree for the passed rootElement is fully constructed, the `adopted()` lifecycle
-method will be called on all new components that implement that method.
-When the `adopted()` method is called, it means that the component is fully adopted by all its
-parents and the application is fully mounted.
 
 ### cleanElement
 Cleans all component classes previously created by calling initComponents on the same container. 

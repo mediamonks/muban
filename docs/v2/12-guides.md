@@ -274,9 +274,33 @@ Example: `_my-page.yaml`
 
 ## TypeScript
 
-### Ensure all components have been initalised
+### Ensure all components have been adopted
+When the application is initialised it runs through a [lifecycle](./05-application.md#Application-lifecycle). This basically means that all your components will be initialised from the deepest child up. This could mean that your child component is initialised before the parent component. This could (in some cases) cause problems if you rely on parent components. 
 
-> ⚙️ TODO.
+If you want to ensure that your component is fully adopted by the application you can add the `adopted` method to the components TypeScript file and it will be called once the application is fully mounted.
+
+```typescript
+import AbstractComponent from "../AbstractComponent";
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName:string = 'my-smart-component';
+
+  constructor(el:HTMLElement) {
+    super(el);
+
+    // I'm ready but might not be adopted by the application! ☹️
+  }
+  
+  public adopted():void {
+  	// I'm finally adopted by the application! 🎉
+  }
+  
+
+  public dispose() {
+    super.dispose();
+  }
+}
+```
 
 ### Select child element/elements
 
