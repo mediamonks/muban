@@ -10,15 +10,25 @@ everything is a component.
 
 Muban basically has three types of components that extend each other.
 
-- _component_
-
-  ⇩
-
-- _smart-component_
-
-  ⇩
-
-- _block_
+```
++----------------------+ 
+|                      | 
+|      Component       | 
+|                      | 
++----------+-----------+ 
+           |             
++----------v-----------+ 
+|                      | 
+|    Smart-component   | 
+|                      | 
++----------+-----------+ 
+           |             
++----------v-----------+ 
+|                      | 
+|        Block         | 
+|                      | 
++----------------------+ 
+```
 
 ### Component
 
