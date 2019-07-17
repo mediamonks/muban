@@ -165,13 +165,26 @@ Add a `data.json` file with the following structure:
 ### Using JavaScript for data files
 If you want dynamic data, add loops or something from the `process.env` you can use JavaScript as the source of your data. 
 
-add a `data.js` file with the following structure:
+There are two ways of defining the data in JavaScript.
+
+#### Object notation
+This is a static object and will only be initialised once.
 
 ```javascript
 module.exports = {
   title: 'Hi I\'m a block! 💪',
   content: 'I\'m the body copy for the block.',
 };
+```
+
+#### Function notation
+This method is executed on run time so you could technically use this to renew data runtime.
+
+```javascript
+module.exports = () => ({
+  title: 'Hi I\'m a block! 💪',
+  content: 'I\'m the body copy for the block.',
+});
 ```
 
 > If you are planning on using JavaScript for all data files, it is recommended to remove the template file `{name_sc}.yaml` from the page directory: `build-tools/generator-templates/block/` and add a JavaScript variant: `{name_sc}.js`
@@ -202,9 +215,12 @@ Add a `my-page.json` file in the data `src/data/` folder, with the following str
 > If you are planning on using JSON for all pages, it is recommended to remove the template file `{name_sc}.yaml` from the page directory: `build-tools/generator-templates/page/` and add a JSON variant: `{name_sc}.json`
 
 ### Using JavaScript for page files
-If you want dynamic data, add loops or something from the `process.env` you can use JavaScript as the source of your data. 
+If you want dynamic data, add loops or something from the `process.env` you can use JavaScript as the source of your data.  Just add a `my-page.js` file in the data `src/data/` folder.
 
-Add a `my-page.js` file in the data `src/data/` folder, with the following structure:
+There are two ways of defining the data in JavaScript. 
+
+#### Object notation
+This is a static object and will only be initialised once.
 
 ```javascript
 module.exports = {
@@ -222,6 +238,27 @@ module.exports = {
     },
   ],
 };
+```
+
+#### Function notation
+This method is executed on run time so you could technically use this to renew data runtime.
+
+```javascript
+module.exports = () => ({
+  title: 'my-page',
+  meta: {
+    id: '',
+    status: '',
+    notes: '',
+    category: '',
+  },
+  blocks: [
+    {
+      name: 'my-block',
+      data: 'import!../app/component/block/my-block/data.js',
+    },
+  ],
+});
 ```
 
 > If you are planning on using JavaScript for all pages, it is recommended to remove the template file `{name_sc}.yaml` from the page directory: `build-tools/generator-templates/page/` and add a JavaScript variant: `{name_sc}.js`
@@ -248,7 +285,6 @@ After defining the variable you can use it in your data by wrapping it in the `$
 ```yaml
 image: ${assetBase}/some/path/to/image.jpg
 ```
-
 > ⚠️ Make sure the current `_src/data/_variables.yaml` file is not empty.
 
 ### Updating the HTML boilerplate
@@ -296,7 +332,6 @@ export default class MySmartComponent extends AbstractComponent {
 ```
 
 ### Select child element/elements
-
 Selecting elements is usually done with the querySelector or the querySelectorAll methods, when using the querySelector the result will be typed as a Node and if you use the querySelectorAll it will be typed as a NodeList. In a lot of situations this is not the desired output since you will most likely want to loop over the Nodes in a forEach loop or use HTMLElement specific properties or eventListeners.
 
 This would mean casting the result or modifying the NodeList every time you use these selectors. To avoid typing a lot of the same code all AbstractComponents have two public methods available for selecting elements.
@@ -320,13 +355,43 @@ const element = this.getElements<HTMLVideoElement>('.some-selector');
 const elements = this.getElements<HTMLVideoElement>('.some-selector');
 ```
 
+### Adding event listeners
+Attaching an event handler to a specific element is a very common thing in JavaScript. In Muban this works the same as it would on any other plain JavaScript setup:
 
-### Adding event listeners to components
+```typescript
+import AbstractComponent from '../AbstractComponent';
 
-> ⚙️ TODO.
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  private button:HTMLButtonElement;
+
+  constructor(el: HTMLElement) {
+    super(el);
+
+    // 1. Select the button in the DOM 
+    this.button = this.getElement<HTMLButtonElement>('.my-button');
+    // 2. Attach the event listener.
+    this.button.addEventListener('click', this.onButtonClick);
+  }
+  
+  private onButtonClick = () => {
+    // 3. Handler for the event. 
+  }
+
+  public dispose() {
+    // 4. Remove the listener once the component is disposed.
+    this.button.removeEventListener('click', this.onButtonClick); 
+    super.dispose();
+  }
+}
+```
+
+This covers basically all DOM interactions, but sometimes you would want to dispatch custom events from your component. For example if your carousel component opens the next slide and you want to notify a parent component about this. 
+
+The easiest way to do this is to use the [seng-event](https://www.npmjs.com/package/seng-event) module. Please read the extensive documentation to learn more about this!
 
 ### Get data from data-attributes
-
 Providing data to your TypeScript file through data attributes is very easy and can be done by
 adding it to the root element in your `.hbs` file.
 

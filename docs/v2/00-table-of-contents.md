@@ -123,7 +123,7 @@ This file serves as an overview of all the pages available in the Muban docs.
     2. [TypeScript](./12-guides.md#TypeScript)
        1. [Ensure all components have been initalised](./12-guides.md#Ensure-all-components-have-been-initialised)
        2. [Select child element/elements](./12-guides.md#Select-child-element-elements)
-       3. [Adding event listeners to components](./12-guides.md#Adding-event-listeners-to-components)
+       3. [Adding event listeners](./12-guides.md#Adding-event-listeners)
        4. [Get data from data-attributes](./12-guides.md#Get-data-from-data-attributes)
        5. [Get data from embedded json](./12-guides.md#Get-data-from-embedded-json)
        6. [Get data through a http-request](./12-guides.md#Get-data-through-a-http-request)
