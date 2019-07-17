@@ -391,6 +391,25 @@ This covers basically all DOM interactions, but sometimes you would want to disp
 
 The easiest way to do this is to use the [seng-event](https://www.npmjs.com/package/seng-event) module. Please read the extensive documentation to learn more about this!
 
+### Add a polyfill
+Sometimes you want to use functionality that not supported by all browsers, to do this you can add a polyfill for that functionality. You can do this by installing the polyfill and adding it to the `src/app/polyfills.js` file
+
+For example if you want to install a polyfill for the fetch you first install the dependency.
+
+```bash
+yarn add whatwg-fetch
+```
+
+After installing the polyfill you add the import to the `polyfills.js` file
+
+```javascript
+...
+
+// Add the polyfill for fetch at the bottom of the file
+import 'whatwg-fetch';
+```
+
+
 ### Get data from data-attributes
 Providing data to your TypeScript file through data attributes is very easy and can be done by
 adding it to the root element in your `.hbs` file.
@@ -487,8 +506,68 @@ export default class MySmartComponent extends AbstractComponent {
 
 
 ### Get data through a http-request
+If the data is too big, or too dynamic, and the backend has an API in place, we can also get more data that way.
 
-> ⚙️ TODO.
+For basic XHR calls, you should use the Fetch API. To support older browsers (IE), you should include the fetch polyfill (whatwg-fetch). See the section on [installing polyfills](#Add-a-polyfill) on how to do this.
+
+> 🔧 If you need more features, you could use [Axios](https://www.npmjs.com/package/axios). It's a wrapper around `fetch`, but with more configuration options.
+
+
+#### Getting HTML
+```typescript
+fetch('/users.html')
+  .then(response => response.text())
+  .then(body => {
+    document.body.innerHTML = body;
+  });
+```
+
+#### Getting JSON
+```typescript
+fetch('/users.json')
+  .then(response => response.json())
+  .then(json => {
+    console.log('parsed json', json);
+  }).catch(ex => {
+    console.error('parsing failed', ex);
+  });
+```
+
+#### Post a form
+```typescript
+fetch('/users', {
+  method: 'POST',
+  body: new FormData(this.getElement('form')),
+});
+```
+
+#### Post JSON
+```typescript
+fetch('/users', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name: 'Hubot',
+    login: 'hubot',
+  }),
+});
+```
+
+#### File upload
+```typescript
+const input = this.getElement('input[type="file"]');
+
+const data = new FormData()
+data.append('file', input.files[0]); // 1. Add the file that you want to upload.
+data.append('user', 'hubot'); // 2. Add any other data that is required.
+
+fetch('/avatars', {
+  method: 'POST',
+  body: data
+})
+```
 
 ### Update an entire section through a http-request
 
