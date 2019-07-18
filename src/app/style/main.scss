@@ -4,6 +4,8 @@
 /* Globally available project specific mixins, functions and variables */
 @import 'global';
 
+@import 'util/_helpers';
+
 @import 'type/font';
 @import 'type/type';
 
