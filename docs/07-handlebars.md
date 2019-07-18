@@ -8,7 +8,8 @@ This page be the starting point for the core functionality of handlebars within 
 detailed documentation please check the official [Handlebars](https://handlebarsjs.com/)
 documentation.
 
-> **Note:** You can read why handlebars was chosen in the introduction section.
+> **Note:** You can read why handlebars was chosen in the
+> [introduction section](./01-introduction.md#Template).
 
 ## Partials
 
@@ -69,4 +70,5 @@ It supports all common operators, like `==`, `===`, `!=`, `!==`, `<`, `<=`, `>`,
 
 #### Custom helpers
 
-If you want to create a custom helper please see the guide on how to do this!
+If you want to create a custom helper please
+[see the guide on how to do this](./13-guides.md#Create-a-custom-helper)!

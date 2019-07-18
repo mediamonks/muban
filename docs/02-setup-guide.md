@@ -206,7 +206,7 @@ top-left to play around with breakpoints (this works in every browser).
 As described in the previous step Muban comes with some boilerplate code that you will most likely
 want to remove when you start your project.
 
-To make live a little easier you can run the following command in the root of your project to remove
+To make life a little easier you can run the following command in the root of your project to remove
 it.
 
 ```

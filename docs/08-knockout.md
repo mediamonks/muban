@@ -1,6 +1,6 @@
 # Knockout
 
-Because muban is built for server-rendered pages, there is no possibility for client-side
+Because Muban is built for server-rendered pages, there is no possibility for client-side
 data-binding without bloating the html with template mumbo-jumbo. Even then, things like looping
 over lists (or other thing where a template is used in the non-rendered state) are not really
 possible.
@@ -8,8 +8,9 @@ possible.
 On the other hand, using just DOM APIs to read and update the DOM can become quite cumbersome and
 error prone.
 
-Luckily, Knockout allows us to initiate data-bindings from javascript (as opposed to in HTML), where
-they can be bound to observables and computes, just like your normally would.
+Luckily, [Knockout](https://knockoutjs.com/) allows us to initiate data-bindings from javascript (as
+opposed to in HTML), where they can be bound to observables and computes, just like your normally
+would.
 
 The big advantage is that you can specify those in one place (e.g. in the constructor or in a
 dedicated named method) so they are visible to everyone, and they will automatically update your
@@ -82,26 +83,24 @@ by introducing some logic. For better performance, the reading of the attributes
 once.
 
 ```typescript
-$('.bar')
-  .toArray()
-  .forEach(bar => {
-    ko.applyBindingAccessorsToNode(
-      bar,
-      {
-        css: () => {
-          let min: any = bar.getAttribute('data-size-min');
-          let max: any = bar.getAttribute('data-size-max');
-          min = min === '*' ? min : parseInt(min, 10);
-          max = max === '*' ? max : parseInt(max, 10);
+this.getElements('.bar').forEach(bar => {
+  ko.applyBindingAccessorsToNode(
+    bar,
+    {
+      css: () => {
+        let min: any = bar.getAttribute('data-size-min');
+        let max: any = bar.getAttribute('data-size-max');
+        min = min === '*' ? min : parseInt(min, 10);
+        max = max === '*' ? max : parseInt(max, 10);
 
-          return {
-            active:
-              (model.viewportWidth() >= min || min === '*') &&
-              (model.viewportWidth() <= max || max === '*'),
-          };
-        },
+        return {
+          active:
+            (model.viewportWidth() >= min || min === '*') &&
+            (model.viewportWidth() <= max || max === '*'),
+        };
       },
-      {},
-    );
-  });
+    },
+    {},
+  );
+});
 ```

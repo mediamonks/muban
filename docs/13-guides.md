@@ -1067,7 +1067,6 @@ export default class MySmartComponent extends AbstractComponent {
     super.dispose();
   }
 }
-``;
 ```
 
 > ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will
