@@ -362,6 +362,48 @@ project you can do this by prefixing them with an underscore.
 
 Example: `_my-page.yaml`
 
+### Using assets
+
+In Muban there are two types of assets the way you use them is a bit different. 
+
+1. Static assets
+2. Webpack assets.
+
+### Static assets
+Static assets are assets that will not be processed by webpack and they will be copied over to the root of the `dist` folder after you do a production build. The way to access them is to use the absolute path to access the asset.
+ 
+> ⚠️ Assets used in `CSS` will always be bundled, if you don't want this use inline styling.
+
+```handlebars
+<img src="/image/path/to/my-image.jpg" alt="Some alt text" />
+```
+
+```typescript
+const image = new Image();
+image.src = "/image/path/to/my-image.jpg"
+```
+
+> **Note:** It is recommended to create folders for the type of asset. This way you can keep your assets organised.
+
+#### Webpack assets
+As the name states Webpack assets are assets that are loaded through webpack, this means they will automatically be bundled and versioned once you do a production build. This is usefull for assets that are static and are not provided by the backend. Based on the type of assets they should be kept in the correct directory in the `src/app` directory. So for example images are kept within an `image` folder in the `app` folder.
+
+```scss
+.some-selector {
+  background: url('../../../image/some-image.jpg'); 
+}
+
+// The same but using the seng-css image mixin.
+.some-other-selector {
+  background: image('some-image.jpg') 
+}
+```
+
+```typescript
+const image = new Image();
+image.src = require('../../../image/some-image.jpg');
+```
+
 ## TypeScript
 
 ### Ensure all components have been adopted
@@ -1105,21 +1147,44 @@ export default class MySmartComponent extends AbstractComponent {
 
 ## Handlebars
 
+### Render a component
+
+Rendering a component can be done by using the [handlebars partial call syntax](https://handlebarsjs.com/partials.html). 
+
+```handlebars
+{{> general/my-component }}
+```
+> ⚠️ Just make sure the path is relative to the `src/app/component` directory
+
+### Pass data to your component
+
+Providing data to a components can be done by adding parameters.
+
+```handlebars
+{{> general/my-component parameter="value" another-parameter="another-value"}}
+```
+
 ### Render data in your component
 
-> ⚙️ TODO.
+To render out provided data you can use handlebars expressions, the most basic version can be seen in the following example. 
+
+```handlebars
+<div class="my-component">
+  <h1>{{parameter}}</h2>
+</div>
+```
+> **Note:** If you want more detailed instructions and examples on data rendering please have a look at the [handlebars documentation](https://handlebarsjs.com/expressions.html).
+
 
 ### Render data as HTML in your component
 
-> ⚙️ TODO.
+By default handlebars escapes all inlined HTML tags, if you want to disable this logic you can use the `triple-stash` notation. 
 
-### Render a component
-
-> ⚙️ TODO.
-
-### Reference static assets
-
-> ⚙️ TODO.
+```handlebars
+<div class="my-component">
+  <h1>{{{parameter}}}</h2>
+</div>
+```
 
 ### Dynamically render components
 
