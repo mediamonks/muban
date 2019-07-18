@@ -1240,6 +1240,8 @@ module.exports = function (value) {
 
 ## Knockout
 
+> ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will increase a lot.
+
 ### Apply bindings to a node.
 This example will show you how to bind a knockout observable to an element in the DOM. If you want a more detailed explanation on knockout in Muban please have a look at the [page bout knockout](./08-knockout.md).
 
@@ -1275,7 +1277,6 @@ export default class MySmartComponent extends AbstractComponent {
   }
 }
 ```
-> ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will increase a lot.
 
 ### Apply bindings to the entire component
 ```handlebars
@@ -1307,15 +1308,8 @@ export default class MySmartComponent extends AbstractComponent {
   }
 }
 ```
-> ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will increase a lot.
 
 ### Create a global state
-
-> ⚙️ TODO.
-
-## Webstorm
-
-### Setup a Prettier shortcut
 
 > ⚙️ TODO.
 
