@@ -1187,8 +1187,29 @@ By default handlebars escapes all inlined HTML tags, if you want to disable this
 ```
 
 ### Dynamically render components
+All components that are inside of the `src/app/component/block` folder can be dynamically rendered using the [lookup helper](https://handlebarsjs.com/partials.html) from handlebars. 
 
-> ⚙️ TODO.
+For example if you have block data that dynamically renders out more blocks.
+
+```yaml
+title: My awesome block with child components
+childComponents: 
+  - name: "my-child-component"
+    data: "🥇 I'm the first data."  
+  - name: "my-child-component"
+    data: "🥈I'm the second data."      
+  - name: "my-child-component"
+    data: "🥉 I'm the third data."
+```
+
+```handlebars
+<div>
+  <h1>{{title}}</h1>
+  {{#each childComponents}}
+    {{> (lookup . 'name') data }}
+  {{/each}}
+</div>
+```
 
 ### Dynamically render out components that are not in the block folder
 
