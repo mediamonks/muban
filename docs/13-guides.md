@@ -1284,6 +1284,7 @@ export default class MySmartComponent extends AbstractComponent {
   <button data-bind="text: buttonText"></p>
 </div>
 ```
+
 ```typescript
 import ko from 'knockout';
 import AbstractComponent from '../AbstractComponent';
