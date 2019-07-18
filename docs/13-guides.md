@@ -427,7 +427,7 @@ export default class MySmartComponent extends AbstractComponent {
   constructor(el: HTMLElement) {
     super(el);
 
-    // I'm ready but might not be adopted by the application! ☹️
+    // I'm ready but might not be adopted by the application! 😢
   }
 
   public adopted(): void {
