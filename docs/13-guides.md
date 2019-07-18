@@ -1310,10 +1310,6 @@ export default class MySmartComponent extends AbstractComponent {
 }
 ```
 
-### Create a global state
-
-> ⚙️ TODO.
-
 ## Seng-generator
 
 ### Create a custom template
