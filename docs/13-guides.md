@@ -1220,8 +1220,23 @@ SVG icons are a big part of websites nowadays, Muban has a default component tha
 ```
 
 ### Create a custom helper
+Handlebars comes with a set of built-in helpers, [documentation](https://handlebarsjs.com/builtin_helpers.html) on these can be found on their website. By default Muban already adds one helper that can be used in combintation with the `if` helper to do more conditional rendering. If you want to add more custom helpers you can add them in the `build-tools/handlebars-helpers` folder.
 
-> ⚙️ TODO.
+#### A very basic example of a helper that reverses a word could look like this.
+
+```javascript
+// file: reverse.js
+module.exports = function (value) {
+  return value.split('').reverse().join();
+};
+```
+> **Note 1:** You do not need to register them using the `registerHelper` method this is all handled by webpack. 
+
+> **Note 2:** The helper will take the name of the file that it's in!
+
+```handlebars
+<p>We need to reverse the word "palindrome": {{reverse "palindrome"}}.</p>
+```
 
 ## Knockout
 
