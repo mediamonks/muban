@@ -1241,12 +1241,73 @@ module.exports = function (value) {
 ## Knockout
 
 ### Apply bindings to a node.
+This example will show you how to bind a knockout observable to an element in the DOM. If you want a more detailed explanation on knockout in Muban please have a look at the [page bout knockout](./08-knockout.md).
 
-> ⚙️ TODO.
+```handlebars
+<div class="my-component" data-component="my-component">
+  <button>I'm the initial text</p>
+</div>
+```
+
+```typescript
+import ko from 'knockout';
+import AbstractComponent from '../AbstractComponent';
+
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  private buttonActive = ko.observable(false);
+
+  constructor(el: HTMLElement) {
+    super(el);
+    
+    // 1. Bind the value to the element
+    ko.applyBindingsToNode(this.getELement('p'), {
+      css: { isActive: this.buttonActive },
+    });
+
+    // 2. Change the value and see the class change
+    this.searchOpened(true);
+  }
+
+  public dispose() {
+    super.dispose();
+  }
+}
+```
+> ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will increase a lot.
 
 ### Apply bindings to the entire component
+```handlebars
+<div class="my-component" data-component="my-component">
+  <button data-bind="text: buttonText"></p>
+</div>
+```
+```typescript
+import ko from 'knockout';
+import AbstractComponent from '../AbstractComponent';
 
-> ⚙️ TODO.
+export default class MySmartComponent extends AbstractComponent {
+  static displayName: string = 'my-component';
+
+  private buttonText = ko.observable('I\'m the initial text');
+
+  constructor(el: HTMLElement) {
+    super(el);
+    
+    // 1. Apply the bindings to the component
+    ko.applyBindings(this, this.element);
+
+    // 2. Update the button text
+    this.buttonText('I\'m the modified text');
+  }
+
+  public dispose() {
+    super.dispose();
+  }
+}
+```
+> ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will increase a lot.
 
 ### Create a global state
 
