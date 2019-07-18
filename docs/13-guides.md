@@ -1187,7 +1187,7 @@ By default handlebars escapes all inlined HTML tags, if you want to disable this
 ```
 
 ### Dynamically render components
-All components that are inside of the `src/app/component/block` folder can be dynamically rendered using the [lookup helper](https://handlebarsjs.com/partials.html) from handlebars. 
+If you want to dynamically render out child components within a component you can use the [lookup helper](https://handlebarsjs.com/partials.html) from handlebars.
 
 For example if you have block data that dynamically renders out more blocks.
 
@@ -1210,10 +1210,14 @@ childComponents:
   {{/each}}
 </div>
 ```
+> ⚠️ This only works for components in the `src/app/component/block` folder.
 
-### Dynamically render out components that are not in the block folder
+### Using icons
+SVG icons are a big part of websites nowadays, Muban has a default component that can be used to render them. To add an SVG icon to your project simply add the `.svg` file in the `src/app/svg` folder and use the name without the extension of the file to reference it. 
 
-> ⚙️ TODO.
+```handlebars
+{{> general/icon name="name-of-svg-file" }}
+```
 
 ### Create a custom helper
 

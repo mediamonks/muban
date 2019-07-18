@@ -145,7 +145,7 @@ This file serves as an overview of all the pages available in the Muban docs.
        2. [Render data as HTML in your component](./13-guides.md#Render-data-as-HTML-in-your-comonent)
        3. [Render a component](./13-guides.md#Render-a-component)
        4. [Dynamically render components](./13-guides.md#Dynamically-render-components)
-       5. [Dynamically render out components that are not in the block folder.](./13-guides.md#Dynamically-render-out-components-that-are-not-in-the-block-folder)
+       5. [Using icons](./13-guides.md#Using-icons)
        6. [Create a custom helper](./13-guides.md#Create-a-custom-helper)
     4. [Knockout](./13-guides.md#Knockout)
        1. [Apply bindings to a node](./13-guides.md#Apply-bindings-to-a-node)
