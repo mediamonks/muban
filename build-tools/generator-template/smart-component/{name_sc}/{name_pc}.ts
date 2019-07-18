@@ -1,6 +1,6 @@
-import AbstractBlock from "../AbstractComponent";
+import AbstractComponent from "../AbstractComponent";
 
-export default class {{name_pc}} extends AbstractBlock {
+export default class {{name_pc}} extends AbstractComponent {
   static displayName:string = '{{name_sc}}';
 
   constructor(el:HTMLElement) {
