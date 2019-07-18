@@ -1316,5 +1316,4 @@ export default class MySmartComponent extends AbstractComponent {
 ## Seng-generator
 
 ### Create a custom template
-
-> ⚙️ TODO.
+The seng-generator CLI uses templates to generate the components and pages that we need to create a website. These templates are stored in the `build-tools/generator-template` folder. If you add a new folder there you the CLI will automatically pick this up an let's you use it when you run the wizard. You can read more about the templates in the [seng-generator documentation](https://www.npmjs.com/package/seng-generator).
