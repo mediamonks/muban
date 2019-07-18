@@ -1,4 +1,5 @@
 # API Reference
+Muban provides a couple of util methods that are exposed. This file will describe all the methods that are exposed by the Muban-core. The utils are divided up into sub-sections to keep track on what part they apply to.
 
 ## Muban
 
@@ -65,6 +66,78 @@ retrieve the instance. From there, you can read properties, call methods or add 
 Muban creates child components first, so in the `constructor` of any components, all children
 classes already have been instantiated. If you want to have access to class instances of parent DOM
 elements, you should call this method from the `adopted()` lifecycle method.
+
+### bootstrap
+
+Starts up Muban and makes sure all components get initialised.
+
+```typescript
+bootstrap(
+  appRoot: HTMLElement,
+  options: {
+    indexTemplate: (data: any) => string;
+    appTemplate: (data: any) => string;
+    dataContext: any;
+    partialsContext: any;
+    Handlebars: any;
+    onBeforeInit?: () => void;
+    onInit?: () => void;
+    onUpdate?: () => void;
+    onData: (data: object, pageName: string) => object;
+    registerPartialMap?: Array<(path: string) => string | null>;
+    pageName?: string;
+  } = {}): {
+    updateData: (changedContext) => void,
+    updatePartials: (changedContext) => void,
+    update: (updatedIndexTemplate, updatedAppTemplate) => void,
+  }
+```
+
+- **appRoot** - The container where the Muban application lives, most likely a div in the `<body>`.
+- **indexTemplate** - The hbs template to render the Muban index page.
+- **appTemplate** - The hbs template to render the application shell, includes logic to render all
+  the blocks.
+- **dataContext** - A webpack context with all data (yaml/json) files.
+- **partialsContext** - A webpack context with component hbs files.
+- **Handlebars** - The Handlebars instance to register templates to.
+- **onBeforeInit** - Optional callback that gets called right before the application becomes fully
+  interactive.
+- **onInit** - Optional callback that gets called after the application is fully interactive.
+- **onUpdate** - Optional callback that gets called after hot reloading did an update.
+- **onData** - Optional callback that gets called before rendering the page, and gives you the
+  opportunity to modify the data before rendering.
+- **registerPartialMap** - A map with functions to define if and how partials should be registered.
+- **pageName** - Override a pageName to render, when you don't want to make use of the default url
+  parsing logic of Muban.
+- returns **App** - An object with 3 functions that can be called when hot reloading triggers. The
+  app will do the appropriate re-rendering and trigger the `onUpdate` callback afterwards.
+
+Both `indexTemplate` and `appTemplate` are passed from the outside, so you have full control in the
+project about where they are located. Together with the `dataContext` and `partialsContext` they are
+kept outside so we can apply hot reloading logic. When any of those 4 things change, we update the
+returned `app` object.
+
+##### registerPartialsMap
+
+The `registerPartialsMap` has a default value:
+
+```typescript
+[path => (path.includes('/block/') ? /\/([^/]+)\.hbs/gi.exec(path)[1] : null)];
+```
+
+The above will first check if there is `/block/` in the path, and if so it will return the basename.
+So a path of `component/block/paragraph/paragraph.hbs` will return `paragraph`. This means that the
+partial is registered as `paragraph`, and is used in the `data.yaml` with that block name.
+
+You can register multiple functions, but the first one that returns a non-null value will
+short-circuit the map.
+
+When providing a custom map, make sure to also include the default value above if you want to keep
+it, since it will overwrite the complete map.
+
+This option is most useful if you want to render non-block components in a dynamic way in
+Handlebars. By default, the handlebars-loader will auto-require all static partial includes, but
+dynamic includes (e.g. using the `lookup` helper) will need to be registered manually upfront.
 
 ## Handlebars
 
@@ -239,92 +312,3 @@ const items = initListBinding(
 // add a new item, will be added to the DOM
 items.push({ name: 'Joe', age: 24 });
 ```
-
-## Bootstrap
-
-### Development
-
-Bootstraps the Muban application during a development build.
-
-```typescript
-bootstrap(
-  appRoot: HTMLElement,
-  options: {
-    indexTemplate: (data: any) => string;
-    appTemplate: (data: any) => string;
-    dataContext: any;
-    partialsContext: any;
-    Handlebars: any;
-    onBeforeInit?: () => void;
-    onInit?: () => void;
-    onUpdate?: () => void;
-    onData: (data: object, pageName: string) => object;
-    registerPartialMap?: Array<(path: string) => string | null>;
-    pageName?: string;
-  } = {}): {
-    updateData: (changedContext) => void,
-    updatePartials: (changedContext) => void,
-    update: (updatedIndexTemplate, updatedAppTemplate) => void,
-  }
-```
-
-- **appRoot** - The container where the Muban application lives, most likely a div in the `<body>`.
-- **indexTemplate** - The hbs template to render the Muban index page.
-- **appTemplate** - The hbs template to render the application shell, includes logic to render all
-  the blocks.
-- **dataContext** - A webpack context with all data (yaml/json) files.
-- **partialsContext** - A webpack context with component hbs files.
-- **Handlebars** - The Handlebars instance to register templates to.
-- **onBeforeInit** - Optional callback that gets called right before the application becomes fully
-  interactive.
-- **onInit** - Optional callback that gets called after the application is fully interactive.
-- **onUpdate** - Optional callback that gets called after hot reloading did an update.
-- **onData** - Optional callback that gets called before rendering the page, and gives you the
-  opportunity to modify the data before rendering.
-- **registerPartialMap** - A map with functions to define if and how partials should be registered.
-- **pageName** - Override a pageName to render, when you don't want to make use of the default url
-  parsing logic of Muban.
-- returns **App** - An object with 3 functions that can be called when hot reloading triggers. The
-  app will do the appropriate re-rendering and trigger the `onUpdate` callback afterwards.
-
-Both `indexTemplate` and `appTemplate` are passed from the outside, so you have full control in the
-project about where they are located. Together with the `dataContext` and `partialsContext` they are
-kept outside so we can apply hot reloading logic. When any of those 4 things change, we update the
-returned `app` object.
-
-**registerPartialsMap**
-
-The `registerPartialsMap` has a default value:
-
-```typescript
-[path => (path.includes('/block/') ? /\/([^/]+)\.hbs/gi.exec(path)[1] : null)];
-```
-
-The above will first check if there is `/block/` in the path, and if so it will return the basename.
-So a path of `component/block/paragraph/paragraph.hbs` will return `paragraph`. This means that the
-partial is registered as `paragraph`, and is used in the `data.yaml` with that block name.
-
-You can register multiple functions, but the first one that returns a non-null value will
-short-circuit the map.
-
-When providing a custom map, make sure to also include the default value above if you want to keep
-it, since it will overwrite the complete map.
-
-This option is most useful if you want to render non-block components in a dynamic way in
-Handlebars. By default, the handlebars-loader will auto-require all static partial includes, but
-dynamic includes (e.g. using the `lookup` helper) will need to be registered manually upfront.
-
-### Distribution
-
-Bootstraps the Muban application during a production build.
-
-```typescript
-bootstrap(
-  appRoot: HTMLElement,
-  options: {
-    onInit?: () => void;
-  } = {})
-```
-
-- **appRoot** - The container where the Muban application lives, most likely a div in the `<body>`.
-- **onInit** - Optional callback that gets called after the application is fully interactive.
