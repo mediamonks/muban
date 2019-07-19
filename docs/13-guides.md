@@ -1,7 +1,68 @@
 # Guides
 
-Here you can find a collection of guides to help you perform certain tasks you might want to do in
-your project!
+These guides will help you through certain tasks that you might need during your project! Have a look at the table of contents for a quick overview of the available guides.
+
+- [Guides](#Guides)
+  - [Muban](#Muban)
+    - [Create a component](#Create-a-component)
+    - [Using the wizard](#Using-the-wizard)
+    - [Using the shorthand](#Using-the-shorthand)
+    - [Create a smart-component](#Create-a-smart-component)
+    - [Create a block](#Create-a-block)
+    - [Create a page](#Create-a-page)
+    - [Using the wizard](#Using-the-wizard-1)
+    - [Using the shorthand](#Using-the-shorthand-1)
+    - [Do not use the default index template](#Do-not-use-the-default-index-template)
+    - [Using JSON for data files](#Using-JSON-for-data-files)
+    - [Using JavaScript for data files](#Using-JavaScript-for-data-files)
+      - [Object notation](#Object-notation)
+      - [Function notation](#Function-notation)
+    - [Using JSON for page files](#Using-JSON-for-page-files)
+    - [Using JavaScript for page files](#Using-JavaScript-for-page-files)
+      - [Object notation](#Object-notation-1)
+      - [Function notation](#Function-notation-1)
+    - [Use custom variables in your data](#Use-custom-variables-in-your-data)
+    - [Updating the HTML boilerplate](#Updating-the-HTML-boilerplate)
+    - [Excluding page files.](#Excluding-page-files)
+    - [Using assets](#Using-assets)
+    - [Static assets](#Static-assets)
+      - [Webpack assets](#Webpack-assets)
+  - [TypeScript](#TypeScript)
+    - [Ensure all components have been adopted](#Ensure-all-components-have-been-adopted)
+    - [Select child element/elements](#Select-child-elementelements)
+    - [Adding event listeners](#Adding-event-listeners)
+    - [Add a polyfill](#Add-a-polyfill)
+    - [Get data from data-attributes](#Get-data-from-data-attributes)
+    - [Get data from embedded json](#Get-data-from-embedded-json)
+    - [Get data through a http-request](#Get-data-through-a-http-request)
+      - [Getting HTML](#Getting-HTML)
+      - [Getting JSON](#Getting-JSON)
+      - [Post a form](#Post-a-form)
+      - [Post JSON](#Post-JSON)
+      - [File upload](#File-upload)
+    - [Update an entire section through a http-request](#Update-an-entire-section-through-a-http-request)
+      - [The API returns HTML](#The-API-returns-HTML)
+      - [The API returns JSON](#The-API-returns-JSON)
+    - [Sort or filter items already in the DOM](#Sort-or-filter-items-already-in-the-DOM)
+    - [Load more items to the page](#Load-more-items-to-the-page)
+      - [Clone and update element](#Clone-and-update-element)
+      - [Use a handlebars template](#Use-a-handlebars-template)
+        - [Data util methods](#Data-util-methods)
+      - [Use a knockout template](#Use-a-knockout-template)
+  - [Handlebars](#Handlebars)
+    - [Render a component](#Render-a-component)
+    - [Pass data to your component](#Pass-data-to-your-component)
+    - [Render data in your component](#Render-data-in-your-component)
+    - [Render data as HTML in your component](#Render-data-as-HTML-in-your-component)
+    - [Dynamically render components](#Dynamically-render-components)
+    - [Using icons](#Using-icons)
+    - [Create a custom helper](#Create-a-custom-helper)
+      - [A very basic example of a helper that reverses a word could look like this.](#A-very-basic-example-of-a-helper-that-reverses-a-word-could-look-like-this)
+  - [Knockout](#Knockout)
+    - [Apply bindings to a node.](#Apply-bindings-to-a-node)
+    - [Apply bindings to the entire component](#Apply-bindings-to-the-entire-component)
+  - [Seng-generator](#Seng-generator)
+    - [Create a custom template](#Create-a-custom-template)
 
 ## Muban
 
@@ -364,14 +425,17 @@ Example: `_my-page.yaml`
 
 ### Using assets
 
-In Muban there are two types of assets the way you use them is a bit different. 
+In Muban there are two types of assets the way you use them is a bit different.
 
 1. Static assets
 2. Webpack assets.
 
 ### Static assets
-Static assets are assets that will not be processed by webpack and they will be copied over to the root of the `dist` folder after you do a production build. The way to access them is to use the absolute path to access the asset.
- 
+
+Static assets are assets that will not be processed by webpack and they will be copied over to the
+root of the `dist` folder after you do a production build. The way to access them is to use the
+absolute path to access the asset.
+
 > ⚠️ Assets used in `CSS` will always be bundled, if you don't want this use inline styling.
 
 ```handlebars
@@ -380,22 +444,28 @@ Static assets are assets that will not be processed by webpack and they will be 
 
 ```typescript
 const image = new Image();
-image.src = "/image/path/to/my-image.jpg"
+image.src = '/image/path/to/my-image.jpg';
 ```
 
-> **Note:** It is recommended to create folders for the type of asset. This way you can keep your assets organised.
+> **Note:** It is recommended to create folders for the type of asset. This way you can keep your
+> assets organised.
 
 #### Webpack assets
-As the name states Webpack assets are assets that are loaded through webpack, this means they will automatically be bundled and versioned once you do a production build. This is usefull for assets that are static and are not provided by the backend. Based on the type of assets they should be kept in the correct directory in the `src/app` directory. So for example images are kept within an `image` folder in the `app` folder.
+
+As the name states Webpack assets are assets that are loaded through webpack, this means they will
+automatically be bundled and versioned once you do a production build. This is usefull for assets
+that are static and are not provided by the backend. Based on the type of assets they should be kept
+in the correct directory in the `src/app` directory. So for example images are kept within an
+`image` folder in the `app` folder.
 
 ```scss
 .some-selector {
-  background: url('../../../image/some-image.jpg'); 
+  background: url('../../../image/some-image.jpg');
 }
 
 // The same but using the seng-css image mixin.
 .some-other-selector {
-  background: image('some-image.jpg') 
+  background: image('some-image.jpg');
 }
 ```
 
@@ -1149,11 +1219,13 @@ export default class MySmartComponent extends AbstractComponent {
 
 ### Render a component
 
-Rendering a component can be done by using the [handlebars partial call syntax](https://handlebarsjs.com/partials.html). 
+Rendering a component can be done by using the
+[handlebars partial call syntax](https://handlebarsjs.com/partials.html).
 
 ```handlebars
 {{> general/my-component }}
 ```
+
 > ⚠️ Just make sure the path is relative to the `src/app/component` directory
 
 ### Pass data to your component
@@ -1166,19 +1238,22 @@ Providing data to a components can be done by adding parameters.
 
 ### Render data in your component
 
-To render out provided data you can use handlebars expressions, the most basic version can be seen in the following example. 
+To render out provided data you can use handlebars expressions, the most basic version can be seen
+in the following example.
 
 ```handlebars
 <div class="my-component">
   <h1>{{parameter}}</h2>
 </div>
 ```
-> **Note:** If you want more detailed instructions and examples on data rendering please have a look at the [handlebars documentation](https://handlebarsjs.com/expressions.html).
 
+> **Note:** If you want more detailed instructions and examples on data rendering please have a look
+> at the [handlebars documentation](https://handlebarsjs.com/expressions.html).
 
 ### Render data as HTML in your component
 
-By default handlebars escapes all inlined HTML tags, if you want to disable this logic you can use the `triple-stash` notation. 
+By default handlebars escapes all inlined HTML tags, if you want to disable this logic you can use
+the `triple-stash` notation.
 
 ```handlebars
 <div class="my-component">
@@ -1187,18 +1262,20 @@ By default handlebars escapes all inlined HTML tags, if you want to disable this
 ```
 
 ### Dynamically render components
-If you want to dynamically render out child components within a component you can use the [lookup helper](https://handlebarsjs.com/partials.html) from handlebars.
+
+If you want to dynamically render out child components within a component you can use the
+[lookup helper](https://handlebarsjs.com/partials.html) from handlebars.
 
 For example if you have block data that dynamically renders out more blocks.
 
 ```yaml
 title: My awesome block with child components
-childComponents: 
-  - name: "my-child-component"
-    data: "🥇 I'm the first data."  
-  - name: "my-child-component"
-    data: "🥈I'm the second data."      
-  - name: "my-child-component"
+childComponents:
+  - name: 'my-child-component'
+    data: "🥇 I'm the first data."
+  - name: 'my-child-component'
+    data: "🥈I'm the second data."
+  - name: 'my-child-component'
     data: "🥉 I'm the third data."
 ```
 
@@ -1210,27 +1287,41 @@ childComponents:
   {{/each}}
 </div>
 ```
+
 > ⚠️ This only works for components in the `src/app/component/block` folder.
 
 ### Using icons
-SVG icons are a big part of websites nowadays, Muban has a default component that can be used to render them. To add an SVG icon to your project simply add the `.svg` file in the `src/app/svg` folder and use the name without the extension of the file to reference it. 
+
+SVG icons are a big part of websites nowadays, Muban has a default component that can be used to
+render them. To add an SVG icon to your project simply add the `.svg` file in the `src/app/svg`
+folder and use the name without the extension of the file to reference it.
 
 ```handlebars
 {{> general/icon name="name-of-svg-file" }}
 ```
 
 ### Create a custom helper
-Handlebars comes with a set of built-in helpers, [documentation](https://handlebarsjs.com/builtin_helpers.html) on these can be found on their website. By default Muban already adds one helper that can be used in combintation with the `if` helper to do more conditional rendering. If you want to add more custom helpers you can add them in the `build-tools/handlebars-helpers` folder.
+
+Handlebars comes with a set of built-in helpers,
+[documentation](https://handlebarsjs.com/builtin_helpers.html) on these can be found on their
+website. By default Muban already adds one helper that can be used in combintation with the `if`
+helper to do more conditional rendering. If you want to add more custom helpers you can add them in
+the `build-tools/handlebars-helpers` folder.
 
 #### A very basic example of a helper that reverses a word could look like this.
 
 ```javascript
 // file: reverse.js
-module.exports = function (value) {
-  return value.split('').reverse().join();
+module.exports = function(value) {
+  return value
+    .split('')
+    .reverse()
+    .join();
 };
 ```
-> **Note 1:** You do not need to register them using the `registerHelper` method this is all handled by webpack. 
+
+> **Note 1:** You do not need to register them using the `registerHelper` method this is all handled
+> by webpack.
 
 > **Note 2:** The helper will take the name of the file that it's in!
 
@@ -1240,10 +1331,14 @@ module.exports = function (value) {
 
 ## Knockout
 
-> ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will increase a lot.
+> ⚠️ Keep in mind that when you include knockout into your project the distribution bundle size will
+> increase a lot.
 
 ### Apply bindings to a node.
-This example will show you how to bind a knockout observable to an element in the DOM. If you want a more detailed explanation on knockout in Muban please have a look at the [page bout knockout](./08-knockout.md).
+
+This example will show you how to bind a knockout observable to an element in the DOM. If you want a
+more detailed explanation on knockout in Muban please have a look at the
+[page bout knockout](./08-knockout.md).
 
 ```handlebars
 <div class="my-component" data-component="my-component">
@@ -1262,7 +1357,7 @@ export default class MySmartComponent extends AbstractComponent {
 
   constructor(el: HTMLElement) {
     super(el);
-    
+
     // 1. Bind the value to the element
     ko.applyBindingsToNode(this.getELement('p'), {
       css: { isActive: this.buttonActive },
@@ -1279,6 +1374,7 @@ export default class MySmartComponent extends AbstractComponent {
 ```
 
 ### Apply bindings to the entire component
+
 ```handlebars
 <div class="my-component" data-component="my-component">
   <button data-bind="text: buttonText"></p>
@@ -1292,16 +1388,16 @@ import AbstractComponent from '../AbstractComponent';
 export default class MySmartComponent extends AbstractComponent {
   static displayName: string = 'my-component';
 
-  private buttonText = ko.observable('I\'m the initial text');
+  private buttonText = ko.observable("I'm the initial text");
 
   constructor(el: HTMLElement) {
     super(el);
-    
+
     // 1. Apply the bindings to the component
     ko.applyBindings(this, this.element);
 
     // 2. Update the button text
-    this.buttonText('I\'m the modified text');
+    this.buttonText("I'm the modified text");
   }
 
   public dispose() {
@@ -1313,4 +1409,9 @@ export default class MySmartComponent extends AbstractComponent {
 ## Seng-generator
 
 ### Create a custom template
-The seng-generator CLI uses templates to generate the components and pages that we need to create a website. These templates are stored in the `build-tools/generator-template` folder. If you add a new folder there you the CLI will automatically pick this up an let's you use it when you run the wizard. You can read more about the templates in the [seng-generator documentation](https://www.npmjs.com/package/seng-generator).
+
+The seng-generator CLI uses templates to generate the components and pages that we need to create a
+website. These templates are stored in the `build-tools/generator-template` folder. If you add a new
+folder there you the CLI will automatically pick this up an let's you use it when you run the
+wizard. You can read more about the templates in the
+[seng-generator documentation](https://www.npmjs.com/package/seng-generator).
