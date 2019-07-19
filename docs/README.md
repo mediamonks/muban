@@ -1,7 +1,5 @@
 # Table of contents
 
-This file serves as an overview of all the pages available in the Muban docs.
-
 1. [Introduction](./01-introduction.md)
    1. [Background](./01-introduction.md#Background)
    2. [Challenges](./01-introduction.md#Challenges)
