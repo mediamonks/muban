@@ -36,7 +36,9 @@ function clean() {
     path.join(projectRoot, 'src/app/svg/icon/*.svg'),
 
     // pages
-    path.join(projectRoot, 'src/data/*'),
+    path.join(projectRoot, 'src/data/home.yaml'),
+    path.join(projectRoot, 'src/data/about.yaml'),
+    path.join(projectRoot, 'src/data/test.js'),
 
     // blocks
     path.join(projectRoot, 'src/app/component/block/paragraph'),
