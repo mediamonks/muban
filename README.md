@@ -39,8 +39,8 @@ read the documentation you can follow these steps to get you started.
    - Open your browser at [http://localhost:9000](http://localhost:9000).
 4. Start editing!
 
-> **Note:** If you need more instructions we suggest you take a look at the full getting
-> [started guide](./docs/02-setup-guide.md#getting-started)!
+> **Note:** If you need more instructions we suggest you take a look at the full
+> [getting started guide](./docs/02-setup-guide.md#getting-started)!
 
 ## 📚 Ecosystem
 
