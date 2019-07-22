@@ -22,7 +22,7 @@ You can find the full documentation in the `/docs` folder. Here you will find th
   [getting started guide](./docs/02-setup-guide.md#getting-started). This guide will walk you
   through all the steps to setup the a new Muban project
 - **Give me some examples:** If you want to dive straight into examples have a look at the
-  [guides section](./docs/12-guides.md) of the documentation. This page contains a lot of example
+  [guides section](./docs/13-guides.md) of the documentation. This page contains a lot of example
   situations hopefully cover all your questions.
 
 ## 🚀 Quick start
@@ -40,7 +40,7 @@ read the documentation you can follow these steps to get you started.
 4. Start editing!
 
 > **Note:** If you need more instructions we suggest you take a look at the full getting
-> [started documentation](./docs/02-setup-guide.md#getting-started)!
+> [started guide](./docs/02-setup-guide.md#getting-started)!
 
 ## 📚 Ecosystem
 
