@@ -133,6 +133,8 @@ manual conversion of templates needed.
 
 ## Storybook
 
+> ⚠️ Storybook will become an installable module, therefore it is temporarily unavailable!
+
 Storybook is inspired by the [React and Vue Storybook](https://storybook.js.org/). It is a UI
 development environment for your UI components. With it, you can visualize different states of your
 UI components and develop them interactively.  

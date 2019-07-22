@@ -187,6 +187,8 @@ navigate them and keep track of your progress.
 
 #### Running the Storybook server
 
+> ⚠️ Storybook will become an installable module, therefore it is temporarily unavailable!
+
 As described in the introduction Muban comes with a Storybook inspired by react-storybook. For a
 more detailed section including examples please see the page on [Storybook](./10-storybook.md).
 

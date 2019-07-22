@@ -1,5 +1,7 @@
 # Storybook
 
+> ⚠️ Storybook will become an installable module, therefore it is temporarily unavailable!
+
 Storybook is a web-app that lets you preview and interact with the components in your project. You
 can create presets that render your component with custom HTML, and pass different properties by
 providing a yaml/json object.

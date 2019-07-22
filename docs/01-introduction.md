@@ -107,6 +107,8 @@ yaml.
 
 ### Preview components
 
+> ⚠️ Storybook is being moved to another repository and is therefore temporarily not available!
+
 While those preview pages are useful in their own way, sometimes you want to have an overview of
 individual components, with some documentation, and maybe the used data, and the source files that
 make up those components. For this we created muban-storybook, inspired by
