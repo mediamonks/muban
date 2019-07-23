@@ -276,7 +276,7 @@ yarn analayze
 ```
 
 Once the server has started you can open your browser up at
-[http://localhost:9001](http://localhost:8888/) to preview the bundle analyzer.
+[http://localhost:8888](http://localhost:8888/) to preview the bundle analyzer.
 
 #### Generate a difference report
 
