@@ -628,7 +628,15 @@ export default class MySmartComponent extends AbstractComponent {
     super(el);
 
     // Get the data from the colors data attribute.
-    const colors = this.element.dataset.colors.split(',');
+    let { colors } = this.element.dataset;
+    
+    // Make sure the colors are available.
+    if(colors) {
+      // Split the values.
+      const colorValues = colors.split(',');
+      // Do something with the values.
+      console.log(colorValues);
+    }
   }
 
   public dispose() {
