@@ -1367,7 +1367,7 @@ export default class MySmartComponent extends AbstractComponent {
     super(el);
 
     // 1. Bind the value to the element
-    ko.applyBindingsToNode(this.getELement('p'), {
+    ko.applyBindingsToNode(this.getElement('p'), {
       css: { isActive: this.buttonActive },
     });
 
