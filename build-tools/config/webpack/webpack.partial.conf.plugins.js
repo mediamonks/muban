@@ -105,7 +105,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
         {
           // copy over readme
           context: path.resolve(config.projectRoot, 'docs'),
-          from: 'dist-implementation-guide.md',
+          from: '12-dist-implementation-guide.md',
           to: path.resolve(config.distPath),
         },
       ].filter(_ => _)),

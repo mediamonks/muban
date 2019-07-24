@@ -1,4 +1,4 @@
-# Muban boilerplate
+# Muban [![muban-release-status]][muban-release]
 
 Muban is a backend-agnostic framework and development setup to enhance server-rendered HTML with
 [TypeScript](https://www.typescriptlang.org/) or [Babel](https://babeljs.io/) components and
@@ -10,163 +10,55 @@ reloading, while using [Handlebars](http://handlebarsjs.com/) templates to rende
 The dist build will generates preview html pages and a js and css bundle that backend developers can
 use to integrate the pages in their server side templates or CMS of choice.
 
-## Why Muban?
+## 🎓 Documentation
 
-Please read this [introduction](./docs/introduction.md) about why and how we created Muban.
+You can find the full documentation in the `/docs` folder. Here you will find the full
+[table of contents](./docs/) covering all the subjects required to start on your own Muban project!
 
-## Getting started
+- **Totally new:** If you are new to Muban we suggest to start by reading the
+  [preparations guide](./docs/02-setup-guide.md#preparations). This will guide you through the core
+  technologies and the required steps to setup your environment.
+- **Ready to get started:** Once you've completed the preparations you can have a look at the
+  [getting started guide](./docs/02-setup-guide.md#getting-started). This guide will walk you
+  through all the steps to setup the a new Muban project
+- **Give me some examples:** If you want to dive straight into examples have a look at the
+  [guides section](./docs/13-guides.md) of the documentation. This page contains a lot of example
+  situations that hopefully cover all your questions.
 
-Please read this [getting started guide](./docs/getting-started.md) if you're new to Muban.
+## 🚀 Quick start
 
-## Distribution implementation guide
+If you have all the [preparations](./docs/02-setup-guide.md#preparations) done and you don't want to
+read the documentation you can follow these steps to get you started.
 
-If you're a developer that needs to implement the dist build into an existing backend/cms, please
-read the [implementation guide](./docs/dist-implementation-guide.md) that is also distributed with
-the build output.
+1. Get the a _copy_ of the source code using one of the following methods
+   - Clone the repository and remove the `.git` folder.
+   - [📦 Download](https://github.com/mediamonks/muban/archive/master.zip) the repository `zip`
+     file.
+2. Install the project dependencies using `yarn`.
+3. Startup the development server using `yarn dev`.
+   - Open your browser at [http://localhost:9000](http://localhost:9000).
+4. Start editing!
 
-## Setup
+> **Note:** If you need more instructions we suggest you take a look at the full
+> [getting started guide](./docs/02-setup-guide.md#getting-started)!
 
-After cloning this repos and removing the `.git` folder, run:
+## 📚 Ecosystem
 
-```sh
-yarn
-```
+| Project                      | Status                                                                     | Description                     |
+| ---------------------------- | -------------------------------------------------------------------------- | ------------------------------- |
+| [muban-core]                 | [![muban-core-status]][muban-core-package]                                 | The core functionality of Muban |
+| [muban-transition-component] | [![muban-transition-component-status]][muban-transition-component-package] | GSAP transitions for Muban      |
 
-This boilerplate comes with some sample pages, blocks and components.
-If you don't need them in your project, you can remove them all with a simple command:
+## 📝 License
 
-```sh
-yarn clean:boilerplate
-```
+Muban is released under the [MIT](http://opensource.org/licenses/MIT) License.
 
-You can also remove the storybook config, source and preset files if you don't need it:
-
-```sh
-yarn clean:storybook
-```
-
-### Config
-
-The most basic settings can be found and changed in `build-tools/config/config.js`.
-
-### Development
-
-```sh
-yarn dev
-```
-
-Open your browser at [http://localhost:9000](http://localhost:9000).
-
-**Using own server for html**
-
-When using server-generated html instead of the handlebars templates, you can use the following
-command to just compile the `js` and `css` bundles (incl other assets).
-
-```sh
-yarn dev:code
-```
-
-The files will be outputted/updated in the same folder as the normal build is done, but uses the
-`development` environment, enables sourcemaps, and disables minification and other stuff.
-
-## Creating pages, blocks and components
-
-With seng-generator you're able to create pages, blocks and components with the CLI. The
-seng-generator needs to be installed globally.
-
-```sh
-yarn global add seng-generator
-```
-
-The easiest way to use it is by using the wizard
-
-```sh
-sg wizard
-```
-
-Starts a wizard to create a component, page or block.
-
-For more information about the generating components, check the [docs](./docs/components.md).
-
-## Code Quality tools
-
-Muban uses multiple code quality tools like linters and formatters. Please read the
-[extended documentation](docs/code-quality.md) for more information.
-
-## Build
-
-```sh
-yarn build
-```
-
-The code is outputted in `/dist`.
-
-To preview the build in the browser, run:
-
-```sh
-yarn preview
-```
-
-To analyze the created bundle, run:
-
-```sh
-yarn analyze
-```
-
-Using the build script, you can also run some parts of the process separately:
-
-```sh
-yarn build code      # or yarn compile:code
-yarn build partials  # or yarn compile:partials
-yarn build html      # or yarn compile:html
-```
-
-### Diff
-
-If you want to generate a report on what has changed in the handlebars templates,
-you can generate a diff report between two git commits (default to `master` and `HEAD`).
-
-```sh
-yarn build:diff
-```
-
-It will generate a file in `dist/diff/templates.html` with a proper formatted diff.
-
-## Files and folders
-
-* `src/app/dev.js` Main dev file, you should never have to change anything here
-
-* `src/app/dist.js` Webpack entry file for production build, contains code that runs immediately.
-* `src/app/partials.js` Webpack entry file for generating output html files.
-* `src/app/bundle.js` Webpack entry that will include all js and css files referenced from all
-  template files.
-* `src/app/polyfills.js` List of polyfills to include in the bundles.
-* `src/app/component/layout/index/index.hbs` Template file to list all the pages.
-* `src/app/component/layout/app/app.hbs` Template file that is used for all pages, contains basic
-  page layout (e.g. header, footer and wrapper).
-* `src/app/component/` Contains all components, each folder is made up of:
-  * `component-name.hbs` The template file, can import a stylesheet using the html `link` tag, and a
-    script using the html `script` tag.
-  * `component-name.scss` The stylesheet, best to use a `component` prefix for your outer selector.
-  * `ComponentName.ts/js` An optional TS/JS file for the component, receives the DOM element, and
-    should have a static `block` property that corresponds with the `data-component` DOM attribute.
-* `src/app/component/blocks/` Contains all _block_ components. They are dynamically rendered based
-  on the blocks entry in the json data file.
-* `src/app/style` Folder containing global styles. All components will include their own stylesheet.
-* `src/app/style/main.scss` Main stylesheet file, only for setting up global styles.
-* `src/data` The yaml files for all preview pages. Each yaml file corresponds with a page. Using a
-  `.` in the filename will allow to group alternative variations for a single page. E.g. `home.yaml`
-  is the main page, and `home.alt.yaml` is an alternative version that can be visited via the
-  overview page.
-* `.modernizrrc` config file for Modernizrrc used by `modernizr-loader`, config rules can be found
-  [here](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json).
-* `build-tools/generator-template/*` Template files for seng-generator, for creating pages, blocks
-  and components.
-
-## Storybook
-
-Storybook is a web-app that lets you preview and interact with the components in your project. You
-can create presets that render your component with custom HTML, and pass different properties by
-providing a json object.
-
-Please read the [extended documentation](docs/storybook.md) for more information.
+[muban-release]: https://github.com/mediamonks/muban/releases
+[muban-release-status]: https://img.shields.io/github/release/mediamonks/muban.svg?colorB=41a6ff
+[muban-core]: https://github.com/mediamonks/muban-core
+[muban-transition-component]: https://github.com/riccoarntz/muban-transition-component
+[muban-core-status]: https://img.shields.io/npm/v/muban-core.svg?colorB=41a6ff
+[muban-transition-component-status]:
+  https://img.shields.io/npm/v/muban-transition-component.svg?colorB=41a6ff
+[muban-core-package]: https://npmjs.com/package/muban-core
+[muban-transition-component-package]: https://npmjs.com/package/muban-transition-component
