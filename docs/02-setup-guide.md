@@ -281,7 +281,7 @@ Once the server has started you can open your browser up at
 #### Generate a difference report
 
 When you handover the code to the backend it can be quite difficult to see the difference between
-builds. To make this easier you can also create a difference report. This also creates a `/diff`
+generated HTML in the builds. To make this easier you can also create a difference report. This also creates a `/diff`
 folder inside of the `/dist` folder containing the report.
 
 You can do this by running the following in the root of your project
