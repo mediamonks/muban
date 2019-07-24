@@ -23,7 +23,7 @@ You can find the full documentation in the `/docs` folder. Here you will find th
   through all the steps to setup the a new Muban project
 - **Give me some examples:** If you want to dive straight into examples have a look at the
   [guides section](./docs/13-guides.md) of the documentation. This page contains a lot of example
-  situations hopefully cover all your questions.
+  situations that hopefully cover all your questions.
 
 ## 🚀 Quick start
 
