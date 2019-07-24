@@ -1,7 +1,7 @@
 # Application
 
-Like described in the page about components everything in Muban is a component this includes the
-application it self, the smart-component is called `App` and can be found in the
+Like described in the page about components everything in Muban is a component, this includes the
+application itself. This component is called `App` and can be found in the
 `src/app/component/layout/app` folder. By default the app does not do that much it renders out all
 the blocks that are provided by the blocks list as described in the page about pages.
 
