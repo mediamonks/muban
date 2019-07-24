@@ -182,7 +182,7 @@ yarn dev
 Once the server has started you can open your browser up at
 [http://localhost:9000](http://localhost:9000/) to preview Muban with some boilerplate code.
 
-The root of the server will list you all the pages that are available, this way you can easily
+The index page in the root of the server will list you all the pages that are available, this way you can easily
 navigate them and keep track of your progress.
 
 #### Running the Storybook server
