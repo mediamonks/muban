@@ -73,13 +73,13 @@ blocks:
 
 The data provides the content and structure of your block, it represents the eventual backend data
 that will be used to render the templates on the server. Usually all blocks contain data and it is
-defined on the page that the block is rendered.
+defined on the page that the block is rendered on.
 
 There can be two ways of providing data to your block.
+ 
+##### Page data
 
-##### Local data
-
-Local data is data that is directly defined in the data key of your block. You will probably not use
+Page data is defined directly in the data key of your block. You will probably not use
 this but if your block uses specific data that is only required on that page you could define it on
 page level.
 

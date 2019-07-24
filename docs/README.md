@@ -68,7 +68,7 @@
    3. [Blocks](./04-page.md#Blocks)
       1. [Name](./04-page.md#Name)
       2. [Data](./04-page.md#Data)
-         1. [Local data](./04-page.md#Local-data)
+         1. [Page data](./04-page.md#Page-data)
          2. [Imported data](./04-page.md#Imported-data)
 5. [Application](./05-application.md)
    1. [Bootstrapping](./05-application.md#Bootstrapping)
