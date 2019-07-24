@@ -99,10 +99,21 @@ blocks:
 Imported data is data that is imported from another location. If you look at the block section on
 the page about components you can see that all blocks all have a local `data.yaml` file. This file
 can be used to provide the same data to multiple instances of the same block without having to write
-it multiple times.
+it multiple times. 
 
 ```yaml
 blocks:
   - name: 'my-block'
     data: 'import!../app/component/block/my-block/data.yaml'
+```
+
+You can even take this a step further and create multiple variations of the data file. This way you could 
+easily render out different states of the same component and keep everything clean and more re-usable.
+
+```yaml
+blocks:
+  - name: 'my-block'
+    data: 'import!../app/component/block/my-block/data-logged-in.yaml'
+  - name: 'my-block'
+    data: 'import!../app/component/block/my-block/data-logged-out.yaml'
 ```
