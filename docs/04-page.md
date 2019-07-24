@@ -57,7 +57,7 @@ A block exists of two values.
 
 #### Name
 
-The name is the name of the block component that should be rendered.
+The name is used for the lookup of the block, the following path is generated: `component/block/{{name}}/{{name}}.hbs`. 
 
 > **Note:** Keep in mind that the casing should be in `slug-case`
 
