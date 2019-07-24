@@ -153,10 +153,13 @@ export default class MySmartComponent extends AbstractComponent {
 
 Here you can see that we create a class that extends the `AbstractComponent`, this makes sure that
 we have all the base logic that is required for Muban to initialise the components and provide the
-default functionality.
+default functionality. 
 
-_Note: If you don't want to use TypeScript you could also create a JavaScript file, just keep in
-mind that your will lose all typings._
+It's important that the static `displayName` value matches the `data-component` attribute value 
+in the handlebars file because Muban uses these values to bind them together. 
+
+> **Note:** If you don't want to use TypeScript you could also create a JavaScript file, just keep in
+mind that your will lose all typings.
 
 ### Block
 
