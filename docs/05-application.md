@@ -48,13 +48,13 @@ production version of the bootstrap.
 ### Development bootstrapping
 
 The development version of the bootstrap file consists of two sections. The first one is the
-initialisation of Muban with all the confiugration and the second one enables hot reloading for the
+initialisation of Muban with all the configuration, and the second one enables hot reloading for the
 development server. For a full detailed description of the development bootstrap method
 [see the API reference page](./09-api-reference.md)!
 
 ### Production bootstrapping
 
-The production version of the bootstrap file also exists of two sections. The first one is the
+The production version of the bootstrap file also consists of two sections. The first one is the
 creation of a require context for all the blocks. The second part is the actual initialisation of
 Muban, compared to the development version this initialisation does not require any more
 configuration since everything is already bundled.
