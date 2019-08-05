@@ -11,7 +11,7 @@ const resolvers = {
   yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
 };
 
-const replaceVariables = ((path) => fs.existsSync(path) && loadData(path, {
+const replaceVariables = ((varPath) => fs.existsSync(varPath) && loadData(varPath, {
   resolvers,
 }))(path.resolve(projectRoot, 'src/data/_variables.yaml')) || {};
 
