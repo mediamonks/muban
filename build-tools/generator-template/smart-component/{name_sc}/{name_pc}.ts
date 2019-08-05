@@ -1,4 +1,4 @@
-import AbstractComponent from "../AbstractComponent";
+import AbstractComponent from '../AbstractComponent';
 
 export default class {{name_pc}} extends AbstractComponent {
   static displayName:string = '{{name_sc}}';
