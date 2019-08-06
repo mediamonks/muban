@@ -258,8 +258,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
         test: /\.yaml$/,
         use: [
           { loader: 'json-import-loader' },
-          { loader: 'json-loader' },
-          { loader: 'yaml-loader' },
+          { loader: 'js-yaml-loader' },
         ],
       },
     ],

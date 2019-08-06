@@ -11,9 +11,9 @@ const resolvers = {
   yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
 };
 
-const replaceVariables = loadData(path.resolve(projectRoot, 'src/data/_variables.yaml'), {
+const replaceVariables = ((varPath) => fs.existsSync(varPath) && loadData(varPath, {
   resolvers,
-});
+}))(path.resolve(projectRoot, 'src/data/_variables.yaml')) || {};
 
 /**
  * Get all data files, and return an array of page/file

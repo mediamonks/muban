@@ -6,6 +6,7 @@ import 'modernizr';
 import Handlebars from 'handlebars/runtime';
 import { bootstrap } from 'muban-core/lib/dev';
 import symbol from 'core-js/es6/symbol';
+import RequireContext = __WebpackModuleApi.RequireContext;
 symbol;
 
 declare var require: any;
@@ -15,7 +16,11 @@ declare var module: any;
 // pick any json/yaml file that doesn't start with a _ in the filename
 const dataContext = require.context('../data/', true, /^(.*[\/\\])?[^_][^\/\\]+\.(yaml|json|js)$/);
 const partialsContext = require.context('./component/', true, /\.hbs$/);
-const replaceVariables = require('../data/_variables.yaml');
+// require global handlebar variables
+const replaceVariables: { [index: string]: any } =
+  ((r: RequireContext) => r.keys()[0] && r(r.keys()[0]))(
+    require.context('../data/', false, /_variables.yaml/),
+  ) || {};
 
 // bootstrap the app
 const appElement = document.getElementById('app');
