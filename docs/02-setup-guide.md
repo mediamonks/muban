@@ -294,6 +294,31 @@ yarn build:diff
 > [Git repository](https://git-scm.com/). it can use either the `master branch`, a
 > [tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) or `commit hash` to make the diff file.
 
+#### Watch a code dev build
+
+When you only want to make changes to html/css. This could happen when your server/cms will take
+care of rendering the HTML, and you only use webpack for frontend development.
+
+The following command will only compile js/css (and assets), with normal webpack watch mode, but
+as a dev build (so it's easy to debug).
+
+```
+yarn dev:code
+```
+
+##### Watch a full dev build
+
+Similar to the above, with one major difference; The HTML will also be watched and re-rendered on
+changes. Live-reload will happen on any file change.
+
+This is mostly useful when you want to test the normal HTML output process (instead of using
+webpack-dev-server), and can also be adopted to render HTML files from other kind of templates.
+
+```
+yarn build:dev
+```
+
+
 ## Code quality
 
 ### EditorConfig
