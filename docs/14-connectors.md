@@ -36,7 +36,7 @@ If you use drush you can enable the module following way:
 
 ### Helper functions
 
-Create a custom module let's call it mymodule_components, define .module and info.yml files.
+Create a custom module, let's call it `mymodule_components`, define `.module` and `info.yml` files.
 Inside your custom module create a src/Handlebars/Helpers folder where you will place following 2 files:
 
 + src/Handlebars/Helpers/ConditionHelper.php
