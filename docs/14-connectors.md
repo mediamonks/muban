@@ -375,6 +375,6 @@ As far you can see the inclusion is done through handlebars() method, where firs
 and than c01-hero.hbs converts nested data array into variables and prints inside of html.
 
 The final step would be to drop drupal cache and see the result in browser after this.
-```
+```sh
 drush cr
 ```
