@@ -30,7 +30,7 @@ Then execute:
 ```
 
 If you use drush, you can enable the module in the following way:
-```
+```sh
  drush en handlebars_theme_handler -y
 ```
 
