@@ -7,8 +7,8 @@ The list of connectors/modules is listed below:
 Drupal Handlebars for Drupal 8 - https://github.com/mediamonks/drupal-handlebars.git
 
 
-### Drupal 8
-#### Installation
+## Drupal 8
+### Installation
 
 In order to perform Muban integration with Drupal first of all you will need to install Drupal Handlebars module.
 In your project <b>composer.json</b> include the repository
@@ -34,7 +34,7 @@ If you use drush you can enable the module following way:
  drush en handlebars_theme_handler -y
 ```
 
-#### Setup
+### Helper functions
 
 Create a custom module let's call it mymodule_components, define .module and info.yml files.
 Inside your custom module create a src/Handlebars/Helpers folder where you will place following 2 files:
@@ -144,7 +144,7 @@ class IfInHelper implements Helper {
 Don't forget to update the namespaces in both files matching your module name.
 These 2 classes are needed in order to let resolve handlebars conditional statements easier.
 
-#### Creating preprocessors.
+### Creating preprocessors.
 There are 3 initial steps while working with handlebars:
 
 + Step 1: Create entities in Drupal eg. Paragraphs, Menus, Nodes.
@@ -153,7 +153,7 @@ There are 3 initial steps while working with handlebars:
 + Step 4: Bridge the twig to handlebars, through handlebars include function.
 + Step 5: Update the assets (css/js).
 
-##### Step 1 - Creating entities.
+#### Step 1 - Creating entities.
 On step 1 we assume that you use Paragraphs Drupal Module (https://www.drupal.org/project/paragraphs) in order to buid your components.
 Let's assume that you already created a paragraph (paragraph machine name: c01_hero) that contains:
 
@@ -161,7 +161,7 @@ Let's assume that you already created a paragraph (paragraph machine name: c01_h
 + Body  [field_body] [textarea]
 + Image [field_image] [image]
 
-##### Step 2 - Creating preprocessor
+#### Step 2 - Creating preprocessor
 Now having the paragraph created, we can create a preprocessor - is needed to aggregate data and pass it to theming layer in our case this is handlebars.
 As a result our preprocessor should return an array or a nested array that will be converted in variables inside of hbs template.
 Let's take a look at the data.yml file of the component that our front-end prepared:
@@ -335,7 +335,7 @@ drush cr
 You can create a demo page with the paragraph component on it and see the result in browser.
 The result would state an error of a missing twig file that is described in the next step (Step 3).
 
-##### Step 3 - Syncing Muban component to Drupal theme folder.
+#### Step 3 - Syncing Muban component to Drupal theme folder.
 Now is the right time to sync the component from muban frontend folder to drupal theme folder.
 Let's assume that you have your custom theme ready under:
 
