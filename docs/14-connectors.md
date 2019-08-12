@@ -371,7 +371,7 @@ c01-hero.twig.html
 {{ handlebars('c01-hero.hbs', data) }}
 
 ```
-As far you can see the inclusion is done through handlebars() method, where first argument is the hbs template from same directory and data is the render array from Step 2 ($variables['data'])
+As you can see, the inclusion is done through the `handlebars()` method, where the first argument is the hbs template from same directory, and `data` is the render array from Step 2 (`$variables['data']`)
 and then `c01-hero.hbs` converts nested data array into variables and prints them inside of the html.
 
 The final step would be to drop drupal cache and see the result in browser after this.
