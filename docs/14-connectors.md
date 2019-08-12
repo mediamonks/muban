@@ -13,7 +13,7 @@ Drupal Handlebars for Drupal 8 - https://github.com/mediamonks/drupal-handlebars
 In order to perform Muban integration with Drupal, first of all you will need to install Drupal Handlebars module.
 In your project <b>composer.json</b> include the repository
 
-```
+```json
 "repositories": [
   {
      "type": "git",
