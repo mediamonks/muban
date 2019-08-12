@@ -23,7 +23,7 @@ In your project <b>composer.json</b> include the repository
   ]
 ```
 
-Than execute:
+Then execute:
 
 ```
  composer require "drupal/handlebars_theme_handler:1.6"
