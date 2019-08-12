@@ -100,7 +100,7 @@ class ConditionHelper implements Helper {
 ```
 + src/Handlebars/Helpers/IfInHelper.php
 
-```
+```php
 <?php
 
 namespace Drupal\mymodule_components\Handlebars\Helpers;
@@ -167,7 +167,7 @@ As a result our preprocessor should return an array or a nested array that will 
 Let's take a look at the data.yml file of the component that our front-end prepared:
 
 + data.yaml
-```
+```yaml
 title: 'Title goes here'
 body: 'some longer text description'
 image:
@@ -354,7 +354,7 @@ In our case it will be looking like this:
 ```
 + themes/custom/mycustomtheme_theme/components/c01-hero
 ```
-** In Muban source/frontend/src/app/component/block you need to copy your c01-hero (data.yml, c01-hero.hbs) files into your newly Drupal created component folder.
+** In Muban `source/frontend/src/app/component/block` you need to copy your `c01-hero` (`data.yml`, `c01-hero.hbs`) files into your newly Drupal created component folder.
 
 Finally your drupal theme structure will look like this:
 ```
