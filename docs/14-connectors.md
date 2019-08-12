@@ -150,7 +150,7 @@ There are 3 initial steps while working with handlebars:
 + Step 1: Create entities in Drupal eg. Paragraphs, Menus, Nodes.
 + Step 2: Create preprocessor that matches data.yml structure of the component.
 + Step 3: Sync muban component to Drupal theme folder.
-+ Step 4: Bridge the twig to handlebars, through handlebars include function.
++ Step 4: Bridge handlebars through twig, through handlebars include function.
 + Step 5: Update the assets (css/js).
 
 #### Step 1 - Creating entities
@@ -364,6 +364,8 @@ Finally your drupal theme structure will look like this:
   +++ c01-hero.hbs 
 ```
 
+#### Step 4 - Bridging handlebars throw twig.
+
 As you can notice, the `component-name.twig.html` was created by us based on the component machine name. Now is the right time to edit this file and include the `.hbs` file into it:
 
 ```twig
@@ -379,3 +381,15 @@ The final step would be to drop drupal cache and see the result in browser after
 ```sh
 drush cr
 ```
+
+#### Step 5: Update the assets (css/js).
+Let's assume your muban project is in `source/frontend` folder, from the root folder execute
+```
+yarn build
+
+```
+This will trigger muban to compile all the styles and typescript from each component folder into compressed `css`, `js` files.'
+All these files you can find under `build` directory which is created after full execution of `yarn build` command.
+
+Now copy all the contents of this folder into your drupal theme `assets` folder. 
+We also assume that you already connected the css and js through `libraries.yml` and the theme is marked as active.
