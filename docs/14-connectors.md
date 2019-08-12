@@ -233,7 +233,7 @@ Now let's take a look at the annotation of the class, as you can see it contains
 + label - human readable label
 + entity_type - in our case is paragraph
 + bundle - is machine name of the entity, in our case c01_hero
-+ view_mode - the view mode for which we create preprocessor, in our case is default. In future you can create more view modes for entities and create a separate preprocessor per view mode.
++ `view_mode` - the view mode for which we create a preprocessor, in our case is `default`. In the future you can create more view modes for entities and create a separate preprocessor per view mode.
 
 The annotation is automatically decoded by ThemeEntityProcessor and used further.
 Also you can note that the main class is matching the file name and it extends the ThemeEntityProcessorBase, this is a requirement.
