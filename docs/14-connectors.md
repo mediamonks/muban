@@ -25,7 +25,7 @@ In your project <b>composer.json</b> include the repository
 
 Then execute:
 
-```
+```sh
  composer require "drupal/handlebars_theme_handler:1.6"
 ```
 
