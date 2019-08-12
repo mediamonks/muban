@@ -29,7 +29,7 @@ Then execute:
  composer require "drupal/handlebars_theme_handler:1.6"
 ```
 
-If you use drush you can enable the module following way:
+If you use drush, you can enable the module in the following way:
 ```
  drush en handlebars_theme_handler -y
 ```
