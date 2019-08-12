@@ -152,3 +152,4 @@
        1. [Prettier shortcut](./13-guides.md#Prettier-shortcut)
     6. [Seng-generator](./13-guides.md#Seng-generator)
        1. [Create a custom template](./13-guides.md#Create-a-custom-template)
+    7. [Connectors](./14-connectors)
