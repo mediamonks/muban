@@ -144,7 +144,7 @@ class IfInHelper implements Helper {
 Don't forget to update the namespaces in both files matching your module name.
 These 2 classes are needed in order to let resolve handlebars conditional statements easier.
 
-### Creating preprocessors.
+### Creating preprocessors
 There are 3 initial steps while working with handlebars:
 
 + Step 1: Create entities in Drupal eg. Paragraphs, Menus, Nodes.
@@ -153,8 +153,8 @@ There are 3 initial steps while working with handlebars:
 + Step 4: Bridge the twig to handlebars, through handlebars include function.
 + Step 5: Update the assets (css/js).
 
-#### Step 1 - Creating entities.
-On step 1 we assume that you use Paragraphs Drupal Module (https://www.drupal.org/project/paragraphs) in order to buid your components.
+#### Step 1 - Creating entities
+On step 1 we assume that you use [Paragraphs Drupal Module](https://www.drupal.org/project/paragraphs) in order to buid your components.
 Let's assume that you already created a paragraph (paragraph machine name: c01_hero) that contains:
 
 + Title [field_title] [textfield]
@@ -162,8 +162,8 @@ Let's assume that you already created a paragraph (paragraph machine name: c01_h
 + Image [field_image] [image]
 
 #### Step 2 - Creating preprocessor
-Now having the paragraph created, we can create a preprocessor - is needed to aggregate data and pass it to theming layer in our case this is handlebars.
-As a result our preprocessor should return an array or a nested array that will be converted in variables inside of hbs template.
+Now having the paragraph created, we can create a preprocessor - this is needed to aggregate data and pass it to the theming layer - in our case this is handlebars.
+As a result our preprocessor should return an array or a nested array that will be converted in variables inside of the hbs template.
 Let's take a look at the data.yml file of the component that our front-end prepared:
 
 + data.yaml
@@ -176,19 +176,19 @@ image:
 ```
 
 As you can see this is the pattern that our preprocessor needs to return. The data.yaml file is used to mock variables and texts,
-so one Muban is compiled and you access Muban preview, you exactly see these texts.
-What we gonna do now, we will create a preprocessor that takes data from paragraph fields and returns it in same format as in provided data.yaml file.
+so once Muban is compiled and you access Muban preview, you exactly see this content.
+The next step is to create a preprocessor that takes data from paragraph fields and returns it in same format as in the provided data.yaml file.
 
-+ First of all we need to create following folders inside of our custom module 'mymodule_components':
-+ src/Plugin/ThemeEntityProcessor/[EntityType] - EntityType can be Paragraph, Node, Media etc... 
++ First of all we need to create the following folders inside of our custom module 'mymodule_components':
++ `src/Plugin/ThemeEntityProcessor/{EntityType}` - where `{EntityType}` can be a Paragraph, Node, Media etc... 
 
-In our case it will be a preprocessor for paragraph src/Plugin/ThemeEntityProcessor/ParagraphsBlock
+In our case it will be a preprocessor for paragraph `src/Plugin/ThemeEntityProcessor/ParagraphsBlock`.
 Inside of this folder, we will create a PHP Class that will match the name of our c01_hero component.
 
 + src/Plugin/ThemeEntityProcessor/ParagraphC01Hero.php
 
 and the contents of file will look like this: 
-```
+```php
 <?php
 
 namespace Drupal\c01_hero\Plugin\ThemeEntityProcessor\Paragraph;
@@ -229,33 +229,34 @@ class ParagraphC17ContactInfoLinkItem extends ThemeEntityProcessorBase {
 ```
 
 Now let's take a look at the annotation of the class, as you can see it contains:
-+ id - this is an id of the preprocessor, usually we keep it as [machineName]_[viewMode], it should be unique.
-+ label - human readable label
-+ entity_type - in our case is paragraph
++ `id` - this is an id of the preprocessor, usually we keep it as `{machineName}_{viewMode}`, it should be unique.
++ `label` - human readable label
++ `entity_type` - in our case it's `paragraph`
 + `bundle` - is machine name of the entity, in our case `c01_hero`
 + `view_mode` - the view mode for which we create a preprocessor, in our case is `default`. In the future you can create more view modes for entities and create a separate preprocessor per view mode.
 
-The annotation is automatically decoded by ThemeEntityProcessor and used further.
-Also you can note that the main class is matching the file name and it extends the ThemeEntityProcessorBase, this is a requirement.
-Is not excluded that you can create an intermediate class MyModuleIntermediateBase extends ThemeEntitiyProcessorBase in case you prefer to change something in the middle, here you use the power of OOP and Dependency Injection.
+The annotation is automatically decoded by `ThemeEntityProcessor` and used further.
+Also you can note that the main class is matching the file name and it extends the `ThemeEntityProcessorBase`, this is a requirement.
+In case you need more flexibility, you can create an intermediate class `MyModuleIntermediateBase extends ThemeEntitiyProcessorBase` so you can change something in the middle. Use the power of OOP and Dependency Injection to your advantage.
 
-The final point is that your class should implement <b>preprocessItemData</b> function.
-<br> Now let's take a closer look how to retrieve the filed data.
+The final point is that your class should implement thee `preprocessItemData` function.
 
-+ By annotation preprocessor knows what type of paragraph it is.
-+ ThemeEntityProcessorBase provides some key methods that allows to retrieve the field data in a generic way, so you don't have to parse all nested arrays and objects for image fields, text fields etc. It does all for you!
+Now let's take a closer look at how to retrieve the filed data.
+
++ Because of the annotation, the preprocessor knows what type of paragraph it is.
++ `ThemeEntityProcessorBase` provides some key methods that allows the retrieval of the field data in a generic way, so you don't have to parse all nested arrays and objects for image fields, text fields, etc. It does all for you!
 + You simply call:
 
-```
+```php
 $this->themeFieldProcessorManager->getFieldData($variables['elements']['field_title'])
 ```
 
-Where field_title, is substituted with a machine name of the field you want to retrieve.
+Where `field_title` is substituted with a machine name of the field you want to retrieve.
 The output will vary based on the field widget, let's check some examples:
 
 + Textfield
 
-```
+```php
 $text = $this->themeFieldProcessorManager->getFieldData($variables['elements']['field_title'])
 
 echo $text; // Output: 'Some text'
@@ -263,7 +264,7 @@ echo $text; // Output: 'Some text'
 ```
 
 + Imagefield
-```
+```php
 $image = $this->themeFieldProcessorManager->getFieldData($variables['elements']['field_image'])
 
 var_dump($image); // 
@@ -275,7 +276,7 @@ Output array:
 ]
 ```
 + Link field
-```
+```php
 $link = $this->themeFieldProcessorManager->getFieldData($variables['elements']['field_link'])
 
 var_dump($image); // 
@@ -286,10 +287,10 @@ Output array:
 ]
 ```
 
-The last step we need to build a render array, meaning that inside of $variables['data'] you need to mimic same structure as in data.yml,
-with exact same namings of array keys / aka variables.
+As the last step, we need to build a render array, meaning that inside of `$variables['data']` you need to mimic same structure as in data.yml,
+with the exact same naming of array keys _(a.k.a. variables)_.
 
-```
+```php
  $variables['data'] = [
       'title' => $image,
       'body' => $body,
@@ -300,22 +301,22 @@ with exact same namings of array keys / aka variables.
     ];
 ```
 
-This is the last step for creating preprocessor.
+This was the last step for creating a preprocessor.
 
 Bonus content: 
-Below we will show some extra tweaks that might be useful while working with <b>getFieldData</b> method.
+Below we will show some extra tweaks that might be useful while working with the `getFieldData` method.
 
 
 + Retrieving multivalue field contents.
-```
+```php
 $this->themeFieldProcessorManager->getFieldData($variables['elements']['field_reviews'], ['multiple' => TRUE])
 ```
-As you can notice the second argument for getFieldData are options, in upper case we use multiple => true to tell that this is a multivalue field,
+As you might notice, the second argument for `getFieldData` are options. In uppercase we use `multiple => true` to tell that this is a multi-value field,
 the result output does not change, the only thing is that it will return a key based array.
 
 + Returning image with image styles.
 
-```
+```php
 $this->themeFieldProcessorManager->getFieldData($variables['elements']['field_image'], [
    'style' => [
       'mobile' => 'image_banner_small',
@@ -326,16 +327,16 @@ $this->themeFieldProcessorManager->getFieldData($variables['elements']['field_im
 
 In order to retrieve an image in some predefined styles, a style key can be passed with machine names of image styles for conversion.
 
-After you are done with preprocessor it is recommended to drop the drupal cache
+After you are done with the preprocessor, it is recommended to drop the drupal cache:
 
-```
+```sh
 drush cr
 ```
 
-You can create a demo page with the paragraph component on it and see the result in browser.
-The result would state an error of a missing twig file that is described in the next step (Step 3).
+You can create a demo page with the paragraph component on it and see the result in the browser.
+The result would state an error of a missing twig file, which is described in the next step (Step 3).
 
-#### Step 3 - Syncing Muban component to Drupal theme folder.
+#### Step 3 - Syncing Muban component to Drupal theme folder
 Now is the right time to sync the component from muban frontend folder to drupal theme folder.
 Let's assume that you have your custom theme ready under:
 
@@ -343,19 +344,19 @@ Let's assume that you have your custom theme ready under:
 + themes/custom/mycustomtheme_theme
 ```
 
-Right there would be nice to create following nested directories:
+Right there would be nice to create the following nested directories:
 
 ```
 + themes/custom/mycustomtheme_theme/components/[component-name]
 ```
 
-In our case it gonna look like this:
+In our case it will be looking like this:
 ```
 + themes/custom/mycustomtheme_theme/components/c01-hero
 ```
 ** In Muban source/frontend/src/app/component/block you need to copy your c01-hero (data.yml, c01-hero.hbs) files into your newly Drupal created component folder.
 
-<br><br>Finally your drupal theme structure will look like this:
+Finally your drupal theme structure will look like this:
 ```
 + themes/custom/mycustomtheme_theme/components/c01-hero
   +++ data.yml
