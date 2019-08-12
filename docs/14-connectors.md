@@ -383,13 +383,13 @@ drush cr
 ```
 
 #### Step 5: Update the assets (css/js).
-Let's assume your muban project is in `source/frontend` folder, from the root folder execute
+Let's assume your muban project is in the`source/frontend` folder, from the root folder execute
 ```
 yarn build
 
 ```
 This will trigger muban to compile all the styles and typescript from each component folder into compressed `css`, `js` files.'
-All these files you can find under `build` directory which is created after full execution of `yarn build` command.
+All these files you can find under the `build` directory which is created after full execution of `yarn build` command.
 
 Now copy all the contents of this folder into your drupal theme `assets` folder. 
 We also assume that you already connected the css and js through `libraries.yml` and the theme is marked as active.
