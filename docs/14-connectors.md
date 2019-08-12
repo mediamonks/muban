@@ -363,7 +363,7 @@ In our case it gonna look like this:
   +++ c01-hero.hbs 
 ```
 
-As far you can notice the twig.html was created by us based on component machine name, now is the right time to edit this file and include .hbs file into it:
+As you can notice, the `component-name.twig.html` was created by us based on the component machine name. Now is the right time to edit this file and include the `.hbs` file into it:
 
 ```twig
 c01-hero.twig.html
