@@ -41,7 +41,7 @@ Inside your custom module create a src/Handlebars/Helpers folder where you will 
 
 + src/Handlebars/Helpers/ConditionHelper.php
 
-```
+```php
 <?php
 
 namespace Drupal\mymodule_components\Handlebars\Helpers;
