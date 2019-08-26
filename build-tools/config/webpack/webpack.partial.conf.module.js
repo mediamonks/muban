@@ -84,7 +84,6 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
             include: [
               /src[\/\\]app/,
               /src[\/\\]storybook/,
-              // include(),
             ],
             use: [
               getCacheLoader(config, buildType, isDevelopment),
