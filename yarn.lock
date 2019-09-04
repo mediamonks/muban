@@ -7800,10 +7800,10 @@ muban-convert-hbs@^1.1.1:
     "@babel/runtime" "^7.0.0-beta.35"
     handlebars "^4.0.11"
 
-muban-core@^1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.13.0.tgz#d5715b7f8242065d9c2b08ea8dcf2eb3d35a89a4"
-  integrity sha512-01RMIS69WOggfpPxoQO2VFQ9+KizrVwliO8XBuIig9QGKou+MPmUzbc7EdwLSCdoFB9jkVYS2cPH3gL20TCV0Q==
+muban-core@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/muban-core/-/muban-core-1.13.1.tgz#be05cd716b0aa2cf0e0812542574eaae70f640c0"
+  integrity sha512-qyArVdguV0WHhVZy3v8/A0vgGLlUo2EHzoENnKnEiNYQxy7lLSs9Qa6tTrG9m1UvCjxsLThhUjkOQV965jaQVw==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"
