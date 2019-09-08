@@ -1,7 +1,6 @@
 const config = require('../config/config');
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.env.production.NODE_ENV);
 const detectPort = require('detect-port');
-const path = require('path');
 const express = require('express');
 const serveIndex = require('serve-index');
 const opn = require('opn');
