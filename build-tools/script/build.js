@@ -39,6 +39,13 @@ const argv = require('yargs')
     type: 'string',
     nargs: 1,
   })
+  .option('l', {
+    alias: 'language',
+    default: undefined,
+    describe: 'Custom language to be used in your yaml files (default "en")',
+    type: 'string',
+    nargs: 1,
+  })
   .help('h')
   .alias('h', 'help').argv;
 

@@ -5,15 +5,16 @@ const recursive = require('recursive-readdir');
 const yaml = require('js-yaml');
 const loadData = require('json-import-loader').loadData;
 
+const getVariables = require('./getVariables');
+const config = require('../../config/config.js');
+
 const projectRoot = path.resolve(__dirname, '../../../');
 
 const resolvers = {
   yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
 };
 
-const replaceVariables = ((varPath) => fs.existsSync(varPath) && loadData(varPath, {
-  resolvers,
-}))(path.resolve(projectRoot, 'src/data/_variables.yaml')) || {};
+let replaceVariables = getVariables(projectRoot, config.buildTypes.PRODUCTION);
 
 /**
  * Get all data files, and return an array of page/file
@@ -39,19 +40,36 @@ module.exports = function() {
             // eslint-disable-next-line import/no-dynamic-require, global-require
             const data = loadData(path.resolve(projectRoot, `src/data/${file}`), {
               resolvers,
+              processPath: path =>
+                Object.keys(replaceVariables).reduce(
+                  (data, varName) =>
+                    // replace ${foo} occurrences in the import path
+                    data.replace(
+                      new RegExp(`\\$\{${varName}}`, 'g'),
+                      () => replaceVariables[varName],
+                    ),
+                  path,
+                ),
             });
 
             // replace ${foo} occurrences in the data to be rendered.
             const replacedData = {
               ...replaceVariables,
               ...JSON.parse(
-                Object.keys(replaceVariables).reduce(
-                  (data, varName) =>
+                Object.keys(config.env[config.buildTypes.PRODUCTION]).reduce(
+                  (data, envName) =>
                     data.replace(
-                      new RegExp('\\${' + varName + '}', 'g'),
-                      () => replaceVariables[varName],
+                      new RegExp('process\\.env\\.' + envName, 'g'),
+                      config.env[config.buildTypes.PRODUCTION][envName].replace(/"/gi, ''),
                     ),
-                  JSON.stringify(data),
+                  Object.keys(replaceVariables).reduce(
+                    (data, varName) =>
+                      data.replace(
+                        new RegExp('\\${' + varName + '}', 'g'),
+                        () => replaceVariables[varName],
+                      ),
+                    JSON.stringify(data),
+                  ),
                 ),
               ),
             };

@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const imageminMozjpeg = require('imagemin-mozjpeg');
+const ReplacePlugin = require('webpack-plugin-replace');
 
 const { cleanupTemplate } = require('./webpack.helpers');
 
@@ -16,9 +17,19 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
   }
 
   const plugins = [
-      new webpack.DefinePlugin({
-        'process.env': config.env[buildType],
-      }),
+    new webpack.DefinePlugin({
+      'process.env': config.env[buildType],
+    }),
+    new ReplacePlugin({
+      include: [
+        /\.ya?ml/,
+        /\.scss/,
+      ],
+      values: Object.keys(config.env[buildType]).reduce((data, envName) => {
+        data[`process.env.${envName}`] = config.env[buildType][envName].replace(/"/gi, '');
+        return data;
+      }, {}),
+    }),
   ];
 
   if (isDevelopment) {
@@ -42,7 +53,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
 
       new MiniCssExtractPlugin({
         filename: 'asset/[name].css',
-        allChunks : true,
+        allChunks: true,
       }),
 
       new CopyWebpackPlugin([
@@ -58,12 +69,13 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
           from: '**/*.hbs',
           to: path.resolve(config.distPath, 'templates') + '/[path]/[name].hbs',
           toType: 'template',
-          transform (content) {
-            return cleanupTemplate(content.toString('utf8'))
+          transform(content) {
+            return cleanupTemplate(content.toString('utf8'));
           },
         },
         // {
         //   // add support for TWIG/HBS drupal integration, generates a twig file that includes a hbs partial
+        //
         //   context: path.resolve(config.projectRoot, 'src/app/component'),
         //   from: '**/*.hbs',
         //   to: path.resolve(config.distPath, 'templates') + '/[path]/[name].html.twig',
@@ -77,13 +89,20 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
           // convert hbs to htl templates
           context: path.resolve(config.projectRoot, 'src/app/component'),
           from: '**/*.hbs',
-          to: path.resolve(config.distPath, 'templates') + '/[path]/[name].' + config.convertTemplates.extension,
+          to: path.resolve(
+            config.distPath,
+            'templates',
+          ) + '/[path]/[name].' + config.convertTemplates.extension,
           toType: 'template',
-          transform (content, path) {
+          transform(content, path) {
             // convert to target template
             try {
-              return convert(cleanupTemplate(content.toString('utf8')), config.convertTemplates.convertTo);
-            } catch (e) {
+              return convert(
+                cleanupTemplate(content.toString('utf8')),
+                config.convertTemplates.convertTo,
+              );
+            }
+            catch (e) {
               console.log(`failed converting "${path}"`);
               console.log(e);
               throw e;
@@ -129,8 +148,8 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
           plugins: [
             imageminMozjpeg({
               quality: 85,
-              progressive: true
-            })
+              progressive: true,
+            }),
           ],
         }),
       );
