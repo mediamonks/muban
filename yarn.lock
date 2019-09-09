@@ -923,11 +923,6 @@
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.6.tgz#5932ead926307ca21e5b36808257f7c926b06565"
   integrity sha512-403D4wN95Mtzt2EoQHARf5oe/jEPhzBOBNrunk+ydQGW8WmkQ/E8rViRAEB1qEt/vssfGfNVD6ujP4FVeegrLg==
 
-"@types/knockout@^3.4.60":
-  version "3.4.60"
-  resolved "https://registry.yarnpkg.com/@types/knockout/-/knockout-3.4.60.tgz#eaa09276ede5cc18f237b01825ace07d226e70ff"
-  integrity sha512-0qFy/G5y+c2CrhUCCEDbodGfMXzVXVBdwpdHBxAVT0qDfnD3XD6dtEb73D1nn0Ip6/IJctSyLW/VpFkakoe5TQ==
-
 "@types/lodash@4.14.87":
   version "4.14.87"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.87.tgz#55f92183b048c2c64402afe472f8333f4e319a6b"
@@ -6761,10 +6756,10 @@ json-buffer@3.0.0:
   resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
   integrity sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=
 
-json-import-loader@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/json-import-loader/-/json-import-loader-1.2.1.tgz#fc60139ac051e8240cad0a32ef869ed52c4e67bc"
-  integrity sha512-CQctdesx8/cUhzoZuJCy6jmnt7B3D5JE9+TYUFBq6jVhRsUS7SpHjNMBG9oM1SpNvU2BvthnVIs6tJDW8KmP2w==
+json-import-loader@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/json-import-loader/-/json-import-loader-1.3.1.tgz#358f6072c7c3200d04cc47e14cb239dd7f582e23"
+  integrity sha512-5csehlGNO5US55SjCJCDTt9BNk/w/qpKdoYoqDkTp6IOEzLlziDD47pY2AuUQVkgRC9tQSIrytky0FLJw5r6qA==
   dependencies:
     "@babel/runtime" "^7.0.0-beta.35"
     loader-utils "^1.1.0"
