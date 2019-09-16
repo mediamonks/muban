@@ -1,4 +1,4 @@
-[data-component='two-col'] {
+[data-component="two-col"] {
   margin-bottom: 30px;
   font-size: 0;
 
@@ -20,12 +20,12 @@
 
     &.col-left {
       img {
-        background-image: url('./image/demo.jpg');
+        background-image: url("./image/demo.jpg");
       }
     }
     &.col-right {
       img {
-        background-image: url('./image/demo.png');
+        background-image: url("./image/demo.png");
       }
     }
   }

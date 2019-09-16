@@ -1,5 +1,5 @@
 // Correctly set `seng-scss` assetPath
-$pathAsset: '~app';
+$pathAsset: "~app";
 
 // Fonts
 $baseFont: Arial, sans-serif;
@@ -10,4 +10,4 @@ $zLayout: default;
 // Colors
 $colorPrimaryTheme: #ff6e3f;
 
-@import '../../data/shared-variable/media-queries.json';
+@import "../../data/shared-variable/media-queries.json";

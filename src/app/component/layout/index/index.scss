@@ -30,7 +30,7 @@ $colorQA: #1e90ff;
 $colorFeedback: #dc4832;
 $colorDone: #0eb415;
 
-[data-component='index-root'] {
+[data-component="index-root"] {
   height: 100%;
 
   * {
@@ -234,5 +234,5 @@ $colorDone: #0eb415;
     }
   }
 
-  @import 'index-footer';
+  @import "index-footer";
 }

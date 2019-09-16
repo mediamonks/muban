@@ -10,6 +10,12 @@
       "options": {
         "printWidth": 999999
       }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "singleQuote": false
+      }
     }
   ]
 }
