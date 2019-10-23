@@ -13,5 +13,6 @@ module.exports = {
     'no-increment-decrement': false,
     'strict-boolean-expressions': false,
     'import-name': false,
+    'member-access': true,
   },
 };
