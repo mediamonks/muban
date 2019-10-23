@@ -1,7 +1,7 @@
 import AbstractComponent from '../../AbstractComponent';
 
 export default class App extends AbstractComponent {
-  static displayName: string = 'index-root';
+  public static readonly displayName: string = 'index-root';
 
   constructor(element: HTMLElement) {
     super(element);
@@ -31,7 +31,7 @@ export default class App extends AbstractComponent {
     // for generic app logic
   }
 
-  updateBlocksButton() {
+  private updateBlocksButton() {
     const pages = this.getElements('.page');
     if (pages.some(page => page.classList.contains('show-blocks'))) {
       this.getElement('.toggle-blocks').innerText = 'hide blocks';

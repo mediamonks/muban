@@ -16,7 +16,7 @@ const svgContext = require.context('app/svg/icon/?inline', false, /\.svg/);
  * ```
  */
 export default class Icon extends AbstractComponent {
-  static displayName: string = 'icon';
+  public static readonly displayName: string = 'icon';
 
   constructor(el: HTMLElement) {
     super(el);
