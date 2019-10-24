@@ -3,7 +3,7 @@ import Icon from '../../general/icon/Icon';
 import AbstractBlock from '../AbstractBlock';
 
 export default class Paragraph extends AbstractBlock {
-  static displayName: string = 'paragraph';
+  public static readonly displayName: string = 'paragraph';
 
   private btn: HTMLButtonElement | null;
   private btnLabel: HTMLSpanElement | undefined | null;

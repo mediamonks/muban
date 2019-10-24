@@ -1,7 +1,7 @@
 import AbstractComponent from '../../AbstractComponent';
 
 export default class App extends AbstractComponent {
-  static displayName: string = 'app-root';
+  public static readonly displayName: string = 'app-root';
 
   constructor(element: HTMLElement) {
     super(element);
