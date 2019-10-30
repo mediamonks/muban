@@ -11,13 +11,13 @@ blocks:
     data: {}
 
   - name: "paragraph"
-    data: "import!../app/component/block/paragraph/data.yaml"
+    data: "import!../app/component/block/paragraph/data/data.yaml"
 
   - name: "paragraph"
-    data: "import!../app/component/block/paragraph/data-${language}.yaml"
+    data: "import!../app/component/block/paragraph/data/data-${language}.yaml"
 
   - name: 'two-col'
-    data: 'import!../app/component/block/two-col/data.yaml'
+    data: 'import!../app/component/block/two-col/data/data.yaml'
 
   - name: "footer"
     data: {}

@@ -13,7 +13,7 @@ module.exports = () => ({
     },
     {
       name: 'paragraph',
-      data: 'import!../app/component/block/paragraph/data.js',
+      data: 'import!../app/component/block/paragraph/data/data.js',
     },
     {
       name: 'footer',
