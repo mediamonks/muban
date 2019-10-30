@@ -7,6 +7,8 @@ const path = require('path');
 const Handlebars = require('handlebars');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const beautifyHtml = require('js-beautify').html;
+const importFresh = require('import-fresh');
+
 const config = require('../config/config');
 const { addToIndex, renderIndex, startNewIndex } = require('./util/index-page');
 const getPages = require('./util/getPages');
@@ -20,7 +22,7 @@ module.exports = function(options) {
     throw new Error('Partials file not present, run `yarn build partials` first.');
   }
   // eslint-disable-next-line import/no-unresolved
-  const { indexTemplate, appTemplate } = require(partialsPath);
+  const { indexTemplate, appTemplate } = importFresh(partialsPath);
 
   // compile normal and standalone page templates
   const htmlTemplate = Handlebars.compile(

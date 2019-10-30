@@ -1177,7 +1177,7 @@ export default class MySmartComponent extends AbstractComponent {
     // 3. apply bindings to list, this will re-render the items
     ko.applyBindingsToNode(this.element.querySelector('.items'), {
       template: { name: 'item-template', foreach: itemData },
-    });
+    }, {});
 
     // 4. add new data to the observable or do any other funky stuff to the array, like sorting/filtering
     itemData.push(...newData);
@@ -1369,7 +1369,7 @@ export default class MySmartComponent extends AbstractComponent {
     // 1. Bind the value to the element
     ko.applyBindingsToNode(this.getELement('p'), {
       css: { isActive: this.buttonActive },
-    });
+    }, {});
 
     // 2. Change the value and see the class change
     this.searchOpened(true);

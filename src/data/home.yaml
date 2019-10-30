@@ -13,6 +13,9 @@ blocks:
   - name: "paragraph"
     data: "import!../app/component/block/paragraph/data.yaml"
 
+  - name: "paragraph"
+    data: "import!../app/component/block/paragraph/data-${language}.yaml"
+
   - name: 'two-col'
     data: 'import!../app/component/block/two-col/data.yaml'
 

@@ -34,13 +34,13 @@ Within the data-bind values you can pass observables, but you have to do so with
 observable itself, changes can be tracked to update the binding.
 
 ```typescript
-ko.applyBindingsToNode(element, object);
+ko.applyBindingsToNode(element, object, viewModel);
 ```
 
 ```typescript
 ko.applyBindingsToNode(this.element.querySelector('.search-results'), {
   css: { opened: this.searchOpened },
-});
+}, {});
 ```
 
 ### applyBindingAccessorsToNode

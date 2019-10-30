@@ -1,4 +1,4 @@
-import ko from 'knockout';
+import ko, { Observable } from 'knockout';
 import extract from 'html-extract-data';
 
 /**
@@ -8,17 +8,18 @@ import extract from 'html-extract-data';
  * @param {boolean} html
  * @return {KnockoutObservable<string>}
  */
-export function initTextBinding(
-  element: HTMLElement,
-  html: boolean = false,
-): KnockoutObservable<string> {
+export function initTextBinding(element: HTMLElement, html: boolean = false): Observable<string> {
   // init the observable with the correct initial data
   const obs = ko.observable(<string>element[html ? 'innerHTML' : 'textContent']);
 
   // then apply the observable to the HTML element
-  ko.applyBindingsToNode(element, {
-    [html ? 'html' : 'text']: obs,
-  });
+  ko.applyBindingsToNode(
+    element,
+    {
+      [html ? 'html' : 'text']: obs,
+    },
+    {},
+  );
 
   return obs;
 }
@@ -85,7 +86,7 @@ export function initListBinding<T>(
   templateName: string,
   configOrData: Array<T> | any,
   additionalData?: any,
-): KnockoutObservable<Array<T>> {
+): Observable<Array<T>> {
   let currentData;
   if (Array.isArray(configOrData)) {
     currentData = configOrData;
@@ -95,8 +96,12 @@ export function initListBinding<T>(
   // 2. create observable and set old data
   const list = ko.observableArray<T>(currentData);
   // 3. apply bindings to list, this will re-render the items
-  ko.applyBindingsToNode(container, {
-    template: { name: templateName, foreach: list },
-  });
+  ko.applyBindingsToNode(
+    container,
+    {
+      template: { name: templateName, foreach: list },
+    },
+    {},
+  );
   return list;
 }

@@ -34,6 +34,14 @@ if (publicPath !== '/') {
   console.log('');
 }
 
+// set language to be set as process.env
+let language = 'en';
+
+if(argv.language){
+  language = argv.language;
+}
+
+
 const buildTypes = {
   DEVELOPMENT: 'development',
   PRODUCTION: 'production',
@@ -92,14 +100,22 @@ module.exports = Object.assign({},
     },
 
     /* environment variables (set using DefinePlugin) */
+    //
+    // These variables can also be used in _variables.yaml by using `process.env.SOMETHING`
+    // example:
+    // publicPath: process.env.PUBLIC_PATH
+    //
+    // These variables are also available in SCSS as `$something`
     env: {
       [buildTypes.PRODUCTION]: {
         NODE_ENV: JSON.stringify('production'),
         PUBLIC_PATH: JSON.stringify(publicPath),
+        LANGUAGE: language,
       },
       [buildTypes.DEVELOPMENT]: {
         NODE_ENV: JSON.stringify('development'),
         PUBLIC_PATH: JSON.stringify('/'),
+        LANGUAGE: language,
       }
     },
   }

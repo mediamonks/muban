@@ -25,6 +25,10 @@ module.exports = ({ config }) => webpackConfig => ({
       // render basic default index.html for all html files (path will be picked by JS)
       app.use((req, res, next) => {
         if (req.path.includes('.html')) {
+          // ignore any url that would go trough the proxy table.
+          if (config.devServer.proxyTable && Object.keys(config.devServer.proxyTable).some(p => req.path.indexOf(p) === 0)) {
+            return next();
+          }
           res.send(fs.readFileSync(path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'), 'utf-8'));
         } else {
           next();
