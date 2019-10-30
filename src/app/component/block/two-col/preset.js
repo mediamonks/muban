@@ -6,17 +6,17 @@ storiesOf('Two Col', require('./two-col'))
     'default',
     'A block that has two columns of text, each with its own title.',
     `<hbs>
-			{{> two-col @root }}
-		</hbs>`,
+      {{> two-col @root }}
+    </hbs>`,
     require('./data'),
   )
   .add(
     'small',
     'A smaller wrapper around the two colomns.',
     `<hbs>
-			<div style="max-width: 600px">
-				{{> two-col @root }}
-			</div>
-		</hbs>`,
-    require('./data'),
+      <div style="max-width: 600px">
+        {{> two-col @root }}
+      </div>
+    </hbs>`,
+    require('./data/data'),
   );
