@@ -6,17 +6,17 @@ storiesOf('Paragraph', require('./paragraph'))
     'default',
     'A Paragraph block with a "read more" section you can show by clicking a button.',
     `<hbs>
-			{{> paragraph @root }}
-		</hbs>`,
-    require('./data'),
+      {{> paragraph @root }}
+    </hbs>`,
+    require('./data/data'),
   )
   .add(
     'no more content',
     'Without more content, hides the button',
     `<hbs>
-			<div style="max-width: 400px;">
-				{{> paragraph @root }}
-			</div>
-		</hbs>`,
-    require('./data-simple'),
+      <div style="max-width: 400px;">
+        {{> paragraph @root }}
+      </div>
+    </hbs>`,
+    require('./data/data-simple'),
   );
