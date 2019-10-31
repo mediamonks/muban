@@ -8,7 +8,7 @@ storiesOf('Two Col', require('./two-col'))
     `<hbs>
       {{> two-col @root }}
     </hbs>`,
-    require('./data'),
+    require('./data/data'),
   )
   .add(
     'small',
