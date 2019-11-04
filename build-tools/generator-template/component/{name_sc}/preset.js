@@ -5,7 +5,7 @@ storiesOf('{{name_sc}}', require('./{{name_sc}}.hbs')).add(
   'default',
   'No description yet...',
   `<hbs>
-			\{{> {{name_sc}} @root}}
-		</hbs>`,
+      \{{> {{name_sc}} @root}}
+    </hbs>`,
   {},
 );
