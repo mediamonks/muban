@@ -8,9 +8,9 @@ meta:
 
 blocks:
 {{#if blocks}}
-{{#each blocks}}
+  {{#each blocks}}
   - name: "{{this}}"
-    data: "import!../app/component/block/{{this}}/data"
+    data: "import!../app/component/block/{{this}}/data/default"
 
-{{/each}}
+  {{/each}}
 {{/if}}
