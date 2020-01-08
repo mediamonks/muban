@@ -105,7 +105,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
             },
             {
               test: /\.ts$/,
-              include: [/src[\/\\]app/, /src[\/\\]storybook/],
+              include: [/src[\/\\]/, /src[\/\\]/],
               use: [
                 getCacheLoader(config, buildType, isDevelopment),
                 babelLoaderConfig,
