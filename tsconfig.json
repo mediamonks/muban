@@ -17,5 +17,9 @@
   "include": [
     "./src/types.d.ts",
     "./src/**/*.ts"
+  ],
+  "exclude": [
+    "./src/**/preset.js",
+    "./build-tools/config/storybook/config.js"
   ]
 }
