@@ -11,6 +11,7 @@ module.exports = function(api) {
           },
           modules: false,
           useBuiltIns: 'entry',
+          loose: true,
 
           exclude: [
             // we don't use generators or async/await by default
@@ -69,6 +70,7 @@ module.exports = function(api) {
           ],
         },
       ],
+      '@babel/preset-typescript',
     ],
     plugins: [
       // NOTE: adding helpers will reduce the filesize if you have a lot off classes,
