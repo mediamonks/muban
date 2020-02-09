@@ -27,7 +27,8 @@
     "analyze": "webpack-bundle-analyzer dist/bundlesize-profile.json ./dist/site",
     "prettify": "prettier --write \"src/**/*.{js,ts,scss,json}\"",
     "precommit": "lint-staged",
-    "preinstall": "npx use-yarn -m 'Please use yarn!'"
+    "preinstall": "npx use-yarn -m 'Please use yarn!'",
+    "generate": "sg wizard"
   },
   "lint-staged": {
     "linters": {
@@ -155,6 +156,7 @@
     "raw-loader": "^0.5.1",
     "recursive-readdir": "^2.2.2",
     "sass-loader": "^7.1.0",
+    "seng-generator": "^0.9.0",
     "serve-index": "^1.9.1",
     "shelljs": "^0.8.3",
     "shx": "^0.3.2",
