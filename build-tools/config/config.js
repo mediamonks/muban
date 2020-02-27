@@ -14,10 +14,21 @@ When you don't know the publicPath at build time, you can set `window['webpackPu
 loading any script in your HTML.
 */
 let publicPath = '/';
+let clientLibRoot = '/';
+let clientLibName = '';
 
 if(argv.publicPath){
   publicPath = argv.publicPath;
 }
+
+if (argv.clientLibRoot) {
+  clientLibRoot = argv.clientLibRoot;
+}
+
+if (argv.clientLibName) {
+  clientLibName = argv.clientLibName;
+}
+
 
 // force leading /
 if (!publicPath.startsWith('/')) {
@@ -28,11 +39,31 @@ if (!publicPath.endsWith('/')) {
   publicPath = `${publicPath}/`;
 }
 
+// force trailing /
+if (!clientLibRoot.endsWith('/')) {
+  clientLibRoot = `${clientLibRoot}/`;
+}
+
+
+
 if (publicPath !== '/') {
   console.log('');
   console.log(`${chalk.yellow('Note:')} publicPath set to "${chalk.blue(publicPath)}"`);
   console.log('');
 }
+
+if (clientLibRoot !== '/') {
+  console.log('');
+  console.log(`${chalk.yellow('Note:')} clientLibRoot set to "${chalk.blue(clientLibRoot)}"`);
+  console.log('');
+}
+
+if (clientLibName !== '') {
+  console.log('');
+  console.log(`${chalk.yellow('Note:')} clientLibName set to "${chalk.blue(clientLibName)}"`);
+  console.log('');
+}
+
 
 // set language to be set as process.env
 let language = 'en';
@@ -67,6 +98,10 @@ module.exports = Object.assign({},
     staticPath,
     distPath,
     buildPath,
+
+    /* AEM */
+    clientLibRoot,
+    clientLibName,
 
     /* EXPERIMENTAL: enable to generate per-page bundles. For each json file a .js and .css file are generated */
     standaloneOutput: false,
