@@ -3,6 +3,7 @@ const shell = require('shelljs');
 const path = require('path');
 const webpack = require('webpack');
 const chokidar = require('chokidar');
+const clientLib = require('./clientlib');
 
 
 const { createTaskSpinner } = require('./util/spinner');
@@ -166,5 +167,6 @@ function buildAll() {
         )} ${chalk.green('yarn analyze')}`,
       );
       console.log();
+      clientLib(config);
     });
 }
