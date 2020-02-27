@@ -393,3 +393,30 @@ All these files you can find under the `build` directory which is created after 
 
 Now copy all the contents of this folder into your drupal theme `assets` folder. 
 We also assume that you already connected the css and js through `libraries.yml` and the theme is marked as active.
+
+Or you can simply use the following sh where you need to replace the theme name with your relevant one:
+
+```sh
+#!/usr/bin/env bash
+
+THEME='nfe_theme'
+
+cd source/frontend
+
+echo 'Updating package dependencies'
+yarn
+
+echo 'Building frontend assets'
+yarn build --publicPath=/themes/custom/${THEME}
+
+echo 'Copying assets to drupal theme'
+cp -R dist/site/asset/. ../drupal/docroot/themes/custom/${THEME}/asset
+
+echo 'Updating templates in drupal theme'
+cp -R dist/templates/. ../drupal/docroot/themes/custom/${THEME}/templates
+rm -rf ../drupal/docroot/themes/custom/${THEME}/templates/block
+cp -R dist/templates/block/. ../drupal/docroot/themes/custom/${THEME}/templates/component
+echo 'Done'
+```
+
+Place above sh in your docroot and you can simply execute it for automated FE built and syncronization keeping your templates and styles / fonts allways up to date.
