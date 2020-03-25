@@ -228,6 +228,7 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
                   { removeMetadata: true },
                   { removeComments: true },
                   { cleanupIDs: { remove: true, prefix: '' } },
+                  { prefixIds: true },
                   { convertColors: { shorthex: false } },
                 ],
               },
