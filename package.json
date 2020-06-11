@@ -1,9 +1,9 @@
 {
   "name": "muban",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "skeleton": {
     "name": "muban",
-    "version": "3.2.0"
+    "version": "3.3.0"
   },
   "description": "",
   "scripts": {
@@ -71,7 +71,7 @@
     "modernizr": "^3.6.0",
     "modernizr-loader": "^1.0.1",
     "muban-convert-hbs": "^1.1.1",
-    "muban-core": "^1.13.1",
+    "muban-core": "^2.1.2",
     "normalize.css": "^8.0.1",
     "qs": "^6.6.0",
     "seng-device-state-tracker": "^1.1.4",
@@ -175,7 +175,7 @@
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "1.17.0",
     "tslint-loader": "^3.5.4",
-    "typescript": "^3.5.1",
+    "typescript": "^3.8.3",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.2",
     "use-yarn": "^2.2.0",

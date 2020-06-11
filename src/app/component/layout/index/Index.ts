@@ -18,7 +18,7 @@ export default class App extends AbstractComponent {
       });
     });
 
-    this.getElement('.toggle-blocks').addEventListener('click', () => {
+    this.getElement('.toggle-blocks')!.addEventListener('click', () => {
       const pages = this.getElements('.page');
       if (pages.some(page => page.classList.contains('show-blocks'))) {
         pages.forEach(page => page.classList.remove('show-blocks'));
@@ -32,11 +32,11 @@ export default class App extends AbstractComponent {
   }
 
   private updateBlocksButton() {
-    const pages = this.getElements('.page');
+    const pages = this.getElements('.page')!;
     if (pages.some(page => page.classList.contains('show-blocks'))) {
-      this.getElement('.toggle-blocks').innerText = 'hide blocks';
+      this.getElement('.toggle-blocks')!.innerText = 'hide blocks';
     } else {
-      this.getElement('.toggle-blocks').innerText = 'show blocks';
+      this.getElement('.toggle-blocks')!.innerText = 'show blocks';
     }
   }
 
