@@ -20,16 +20,6 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
     new webpack.DefinePlugin({
       'process.env': config.env[buildType],
     }),
-    new ReplacePlugin({
-      include: [
-        /\.ya?ml/,
-        /\.scss/,
-      ],
-      values: Object.keys(config.env[buildType]).reduce((data, envName) => {
-        data[`process.env.${envName}`] = config.env[buildType][envName].replace(/"/gi, '');
-        return data;
-      }, {}),
-    }),
   ];
 
   if (isDevelopment) {
