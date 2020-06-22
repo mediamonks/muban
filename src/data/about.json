@@ -1,0 +1,9 @@
+{
+  "title": "About",
+  "blocks": [
+    {
+      "name": "paragraph",
+      "data": "import!../app/component/block/paragraph/data.json"
+    }
+  ]
+}

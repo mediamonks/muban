@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="./phases.scss">
+
+<a name="workflow"></a>
+<div data-component="phases">
+  <div class="container">
+    <h2>Workflow</h2>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>
+          To better explain how Muban can benefit you, let's explain what a common workflow looks like.
+          There are three different phases where all work passes through.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div class="info">
+          <h3 class="h1">Develop.</h3>
+        </div>
+      </div>
+      <div class="col-sm">
+        <p>
+          Development starts by copying the project, installing the node modules, executing <kbd>yarn dev</kbd>
+          and opening the browser at <code>http://localhost:9000/</code>.
+        </p>
+        <p>
+          After that you can just create a page by <kbd>sg page blog-detail</kbd> and
+          a component by <kbd>sg component hero-detail</kbd>.
+        </p>
+        <p>
+          Any changes you make to your template, script or style will automatically update in the browser without manual reloads.
+        </p>
+        <p>
+          You can also choose to run <kbd>yarn storybook</kbd> and open <code>http://localhost:9002/</code>
+          to view your component in Storybook. This allows you to create multiple presets with different data to
+          showcase and test different variations. It'll also display component documentation and source code.
+        </p>
+        <p>
+          You can run <kbd>yarn build</kbd> and upload the generated HTML pages to a preview server to
+          get design and QA sign-off without ever needing a backend system.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <p>
+          When your site or a part of it is completed and signed off, it's time to integrate it in the backend system.
+        </p>
+        <p>
+          Running <kbd>yarn build</kbd> will generate bundled and minified scripts and styles that can be directly used
+          in your server-rendered pages. It will also collect all the mock data and development templates so the person
+          that's going to implement the templates in the backend will have a full overview. Storybook can also be used
+          to gather information about components.
+        </p>
+        <p>
+          Depending on your server-side template language, the <a href="https://www.npmjs.com/package/muban-convert-hbs">muban-convert-hbs</a>
+          module can transpile the Handlebars templates for you. It currently supports HTL, Django and Twig output templates.
+          If you kept the json mock files and the actual backend data model similar, the templates hardly need any manual updates.
+        </p>
+      </div>
+      <div class="col-sm">
+        <div class="info">
+          <h3 class="h1">Integrate.</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div class="info">
+          <h3 class="h1">Update.</h3>
+        </div>
+      </div>
+      <div class="col-sm">
+        <p>
+          Of course, nothing is perfect the first time something is created. You get feedback,
+          or something doesn't look quite right on a specific device. Whatever the reason, you'll have
+          to update some components you created before.
+        </p>
+        <p>
+          By design, Muban tries to minimize the coupling between your templates and your scripts and styles.
+          Because of this, most often your changes can be done in your script or style, without touching the template.
+        </p>
+        <p>
+          If you do need to update your template, you have to make a choice:
+        </p>
+        <ol>
+          <li>
+            You could completely ignore the Handlebars templates and only update your server-side templates.
+            This means you have to run the complete backend to see and test your changes, and you'll lose
+            the template hot reloading feature. Even worse, Storybook isn't up-to-date anymore, so you'll
+            have to disband it.
+          </li>
+          <li>
+            You make the updates the same way you have developed it. This will keep the development workflow
+            optimal and allows you to keep using Storybook. The downside is that you have to re-integrate
+            the changes in the server-side templates, which is duplicate work and mistakes could slip in.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>

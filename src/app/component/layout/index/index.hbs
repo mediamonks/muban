@@ -1,0 +1,11 @@
+{{!
+  Index with all rendered pages for easy access
+}}
+<ul>
+  {{#each pages}}
+    <li>
+      <a href="{{link}}">{{page}}</a>
+      - {{data.title}} ({{data.blocks.length}})
+    </li>
+  {{/each}}
+</ul>

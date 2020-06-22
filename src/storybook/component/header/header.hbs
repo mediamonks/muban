@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="./header.scss">
+<script src="./Header.ts"></script>
+
+<header data-component="storybook-header">
+  <div class="header-block left">
+	  <a href="/"><span class="header-title">Muban</span></a>
+  </div>
+
+  <div class="header-block">
+    <div class="search">
+      <input type="text" placeholder="Search..." />
+    </div>
+  </div>
+
+  <div class="header-block right align-right">
+    <ul class="header-nav">
+      <li class="device-emulator">
+        <a href="#">
+          <span class="device-icon">
+            &nbsp;
+            <span class="tablet"></span>
+            <span class="phone">
+              <span class="bezel"></span>
+            </span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+	{{> ../search-results/search-results.hbs }}
+
+</header>

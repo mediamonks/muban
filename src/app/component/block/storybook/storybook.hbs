@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="./storybook.scss">
+
+<a name="storybook"></a>
+<div data-component="storybook">
+  <div class="container">
+    <h2>Storybook</h2>
+    <div class="row intro">
+      <div class="col-sm-6">
+        <p>
+          Inspired by React and Vue Storybook, it allows you to view all your components.
+          It serves developers during the development phase, website owners to keep track of everything,
+          and backend developers to do integration.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <h3 class="h5">Development</h3>
+        <p>Since Muban promotes component based development, we have Storybook to make this even easier.</p>
+        <p>
+          Every component folder can contain a <code>preset.js</code> file that registers a component with Storybook.
+          When scaffolding a component, a default preset is generated automatically
+        </p>
+        <pre><code>
+storiesOf('Button', require('./button.hbs'))
+  .add(
+    'with Foo',
+    'Just a normal button that says Foo.',
+    `&lt;hbs&gt;
+      \{{&gt; button text=text}}
+    &lt;/hbs&gt;`,
+    { text: 'foo' },
+  )
+        </code></pre>
+        <p>
+          Every preset contains a name, description, a template and mock data.
+          Using a custom webpack-loader, you can use inline Handlebars syntax to customize how
+          your component is displayed on the page.
+        </p>
+        <p>
+          By adding multiple presets you can display your components in different scenarios,
+          which could be hard to do when you only render your component on a single page.
+        </p>
+      </div>
+      <div class="col-sm">
+        <h3 class="h5">Integration</h3>
+        <p>
+          Storybook can be a big help during integration. Besides displaying the components, it will
+          also show a ton of information.
+        </p>
+        <p>
+          The component description can contain information on how and where the component should be used or
+          what variations are possible by adding certain classes or properties.
+        </p>
+        <p>
+          It also shows source code in multiple tabs; the preset code, mock data, rendered HTML,
+          Handlebars source, script source and template source.
+        </p>
+        <p>
+          Additionally it can even show a tab with the template converted to the backend template language
+          using the <a href="https://www.npmjs.com/package/muban-convert-hbs">muban-convert-hbs</a> plugin.
+          Not having to convert the template manually will save a lot of time!
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

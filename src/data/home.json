@@ -1,0 +1,44 @@
+{
+  "title": "Home",
+  "blocks": [
+    {
+      "name": "hero",
+      "data": "import!../app/component/block/hero/data.json"
+    },
+    {
+      "name": "perks",
+      "data": {
+        "perks": [
+          {
+            "title": "Backend agnostic",
+            "content": "<p>Muban doesn't care what backend system you use, it uses Handlebars to render everything on the client when developing.</p><p>Never be slowed down by waiting on backend setup and integration, use mock data to preview all your components.</p>"
+          },
+          {
+            "title": "Component based",
+            "content": "<p>Create small reusable components by keeping the template, style and script together, and compose them to build blocks that make up your site.</p><p>When the HTML is rendered on the server, Muban will attach components to the DOM and manage interaction between them.</p>"
+          },
+          {
+            "title": "Webpack",
+            "content": "<p>Muban makes use of a common webpack setup, enhanced with custom loaders to even support hot reloading for your Handlebars templates.</p><p>You're free to adjust the webpack setup to your own liking to better suit your personal preference.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "name": "future",
+      "data": "import!../app/component/block/future/data.json"
+    },
+    {
+      "name": "vision",
+      "data": "import!../app/component/block/vision/data.json"
+    },
+    {
+      "name": "phases",
+      "data": "import!../app/component/block/phases/data.json"
+    },
+    {
+      "name": "storybook",
+      "data": "import!../app/component/block/storybook/data.json"
+    }
+  ]
+}

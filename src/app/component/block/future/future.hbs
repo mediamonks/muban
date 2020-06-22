@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="./future.scss">
+<script src="./Future.ts"></script>
+
+<a name="dynamic-data"></a>
+<div data-component="future">
+  <div class="container">
+    <h2>Dynamic data</h2>
+    <div class="row">
+      <div class="col-sm">
+        <p>
+          Traditionally, server rendered websites only rendered on the server, and each action would
+          require a page load. <abbr title="Single Page Application" >SPA</abbr>s do the opposite,
+          they render completely on the client without ever needing a page load. They communicate
+          strictly with API using <code>fetch</code>.
+        </p>
+        <p>
+          Wouldn't it be nice if there was a middle ground? Quickly load pages from the server, but
+          also use <code>fetch</code> on highly dynamic pages, like auto-suggest searches or applying
+          filters to search results. Depending on the backend, data can be returned as HTML (reusing
+          the same rendering as the original page) or as JSON.
+        </p>
+        <p>
+          When the server returns HTML, you can just replace a certain section of the page. But don't
+          forget to re-initialize all the components that exists within that HTML. Muban supplies utils
+          to make that process painless.
+        </p>
+        <p>
+          When working with JSON, you'll have to replace data in already rendered HTML, without a template
+          engine like Vue or React. Muban makes use of the special created
+          <a href="https://www.npmjs.com/package/html-extract-data">html-extract-data</a> module where
+          you can extract and convert any data from any html structure. Muban implements and describes
+          best practices when working with existing HTML.
+        </p>
+      </div>
+      <div class="col-sm">
+        <p>
+          When working whit extracted or new data, sometimes you wish you had some sort of template
+          language. Most template languages cannot be used, because they either require client-side
+          rendering, or only work on string-based templates. We found <a href="http://knockoutjs.com/">Knockout</a>
+          to be a perfect candidate, since it allows you to define HTML-bindings from JavaScript.
+          This means you never have to update your HTML when adding complex template logic.
+          Muban adds some utils to convert rendered HTML to interactive templates. It's completely
+          optional, but will add some additional bytes to your JS bundle, so use only when needed!
+        </p>
+        <p>
+          With knockout already available, it's super easy to make a small part of your site that doesn't
+          have to render on the server, interactive on the client. Muban provides custom webpack loaders
+          that allows the same setup for both Muban and Knockout components. It even allows for integration
+          with Redux if there is the need to communicate state between components.
+        </p>
+      </div>
+    </div>
+    <h2>Animation</h2>
+    <div class="row">
+      <div class="col-sm">
+        <p>
+          Not every site will need the same level of animation. Information focused sites would benefit
+          from small details, like smooth hovers. But if your website is more focused towards creating
+          an experience for the user, you might want to transition in components when you scroll the page,
+          create parallax effects, or manipulate the page in such a way that it just looks like a
+          <abbr title="Single Page Application" >SPA</abbr>s.
+        </p>
+      </div>
+      <div class="col-sm">
+        <p>
+          Having a component-based setup that allows communication through the framework helps to create
+          a foundation for setting up high level transitions and animations. Create animation timelines
+          in your components that are automatically picked up when entering the viewport.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

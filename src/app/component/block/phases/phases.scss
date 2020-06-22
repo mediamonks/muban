@@ -1,0 +1,31 @@
+/* stylelint-disable-next-line block-no-empty */
+[data-component="phases"] {
+  background-color: darken($gray-800, 4);
+  color: $gray-400;
+  padding: 3em 0;
+
+  h2 {
+    font-weight: 200;
+    margin-bottom: 20px;
+  }
+
+  p, ol {
+    font-weight: 200;
+  }
+
+  li {
+    padding-bottom: 10px;
+  }
+
+  .info {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .row {
+    margin-bottom: 20px;
+  }
+}

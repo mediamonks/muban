@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="./perks.scss">
+<script src="./Perks.ts"></script>
+
+<div data-component="perks" class="container">
+  <div class="row">
+  {{#each perks as |perk| }}
+    <div class="col-sm">
+    {{> paragraph-small perk }}
+    </div>
+  {{/each}}
+  </div>
+</div>

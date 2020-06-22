@@ -1,0 +1,167 @@
+[data-component='storybook-header'] {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  background-color: #546e7a;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  box-sizing: border-box;
+  font-size: 0;
+
+  .header-block {
+    width: 60%;
+
+    &.left {
+      width: 20%;
+    }
+
+    &.right {
+      width: 20%;
+    }
+
+    &.align-left {
+      text-align: left;
+    }
+
+    &.align-right {
+      text-align: right;
+    }
+  }
+
+  .header-title {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 50px;
+    color: white;
+  }
+
+  .search {
+    position: relative;
+    margin: 7px auto 0;
+    width: 100%;
+    max-width: 600px;
+
+    input {
+      box-sizing: border-box;
+      font-size: 18px;
+      font-weight: 300;
+      color: #607d8b;
+      background-color: #eceff1;
+      padding: 7px 15px;
+      width: 100%;
+      border: 0;
+      box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.3);
+
+      &::placeholder {
+        color: #b0bec5;
+      }
+
+      &:focus {
+        outline: none;
+        background-color: white;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  .header-nav {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+
+    li {
+      display: inline-block;
+      line-height: 50px;
+      transition: background-color 0.3s;
+      font-size: 16px;
+
+      &:hover,
+      &.selected {
+        background-color: #455a64;
+
+        .device-icon {
+          .phone,
+          .tablet {
+            background-color: #455a64;
+          }
+        }
+      }
+
+      &.size-xs {
+        font-weight: 200;
+      }
+      &.size-s {
+        font-weight: 300;
+      }
+      &.size-m {
+        font-weight: 400;
+      }
+      &.size-l {
+        font-weight: 500;
+      }
+      &.size-xl {
+        font-weight: 600;
+      }
+
+      a {
+        padding: 0 15px;
+        color: white;
+        display: block;
+      }
+
+      .device-icon {
+        left: -8px;
+        position: relative;
+
+        .phone,
+        .tablet {
+          position: absolute;
+          display: block;
+          border: 1px solid white;
+          border-radius: 1px;
+          background-color: #546e7a;
+        }
+        .phone {
+          top: 6px;
+          left: 1px;
+          width: 5px;
+          height: 10px;
+
+          .bezel {
+            display: block;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            position: absolute;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+          }
+        }
+        .tablet {
+          top: 0;
+          left: 4px;
+          width: 11px;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  @include respond-to(SMALL) {
+    .header-block {
+      width: 50%;
+
+      &.left {
+        width: 25%;
+      }
+
+      &.right {
+        width: 25%;
+      }
+    }
+  }
+}

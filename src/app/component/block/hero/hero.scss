@@ -1,0 +1,49 @@
+/* stylelint-disable-next-line block-no-empty */
+[data-component="hero"] {
+  text-align: center;
+  padding: 100px 0;
+  background-color: darken($gray-800, 4);
+  color: $light;
+
+  @include media-breakpoint-down(sm) {
+    padding: 50px 0;
+  }
+
+  h1 {
+    font-size: 8vw;
+    font-weight: 100;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 3rem;
+    }
+  }
+
+  p {
+    font-size: 2rem;
+    font-size: 2.4vw;
+    margin: 20px 20.5vw 30px;
+    font-weight: 200;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 1rem;
+      width: 100%;
+      max-width: 415px;
+      margin: 0 auto 30px;
+    }
+  }
+
+  .actions {
+    a:not(:first-child) {
+      margin-left: 15px;
+    }
+  }
+
+  .btn-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    position: relative;
+    top: 1px;
+    margin-right: 4px;
+  }
+}

@@ -1,0 +1,10 @@
+/* stylelint-disable-next-line block-no-empty */
+[data-component='icon'] {
+  display: inline-block;
+  vertical-align: middle;
+
+  svg {
+    @include size(100%);
+    display: block;
+  }
+}

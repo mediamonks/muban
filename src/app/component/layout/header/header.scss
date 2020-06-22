@@ -1,0 +1,19 @@
+[data-component='header'] {
+  background-color: $gray-900;
+
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .navbar-brand {
+    width: calc(100% / 6);
+    font-weight: 100;
+    font-size: 22px;
+  }
+
+  .nav-item {
+    font-weight: 100;
+    font-size: 20px;
+  }
+}

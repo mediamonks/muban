@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="./paragraph.scss">
+<script src="./Paragraph.ts"></script>
+
+<div data-component="paragraph">
+  <h2>{{title}}</h2>
+
+  <p>{{{content}}}</p>
+
+  {{#if contentMore }}
+  <p class="js-content-more hidden">{{{contentMore}}}</p>
+
+  {{> general/button text="read more..." }}
+  {{/if}}
+</div>

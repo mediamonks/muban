@@ -1,0 +1,17 @@
+@import '~normalize.css';
+@import '~seng-scss';
+
+/* Globally available project specific mixins, functions and variables */
+@import 'global';
+
+@import 'type/font';
+@import "~bootstrap/scss/bootstrap";
+
+// Generic stuff
+
+a[name] {
+  display: block;
+  position: relative;
+  top: -40px;
+  visibility: hidden;
+}

@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="./vision.scss">
+
+<a name="vision"></a>
+<div data-component="vision">
+  <div class="container">
+    <h2>Vision</h2>
+    <div class="row">
+      <div class="col-sm">
+        <p>
+          It's hard to explain exactly what Muban is. It's not just a framework or library, and it's more than a boilerplate.
+          <em>Muban is how we envision the frontend development workflow when building server-rendered websites.</em>
+          It's a combination of a small runtime framework, a custom but adjustable webpack setup, and a set of tools to
+          allow a efficient way of working.
+        </p>
+        <p>
+          Traditionally those websites were made by including some scripts and styles, and writing
+          javascript in a single file using a lot of jQuery plugins. A lot has changed since then,
+          where most of the innovation has happened around Single Page Applications.
+        </p>
+        <p>
+          With the rise of webpack we got used to code with hot reloading, and it's hard to live without it.
+          The choice to bring HTML rendering to the client makes it possible to hot reload everything; your scripts, styles and templates!
+          We want to make use of Babel or Typescript to write modern JavaScript, and we can compress and combine our code better than
+          any server side framework can.
+        </p>
+      </div>
+      <div class="col-sm">
+        <p>
+          Another aspect that became popular with SPA frameworks is to make everything a component, and make that component reusable.
+          Muban tries to embrace that philosophy by importing your script and style from your template file. Besides global styles,
+          your component stylesheet only cares about your component. To make components interactive, the framework creates a component
+          class instance for each DOM component. It also facilitates communication between components by retrieve component instances
+          from DOM elements.
+        </p>
+        <p>
+          The reason we keep everything on the client, is that we want to avoid the backend as long as possible.
+          Why? Because it only slows you down. You don't want to wait until the backend has created the Domain Model
+          and set up all the controllers. You don't want to have slow page loads and miss out on hot reloading.
+          By using local json files you can mock all the data, and prepare for all possible scenarios.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

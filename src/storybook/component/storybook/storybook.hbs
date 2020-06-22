@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="./storybook.scss">
+<script src="./Storybook.ts"></script>
+
+<div data-component="storybook">
+
+	{{> ../header/header }}
+
+	<div class="settings">
+		<div class="generic">
+			<div class="current-size">
+				<div class="value">123px</div>
+			</div>
+			<div class="size fourk" data-size="2650">4k - 2650px</div>
+			<div class="size laptop-l" data-size="1440">Laptop L - 1440px</div>
+			<div class="size laptop" data-size="1024">Laptop - 1024px</div>
+			<div class="size tablet" data-size="768">Tablet - 768px</div>
+			<div class="size mobile-l" data-size="425">Mobile L - 425px</div>
+			<div class="size mobile-m" data-size="375">Mobile M - 375px</div>
+			<div class="size mobile-s" data-size="320">Mobile S - 320px</div>
+		</div>
+		<div class="max-width">
+			<div class="bar" data-size-type="max" data-size-min="*" data-size-max="1100" style="width: 1100px;">
+				<span class="label left">1100px</span>
+				<span class="label right">1100px</span>
+			</div>
+			<div class="bar" data-size-type="max" data-size-min="*" data-size-max="700" style="width: 700px;">
+				<span class="label left">700px</span>
+				<span class="label right">700px</span>
+			</div>
+		</div>
+		<div class="min-max-width">
+			<div class="bar left" data-size-type="min-max" data-size-min="800" data-size-max="1000" style="width: 100px; right: 50%; transform: translate(-400px, 0);">
+				<span class="label left">800px</span>
+				<span class="label right">1000px</span>
+			</div>
+			<div class="bar right" data-size-type="min-max" data-size-min="800" data-size-max="1000" style="width: 100px; left: 50%; transform: translate(400px, 0);">
+				<span class="label left">800px</span>
+				<span class="label right">1000px</span>
+			</div>
+			<div class="bar left" data-size-type="min-max" data-size-min="900" data-size-max="1050" style="width: 75px; right: 50%; transform: translate(-450px, 0);">
+				<span class="label left">900px</span>
+				<span class="label right">1050px</span>
+			</div>
+			<div class="bar right" data-size-type="min-max" data-size-min="900" data-size-max="1050" style="width: 75px; left: 50%; transform: translate(450px, 0);">
+				<span class="label left">900px</span>
+				<span class="label right">1050px</span>
+			</div>
+		</div>
+		<div class="min-width">
+			<div class="bar left" data-size-type="min" data-size-min="600" data-size-max="*" style="width: 100vw; right: 50%; transform: translate(-300px, 0);">
+				<span class="label">600px</span>
+			</div>
+			<div class="bar right" data-size-type="min" data-size-min="600" data-size-max="*" style="width: 100vw; left: 50%; transform: translate(300px, 0);">
+				<span class="label">600px</span>
+			</div>
+			<div class="bar left" data-size-type="min" data-size-min="1200" data-size-max="*" style="width: 100vw; right: 50%; transform: translate(-600px, 0);">
+				<span class="label">1200px</span>
+			</div>
+			<div class="bar right" data-size-type="min" data-size-min="1200" data-size-max="*" style="width: 100vw; left: 50%; transform: translate(600px, 0);">
+				<span class="label">1200px</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="content {{#if path}}single-story{{/if}}">
+		<div class="resizer before"></div>
+		<div class="resizer after"></div>
+		<iframe class="story-frame" src="/story.html?storyName={{story}}&variant={{variant}}" frameborder="0"></iframe>
+		<div class="blocker"></div>
+	</div>
+
+	{{#if path}}
+		<div class="story-panel">
+			{{> ../story-info/story-info }}
+			{{> ../story-source/story-source }}
+
+		</div>
+	{{/if}}
+
+</div>

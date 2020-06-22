@@ -1,0 +1,11 @@
+/* stylelint-disable-next-line block-no-empty */
+[data-component="vision"] {
+  background-color: $gray-100;
+  color: $gray-600;
+  padding: 3rem 0;
+
+  h2 {
+    font-weight: 200;
+    margin-bottom: 20px;
+  }
+}
