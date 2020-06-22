@@ -12,4 +12,4 @@ blocks:
     data: {}
 
   - name: "paragraph"
-    data: "import!../app/component/block/paragraph/data/data.yaml"
+    data: "import!../app/component/block/paragraph/data/paragraph.yaml"
