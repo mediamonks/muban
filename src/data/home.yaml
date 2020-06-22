@@ -11,10 +11,10 @@ blocks:
     data: {}
 
   - name: "paragraph"
-    data: "import!../app/component/block/paragraph/data/data.yaml"
+    data: "import!../app/component/block/paragraph/data/paragraph.yaml"
 
   - name: "paragraph"
-    data: "import!../app/component/block/paragraph/data/data-${language}.yaml"
+    data: "import!../app/component/block/paragraph/data/paragraph-${language}.yaml"
 
   - name: 'two-col'
-    data: 'import!../app/component/block/two-col/data/data.yaml'
+    data: 'import!../app/component/block/two-col/data/paragraph.yaml'
