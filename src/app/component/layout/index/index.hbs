@@ -14,8 +14,10 @@
 
     <h2>
       Pages
+      {{#if pages }}
       <button class="action toggle-blocks">show blocks</button>
       <!--<button class="action sort-status">sort by status</button>-->
+      {{/if}}
     </h2>
     {{#if showCategories }}
       {{#each categories}}

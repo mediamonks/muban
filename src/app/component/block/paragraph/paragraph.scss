@@ -1,7 +1,12 @@
-[data-component='paragraph'] {
+[data-component="paragraph"] {
   margin-bottom: 30px;
 
   .hidden {
     display: none;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
   }
 }

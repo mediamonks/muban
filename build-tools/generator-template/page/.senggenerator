@@ -1,0 +1,10 @@
+{
+  "destination": "./src/data",
+  "variables": [{
+    "name": "blocks",
+   	"type": "input",
+    "message": "Add a list of comma separated blocks (optional)",
+    "isArray": true,
+    "default": []
+  }]
+}

@@ -1,6 +1,8 @@
 import AbstractComponent from 'app/component/AbstractComponent';
 
-declare function require(name: string): string;
+// declare var require:any;
+
+const svgContext = require.context('app/svg/icon/?inline', false, /\.svg/);
 
 /**
  * Note: Please be aware that all svg icons in the folder "app/svg/*.svg"
@@ -14,11 +16,15 @@ declare function require(name: string): string;
  * ```
  */
 export default class Icon extends AbstractComponent {
-  static displayName: string = 'icon';
+  public static readonly displayName: string = 'icon';
 
   constructor(el: HTMLElement) {
     super(el);
 
-    el.innerHTML = require(`app/svg/icon/${this.element.dataset.icon}.svg`);
+    this.element.innerHTML = svgContext(`./${this.element.dataset.icon}.svg`);
+  }
+
+  public setIcon(name: string): void {
+    this.element.innerHTML = svgContext(`./${name}.svg`);
   }
 }

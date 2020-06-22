@@ -1,160 +1,172 @@
-const config = require('../config');
-const ora = require('ora');
-const webpack = require('webpack');
-const webpackConfigCode = require('../config/webpack/webpack.config.code.dist');
-const webpackConfigPartials = require('../config/webpack/webpack.config.partials');
-const webpackConfigStorybook = require('../config/storybook/webpack.config.dist');
-const buildHtml = require('./build-html');
-const fs = require('fs-extra');
 const chalk = require('chalk');
 const shell = require('shelljs');
+const path = require('path');
+const webpack = require('webpack');
+const chokidar = require('chokidar');
+const clientLib = require('./clientlib');
+
+
+const { createTaskSpinner } = require('./util/spinner');
+const { compileWebpack, handleWebpackComplete, displayWebpackStats, getWebpackConfig } = require('./util/webpack');
+const buildHtml = require('./build-html');
+const previewServer = require('./preview-server');
+
+const config = require('../config/config');
+const webpackConfigCode = require('../config/webpack/webpack.conf.code.dist');
+const webpackConfigCodeDev = require('../config/webpack/webpack.conf.code.dev.build');
+const webpackConfigPartials = require('../config/webpack/webpack.conf.partials');
+let webpackConfigStorybook;
+try {
+  webpackConfigStorybook = require('../config/storybook/webpack.config.dist');
+} catch (e) {}
+
+const projectRoot = path.resolve(__dirname, '../../');
 
 const argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
-  .command(['$0', 'all'], 'Only build code bundle', () => {}, (argv) => {
-    buildAll();
-  })
-  .command('code', 'Only build code bundle', () => {}, (argv) => {
-    buildCode();
-  })
-  .command('partials', 'Only build partials bundle', () => {}, (argv) => {
-    buildPartials();
-  })
-  .command('html', 'Only generate html files', () => {}, (argv) => {
-    buildHTML();
-  })
-  .command('storybook', 'Build the storybook', () => {}, (argv) => {
-    buildStorybook();
-  })
-  .command('clean', 'Cleans the dist folder', () => {}, (argv) => {
-    cleanDist();
-  })
   .example('$0 --publicPath=/m/muban-site/', 'Build with a different publicPath')
   .example('$0 -p /m/muban-site/', 'Build with a different publicPath')
-  .alias('p', 'publicPath')
-  .nargs('p', 1)
-  .describe('p', 'Custom publicPath (default / )')
+  .command(['$0', 'all'], 'Only build code bundle', () => {}, buildAll)
+  .command('dev', 'A dev build with live reload', () => {}, buildDev)
+  .command('code', 'Only build code bundle', () => {}, buildCode)
+  .command('partials', 'Only build partials bundle', () => {}, buildPartials)
+  .command('html', 'Only generate html files', () => {}, () => buildHTML({ skipPartials: true }))
+  .command('storybook', 'Build the storybook', () => {}, buildStorybook)
+  .command('clean', 'Cleans the dist folder', () => {}, cleanDist)
+  .option('p', {
+    alias: 'publicPath',
+    default: undefined,
+    describe: 'Custom publicPath (default / )',
+    type: 'string',
+    nargs: 1,
+  })
+  .option('l', {
+    alias: 'language',
+    default: undefined,
+    describe: 'Custom language to be used in your yaml files (default "en")',
+    type: 'string',
+    nargs: 1,
+  })
   .help('h')
-  .alias('h', 'help')
-  .argv;
-
-function callWebpack(config, callback) {
-  if (config && typeof config.then === 'function') {
-    config
-      .then(result => webpack(result, callback))
-      .catch(e => callback(e));
-  } else if (typeof config === 'function') {
-    webpack(config(), callback);
-  } else {
-    webpack(config, callback);
-  }
-}
-
-function displayWebpackStats(stats) {
-  if (stats.hasErrors()) {
-    throw stats.toString({
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false,
-      reasons: false,
-    }) + '\n';
-  }
-  process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false,
-    reasons: false
-  }) + '\n');
-}
+  .alias('h', 'help').argv;
 
 function cleanDist() {
   shell.rm('-rf', config.distPath);
 }
 
-function buildCode(cb) {
-  const spinner = ora('Starting webpack code...');
-  spinner.start();
-  callWebpack(webpackConfigCode, (err, stats) => {
-    if (err) {
-      spinner.fail('webpack code failed');
-      throw err;
-    }
-    displayWebpackStats(stats);
-
-    console.log();
-    spinner.succeed('webpack code done!');
-    console.log();
-
-    cb && cb(null);
-  })
+function buildCode() {
+  const spinner = createTaskSpinner('webpack code');
+  return handleWebpackComplete(spinner, compileWebpack(webpackConfigCode));
 }
 
-function buildPartials(cb) {
-  const spinner = ora('Starting webpack partials...');
-  spinner.start();
-  callWebpack(webpackConfigPartials, (err, stats) => {
-    if (err) {
-      spinner.fail('webpack partials failed');
-      throw err;
-    }
-    displayWebpackStats(stats);
-
-    console.log();
-    spinner.succeed('webpack partials done!');
-    console.log();
-
-    cb && cb(null);
-  })
+function buildPartials() {
+  const spinner = createTaskSpinner('webpack partials');
+  return handleWebpackComplete(spinner, compileWebpack(webpackConfigPartials));
 }
 
-function buildStorybook(cb) {
-  const spinner = ora('Starting storybook build...');
-  spinner.start();
-  callWebpack(webpackConfigStorybook, (err, stats) => {
-    if (err) {
-      spinner.fail('Storybook build failed');
-      throw err;
-    }
-    displayWebpackStats(stats);
-
-    console.log();
-    spinner.succeed('Storybook build done!');
-    console.log();
-
-    cb && cb(null);
-  })
+function buildStorybook() {
+  if (webpackConfigStorybook) {
+    const spinner = createTaskSpinner('storybook build');
+    return handleWebpackComplete(spinner, compileWebpack(webpackConfigStorybook));
+  } else {
+    console.log('No storybook present in this project');
+    return Promise.resolve();
+  }
 }
 
-function buildHTML(cb) {
-  htmlSpinner = ora('Starting html generation...');
-  htmlSpinner.start();
-  buildHtml((err) => {
-    if (err) {
-      htmlSpinner.fail('html generation failed!');
-      throw err;
+function buildHTML(options) {
+  return (() => {
+    if (!options || !options.skipPartials) {
+      return buildPartials()
+    } else {
+      return Promise.resolve();
     }
-    console.log();
-    htmlSpinner.succeed('html generation done!');
+  })()
+    .then(() => {
+      const spinner = createTaskSpinner('html generation');
+      return buildHtml(options)
+        .then(spinner.succeed)
+        .catch(err => {
+          spinner.fail();
+          throw err;
+        });
+    })
+}
 
-    cb && cb(null);
+function buildDev() {
+  // cleanDist();
+
+  // start preview server
+  const serverConfig = previewServer();
+
+  // reload the page on any file changes in the dist folder
+  const livereload = require('livereload');
+  const lrserver = livereload.createServer({
+    // exts: ['html'],
   });
+  lrserver.watch(config.buildPath);
+
+  // build js/css in watch mode
+  getWebpackConfig(webpackConfigCodeDev).then(configs => {
+    webpack(configs).watch({
+      ignored: ['**/*.hbs', 'node_modules']
+    }, (err, stats) => {
+      if (err) {
+        return console.log(err);
+      }
+      displayWebpackStats(stats, true);
+
+      console.log('webpack code done!');
+      console.log();
+
+    });
+  });
+
+  // builds partials and html
+  const build = () => {
+    buildHTML()
+      .then(() => {
+        console.log();
+        console.log('templates done!');
+      }).catch((err) => {
+      console.log(err);
+      console.log();
+      console.log('Templates error');
+    });
+  };
+
+  // initial build
+  build();
+
+  // watch partials or data files for rebuild
+  chokidar
+    .watch(
+      [projectRoot + '/src/app/**/*.{hbs,yaml,json}', projectRoot + '/src/data/**/*.{yaml,json}'],
+      { ignoreInitial: true },
+    )
+    .on('all', (event, path) => {
+      build();
+    });
 }
 
 function buildAll() {
   cleanDist();
 
-  buildCode(() => {
-    buildPartials(() => {
-      buildHTML(() => {
-        console.log();
-        console.log(chalk.blue('You can preview your build by running:'), chalk.blue.bold('yarn preview'));
-        console.log(chalk.blue('You can analyze your build by running:'), chalk.blue.bold('yarn analyze'));
-        console.log();
-      })
-    })
-  })
+  buildCode()
+    .then(() => buildHTML({ cleanPartials: true}))
+    .then(() => {
+      console.log();
+      console.log(
+        `${chalk.blue('You can')} ${chalk.green('preview')} ${chalk.blue(
+          'your build by running:',
+        )} ${chalk.green('yarn preview')}`,
+      );
+      console.log(
+        `${chalk.blue('You can')} ${chalk.green('analyze')} ${chalk.blue(
+          'your build by running:',
+        )} ${chalk.green('yarn analyze')}`,
+      );
+      console.log();
+      clientLib(config);
+    });
 }

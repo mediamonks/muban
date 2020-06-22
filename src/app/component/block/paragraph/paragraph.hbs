@@ -2,13 +2,13 @@
 <script src="./Paragraph.ts"></script>
 
 <div data-component="paragraph">
-  <h2>{{title}}</h2>
+  <h2>{{title}} {{@root.foo}}</h2>
 
   <p>{{{content}}}</p>
 
   {{#if contentMore }}
   <p class="js-content-more hidden">{{{contentMore}}}</p>
 
-  {{> general/button text=ctaReadMore }}
+  {{> general/button text=ctaReadMore icon="arrow-down" }}
   {{/if}}
 </div>

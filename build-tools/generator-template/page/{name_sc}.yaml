@@ -1,0 +1,16 @@
+title: {{name_pc}}
+
+meta:
+  id: '' # can be number or string, used for ordering
+  status: '' # dev, qa, feedback, done
+  notes: '' # add some information about the page
+  category: '' # to group pages in the overview
+
+blocks:
+{{#if blocks}}
+  {{#each blocks}}
+  - name: "{{this}}"
+    data: "import!../app/component/block/{{this}}/data/default"
+
+  {{/each}}
+{{/if}}

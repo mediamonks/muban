@@ -1,0 +1,29 @@
+[data-component="header"] {
+  border-bottom: 1px solid #ddd;
+  background-color: #eee;
+
+  ul {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px 0;
+
+    li {
+      display: inline-block;
+
+      a {
+        color: #444;
+        text-decoration: none;
+        font-size: 1.2em;
+        padding: 1px 10px;
+
+        &:hover {
+          color: #111;
+        }
+
+        &:first-child {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{{!
+  Production page template, requires standalone js/css files instead of the complete bundle
+}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charSet="utf-8">
+  <title>Muban - {{page}}</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="{{publicPath}}favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="{{publicPath}}asset/common.css">
+  <link rel="stylesheet" href="{{publicPath}}asset/{{page}}.css">
+</head>
+<body>
+  <div id="app">
+    {{{content}}}
+  </div>
+
+  <script src="{{publicPath}}asset/common.js"></script>
+  <script src="{{publicPath}}asset/{{page}}.js"></script>
+</body>
+</html>

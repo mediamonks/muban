@@ -1,40 +1,40 @@
 /**
  * Generation the production pages from the compiled partials and json files
  */
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
-const yaml = require('js-yaml');
-const loadData = require('json-import-loader').loadData;
 // eslint-disable-next-line import/no-extraneous-dependencies
 const Handlebars = require('handlebars');
 // eslint-disable-next-line import/no-extraneous-dependencies
-const recursive = require('recursive-readdir');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const beautifyHtml = require('js-beautify').html;
-const config = require('../config');
+const importFresh = require('import-fresh');
 
-const projectRoot = path.resolve(__dirname, '../../');
+const config = require('../config/config');
+const { addToIndex, renderIndex, startNewIndex } = require('./util/index-page');
+const getPages = require('./util/getPages');
 
-module.exports = function(cb) {
+const templatePath = path.resolve(__dirname, '../templates');
+
+module.exports = function(options) {
+  // load partials
   const partialsPath = path.join(config.buildPath, 'asset/partials.js');
   if (!fs.existsSync(partialsPath)) {
     throw new Error('Partials file not present, run `yarn build partials` first.');
   }
   // eslint-disable-next-line import/no-unresolved
-  const { indexTemplate, appTemplate } = require(partialsPath);
+  const { indexTemplate, appTemplate } = importFresh(partialsPath);
 
+  // compile normal and standalone page templates
   const htmlTemplate = Handlebars.compile(
-    fs.readFileSync(path.resolve(__dirname, './template.hbs'), 'utf-8')
+    fs.readFileSync(path.join(templatePath, 'build-html-template.hbs'), 'utf-8'),
   );
   const htmlTemplateStandalone = config.standaloneOutput
     ? Handlebars.compile(
-        fs.readFileSync(path.resolve(__dirname, './template-standalone.hbs'), 'utf-8')
+        fs.readFileSync(path.join(templatePath, 'build-html-template-standalone.hbs'), 'utf-8'),
       )
     : null;
 
-  // store json info to render overview page later
-  const dirIndex = [];
-
+  // prepare standalone output
   const standalonePath = path.resolve(config.buildPath, 'standalone');
   if (config.standaloneOutput) {
     if (!fs.existsSync(standalonePath)) {
@@ -45,121 +45,70 @@ module.exports = function(cb) {
   console.log();
   console.log();
 
-  // read json files and generate a page for each json
-  recursive(
-    path.resolve(projectRoot, 'src/data'),
-    [file => path.extname(file) !== '.json' && path.extname(file) !== '.yaml'],
-    (err, files) => {
-      files
-        .map(f => path.basename(f))
-        .sort()
-        .forEach(file => {
-          const page = path.basename(file, `.${file.split('.').pop()}`);
-          // eslint-disable-next-line import/no-dynamic-require, global-require
-          const data = loadData(path.resolve(__dirname, `../../src/data/${file}`), {
-            resolvers: {
-              yaml: path => yaml.safeLoad(fs.readFileSync(path, 'utf8')),
-            },
-          });
-          const content = appTemplate(data);
+  startNewIndex();
 
-          const templateResult = htmlTemplate({
-            content,
-            page,
-            publicPath: config.dist.publicPath,
-          });
-
-          let html = beautifyHtml(templateResult, { indent_size: 2 });
-
-          fs.writeFileSync(path.resolve(config.buildPath, `${page}.html`), html, 'utf-8');
-
-          console.log(`Generating... ${page}.html`);
-
-          dirIndex.push({
-            page,
-            data,
-            link: `${page}.html`,
-          });
-
-          if (config.standaloneOutput) {
-            const templateStandaloneResult = htmlTemplateStandalone({
-              content,
-              page,
-              publicPath: config.dist.publicPath,
-            });
-
-            html = beautifyHtml(templateStandaloneResult, { indent_size: 2 });
-
-            fs.writeFileSync(path.resolve(standalonePath, `${page}.html`), html, 'utf-8');
-          }
-        });
-
-      const pages = dirIndex
-        .map(item => {
-          if (!item.data.meta) {
-            item.data.meta = {};
-          }
-          if (item.page.includes('.')) {
-            item.data.meta.alt = true;
-          }
-          return item;
-        })
-        .sort((a, b) => {
-          if (a.data.meta.alt || b.data.meta.alt) {
-            // sort on alt
-            if (a.page.startsWith(b.page)) return 1;
-            if (b.page.startsWith(a.page)) return -1;
-            // return String(a.page).localeCompare(String(b.page));
-          }
-          return String(a.data.meta.id || a.page).localeCompare(String(b.data.meta.id || b.page));
-        })
-        .map(({ page, data }) => ({
+  return getPages().then(pages => {
+    return Promise.all(
+      pages.map(({ page, file, data }) => {
+        addToIndex({
           page,
           data,
-          link: `${page}.html`,
-        }));
+        });
 
-      const categoryMap = pages.reduce((cats, page) => {
-        const category = page.data.meta.category || 'default';
-        if (!cats[category]) {
-          cats[category] = [];
-        }
-        cats[category].push(page);
-        return cats;
-      }, {});
+        // page content
+        const content = appTemplate(data);
 
-      const categories = Object.keys(categoryMap).map(key => ({
-        name: key,
-        pages: categoryMap[key]
-      }));
+        // render normal page
+        return renderPage(htmlTemplate, content, page, config.buildPath)
+          .then(() => {
+            // render standalone page
+            if (config.standaloneOutput) {
+              return renderPage(htmlTemplateStandalone, content, page, standalonePath);
+            }
+          })
+          .then(() => {
+            console.log(`Generating... ${page}.html`);
+          });
+      }),
+    ).then(() => {
+      renderIndex(indexTemplate, htmlTemplate);
 
-      // render list overview page
-      const date = new Date();
-      const content = indexTemplate({
-        pages,
-        categories,
-        showCategories: categories.length > 1,
-        date: `${getLeadingZero(date.getDate())}-${getLeadingZero(date.getMonth() + 1)}-${date.getFullYear()} ${getLeadingZero(date.getHours())}:${getLeadingZero(date.getMinutes())}`
-      });
-      let indexResult = htmlTemplate({
-        content,
-        page: 'Index',
-      });
-
-      indexResult = indexResult
-        .replace('<link rel="stylesheet" href="asset/bundle.css">', '<link rel="stylesheet" href="asset/preview.css">\n\t<link rel="stylesheet" href="asset/bundle.css">')
-        .replace('<script src="asset/bundle.js"></script>', '<script src="asset/preview.js"></script>\n\t<script src="asset/bundle.js"></script>');
-
-      fs.writeFileSync(path.resolve(config.buildPath, 'index.html'), indexResult, 'utf-8');
-
-      // cleanup, doesn't belong in the build folder
-      fs.unlink(partialsPath);
-
-      cb(null);
-    }
-  );
+      if (options && options.cleanPartials) {
+        // cleanup, doesn't belong in the build folder
+        fs.unlinkSync(partialsPath);
+      }
+    });
+  });
 };
 
-function getLeadingZero(nr) {
-  return nr < 10 ? `0${nr}` : nr;
+/**
+ * Render body content into a full html page
+ * @param template
+ * @param content
+ * @param page
+ * @param outputPath
+ * @returns {Promise}
+ */
+function renderPage(template, content, page, outputPath) {
+  // render full html page
+  const templateStandaloneResult = template({
+    content,
+    page,
+    publicPath: config.dist.publicPath,
+  });
+
+  // make it pretty
+  const html = beautifyHtml(templateStandaloneResult, { indent_size: 2 });
+
+  // output to disk
+  return new Promise((resolve, reject) => {
+    fs.writeFile(path.resolve(outputPath, `${page}.html`), html, 'utf-8', (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    });
+  });
 }
+

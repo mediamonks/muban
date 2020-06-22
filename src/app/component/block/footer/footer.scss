@@ -1,0 +1,16 @@
+[data-component="footer"] {
+  border-top: 1px solid #ddd;
+  background-color: #eee;
+  height: 50px;
+
+  p {
+    font-size: 0.7em;
+    text-align: center;
+    color: #555;
+
+    &::after {
+      padding-left: 10px;
+      content: $LANGUAGE;
+    }
+  }
+}

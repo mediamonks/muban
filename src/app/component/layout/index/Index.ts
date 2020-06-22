@@ -1,7 +1,7 @@
 import AbstractComponent from '../../AbstractComponent';
 
 export default class App extends AbstractComponent {
-  static displayName: string = 'index-root';
+  public static readonly displayName: string = 'index-root';
 
   constructor(element: HTMLElement) {
     super(element);
@@ -11,12 +11,14 @@ export default class App extends AbstractComponent {
     this.getElements('sup').forEach(sup => {
       sup.addEventListener('click', event => {
         const page = (<HTMLElement>event.currentTarget).closest('.page');
-        page.classList.toggle('show-blocks');
-        this.updateBlocksButton();
+        if (page) {
+          page.classList.toggle('show-blocks');
+          this.updateBlocksButton();
+        }
       });
     });
 
-    this.getElement('.toggle-blocks').addEventListener('click', () => {
+    this.getElement('.toggle-blocks')!.addEventListener('click', () => {
       const pages = this.getElements('.page');
       if (pages.some(page => page.classList.contains('show-blocks'))) {
         pages.forEach(page => page.classList.remove('show-blocks'));
@@ -29,12 +31,12 @@ export default class App extends AbstractComponent {
     // for generic app logic
   }
 
-  updateBlocksButton() {
-    const pages = this.getElements('.page');
+  private updateBlocksButton() {
+    const pages = this.getElements('.page')!;
     if (pages.some(page => page.classList.contains('show-blocks'))) {
-      this.getElement('.toggle-blocks').innerText = 'hide blocks';
+      this.getElement('.toggle-blocks')!.innerText = 'hide blocks';
     } else {
-      this.getElement('.toggle-blocks').innerText = 'show blocks';
+      this.getElement('.toggle-blocks')!.innerText = 'show blocks';
     }
   }
 
