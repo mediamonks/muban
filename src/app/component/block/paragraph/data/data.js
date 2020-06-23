@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-template-curly-in-string */
 
 module.exports = {
   title: 'What is ${foo} Lorem ${foo} Ipsum?',
