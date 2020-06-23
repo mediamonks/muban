@@ -140,7 +140,10 @@ module.exports = Object.assign({},
     // example:
     // publicPath: process.env.PUBLIC_PATH
     //
-    // These variables are also available in SCSS as `$something`
+    // These variables are also available in SCSS as `$SOMETHING`
+    //
+    // For yaml files, it's added through the string-replace-loader (during dev) and getVariables() (during build)
+    // For scss files, it's added through the sass-loader.
     env: {
       [buildTypes.PRODUCTION]: {
         NODE_ENV: JSON.stringify('production'),

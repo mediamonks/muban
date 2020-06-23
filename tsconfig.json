@@ -12,7 +12,12 @@
       "DOM.Iterable",
       "ES2017"
     ],
-    "baseUrl": "./src/"
+    "baseUrl": "./src/",
+    "types": [
+      "@types/handlebars",
+      "@types/core-js",
+      "@types/webpack-env"
+    ]
   },
   "include": [
     "./src/types.d.ts",

@@ -4,5 +4,9 @@ foo: bar
 # switch importing different data files based on language
 # Can be changed by calling `yarn dev --language=nl`
 # or `yarn build --language=nl`
+#
 # Note: any environment set in config/config.js is available this way
 language: process.env.LANGUAGE
+
+# imports are also possible here, nice way to share "global" components in the app.hbs or all pages
+footer: "import!../app/component/block/footer/data/data.js"

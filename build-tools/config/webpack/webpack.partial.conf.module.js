@@ -30,6 +30,19 @@ const getImportLoader = (config, buildType) => {
   };
 };
 
+const getReplaceLoader = (config, buildType) => (
+  {
+    loader: 'string-replace-loader',
+    options: {
+      multiple:
+        Object.keys(config.env[buildType]).map(
+          (envName) =>
+            ({ search: `process.env.${envName}`, replace: config.env[buildType][envName].replace(/"/gi, '')})
+        )
+    }
+  }
+);
+
 module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => webpackConfig => {
   return {
     ...webpackConfig,
@@ -274,7 +287,11 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
         },
         {
           test: /\.yaml$/,
-          use: [getImportLoader(config, buildType), { loader: 'js-yaml-loader' }],
+          use: [
+            getReplaceLoader(config, buildType),
+            getImportLoader(config, buildType),
+            { loader: 'js-yaml-loader' }
+          ],
         },
       ],
     },

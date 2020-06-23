@@ -13,6 +13,3 @@ blocks:
 
   - name: "paragraph"
     data: "import!../app/component/block/paragraph/data/data.yaml"
-
-  - name: "footer"
-    data: {}

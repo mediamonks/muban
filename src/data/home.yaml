@@ -18,6 +18,3 @@ blocks:
 
   - name: 'two-col'
     data: 'import!../app/component/block/two-col/data/data.yaml'
-
-  - name: "footer"
-    data: {}

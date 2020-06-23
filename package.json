@@ -1,9 +1,9 @@
 {
   "name": "muban",
-  "version": "3.2.0",
+  "version": "3.3.1",
   "skeleton": {
     "name": "muban",
-    "version": "3.1.0"
+    "version": "3.3.1"
   },
   "description": "",
   "scripts": {
@@ -70,11 +70,12 @@
     "modernizr": "^3.6.0",
     "modernizr-loader": "^1.0.1",
     "muban-convert-hbs": "^1.1.1",
-    "muban-core": "^1.13.1",
+    "muban-core": "^2.1.2",
     "normalize.css": "^8.0.1",
     "qs": "^6.6.0",
     "seng-device-state-tracker": "^1.1.4",
-    "seng-scss": "^1.0.0"
+    "seng-scss": "^1.0.0",
+    "string-replace-loader": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
@@ -183,14 +184,14 @@
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "1.17.0",
     "tslint-loader": "^3.5.4",
-    "typescript": "^3.5.1",
+    "typescript": "^3.8.3",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.2",
     "use-yarn": "^2.2.0",
-    "webpack": "^4.26.1",
+    "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.0.3",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.1.4",
     "webpack-plugin-replace": "^1.2.0",
     "yargs": "^12.0.5"
