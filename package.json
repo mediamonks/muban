@@ -165,7 +165,7 @@
     "raw-loader": "^0.5.1",
     "recursive-readdir": "^2.2.2",
     "sass": "^1.26.10",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^9.0.2",
     "seng-generator": "^0.9.0",
     "serve-index": "^1.9.1",
     "shelljs": "^0.8.3",
