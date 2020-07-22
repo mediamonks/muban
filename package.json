@@ -74,7 +74,7 @@
     "normalize.css": "^8.0.1",
     "qs": "^6.6.0",
     "seng-device-state-tracker": "^1.1.4",
-    "seng-scss": "^1.0.0",
+    "seng-scss": "^1.2.3",
     "string-replace-loader": "^2.3.0"
   },
   "devDependencies": {
@@ -121,7 +121,6 @@
     "eslint-config-prettier": "3.3.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-import-resolver-webpack": "^0.12.1",
-
     "eslint-loader": "^2.1.1",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-cypress": "^2.1.2",

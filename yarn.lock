@@ -12612,10 +12612,10 @@ seng-generator@^0.9.0:
     to-space-case "^1.0.0"
     user-settings "^0.1.5"
 
-seng-scss@^1.0.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/seng-scss/-/seng-scss-1.1.1.tgz#dd01475aee6a69a02750198947d9c0c3222acbf0"
-  integrity sha1-3QFHWu5qaaAnUBmJR9nAwyIqy/A=
+seng-scss@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/seng-scss/-/seng-scss-1.2.3.tgz#ef08931ecf148a3e5fe3186fd1805539c6609cbd"
+  integrity sha512-odz9hryLjDicgDAJhJc9UrXIKzrV4zQKU/xnIKMO82/Uzkl/Sqnc2lH7ygUdP5+xejlGHsO8iun8izQZt4b/AQ==
 
 serialize-javascript@^1.4.0:
   version "1.5.0"
