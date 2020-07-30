@@ -167,10 +167,11 @@ module.exports = ({ config, isDevelopment, buildType, isPartials, isCode }) => w
                 {
                   loader: 'sass-loader',
                   options: {
+                    additionalData: `@import "~seng-scss"; ${extraVars} @import "src/app/style/global";`,
                     sourceMap: true,
-                    data: `@import "~seng-scss"; ${extraVars} @import "src/app/style/global";`,
-                    importer: jsonImporter(),
-                    includePaths: ['src/app/style'],
+                    sassOptions: {
+                      importer: jsonImporter(),
+                    }
                   },
                 },
               );
