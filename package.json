@@ -74,7 +74,7 @@
     "normalize.css": "^8.0.1",
     "qs": "^6.6.0",
     "seng-device-state-tracker": "^1.1.4",
-    "seng-scss": "^1.2.3",
+    "seng-scss": "^1.2.4",
     "string-replace-loader": "^2.3.0"
   },
   "devDependencies": {
