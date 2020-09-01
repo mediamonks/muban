@@ -8101,10 +8101,10 @@ is-tar@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-tar/-/is-tar-1.0.0.tgz#2f6b2e1792c1f5bb36519acaa9d65c0d26fe853d"
   integrity sha1-L2suF5LB9bs2UZrKqdZcDSb+hT0=
 
-is-there@^4.0.0:
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/is-there/-/is-there-4.4.3.tgz#a2c49366c6a487f719dbcad80cbde21248d2c18d"
-  integrity sha1-osSTZsakh/cZ28rYDL3iEkjSwY0=
+is-there@^4.4.4:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/is-there/-/is-there-4.5.1.tgz#ea292e7fad3fc4d70763fe0af40a286c9f5e1e2e"
+  integrity sha512-vIZ7HTXAoRoIwYSsTnxb0sg9L6rth+JOulNcavsbskQkCIWoSM2cjFOWZs4wGziGZER+Xgs/HXiCQZgiL8ppxQ==
 
 is-typedarray@~1.0.0:
   version "1.0.0"
@@ -8385,7 +8385,7 @@ json5@^0.5.0:
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
   integrity sha1-Hq3nrMASA0rYTiOWdn6tn6VJWCE=
 
-json5@^1.0, json5@^1.0.1:
+json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
   integrity sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==
@@ -8399,7 +8399,7 @@ json5@^2.1.0:
   dependencies:
     minimist "^1.2.0"
 
-json5@^2.1.2:
+json5@^2.1.1, json5@^2.1.2:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.1.3.tgz#c9b0f7fa9233bfe5807fe66fcf3a5617ed597d43"
   integrity sha512-KXPvOm8K9IJKFM0bmdn8QXh7udDh1g/giieX0NLCaMnb4hEiVFqnop2ImTXCc5e0/oHz3LTqmHGtExn5hfMkOA==
@@ -8996,7 +8996,7 @@ lodash@4.17.4:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
   integrity sha1-eCA6TRwyiuHYbcpkYONptX9AVa4=
 
-lodash@^4.14.0, lodash@^4.17, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5:
+lodash@^4.14.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.13"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.13.tgz#0bdc3a6adc873d2f4e0c4bac285df91b64fc7b93"
   integrity sha512-vm3/XWXfWtRua0FkUyEHBZy8kCPjErNBT9fJx8Zvs+U6zjqPbTUOpkaoum3O5uiA8sm+yNMHXfYkTUHFoMxFNA==
@@ -9862,14 +9862,14 @@ node-releases@^1.0.5:
   dependencies:
     semver "^5.3.0"
 
-node-sass-json-importer@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/node-sass-json-importer/-/node-sass-json-importer-4.1.0.tgz#215dc6cfaf9902a705465652143ac9bf35cd499a"
-  integrity sha512-lNlSzglF+TDfb+UpOGX3GCytMWPLSsRpTjuCHgIrK2VBpCiHQUGWMUc5AXXoKeO1ONeJpFTo5xnFUELUOGTHsA==
+node-sass-json-importer@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/node-sass-json-importer/-/node-sass-json-importer-4.3.0.tgz#15773cc070f16aa20e93b378908366af85f6f742"
+  integrity sha512-+j+SsxPzYo7fWIDuz/etuLs+wfay5Zx2bkWE4LazkycdYGzEtCQz4tgIFXveeLBCBM6jvY4fp45z2JEj6U+VWQ==
   dependencies:
-    is-there "^4.0.0"
-    json5 "^1.0"
-    lodash "^4.17"
+    is-there "^4.4.4"
+    json5 "^2.1.1"
+    lodash "^4.17.15"
 
 node-status-codes@^1.0.0:
   version "1.0.0"
