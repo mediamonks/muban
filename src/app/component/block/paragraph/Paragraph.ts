@@ -17,7 +17,7 @@ export default class Paragraph extends AbstractBlock {
     if (this.button) {
       this.button.addEventListener('click', this.onButtonClick);
       this.buttonLabel = this.getElement<HTMLSpanElement>('.label', this.button);
-      this.buttonIcon = this.getElement<HTMLElement>('.icon', this.button);
+      this.buttonIcon = this.getElement<HTMLElement>('[data-component="icon"]', this.button);
 
       this.contentMore = <HTMLParagraphElement>this.element.querySelector('.js-content-more');
     }
