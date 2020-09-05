@@ -56,12 +56,19 @@
     "url": "https://github.com/mediamonks/muban/issues"
   },
   "homepage": "https://github.com/mediamonks/muban#readme",
+  "resolutions": {
+    "browserslist": "^4.14.1",
+    "caniuse-lite": "^1.0.30001124"
+  },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@babel/runtime-corejs2": "^7.1.5",
     "@types/core-js": "^2.5.0",
     "@types/handlebars": "4.0.40",
     "@types/webpack-env": "^1.13.6",
+    "browserslist": "^4.14.1",
+    "caniuse-lite": "^1.0.30001124",
+    "core-js": "3",
     "highlight.js": "^9.13.1",
     "html-extract-data": "^1.0.1",
     "knockout": "^3.4.2",
