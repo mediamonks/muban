@@ -11,23 +11,23 @@ everything is a component.
 Muban basically has three types of components that extend each other.
 
 ```
-+----------------------+ 
-|                      | 
-|      Component       | 
-|                      | 
-+----------+-----------+ 
-           |             
-+----------v-----------+ 
-|                      | 
-|    Smart-component   | 
-|                      | 
-+----------+-----------+ 
-           |             
-+----------v-----------+ 
-|                      | 
-|        Block         | 
-|                      | 
-+----------------------+ 
++----------------------+
+|                      |
+|      Component       |
+|                      |
++----------+-----------+
+           |
++----------v-----------+
+|                      |
+|    Smart-component   |
+|                      |
++----------+-----------+
+           |
++----------v-----------+
+|                      |
+|        Block         |
+|                      |
++----------------------+
 ```
 
 ### Component
@@ -42,7 +42,7 @@ The basic component has the following structure.
 my-component/
   - my-component.hbs
   - my-component.scss
-  - preset.js
+  - MyComponent.stories.js
 ```
 
 #### Handlebars [Component]
@@ -80,12 +80,10 @@ folder.
 
 > **Note:** The `.scss` file is technically optional so if you don't need it you could remove it.
 
-#### Preset [Component]
+#### Stories [Component]
 
-_Note: If you have removed storybook from your Muban project you can skip this part._
-
-The final file for any component is the `preset.js` file, this file contains the information
-required by Storybook to render out the stories. To read more about storybook and the preset files
+The final file for any component is the `*.stories.ts` file. This file contains the information
+required by Storybook to render out the stories. To read more about storybook and the stories files
 please see the page on Storybook.
 
 ### Smart-component
@@ -100,7 +98,7 @@ my-smart-component/
   - my-smart-component.hbs
   - my-smart-component.scss
   - MySmartComponent.ts
-  - preset.js
+  - MySmartComponent.stories.js
 ```
 
 #### Handlebars [Smart-component]
@@ -116,9 +114,9 @@ data attribute that is used to initialise the component.
 
 The `.scss` file for the smart-component is exactly the same as the one for the basic component.
 
-#### Preset [Smart-component]
+#### Stories [Smart-component]
 
-The `preset.js` file for the smart-component is exactly the same as the one for the basic component.
+The `.stories.js` file for the smart-component is exactly the same as the one for the basic component.
 
 #### TypeScript [Smart-component]
 
@@ -153,10 +151,10 @@ export default class MySmartComponent extends AbstractComponent {
 
 Here you can see that we create a class that extends the `AbstractComponent`, this makes sure that
 we have all the base logic that is required for Muban to initialise the components and provide the
-default functionality. 
+default functionality.
 
-It's important that the static `displayName` value matches the `data-component` attribute value 
-in the handlebars file because Muban uses these values to bind them together. 
+It's important that the static `displayName` value matches the `data-component` attribute value
+in the handlebars file because Muban uses these values to bind them together.
 
 > **Note:** If you don't want to use TypeScript you could also create a JavaScript file, just keep in
 mind that your will lose all typings.
@@ -175,7 +173,7 @@ my-block/
   - my-block.scss
   - MyBlock.ts
   - data.yaml
-  - preset.js
+  - MyBlock.stories.ts
 ```
 
 #### Handlebars [Block]
@@ -186,9 +184,9 @@ The `.hbs` file for a block is exactly the same as the one for a smart-component
 
 The `.scss` file for a block is exactly the same as the one for a smart-component.
 
-#### Preset [Block]
+#### Stories [Block]
 
-The `preset.js` file for a block is exactly the same as the one for the smart-component.
+The `.stories.ts` file for a block is exactly the same as the one for the smart-component.
 
 #### Data [Block]
 

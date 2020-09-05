@@ -1,6 +1,6 @@
-module.exports = ({ config, isDevelopment }) => webpackConfig => ({
+exports.config = ({ config, isDevelopment }) => webpackConfig => ({
   ...webpackConfig,
   node: {
-    fs: 'empty'
-  }
+    fs: 'empty',
+  },
 });

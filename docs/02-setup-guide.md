@@ -187,21 +187,17 @@ navigate them and keep track of your progress.
 
 #### Running the Storybook server
 
-> ⚠️ Storybook will become an installable module, therefore it is temporarily unavailable!
-
-As described in the introduction Muban comes with a Storybook inspired by react-storybook. For a
+As described in the introduction, Muban comes with a Storybook framework. For a
 more detailed section including examples please see the page on [Storybook](./10-storybook.md).
 
 You can start it up by running the following command in the root of your project.
 
-```
+```sh
 yarn storybook
 ```
 
 Once the server has started you can open your browser up at
-[http://localhost:9002](http://localhost:9002/) to see Storybook in action. The components are
-loaded in an iframe to be completely isolated, and you can click the `responsive` icon in the
-top-left to play around with breakpoints (this works in every browser).
+[http://localhost:6006](http://localhost:6006/) to see Storybook in action.
 
 #### Clean boilerplate code
 
@@ -214,17 +210,6 @@ it.
 ```
 yarn clean:boilerplate
 ```
-
-#### Clean Storybook
-
-If for any reason you would want to totally remove Storybook from Muban you can easily do this by
-running the following command in the root of your project.
-
-```bash
-yarn clean:storybook
-```
-
-> **Note:** Once you remove Storybook all scripts related to storybook will no longer be available.
 
 ### Create a distribution build
 
@@ -374,11 +359,12 @@ yarn lint
 
 #### eslint
 
-We use [eslint](https://eslint.org/) lint our JavaScript code. It's configured for use with
+We use [eslint](https://eslint.org/) lint our JavaScript and TypeScript code. It's configured for use with
 Prettier, and set up to understand Webpack imports. It follows the
-[AirBnB styleguide](https://github.com/airbnb/javascript) with some super small tweaks.
+[MediaMonks styleguide](https://www.npmjs.com/package/@mediamonks/eslint-config), which is based on
+[AirBnB styleguide](https://github.com/airbnb/javascript)  with some small tweaks and improvements.
 
-To triger eslint you should open up the terminal in the root of your project and run the following
+To trigger eslint, you should open up the terminal in the root of your project and run the following
 command:
 
 ```
@@ -386,21 +372,6 @@ yarn lint:js
 ```
 
 > **Note:** Settings can be changed in `.eslintrc.js` and files can be ignored in `.eslintignore`.
-
-#### tslint
-
-We use [tslint](https://palantir.github.io/tslint/) lint our TypeScript code. It's configured for
-use with Prettier. It follows the [AirBnB styleguide](https://github.com/airbnb/javascript) with
-some super small tweaks. It's consistent with the eslint settings.
-
-To triger tslint you should open up the terminal in the root of your project and run the following
-command:
-
-```
-yarn lint:ts
-```
-
-> **Note:** Settings can be changed in `.tslintrc.js`.
 
 #### stylelint
 

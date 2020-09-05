@@ -6,11 +6,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const imageminMozjpeg = require('imagemin-mozjpeg');
-const ReplacePlugin = require('webpack-plugin-replace');
 
 const { cleanupTemplate } = require('./webpack.helpers');
 
-module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackConfig => {
+exports.config = ({ config, isDevelopment, buildType, isPartials }) => webpackConfig => {
   if (isPartials) {
     // partials don't need plugins
     return webpackConfig;
@@ -46,78 +45,81 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
         allChunks: true,
       }),
 
-      new CopyWebpackPlugin([
-        {
-          // copy files to public root (not versioned)
-          context: config.staticPath,
-          from: '**/*',
-          to: config.buildPath,
-        },
-        {
-          // copy over hbs templates and remove muban-specific imports and partial paths
-          context: path.resolve(config.projectRoot, 'src/app/component'),
-          from: '**/*.hbs',
-          to: path.resolve(config.distPath, 'templates') + '/[path]/[name].hbs',
-          toType: 'template',
-          transform(content) {
-            return cleanupTemplate(content.toString('utf8'));
+      new CopyWebpackPlugin(
+        [
+          {
+            // copy files to public root (not versioned)
+            context: config.staticPath,
+            from: '**/*',
+            to: config.buildPath,
           },
-        },
-        // {
-        //   // add support for TWIG/HBS drupal integration, generates a twig file that includes a hbs partial
-        //
-        //   context: path.resolve(config.projectRoot, 'src/app/component'),
-        //   from: '**/*.hbs',
-        //   to: path.resolve(config.distPath, 'templates') + '/[path]/[name].html.twig',
-        //   toType: 'template',
-        //   transform (content, path) {
-        //     return `{{ handlebars('${path.split(/[/\\]/gi).pop()}', data) }}`;
-        //   },
-        // },
-        // CONVERT HBS TEMPLATES
-        (config.convertTemplates && config.convertTemplates.convertTo ? {
-          // convert hbs to htl templates
-          context: path.resolve(config.projectRoot, 'src/app/component'),
-          from: '**/*.hbs',
-          to: path.resolve(
-            config.distPath,
-            'templates',
-          ) + '/[path]/[name].' + config.convertTemplates.extension,
-          toType: 'template',
-          transform(content, path) {
-            // convert to target template
-            try {
-              return convert(
-                cleanupTemplate(content.toString('utf8')),
-                config.convertTemplates.convertTo,
-              );
-            }
-            catch (e) {
-              console.log(`failed converting "${path}"`);
-              console.log(e);
-              throw e;
-            }
+          {
+            // copy over hbs templates and remove muban-specific imports and partial paths
+            context: path.resolve(config.projectRoot, 'src/app/component'),
+            from: '**/*.hbs',
+            to: path.resolve(config.distPath, 'templates') + '/[path]/[name].hbs',
+            toType: 'template',
+            transform(content) {
+              return cleanupTemplate(content.toString('utf8'));
+            },
           },
-        } : null),
-        {
-          // copy over component json
-          context: path.resolve(config.projectRoot, 'src/app/component'),
-          from: '**/*.{yaml,json}',
-          to: path.resolve(config.distPath, 'templates'),
-        },
-        {
-          // copy over data json
-          context: path.resolve(config.projectRoot, 'src/data'),
-          from: '**/*.{yaml,json}',
-          to: path.resolve(config.distPath, 'data'),
-        },
-        {
-          // copy over readme
-          context: path.resolve(config.projectRoot, 'docs'),
-          from: '12-dist-implementation-guide.md',
-          to: path.resolve(config.distPath),
-        },
-      ].filter(_ => _)),
+          // {
+          //   // add support for TWIG/HBS drupal integration, generates a twig file that includes a hbs partial
+          //
+          //   context: path.resolve(config.projectRoot, 'src/app/component'),
+          //   from: '**/*.hbs',
+          //   to: path.resolve(config.distPath, 'templates') + '/[path]/[name].html.twig',
+          //   toType: 'template',
+          //   transform (content, path) {
+          //     return `{{ handlebars('${path.split(/[/\\]/gi).pop()}', data) }}`;
+          //   },
+          // },
+          // CONVERT HBS TEMPLATES
+          config.convertTemplates && config.convertTemplates.convertTo
+            ? {
+                // convert hbs to htl templates
+                context: path.resolve(config.projectRoot, 'src/app/component'),
+                from: '**/*.hbs',
+                to:
+                  path.resolve(config.distPath, 'templates') +
+                  '/[path]/[name].' +
+                  config.convertTemplates.extension,
+                toType: 'template',
+                transform(content, path) {
+                  // convert to target template
+                  try {
+                    return convert(
+                      cleanupTemplate(content.toString('utf8')),
+                      config.convertTemplates.convertTo,
+                    );
+                  } catch (e) {
+                    console.log(`failed converting "${path}"`);
+                    console.log(e);
+                    throw e;
+                  }
+                },
+              }
+            : null,
+          {
+            // copy over component json
+            context: path.resolve(config.projectRoot, 'src/app/component'),
+            from: '**/*.{yaml,json}',
+            to: path.resolve(config.distPath, 'templates'),
+          },
+          {
+            // copy over data json
+            context: path.resolve(config.projectRoot, 'src/data'),
+            from: '**/*.{yaml,json}',
+            to: path.resolve(config.distPath, 'data'),
+          },
+          {
+            // copy over readme
+            context: path.resolve(config.projectRoot, 'docs'),
+            from: '12-dist-implementation-guide.md',
+            to: path.resolve(config.distPath),
+          },
+        ].filter(_ => _),
+      ),
     );
 
     // These are not on for a development build
@@ -146,8 +148,8 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
     }
   }
 
-  return ({
+  return {
     ...webpackConfig,
     plugins,
-  });
+  };
 };

@@ -1,120 +1,95 @@
 # Storybook
 
-> ⚠️ Storybook will become an installable module, therefore it is temporarily unavailable!
+By default, muban includes [@muban/storybook](https://www.npmjs.com/package/@muban/storybook) and
+[@muban/storybook-addon-source](https://www.npmjs.com/package/@muban/storybook-addon-source) to bring
+most of the existing [Storybook](https://storybook.js.org/) experience to Muban.
 
-Storybook is a web-app that lets you preview and interact with the components in your project. You
-can create presets that render your component with custom HTML, and pass different properties by
-providing a yaml/json object.
+It allows you to write your stories using the new Args format, and you can customize the rendered template
+using inline an hbs template, and optionally manipulate the passed data that is passed to your template.
 
-Within the viewer you can list all components, list all variations of a single component, or view a
-single preset isolated.
+The **source** addon will allow you to preview the source of your component files (template, styles, script and data)
+in the Storybook panels for reference.
 
-Besides the component, it will show:
+## Running
 
-- the name
-- the file path
-- the description
-- the preset html
-- the preset data
-- the component .hbs source
-- the component .ts source
-- the component .scss source
-- the rendered html
+You can run the following commands
 
-The viewer also includes a media query viewer that read the media queries from your projects, just
-like it's done in Chrome DevTools.
-
+```sh
+yarn storybook          # start the storybook app on port 6006
+yarn build-storybook    # create a storybook build in /dist/storybook
 ```
-yarn storybook          # start the storybook app on port 9002
-yarn storybook:build    # create a storybook build in /dist/storybook
-yarn storybook:preview  # preview the built storybook on port 9003
-```
+
+Any of the normal storybook cli params apply here.
+
+## Setup
+
+Some things to keep in mind when working with storybook:
+
+* Most of the webpack config is shared between Muban and Storybook, so all components are compiled
+  using the same setup. This also means that if you make changes to your webpack config, you need to
+  think if it could affect the storybook setup as well. Check out `.storybook/main.js` for this sharing.
+
+* If you have any global styles or logic that you need for your stories, add them to `.storybook/preview.js`
+  so they are loaded for each story. Have a look at https://storybook.js.org/docs/react/get-started/setup#render-component-styles
+  and https://storybook.js.org/docs/react/configure/overview#configure-story-rendering for more information.
 
 ## Example
 
-Just create a `preset.js` file in your component folder and add a story like this:
+Just create a `MyComponent.stories.ts` file in your component folder.
+
+You can have a look at the existing stories for the default preview components in this repo.
 
 ```typescript
-import { storiesOf } from 'storybook/utils/utils';
+import { Meta } from '@muban/storybook/dist/client/preview/types-6-0';
 
-storiesOf('Paragraph', require('./paragraph'))
-  .add(
-    'default',
-    'A Paragraph block with a "read more" section you can show by clicking a button.',
-    `<hbs>
-      <div>
-        {{> paragraph @root }}
+// Most things are just normal storybook configuration
+export default {
+  title: 'My Component',
+  component: require('./my-component'), // require your hbs file here, omitting the .hbs extension
+  argTypes: {
+    title: { control: 'text' },
+    content: { control: 'text' },
+  },
+  parameters: {
+    source: {
+      data: require('./data/data.yaml'), // this is for your muban source addon
+    },
+    docs: {
+      description: {
+        component: 'Some additional docs description',
+      },
+    },
+  },
+} as Meta;
+
+
+export const Default = () => ({
+  // this template is optional, if you omit it, this is how it will be used by default
+  template: `<hbs>
+      {{> my-component @root }}
+    </hbs>`,
+});
+Default.args = require('./data/data.yaml');
+
+
+// reuse the above template and data, just configuring different args
+export const Simple = Default.bind({});
+Simple.args = require('./data/data-simple');
+
+
+// do more custom things
+export const Custom = (args) => ({
+  // use any hbs syntax to create your custom story template
+  template: `<hbs>
+      <div style="width: 300px; margin: 0 auto;">
+        {{> my-component @root }}
       </div>
     </hbs>`,
-    {
-      title: 'What is Lorem Ipsum?',
-      content: 'industry. Lorem Ipsum has been the industry's standard ...',
-      contentMore: 'Contrary to popular belief, Lorem Ipsum is not simply random text...',
-    },
-  )
+  // optionally return custom data, you can use the passed args here to modify/etc.
+  data: {
+    ...args,
+    foo: 'bar'
+  }
+});
 ```
 
-You can add multiple presets of the same component by chaining the `add()`:
-
-```typescript
-storiesOf('Paragraph', require('./paragraph'))
-  .add('preset 1', ...)
-  .add('preset 2', ...)
-  .add('preset 3', ...);
-```
-
-The `<hbs>` section will be parsed as a handlebars template by a custom webpack loader, so within
-there you can just use any html or hbs syntax to make up your preset.
-
-Using the `@root` in the partial will pass the complete context to that component. The context is
-the object you pass as the last argument.
-
-You can also store the data objects in a yaml file in the same folder and just require it in place:
-
-```typescript
-storiesOf('Paragraph', require('./paragraph')).add(
-  'default',
-  'A Paragraph block with a "read more" section you can show by clicking a button.',
-  `<hbs>
-      {{> paragraph @root }}
-    </hbs>`,
-  require('./data'),
-);
-```
-
-## Customize
-
-The storybook should be as much separated from the main project as possible, but sometimes it's
-needed to include certain assets from the main project in the storybook.
-
-One of theme are the main styles, these are included by default in the story frame.
-
-Other things could be svg sprites that should be available in the HTML. When it's plain HTML it can
-be added in the `/src/storybook/static/story.html` file. When it's a hbs partial, it can be added in
-`/src/storybook/story-list.hbs` and `/src/storybook/story-single.hbs`.
-
-## Configuration
-
-The Storybook configuration files live in `build-tools/config/storybook`.
-
-The `config.js` file is included in the storybook build and is used configure the storybook.
-
-The only configuration available at the moment is loading the stories. When the `loadStories`
-function is called, you have to require all the preset files, which can be done by using a webpack
-context:
-
-```typescript
-import { configure } from 'storybook/utils/utils';
-
-const context = require.context('app/component/', true, /preset\.js$/);
-
-function loadStories() {
-  context.keys().forEach(context);
-}
-
-configure(loadStories);
-```
-
-the **webpack configuration** for development and a distribution build is located in
-`build-tools/config/storybook` It extends the base configuration from the project so it can reuse
-most of its (loader) configuration.

@@ -1,6 +1,6 @@
 const path = require('path');
 
-module.exports = ({ config, isDevelopment, isPartials }) => webpackConfig => {
+exports.config = ({ config, isDevelopment, isPartials }) => webpackConfig => {
   const output = {
     path: config.buildPath,
     filename: 'asset/[name].js',

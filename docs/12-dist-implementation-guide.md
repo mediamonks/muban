@@ -18,8 +18,7 @@ The package content:
     should normally be served dynamically (so should not be copied over, it's just sample content).
 - **template/** - the developer templates, can be used as reference
 - **data/** - the developer mock data, can be used as reference
-- **storybook/** - optionally, a component viewer 'site', where all components can be previewed,
-  together with all the source code and documentation
+- **storybook/** - A static storybook build
 
 #### Preview
 
@@ -133,11 +132,8 @@ manual conversion of templates needed.
 
 ## Storybook
 
-> ⚠️ Storybook will become an installable module, therefore it is temporarily unavailable!
-
-Storybook is inspired by the [React and Vue Storybook](https://storybook.js.org/). It is a UI
-development environment for your UI components. With it, you can visualize different states of your
-UI components and develop them interactively.  
+[Storybook](https://storybook.js.org/) is the industry standard of previewing components.
+With it, you can visualize different states of your UI components and develop them interactively.
 Storybook runs outside of your app. So you can develop UI components in isolation without worrying
 about app specific dependencies and requirements.
 

@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const projectRoot = path.resolve(__dirname, '../../../');
 
-module.exports = ({ config }) => webpackConfig => ({
+exports.config = ({ config }) => webpackConfig => ({
   ...webpackConfig,
   devServer: {
     clientLogLevel: 'info',
@@ -26,10 +26,18 @@ module.exports = ({ config }) => webpackConfig => ({
       app.use((req, res, next) => {
         if (req.path.includes('.html')) {
           // ignore any url that would go trough the proxy table.
-          if (config.devServer.proxyTable && Object.keys(config.devServer.proxyTable).some(p => req.path.indexOf(p) === 0)) {
+          if (
+            config.devServer.proxyTable &&
+            Object.keys(config.devServer.proxyTable).some(p => req.path.indexOf(p) === 0)
+          ) {
             return next();
           }
-          res.send(fs.readFileSync(path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'), 'utf-8'));
+          res.send(
+            fs.readFileSync(
+              path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'),
+              'utf-8',
+            ),
+          );
         } else {
           next();
         }
@@ -37,9 +45,14 @@ module.exports = ({ config }) => webpackConfig => ({
 
       // also render index.html on /
       app.get('/', function(req, res) {
-        res.send(fs.readFileSync(path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'), 'utf-8'));
+        res.send(
+          fs.readFileSync(
+            path.resolve(config.projectRoot, 'build-tools/templates/devserver-index.html'),
+            'utf-8',
+          ),
+        );
       });
     },
-    https: config.devServer.useHttps
+    https: config.devServer.useHttps,
   },
 });

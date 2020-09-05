@@ -27,14 +27,14 @@ const { DEVELOPMENT, PRODUCTION } = config.buildTypes;
 module.exports = (buildType = DEVELOPMENT, isDevelopment, options = {}) => {
   const generator = compose(
     [
-      require('./webpack.partial.conf.devServer'),
-      require('./webpack.partial.conf.entry'),
-      require('./webpack.partial.conf.module'),
-      require('./webpack.partial.conf.node'),
-      require('./webpack.partial.conf.optimization'),
-      require('./webpack.partial.conf.output'),
-      require('./webpack.partial.conf.plugins'),
-      require('./webpack.partial.conf.resolve'),
+      require('./webpack.partial.conf.devServer').config,
+      require('./webpack.partial.conf.entry').config,
+      require('./webpack.partial.conf.module').config,
+      require('./webpack.partial.conf.node').config,
+      require('./webpack.partial.conf.optimization').config,
+      require('./webpack.partial.conf.output').config,
+      require('./webpack.partial.conf.plugins').config,
+      require('./webpack.partial.conf.resolve').config,
     ].map(module =>
       module({
         isDevelopment:

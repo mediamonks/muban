@@ -1,9 +1,9 @@
 {
   "name": "muban",
-  "version": "3.4.1",
+  "version": "3.5.0",
   "skeleton": {
     "name": "muban",
-    "version": "3.4.1"
+    "version": "3.5.0"
   },
   "description": "",
   "scripts": {
@@ -18,7 +18,6 @@
     "compile:html": "npm run build html",
     "clean": "npm run build clean",
     "clean:boilerplate": "node ./build-tools/script/cleanup",
-    "clean:storybook": "node ./build-tools/script/cleanup storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src --ext .js,.ts --cache",
@@ -27,7 +26,9 @@
     "prettify": "prettier --write \"src/**/*.{js,ts,scss,json}\"",
     "precommit": "lint-staged",
     "preinstall": "npx use-yarn -m 'Please use yarn!'",
-    "generate": "sg wizard"
+    "generate": "sg wizard",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -o ./dist/storybook"
   },
   "lint-staged": {
     "linters": {
@@ -35,11 +36,8 @@
         "prettier --write",
         "git add"
       ],
-      "src/**/*.js": [
-        "eslint --ext .js --cache"
-      ],
-      "src/**/*.ts": [
-        "tslint -c .tslintrc.js -p tsconfig.json -t verbose"
+      "src/**/*.{js,ts}": [
+        "eslint --ext .js,.ts --cache"
       ],
       "src/**/*.scss": [
         "stylelint --cache"
@@ -67,6 +65,7 @@
     "browserslist": "^4.14.1",
     "caniuse-lite": "^1.0.30001124",
     "core-js": "3",
+    "flat": "^5.0.2",
     "highlight.js": "^9.13.1",
     "html-extract-data": "^1.0.1",
     "knockout": "^3.4.2",
@@ -103,6 +102,13 @@
     "@babel/preset-typescript": "^7.10.4",
     "@babel/register": "^7.11.5",
     "@mediamonks/eslint-config": "^1.1.3",
+    "@muban/storybook": "^6.0.0",
+    "@muban/storybook-addon-source": "^6.0.0",
+    "@storybook/addon-essentials": "^6.0.20",
+    "@storybook/addon-knobs": "^6.0.20",
+    "@storybook/addon-links": "^6.0.20",
+    "@storybook/addon-storysource": "^6.0.20",
+    "@storybook/core": "^6.0.20",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "aem-clientlib-generator": "^1.4.3",
     "app-root-dir": "^1.0.2",
@@ -112,7 +118,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-remove-debugger": "^6.9.4",
-    "cache-loader": "^1.2.5",
+    "cache-loader": "^4.1.0",
     "chalk": "^2.4.1",
     "chokidar": "^3.0.2",
     "copy-webpack-plugin": "^4.6.0",
@@ -142,7 +148,6 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "fibers": "^5.0.0",
     "file-loader": "^2.0.0",
-    "flat": "^5.0.2",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^7.0.1",
     "handlebars": "4.3.0",

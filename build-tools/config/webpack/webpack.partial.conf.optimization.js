@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
 
-module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackConfig => {
+exports.config = ({ config, isDevelopment, buildType, isPartials }) => webpackConfig => {
   let optimization = {
     concatenateModules: true,
     minimize: buildType === config.buildTypes.PRODUCTION,
@@ -65,16 +65,17 @@ module.exports = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
       new OptimizeCSSAssetsPlugin({
         cssProcessorOptions: {
           parser: safePostCssParser,
-          map: buildType === config.buildTypes.DEVELOPMENT
-            ? {
-                // `inline: false` forces the sourcemap to be output into a
-                // separate file
-                inline: false,
-                // `annotation: true` appends the sourceMappingURL to the end of
-                // the css file, helping the browser find the sourcemap
-                annotation: true,
-              }
-            : false,
+          map:
+            buildType === config.buildTypes.DEVELOPMENT
+              ? {
+                  // `inline: false` forces the sourcemap to be output into a
+                  // separate file
+                  inline: false,
+                  // `annotation: true` appends the sourceMappingURL to the end of
+                  // the css file, helping the browser find the sourcemap
+                  annotation: true,
+                }
+              : false,
         },
       }),
     ],
