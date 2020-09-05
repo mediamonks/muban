@@ -5,9 +5,7 @@
 import 'modernizr';
 import Handlebars from 'handlebars/runtime';
 import { bootstrap } from 'muban-core/lib/dev';
-import symbol from 'core-js/es6/symbol';
 import RequireContext = __WebpackModuleApi.RequireContext;
-symbol;
 
 declare var require: any;
 declare var module: any;

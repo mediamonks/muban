@@ -7,65 +7,74 @@ module.exports = function(api) {
         '@babel/preset-env',
         {
           targets: {
-            browsers: ['last 3 iOS versions', 'last 3 versions', 'ie >= 10'],
+            browsers: ['last 3 iOS versions', 'last 3 versions', 'ie >= 11'],
           },
           modules: false,
           useBuiltIns: 'entry',
+          corejs: { version: 3, proposals: true },
 
           exclude: [
             // we don't use generators or async/await by default
-            'transform-regenerator',
-
-            // we don't use typed arrays by default
-            'es6.typed.*',
-
-            // we don't use reflect by default
-            'es6.reflect.*',
-
-            // we don't use symbols by default
-            'es6.symbol',
-
-            // we don't use advanced regexps by default
-            'es6.regexp.*',
-
-            // we don't use advanced math by default
-            'es6.math.acosh',
-            'es6.math.asinh',
-            'es6.math.atanh',
-            'es6.math.cbrt',
-            'es6.math.clz32',
-            'es6.math.cosh',
-            'es6.math.expm1',
-            'es6.math.fround',
-            'es6.math.hypot',
-            'es6.math.imul',
-            'es6.math.log1p',
-            'es6.math.log10',
-            'es6.math.log2',
-            'es6.math.sign',
-            'es6.math.sinh',
-            'es6.math.tanh',
-            'es6.math.trunc',
+            // but now we do
+            // 'transform-regenerator',
 
             // we don't use maps and sets by default
-            'es6.map',
-            'es6.set',
-            'es6.weak-map',
-            'es6.weak-set',
+            // but now we do
+            // 'es.map',
+            // 'es.set',
+            // 'esnext.map.*',
+            // 'esnext.set.*',
+            // // weak versions
+            // 'es.weak.*',
+            // 'esnext.weak-map.*',
+            // 'esnext.weak-set.*',
+
+            // exclude all symbol stuff, except the basic symbol definition
+            'es.symbol.async-iterator',
+            'es.symbol.description',
+            'es.symbol.has-instance',
+            'es.symbol.is-concat-spreadable',
+            'es.symbol.iterator',
+            // 'es.symbol',
+            'es.symbol.match',
+            'es.symbol.match-all',
+            'es.symbol.replace',
+            'es.symbol.search',
+            'es.symbol.species',
+            'es.symbol.split',
+            'es.symbol.to-primitive',
+            'es.symbol.to-string-tag',
+            'es.symbol.unscopables',
+
+            'esnext.symbol.*',
+            'esnext.composite-symbol',
+
+            'es.typed.*',
+
+            'es.reflect.*',
+            'esnext.reflect.*',
+
+            'es.math.*',
+            'esnext.math.*',
+
+            'es.array-buffer.*',
+            'es.data-view',
+
+            'esnext.observable',
 
             // Funky unused HTML string methods
-            'es6.string.anchor',
-            'es6.string.big',
-            'es6.string.blink',
-            'es6.string.bold',
-            'es6.string.code-point-at',
-            'es6.string.fixed',
-            'es6.string.fontcolor',
-            'es6.string.fontsize',
-            'es6.string.from-code-point',
-            'es6.string.italics',
-            'es6.string.iterator',
-            'es6.string.link',
+            'es.string.anchor',
+            'es.string.big',
+            'es.string.blink',
+            'es.string.bold',
+            'es.string.code-point-at',
+            'es.string.fixed',
+            'es.string.fontcolor',
+            'es.string.fontsize',
+            'es.string.from-code-point',
+            'es.string.italics',
+            'es.string.iterator',
+            'es.string.link',
           ],
         },
       ],
