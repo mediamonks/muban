@@ -47,6 +47,8 @@ read the documentation you can follow these steps to get you started.
 | Project                      | Status                                                                     | Description                     |
 | ---------------------------- | -------------------------------------------------------------------------- | ------------------------------- |
 | [muban-core]                 | [![muban-core-status]][muban-core-package]                                 | The core functionality of Muban |
+| [muban-storybook]            | [![muban-storybook-status]][muban-storybook-package]                       | App framework to integrate Muban in Storybook |
+| [muban-storybook-addon-source] | [![muban-storybook-addon-source-status]][muban-storybook-addon-source-package]  | Show Muban component sources in Storybook |
 | [muban-transition-component] | [![muban-transition-component-status]][muban-transition-component-package] | GSAP transitions for Muban      |
 
 ## 📝 License
@@ -56,9 +58,15 @@ Muban is released under the [MIT](http://opensource.org/licenses/MIT) License.
 [muban-release]: https://github.com/mediamonks/muban/releases
 [muban-release-status]: https://img.shields.io/github/release/mediamonks/muban.svg?colorB=41a6ff
 [muban-core]: https://github.com/mediamonks/muban-core
-[muban-transition-component]: https://github.com/riccoarntz/muban-transition-component
 [muban-core-status]: https://img.shields.io/npm/v/muban-core.svg?colorB=41a6ff
+[muban-core-package]: https://npmjs.com/package/muban-core
+[muban-storybook]: https://github.com/mediamonks/muban-storybook/tree/master/packages/muban-storybook
+[muban-storybook-status]: https://img.shields.io/npm/v/@muban/storybook.svg?colorB=41a6ff
+[muban-storybook-package]: https://www.npmjs.com/package/@muban/storybook
+[muban-storybook-addon-source]: https://github.com/mediamonks/muban-storybook/tree/master/packages/muban-storybook-addon-source
+[muban-storybook-addon-source-status]: https://img.shields.io/npm/v/@muban/storybook-addon-source.svg?colorB=41a6ff
+[muban-storybook-addon-source-package]: https://www.npmjs.com/package/@muban/storybook-addon-source
+[muban-transition-component]: https://github.com/riccoarntz/muban-transition-component
 [muban-transition-component-status]:
   https://img.shields.io/npm/v/muban-transition-component.svg?colorB=41a6ff
-[muban-core-package]: https://npmjs.com/package/muban-core
 [muban-transition-component-package]: https://npmjs.com/package/muban-transition-component
