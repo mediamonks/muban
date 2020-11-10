@@ -1,9 +1,9 @@
 {
   "name": "muban",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "skeleton": {
     "name": "muban",
-    "version": "3.5.0"
+    "version": "3.5.1"
   },
   "description": "",
   "scripts": {
@@ -77,6 +77,7 @@
     "muban-core": "^2.1.2",
     "normalize.css": "^8.0.1",
     "qs": "^6.6.0",
+    "regenerator-runtime": "^0.13.7",
     "seng-device-state-tracker": "^1.1.4",
     "seng-scss": "^1.2.5",
     "string-replace-loader": "^2.3.0"
