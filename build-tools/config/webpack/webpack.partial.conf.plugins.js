@@ -30,6 +30,9 @@ exports.config = ({ config, isDevelopment, buildType, isPartials }) => webpackCo
     plugins.push(
       // enable HMR globally
       new webpack.HotModuleReplacementPlugin(),
+      new webpack.SourceMapDevToolPlugin({
+        filename: 'asset/[name].js.map',
+      }),
     );
   } else {
     /*
