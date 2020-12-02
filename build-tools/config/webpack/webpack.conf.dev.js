@@ -6,7 +6,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const { DEVELOPMENT } = config.buildTypes;
 
 module.exports = detectPort(config.devServer.port).then(port => {
-  const devWebpackConfig = require('./webpack.conf.base')(DEVELOPMENT);
+  const devWebpackConfig = require('./webpack.conf.base')(DEVELOPMENT, true);
 
   process.env.PORT = port;
   devWebpackConfig.devServer.port = port;
@@ -21,9 +21,7 @@ module.exports = detectPort(config.devServer.port).then(port => {
   devWebpackConfig.plugins.push(
     new FriendlyErrorsWebpackPlugin({
       compilationSuccessInfo: {
-        messages: [
-          `Your application is running here: ${uri}`,
-        ],
+        messages: [`Your application is running here: ${uri}`],
       },
     }),
   );
