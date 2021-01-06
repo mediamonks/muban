@@ -148,12 +148,12 @@ module.exports = Object.assign({},
       [buildTypes.PRODUCTION]: {
         NODE_ENV: JSON.stringify('production'),
         PUBLIC_PATH: JSON.stringify(publicPath),
-        LANGUAGE: language,
+        LANGUAGE: JSON.stringify(language),
       },
       [buildTypes.DEVELOPMENT]: {
         NODE_ENV: JSON.stringify('development'),
         PUBLIC_PATH: JSON.stringify('/'),
-        LANGUAGE: language,
+        LANGUAGE: JSON.stringify(language),
       }
     },
   }
