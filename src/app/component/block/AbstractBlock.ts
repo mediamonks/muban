@@ -4,8 +4,4 @@ import abstractComponentMixin from 'app/component/AbstractComponentMixin';
 
 export default class AbstractBlock extends abstractBlockMixin(
   abstractComponentMixin(CoreComponent),
-) {
-  constructor(element: HTMLElement) {
-    super(element);
-  }
-}
+) {}

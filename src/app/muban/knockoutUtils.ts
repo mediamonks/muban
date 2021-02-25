@@ -10,7 +10,7 @@ import extract from 'html-extract-data';
  */
 export function initTextBinding(element: HTMLElement, html: boolean = false): Observable<string> {
   // init the observable with the correct initial data
-  const obs = ko.observable(<string>element[html ? 'innerHTML' : 'textContent']);
+  const obs = ko.observable(element[html ? 'innerHTML' : 'textContent'] as string);
 
   // then apply the observable to the HTML element
   ko.applyBindingsToNode(
@@ -81,6 +81,7 @@ export function initTextBinding(element: HTMLElement, html: boolean = false): Ob
  * @param [additionalData]
  * @return {KnockoutObservable<Array<T>>}
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function initListBinding<T>(
   container: HTMLElement,
   templateName: string,

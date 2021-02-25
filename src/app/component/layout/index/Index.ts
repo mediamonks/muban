@@ -3,14 +3,14 @@ import AbstractComponent from '../../AbstractComponent';
 export default class App extends AbstractComponent {
   public static readonly displayName: string = 'index-root';
 
-  constructor(element: HTMLElement) {
+  public constructor(element: HTMLElement) {
     super(element);
 
     document.documentElement.classList.add('index');
 
     this.getElements('sup').forEach(sup => {
       sup.addEventListener('click', event => {
-        const page = (<HTMLElement>event.currentTarget).closest('.page');
+        const page = (event.currentTarget as HTMLElement).closest('.page');
         if (page) {
           page.classList.toggle('show-blocks');
           this.updateBlocksButton();

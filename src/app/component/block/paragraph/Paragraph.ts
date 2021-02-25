@@ -1,4 +1,5 @@
 import { getComponentForElement } from 'muban-core';
+// eslint-disable-next-line import/no-unresolved
 import Icon from '../../general/icon/Icon';
 import AbstractBlock from '../AbstractBlock';
 
@@ -10,7 +11,7 @@ export default class Paragraph extends AbstractBlock {
   private readonly buttonIcon: HTMLElement | undefined | null;
   private readonly contentMore: HTMLParagraphElement | undefined;
 
-  constructor(element: HTMLElement) {
+  public constructor(element: HTMLElement) {
     super(element);
 
     this.button = this.element.querySelector('button');
@@ -19,7 +20,7 @@ export default class Paragraph extends AbstractBlock {
       this.buttonLabel = this.getElement<HTMLSpanElement>('.label', this.button);
       this.buttonIcon = this.getElement<HTMLElement>('[data-component="icon"]', this.button);
 
-      this.contentMore = <HTMLParagraphElement>this.element.querySelector('.js-content-more');
+      this.contentMore = this.element.querySelector('.js-content-more') as HTMLParagraphElement;
     }
   }
 
