@@ -27,8 +27,8 @@
     "precommit": "lint-staged",
     "preinstall": "npx use-yarn -m 'Please use yarn!'",
     "generate": "sg wizard",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o ./dist/storybook"
+    "storybook": "start-storybook -p 6006 -s src/static",
+    "build-storybook": "build-storybook -o ./dist/storybook -s src/static"
   },
   "lint-staged": {
     "linters": {
