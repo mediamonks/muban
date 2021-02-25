@@ -42,5 +42,6 @@ export default class App extends AbstractComponent {
 
   public dispose() {
     // clean up stuff when hot reloading
+    super.dispose();
   }
 }
