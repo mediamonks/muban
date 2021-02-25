@@ -21,7 +21,7 @@ const replaceVariables: { [index: string]: any } =
   ) || {};
 
 // bootstrap the app
-const appElement = document.querySelector('#app');
+const appElement = document.querySelector('#app') as HTMLElement;
 if (!appElement) {
   throw new ReferenceError('Could not find DOM element with id "app"');
 }
