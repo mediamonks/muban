@@ -2,7 +2,7 @@ import IAbstractComponentMixin from 'app/data/interface/IAbstractComponentMixin'
 
 function abstractBlockMixin<TBase extends Constructor<IAbstractComponentMixin>>(Base: TBase) {
   return class AbstractBlockMixin extends Base {
-    constructor(...args: any[]) {
+    constructor(...args: Array<any>) {
       super(...args);
     }
   };

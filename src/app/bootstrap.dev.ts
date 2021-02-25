@@ -7,8 +7,8 @@ import Handlebars from 'handlebars/runtime';
 import { bootstrap } from 'muban-core/lib/dev';
 import RequireContext = __WebpackModuleApi.RequireContext;
 
-declare var require: any;
-declare var module: any;
+declare let require: any;
+declare let module: any;
 
 // create context for json data and handlebar templates
 // pick any json/yaml file that doesn't start with a _ in the filename
@@ -21,7 +21,7 @@ const replaceVariables: { [index: string]: any } =
   ) || {};
 
 // bootstrap the app
-const appElement = document.getElementById('app');
+const appElement = document.querySelector('#app');
 if (!appElement) {
   throw new ReferenceError('Could not find DOM element with id "app"');
 }

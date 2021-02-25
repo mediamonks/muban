@@ -2,7 +2,7 @@ declare module '*.hbs?include';
 declare module '*.json';
 declare module '*.yml';
 
-type Constructor<T = {}> = new (...args: any[]) => T;
+type Constructor<T = {}> = new (...args: Array<any>) => T;
 
 // declare const process: {
 //   env: {

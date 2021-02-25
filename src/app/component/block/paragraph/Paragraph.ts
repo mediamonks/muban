@@ -6,12 +6,12 @@ export default class Paragraph extends AbstractBlock {
   public static readonly displayName: string = 'paragraph';
 
   private button: HTMLButtonElement | null;
-  private buttonLabel: HTMLSpanElement | undefined | null;
-  private buttonIcon: HTMLElement | undefined | null;
-  private contentMore: HTMLParagraphElement | undefined;
+  private readonly buttonLabel: HTMLSpanElement | undefined | null;
+  private readonly buttonIcon: HTMLElement | undefined | null;
+  private readonly contentMore: HTMLParagraphElement | undefined;
 
-  constructor(el: HTMLElement) {
-    super(el);
+  constructor(element: HTMLElement) {
+    super(element);
 
     this.button = this.element.querySelector('button');
     if (this.button) {
@@ -23,7 +23,7 @@ export default class Paragraph extends AbstractBlock {
     }
   }
 
-  private onButtonClick = () => {
+  private readonly onButtonClick = () => {
     this.contentMore!.classList.toggle('hidden');
 
     if (this.contentMore!.classList.contains('hidden')) {

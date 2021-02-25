@@ -34,9 +34,9 @@ export default class App extends AbstractComponent {
   private updateBlocksButton() {
     const pages = this.getElements('.page')!;
     if (pages.some(page => page.classList.contains('show-blocks'))) {
-      this.getElement('.toggle-blocks')!.innerText = 'hide blocks';
+      this.getElement('.toggle-blocks')!.textContent = 'hide blocks';
     } else {
-      this.getElement('.toggle-blocks')!.innerText = 'show blocks';
+      this.getElement('.toggle-blocks')!.textContent = 'show blocks';
     }
   }
 
