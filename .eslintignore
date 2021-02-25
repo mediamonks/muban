@@ -2,4 +2,3 @@ build/**/*
 build-tools/**/*
 template/**/*
 script/**/*
-*.ts
