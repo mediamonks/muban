@@ -1,3 +1,5 @@
+/* eslint-disable no-template-curly-in-string,global-require, import/no-extraneous-dependencies, @typescript-eslint/naming-convention */
+
 import { Meta } from '@muban/storybook/dist/client/preview/types-6-0';
 
 export default {
