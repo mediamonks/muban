@@ -20,7 +20,7 @@ export default class Paragraph extends AbstractBlock {
       this.buttonLabel = this.getElement<HTMLSpanElement>('.label', this.button);
       this.buttonIcon = this.getElement<HTMLElement>('[data-component="icon"]', this.button);
 
-      this.contentMore = this.element.querySelector('.js-content-more') as HTMLParagraphElement;
+      this.contentMore = this.element.querySelector<HTMLParagraphElement>('.js-content-more');
     }
   }
 
