@@ -1,4 +1,5 @@
 import { getComponentForElement } from 'muban-core';
+// eslint-disable-next-line import/no-unresolved
 import Icon from '../../general/icon/Icon';
 import AbstractBlock from '../AbstractBlock';
 
@@ -6,12 +7,12 @@ export default class Paragraph extends AbstractBlock {
   public static readonly displayName: string = 'paragraph';
 
   private button: HTMLButtonElement | null;
-  private buttonLabel: HTMLSpanElement | undefined | null;
-  private buttonIcon: HTMLElement | undefined | null;
-  private contentMore: HTMLParagraphElement | undefined;
+  private readonly buttonLabel: HTMLSpanElement | undefined | null;
+  private readonly buttonIcon: HTMLElement | undefined | null;
+  private readonly contentMore: HTMLParagraphElement | undefined;
 
-  constructor(el: HTMLElement) {
-    super(el);
+  public constructor(element: HTMLElement) {
+    super(element);
 
     this.button = this.element.querySelector('button');
     if (this.button) {
@@ -19,11 +20,11 @@ export default class Paragraph extends AbstractBlock {
       this.buttonLabel = this.getElement<HTMLSpanElement>('.label', this.button);
       this.buttonIcon = this.getElement<HTMLElement>('[data-component="icon"]', this.button);
 
-      this.contentMore = <HTMLParagraphElement>this.element.querySelector('.js-content-more');
+      this.contentMore = this.element.querySelector<HTMLParagraphElement>('.js-content-more');
     }
   }
 
-  private onButtonClick = () => {
+  private readonly onButtonClick = () => {
     this.contentMore!.classList.toggle('hidden');
 
     if (this.contentMore!.classList.contains('hidden')) {

@@ -17,7 +17,7 @@
 
 import { bootstrap } from 'muban-core/lib/dist';
 
-declare var __webpack_public_path__: string;
+declare let __webpack_public_path__: string;
 
 /* eslint-disable */
 if (window['webpackPublicPath']) {
@@ -32,7 +32,7 @@ context.keys().forEach(key => {
 });
 
 // Makes the website interactive
-const appElement = document.getElementById('app');
+const appElement = document.querySelector<HTMLElement>('#app');
 if (!appElement) {
   throw new ReferenceError('Could not find DOM element with id "app"');
 }
