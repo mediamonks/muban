@@ -26,13 +26,6 @@ if (!appElement) {
   throw new ReferenceError('Could not find DOM element with id "app"');
 }
 
-console.log({
-  dataContext,
-  partialsContext,
-  indexTemplate: require('./component/layout/index'),
-  appTemplate: require('./component/layout/app'),
-});
-
 const app = bootstrap(appElement, <any>{
   Handlebars,
   dataContext,
