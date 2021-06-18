@@ -87,20 +87,22 @@ function renderIndex(indexTemplate, htmlTemplate) {
   let indexResult = htmlTemplate({
     content,
     page: 'Index',
+    publicPath: config.dist.publicPath,
   });
 
   indexResult = indexResult
+    .replace(/(\/\*|<!--) beautify ignore:[a-z]+ (\*\/|-->)/gi, '')
     .replace(
-      '<link rel="stylesheet" href="asset/bundle.css">',
-      '<link rel="stylesheet" href="asset/bundle.css">\n\t<link rel="stylesheet" href="asset/preview.css">',
+      `<link rel="stylesheet" href="${config.dist.publicPath}asset/bundle.css">`,
+      `<link rel="stylesheet" href="${config.dist.publicPath}asset/bundle.css">\n\t<link rel="stylesheet" href="asset/preview.css">`,
     )
     .replace(
-      '<script src="asset/bundle.js"></script>',
-      '<script src="asset/bundle.js"></script>\n\t<script src="asset/preview.js"></script>',
+      `<div data-app-src="${config.dist.publicPath}asset/bundle.js" data-type="app"></div>`,
+      `<div data-app-src="${config.dist.publicPath}asset/bundle.js" data-type="app"></div>\n\t<div data-app-src="${config.dist.publicPath}asset/preview.js" data-type="app"></div>`,
     );
 
   fs.writeFileSync(path.resolve(config.buildPath, 'index.html'), indexResult, 'utf-8');
-}
+};
 
 function getLeadingZero(nr) {
   return nr < 10 ? `0${nr}` : nr;

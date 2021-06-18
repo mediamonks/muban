@@ -18,7 +18,10 @@
     {{{content}}}
   </div>
 
-  <script src="{{publicPath}}asset/common.js"></script>
-  <script src="{{publicPath}}asset/{{page}}.js"></script>
+  <div data-app-src="{{publicPath}}asset/common.js" type="app"></div>
+  <div data-app-src="{{publicPath}}asset/{{page}}.js" type="app"></div>
+  <!-- beautify ignore:start -->
+  <script>/* beautify ignore:start */"use strict";!function(){for(var t=document.querySelectorAll("[data-app-src]"),e=0;e<t.length;e++){var r=t[e].dataset.type,a=t[e].dataset.appSrc;if("/"!==a[0])return;var c=document.createElement("script");c.src=a,"polyfill"===r&&c.setAttribute("noModule",""),document.body.appendChild(c)}}()/* beautify ignore:end */</script>
+  <!-- beautify ignore:end -->
 </body>
 </html>

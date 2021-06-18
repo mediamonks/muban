@@ -50,7 +50,7 @@ module.exports = (buildType = DEVELOPMENT, isDevelopment, options = {}) => {
     // single configuration properties go here
     // objects go into a separate file (e.g. webpack.partial.conf.entry.js)
     mode: buildType === PRODUCTION ? 'production' : 'development',
-    devtool: isDevelopment ? 'eval-cheap-module-source-map' : false,
+    devtool: isDevelopment ? 'source-map' : false,
     target: options.isPartials ? 'node' : undefined,
   });
 };

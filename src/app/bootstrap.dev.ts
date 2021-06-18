@@ -25,6 +25,14 @@ const appElement = document.querySelector<HTMLElement>('#app');
 if (!appElement) {
   throw new ReferenceError('Could not find DOM element with id "app"');
 }
+
+console.log({
+  dataContext,
+  partialsContext,
+  indexTemplate: require('./component/layout/index'),
+  appTemplate: require('./component/layout/app'),
+});
+
 const app = bootstrap(appElement, <any>{
   Handlebars,
   dataContext,
@@ -46,12 +54,17 @@ const app = bootstrap(appElement, <any>{
 
 // Hot reloading support
 if (module.hot) {
+  app.updateData(dataContext);
+  app.updatePartials(partialsContext);
+  app.update(require('./component/layout/index'), require('./component/layout/app'));
+
   module.hot.accept(dataContext.id, () => {
     const changedContext = require.context(
       '../data/',
       true,
       /^(.*[\/\\])?[^_][^\/\\]+\.(yaml|json|js)$/,
     );
+
     app.updateData(changedContext);
   });
 

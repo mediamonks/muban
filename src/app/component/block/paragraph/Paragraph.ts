@@ -9,7 +9,7 @@ export default class Paragraph extends AbstractBlock {
   private button: HTMLButtonElement | null;
   private readonly buttonLabel: HTMLSpanElement | undefined | null;
   private readonly buttonIcon: HTMLElement | undefined | null;
-  private readonly contentMore: HTMLParagraphElement | undefined;
+  private readonly contentMore: HTMLParagraphElement | undefined | null;
 
   public constructor(element: HTMLElement) {
     super(element);

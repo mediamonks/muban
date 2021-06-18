@@ -4,11 +4,14 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-y6zSYDRnnvPXsdyPJkSTJ25talbGpofNceZQ0NWVil4=' 'sha256-T6VpZaIBkbQNokSAmOCA6btCvzSmdUvUrNUtK9IsMMs=' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none';">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
   <title>Muban</title>
 </head>
 <body>
   <div id="app"></div>
-  <script src="/asset/main.js"></script>
+
+  <div data-app-src="/asset/main.js" type="app"></div>
+  <script>"use strict";!function(){for(var t=document.querySelectorAll("[data-app-src]"),e=0;e<t.length;e++){var r=t[e].dataset.type,a=t[e].dataset.appSrc;if("/"!==a[0])return;var c=document.createElement("script");c.src=a,"polyfill"===r&&c.setAttribute("noModule",""),document.body.appendChild(c)}}()</script>
 </body>
 </html>

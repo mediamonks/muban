@@ -98,7 +98,8 @@ function renderPage(template, content, page, outputPath) {
   });
 
   // make it pretty
-  const html = beautifyHtml(templateStandaloneResult, { indent_size: 2 });
+  const html = beautifyHtml(templateStandaloneResult, { indent_size: 2 })
+    .replace(/(\/\*|<!--) beautify ignore:[a-z]+ (\*\/|-->)/gi, '')
 
   // output to disk
   return new Promise((resolve, reject) => {

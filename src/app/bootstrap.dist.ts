@@ -16,6 +16,7 @@
  */
 
 import { bootstrap } from 'muban-core/lib/dist';
+import { initComponents } from 'muban-core';
 
 declare let __webpack_public_path__: string;
 
@@ -36,4 +37,5 @@ const appElement = document.querySelector<HTMLElement>('#app');
 if (!appElement) {
   throw new ReferenceError('Could not find DOM element with id "app"');
 }
-bootstrap(appElement);
+
+initComponents(appElement);
