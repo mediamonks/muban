@@ -94,7 +94,7 @@ function renderIndex(indexTemplate, htmlTemplate) {
     .replace(/(\/\*|<!--) beautify ignore:[a-z]+ (\*\/|-->)/gi, '')
     .replace(
       `<link rel="stylesheet" href="${config.dist.publicPath}asset/bundle.css">`,
-      `<link rel="stylesheet" href="${config.dist.publicPath}asset/bundle.css">\n\t<link rel="stylesheet" href="asset/preview.css">`,
+      `<link rel="stylesheet" href="${config.dist.publicPath}asset/bundle.css">\n\t<link rel="stylesheet" href="${config.dist.publicPath}asset/preview.css">`,
     )
     .replace(
       `<div data-app-src="${config.dist.publicPath}asset/bundle.js" data-type="app"></div>`,
