@@ -25,7 +25,6 @@
     "analyze": "webpack-bundle-analyzer dist/bundlesize-profile.json ./dist/site",
     "prettify": "prettier --write \"src/**/*.{js,ts,scss,json}\"",
     "precommit": "lint-staged",
-    "preinstall": "npx use-yarn -m 'Please use yarn!'",
     "generate": "sg wizard",
     "storybook": "start-storybook -p 6006 -s src/static",
     "build-storybook": "build-storybook -o ./dist/storybook -s src/static"
@@ -198,7 +197,6 @@
     "typescript": "^3.8.3",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.2",
-    "use-yarn": "^2.2.0",
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.3.11",
