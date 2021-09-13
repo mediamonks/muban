@@ -10687,13 +10687,6 @@ is-natural-number@^4.0.1:
   resolved "https://registry.yarnpkg.com/is-natural-number/-/is-natural-number-4.0.1.tgz#ab9d76e1db4ced51e35de0c72ebecf09f734cde8"
   integrity sha1-q5124dtM7VHjXeDHLr7PCfc0zeg=
 
-is-npm-not-yarn@^2.0.3:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/is-npm-not-yarn/-/is-npm-not-yarn-2.0.4.tgz#cdf64c89cbfd564ad949808382723177a109ec39"
-  integrity sha1-zfZMicv9VkrZSYCDgnIxd6EJ7Dk=
-  dependencies:
-    slash "^1.0.0"
-
 is-number@^2.0.2, is-number@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-2.1.0.tgz#01fcbbb393463a548f2f466cce16dece49db908f"
@@ -18411,14 +18404,6 @@ use-latest@^1.0.0:
   integrity sha512-gF04d0ZMV3AMB8Q7HtfkAWe+oq1tFXP6dZKwBHQF5nVXtGsh2oAYeeqma5ZzxtlpOcW8Ro/tLcfmEodjDeqtuw==
   dependencies:
     use-isomorphic-layout-effect "^1.0.0"
-
-use-yarn@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/use-yarn/-/use-yarn-2.2.0.tgz#355da1edf17acc56d7b243fcaa817bd92fd0be4a"
-  integrity sha1-NV2h7fF6zFbXskP8qoF72S/Qvko=
-  dependencies:
-    is-npm-not-yarn "^2.0.3"
-    minimist "^1.2.0"
 
 use@^3.1.0:
   version "3.1.1"
