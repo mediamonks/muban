@@ -23,7 +23,7 @@ The package content:
 #### Preview
 
 To view the preview pages, you must upload or run a local http server, where the contents of the
-`site` folder is your webroot.
+`site` folder is your webroot. You can do this by running `yarn preview`.
 
 ## Integration
 
