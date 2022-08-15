@@ -1,4 +1,11 @@
-# Muban [![muban-release-status]][muban-release]
+# :no_entry: [DEPRECATED] Muban [![muban-release-status]][muban-release]
+
+> :warning: **This version will not receive any future updates, there is a new version**
+>
+> The `muban` repository and `muban-core` package will not receive any future updates.
+> 
+> There is a new version in active development at [github.com/mubanjs](https://github.com/mubanjs)
+> (also called v2), with modern features and a full ecosystem for storybook, testing, hooks, etc.
 
 Muban is a backend-agnostic framework and development setup to enhance server-rendered HTML with
 [TypeScript](https://www.typescriptlang.org/) or [Babel](https://babeljs.io/) components and
